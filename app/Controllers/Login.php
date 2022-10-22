@@ -44,8 +44,8 @@ class Login extends Controller
             //LOGIN
             $_SESSION['login_payment'] = TRUE;
             $_SESSION['user_data'] = $userData;
-            $this->getPrepaidList();
-            $this->getPostpaidList();
+            $this->model('IAK')->getPrepaidList();
+            $this->model('IAK')->getPostpaidList();
             echo 1;
          }
       }
