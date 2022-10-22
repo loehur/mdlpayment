@@ -17,14 +17,14 @@ class Home extends Controller
       $view_load = $this->load;
       $this->view("layouts/layout_main", [
          "view_load" => $view_load,
-         "title" => "Home"
+         "title" => $this->page
       ]);
+      $this->load();
    }
 
    public function load()
    {
-      $data['topup'] = $this->model('M_DB_1')->get_where('topup', "id_user = " . $this->userData['id_user']);
-      $data['callback'] = $this->model('M_DB_1')->get_where('callback', "id_user = " . $this->userData['id_user']);
+      $data = $this->saldo();
       $this->view($this->view_content, $data);
    }
 }

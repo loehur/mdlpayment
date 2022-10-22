@@ -18,6 +18,7 @@ class Akun extends Controller
          "view_load" => $view_load,
          "title" => $this->page
       ]);
+      $this->load();
    }
 
    public function load()

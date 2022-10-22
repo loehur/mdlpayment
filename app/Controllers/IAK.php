@@ -8,21 +8,24 @@ class IAK extends Controller
       $arrRequestInput = json_decode($rawRequestInput, true);
       $d = $arrRequestInput['data'];
 
-      $ref_id = $d['ref_id'];
-      $tr_status = $d['status'];
-      $product_code = $d['product_code'];
-      $customer_id = $d['customer_id'];
-      $price = $d['price'];
-      $message = $d['message'];
-      $sn = $d['sn'];
-      $balance = $d['balance'];
-      $tr_id = $d['tr_id'];
-      $rc = $d['rc'];
-      $sign = $d['sign'];
+      if (isset($d['admin'])) {
+      } else {
+         $ref_id = $d['ref_id'];
+         $tr_status = $d['status'];
+         $product_code = $d['product_code'];
+         $customer_id = $d['customer_id'];
+         $price = $d['price'];
+         $message = $d['message'];
+         $sn = $d['sn'];
+         $balance = $d['balance'];
+         $tr_id = $d['tr_id'];
+         $rc = $d['rc'];
+         $sign = $d['sign'];
 
-      $where = "ref_id = '" . $ref_id . "'";
-      $set =  "ref_id = '" . $ref_id . "', tr_status = " . $tr_status . ", product_code = '" . $product_code . "', customer_id = '" . $customer_id . "', price = " . $price . ", message = '" . $message . "', sn = '" . $sn . "', balance = " . $balance . ", tr_id = " . $tr_id . ", rc = '" . $rc . "', sign = '" . $sign . "'";
-      $this->model('M_DB_1')->update('callback', $set, $where);
+         $where = "ref_id = '" . $ref_id . "'";
+         $set =  "ref_id = '" . $ref_id . "', tr_status = " . $tr_status . ", product_code = '" . $product_code . "', customer_id = '" . $customer_id . "', price = " . $price . ", message = '" . $message . "', sn = '" . $sn . "', balance = " . $balance . ", tr_id = " . $tr_id . ", rc = '" . $rc . "', sign = '" . $sign . "'";
+         $this->model('M_DB_1')->update('callback', $set, $where);
+      }
    }
 
    public function tes()

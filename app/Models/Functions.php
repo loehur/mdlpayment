@@ -49,4 +49,17 @@ class Functions
         }
         return $array;
     }
+
+    function array_group_by_col($array, $col)
+    {
+        $result = array();
+        foreach ($array as $element) {
+            $val = $element[$col];
+            if (!isset($set[$val])) {
+                array_push($result, $val);
+                $set[$val] = true;
+            }
+        }
+        return $result;
+    }
 }

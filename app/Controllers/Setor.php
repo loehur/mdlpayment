@@ -18,12 +18,12 @@ class Setor extends Controller
          "view_load" => $view_load,
          "title" => "Home"
       ]);
+      $this->load();
    }
 
    public function load()
    {
-      $data['topup'] = $this->model('M_DB_1')->get_where('topup', "id_user = " . $this->userData['id_user']);
-      $data['callback'] = $this->model('M_DB_1')->get_where('callback', "id_user = " . $this->userData['id_user']);
+      $data['data_topup'] = $this->topup_data();
       $data['bank'] = $this->model('M_DB_1')->get('bank');
       $this->view($this->view_content, $data);
    }
@@ -43,11 +43,10 @@ class Setor extends Controller
          }
       }
 
-      $cols = 'id_user, jumlah, bank, rek, nama, kode_bank';
-      $vals = $this->userData['id_user'] . "," . $jumlah . ",'" . $bank . "','" . $norek . "','" . $narek . "','" . $kode_bank . "'";
+      $cols = 'no_master, jumlah, bank, rek, nama, kode_bank';
+      $vals = $this->userData['no_master'] . "," . $jumlah . ",'" . $bank . "','" . $norek . "','" . $narek . "','" . $kode_bank . "'";
 
-
-      $whereCount = "id_user = " . $this->userData['id_user'] . " AND topup_status = 1";
+      $whereCount = "no_master = " . $this->userData['no_master'] . " AND topup_status = 1";
       $dataCount = $this->model('M_DB_1')->count_where('topup', $whereCount);
       if ($dataCount == 0) {
          $this->model('M_DB_1')->insertCols('topup', $cols, $vals);

@@ -54,7 +54,7 @@
 <?php if (isset($data['view_load'])) {
 	$method = $data['view_load'];
 } else {
-	$method = "Home/load";
+	$method = "Blank";
 } ?>
 
 
@@ -62,20 +62,9 @@
 
 	<?php require_once("layout_config.php"); ?>
 	<?php require_once("nav_top.php"); ?>
-	<div id="content" class="container m-auto" style="padding-bottom: 70px;padding-top: 70px;min-width:  <?= $min_width ?>;">
+	<div id="content" class="container m-auto" style="padding-bottom: 70px;padding-top: 0px;min-width:  <?= $min_width ?>;">
 	</div>
 	<?php require_once("nav_bot.php"); ?>
 </body>
 
 </html>
-
-<script src="<?= $this->ASSETS_URL ?>plugins/jquery/jquery.min.js"></script>
-<script>
-	$(document).ready(function() {
-		loadContent("<?= $method ?>");
-	});
-
-	function loadContent(method) {
-		$("div#content").load(method);
-	}
-</script>

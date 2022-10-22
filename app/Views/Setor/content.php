@@ -1,23 +1,3 @@
-<?php
-$topup_success = array();
-foreach ($data['topup'] as $a) {
-    if ($a['topup_status'] == 2) {
-        array_push($topup_success, $a['jumlah']);
-    }
-}
-$saldo = array_sum($topup_success);
-
-$trx_success = array();
-foreach ($data['callback'] as $a) {
-    if ($a['rc'] == "00" || $a['rc'] == "39" || $a['rc'] == "201") {
-        array_push($trx_success, $a['price_sell']);
-    }
-}
-$saldo_trx_success = array_sum($trx_success);
-
-$saldo = $saldo - $saldo_trx_success;
-?>
-
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -25,10 +5,6 @@ $saldo = $saldo - $saldo_trx_success;
                 <button type="button" class="btn btn-sm btn-primary m-2 pl-1 pr-1 pt-0 pb-0 buttonTambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     (+) Setoran</b>
                 </button>
-            </div>
-            <div class="col-auto">
-                <span class="float-right">Saldo</span><br>
-                <b class="text-success"><?= number_format($saldo) ?></b>
             </div>
         </div>
     </div>
@@ -38,7 +14,7 @@ $saldo = $saldo - $saldo_trx_success;
     <div class="container-fluid">
         <div class="row">
             <?php
-            foreach ($data['topup'] as $z) { ?>
+            foreach ($data['data_topup'] as $z) { ?>
                 <div class="col p-0 m-1 rounded">
                     <div class="bg-white rounded">
                         <table class="table border table-sm w-100">
@@ -59,7 +35,7 @@ $saldo = $saldo - $saldo_trx_success;
                                 ?>
                                 <tr class="<?= $classTR ?>">
                                     <td><small>#<?= $dibuat ?></small><br><?= strtoupper($z['bank']) . " " . $z['rek'] . "<br>" . $z['nama'] ?></td>
-                                    <td><small>Jumlah/Status</small><br><b><?= number_format($z['jumlah'] + $id) ?><br><small><?= $stBayar ?></b></small></td>
+                                    <td><small>Jumlah/Status</small><br><b><?= number_format($z['jumlah']) ?><br><small><?= $stBayar ?></b></small></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -115,3 +91,17 @@ $saldo = $saldo - $saldo_trx_success;
 <script src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
 <script src="<?= $this->ASSETS_URL ?>js/popper.min.js"></script>
 <script src="<?= $this->ASSETS_URL ?>plugins/bootstrap-5.1/bootstrap.bundle.min.js"></script>
+
+<script>
+    $("form").on("submit", function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            type: $(this).attr("method"),
+            success: function() {
+                location.reload(true);
+            },
+        });
+    });
+</script>

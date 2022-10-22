@@ -95,7 +95,11 @@
                 </form>
                 <p class="mb-0">
                     <a href="<?= $this->BASE_URL ?>Register" class="text-center">Daftar Baru</a>
-                    <a href="<?= $this->BASE_URL ?>Register/reset_pass" class="text-center text-info float-right">Lupa Password</a>
+                    <a href="<?= $this->BASE_URL ?>Register/reset_pass" class="text-center text-info float-right d-none">Lupa Password</a>
+                </p>
+                <hr>
+                <p class="text-center">
+                    MDL-Payment Support<br>081268098300 / 085278114125 (Whatsapp Only)
                 </p>
             </div>
         </div>

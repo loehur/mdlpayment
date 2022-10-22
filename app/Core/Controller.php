@@ -1,8 +1,8 @@
 <?php
 
-require 'app/Config/URL.php';
+require 'app/Config/Public_Variables.php';
 
-class Controller extends URL
+class Controller extends Public_Variables
 {
 
     public $userData;
@@ -35,8 +35,10 @@ class Controller extends URL
     public function data()
     {
         $this->userData = $_SESSION['user_data'];
-        $this->prepaidList = $_SESSION['prepaid_list'];
-        $this->postpaidList = $_SESSION['postpaid_list'];
+
+        $this->prepaidList['list'] = $_SESSION['prepaid_list'];
+        $this->prepaidList['product_type'] = $this->model('Functions')->array_group_by_col($this->prepaidList['list'], "product_type");
+        $this->postpaidList['list'] = $_SESSION['postpaid_list'];
     }
 
     public function dataSynchrone()
@@ -55,57 +57,44 @@ class Controller extends URL
         }
     }
 
-    public function getPrepaidList()
+    public function saldo()
     {
-        $sign = md5("081268098300" . $this->apiKey . "pl");
-        $url = 'https://prepaid.iak.id/api/pricelist';
-        $data = [
-            "username" => "081268098300",
-            "sign" => $sign,
-            "status" => "active"
-        ];
+        $saldo = 0;
+        $arr_topup_success = array();
+        $total_topup_success = 0;
+        $data['topup'] = $this->model('M_DB_1')->get_where('topup', "no_master = " . $this->userData['no_master']);
+        foreach ($data['topup'] as $a) {
+            switch ($a['topup_status']) {
+                case 2:
+                    array_push($arr_topup_success, $a['jumlah']);
+                    break;
+            }
+        }
+        $total_topup_success = array_sum($arr_topup_success);
 
-        $postdata = json_encode($data);
+        $arr_pre_success = array();
+        $total_pre_success = 0;
+        $data['prepaid'] = $this->model('M_DB_1')->get_where('callback', "no_master = " . $this->userData['no_master']);
+        foreach ($data['prepaid'] as $a) {
+            if ($a['rc'] == "00" || $a['rc'] == "39" || $a['rc'] == "201") {
+                array_push($arr_pre_success, $a['price_sell']);
+            }
+        }
 
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        $result = curl_exec($ch);
-        curl_close($ch);
+        $total_pre_success = array_sum($arr_pre_success);
+        $saldo = $total_topup_success - $total_pre_success;
 
-        $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
-        $pricelist = $response['data']['pricelist'];
-        $_SESSION['prepaid_list'] = $pricelist;
-        $this->prepaidList = $pricelist;
+        $return['saldo'] = $saldo;
+        $return['data_topup'] = $data['topup'];
+        $return['data_pre'] = $data['prepaid'];
+        $return['total_pre'] = $total_pre_success;
+
+        return $return;
     }
 
-    public function getPostpaidList()
+    public function topup_data()
     {
-        $sign = md5("081268098300" . $this->apiKey . "pl");
-        $url = 'https://mobilepulsa.net/api/v1/bill/check';
-        $data = [
-            "commands" => "pricelist-pasca",
-            "username" => "081268098300",
-            "sign" => $sign,
-            "status" => "active"
-        ];
-
-        $postdata = json_encode($data);
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
-        $pricelist = $response['data']['pasca'];
-        $_SESSION['postpaid_list'] = $pricelist;
-        $this->postpaidList = $pricelist;
+        return $this->model('M_DB_1')->get_where('topup', "no_master = " . $this->userData['no_master']);
     }
 
     public function logout()

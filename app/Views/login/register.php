@@ -122,7 +122,7 @@
                         $("#info").hide();
                         $('form').trigger("reset");
                         $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-success" role="alert">Registrasi Berhasil Silahkan Login</div>')
+                        $("#info").html('<div class="alert alert-success" role="alert">Registrasi Berhasil, hubungi MDL-Payment Support untuk Aktivasi</div>')
                         $("#spinner").hide();
                     } else {
                         $("#info").hide();
