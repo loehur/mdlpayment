@@ -1,6 +1,10 @@
-<hr class="m-0 p-1">
 <div class="content">
     <div class="container-fluid">
+        <div class="row ml-1">
+            <div class="col-auto">
+                <h6><b><?= ($data == 1) ? "PRABAYAR" : "PASCABAYAR"; ?></b></h6>
+            </div>
+        </div>
         <div class="row ml-1">
             <?php
             foreach ($this->prepaidList['product_type'] as $a) { ?>

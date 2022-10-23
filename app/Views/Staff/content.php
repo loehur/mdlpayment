@@ -24,26 +24,6 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col">
-                            <input type="password" class="form-control form-control-sm" minlength="6" id="password" name="password" placeholder="Password" required>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="password" class="form-control form-control-sm" minlength="6" id="repass" name="repass" placeholder="Ulangi Password" required>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="password" class="form-control form-control-sm" minlength="6" id="pin" name="pin" placeholder="PIN Transaksi" required>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="password" class="form-control form-control-sm" minlength="6" id="repin" name="repin" placeholder="Ulangi PIN Transaksi" required>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
                             <button type="submit" class="btn btn-sm btn-primary btn-block">
                                 Tambah Staff
                             </button>
@@ -54,7 +34,7 @@
         </div>
     </div>
 </div>
-
+<span class="ml-3">Default, Password: abcdef, PIN: 123456</span>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -66,6 +46,7 @@
                             <th>Nama</th>
                             <th>Registered</th>
                             <th>Status</th>
+                            <th>Ops</th>
                         </tr>
                     </thead>
                     <?php
@@ -82,6 +63,10 @@
                                     echo "<td><span style='cursor:pointer' data-value='" . $value . "' data-mode='" . $key . "'>" . $value . "</span></td>";
                             }
                         }
+                        echo "<td>
+                        <a href='" . $this->BASE_URL . "Staff/updateCell_Staff/en/0/" . $a['no_user'] . "'><i class='text-danger fas fa-times-circle'></i></a>
+                        <a href='" . $this->BASE_URL . "Staff/updateCell_Staff/en/1/" . $a['no_user'] . "'><i class='fas fa-check-circle'></i></a>
+                        </td>";
                         echo "</tr>";
                         $no++;
                     }
@@ -105,18 +90,6 @@
         $("form").on("submit", function(e) {
             $("#spinner").show();
             e.preventDefault();
-            if ($('#password').val() != $('#repass').val()) {
-                $("#info").hide();
-                $("#info").fadeIn(1000);
-                $("#info").html('<div class="alert alert-danger" role="alert">Konfirmasi Password tidak cocok!</div>')
-                return;
-            }
-            if ($('#pin').val() != $('#repin').val()) {
-                $("#info").hide();
-                $("#info").fadeIn(1000);
-                $("#info").html('<div class="alert alert-danger" role="alert">Konfirmasi PIN tidak cocok!</div>')
-                return;
-            }
             $.ajax({
                 url: $(this).attr('action'),
                 data: $(this).serialize(),

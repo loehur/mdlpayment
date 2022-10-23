@@ -25,7 +25,10 @@
                                 $active = "";
 
                                 switch ($z['topup_status']) {
-                                    case 2:
+                                    case 0:
+                                        $stBayar = "<b><span class='text-warning'>Proses</span></b>";
+                                        break;
+                                    case 1:
                                         $stBayar = "<b><span class='text-success'>Sukses</span></b>";
                                         break;
                                 }

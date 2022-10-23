@@ -6,6 +6,7 @@ class Staff extends Controller
 
    public function __construct()
    {
+      $this->data();
       $this->session_cek();
       $this->load = $this->page . "/load";
       $this->view_content = $this->page . "/content";
@@ -23,7 +24,21 @@ class Staff extends Controller
 
    public function load()
    {
-      $data = $this->model('M_DB_1')->get_where('user', "no_master = " . $this->userData['no_user'] . " AND no_user <> " . $this->userData['no_user']);
+      $data = $this->model('M_DB_1')->get_where_order('user', "no_master = " . $this->userData['no_user'] . " AND no_user <> " . $this->userData['no_user'], "en DESC");
       $this->view($this->view_content, $data);
+   }
+
+   public function updateCell_Staff($col, $value, $no_user)
+   {
+      $where = "no_user = '" . $no_user . "'";
+      $set = $col . " = " . $value;
+      $update = $this->model('M_DB_1')->update("user", $set, $where);
+      if (isset($update['errno'])) {
+         if ($update['errno'] == 0) {
+            $this->index();
+         }
+      } else {
+         print_r($update);
+      }
    }
 }

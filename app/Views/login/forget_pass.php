@@ -29,92 +29,10 @@
     </style>
 </head>
 
-
-<script>
-    $(document).ready(function() {
-        $("#info").fadeOut();
-
-        $('#req_code').click(function() {
-            var getEmail = $('#email').val();
-
-            if (getEmail.length == 0) {
-                $("#info").hide();
-                $("#info").fadeIn(1000);
-                $("#info").html('<div class="alert alert-danger" role="alert">Silahkan Isi Email Terlebih Dahulu!</div>');
-                return;
-            }
-
-            $.ajax({
-                url: "<?= $this->BASE_URL ?>Register/req_code",
-                data: {
-                    email: getEmail
-                },
-                type: "POST",
-                dataType: 'html',
-
-                success: function(response) {
-                    if (response == 1) {
-                        $("#info").hide();
-                        $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-success" role="alert">Request Code Sukses. Silahkan Cek Email!</div>');
-                    } else {
-                        $("#info").hide();
-                        $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-success" role="alert">' + response + '</div>');
-                    }
-                },
-            });
-        })
-
-        $('#form').validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true
-                },
-                reset_code: {
-                    required: true
-                },
-                password: {
-                    required: true,
-                },
-                repass: {
-                    required: true,
-                    equalTo: '#password'
-                }
-            },
-
-            submitHandler: function(form) {
-                $.ajax({
-                    url: $("#form").attr('action'),
-                    data: $("#form").serialize(),
-                    type: $("#form").attr("method"),
-                    dataType: 'html',
-
-                    success: function(response) {
-                        if (response == 1) {
-                            $("#info").hide();
-                            $('form').trigger("reset");
-                            $("#info").fadeIn(1000);
-                            $("#info").html('<div class="alert alert-success" role="alert">Password Baru Sukses, Silahkan Login!</div>')
-                        } else {
-                            $("#info").hide();
-                            $("#info").fadeIn(1000);
-                            $("#info").html('<div class="alert alert-danger" role="alert">' + response + '</div>')
-                        }
-                    },
-                });
-            }
-        });
-
-
-    });
-</script>
-
 <body class="login-page" style="min-height: 496.781px;">
     <div class="login-box">
         <div class="login-logo">
-            <a href="#">MDL <b>Laundry</b></a>
+            <a href="#">MDL <b>Payment</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -124,18 +42,15 @@
                 <!-- ALERT -->
                 <div id="info"></div>
 
-                <form id="form" action="<?= $this->BASE_URL ?>Register/updatePass" method="post">
+                <form id="form" action="<?= $this->BASE_URL ?>Register/ganti_password" method="post">
                     <div class="row mb-2">
                         <div class="col">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                            <input type="text" class="form-control" name="no_user" placeholder="No HP">
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
-                            <input type="text" class="form-control" id="reset_code" name="reset_code" placeholder="Code">
-                        </div>
-                        <div class="col-4">
-                            <a id="req_code" class="btn btn-dark btn-block">Request Code</a>
+                            <input type="text" class="form-control" id="reset_code" name="reset_code" placeholder="Reset Code">
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -168,3 +83,43 @@
 </body>
 
 </html>
+
+<script>
+    $(document).ready(function() {
+        $("#info").fadeOut();
+        $("#spinner").hide();
+
+        $("form").on("submit", function(e) {
+            e.preventDefault();
+            if ($('#password').val() != $('#repass').val()) {
+                $("#info").hide();
+                $("#info").fadeIn(1000);
+                $("#info").html('<div class="alert alert-danger" role="alert">Konfirmasi Password tidak cocok!</div>')
+                return;
+            }
+            if ($('#pin').val() != $('#repin').val()) {
+                $("#info").hide();
+                $("#info").fadeIn(1000);
+                $("#info").html('<div class="alert alert-danger" role="alert">Konfirmasi PIN tidak cocok!</div>')
+                return;
+            }
+            $.ajax({
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                type: $(this).attr("method"),
+                success: function(response) {
+                    if (response == 1) {
+                        $("#info").hide();
+                        $('form').trigger("reset");
+                        $("#info").fadeIn(1000);
+                        $("#info").html('<div class="alert alert-success" role="alert">Perubahan Password Success!</div>')
+                    } else {
+                        $("#info").hide();
+                        $("#info").fadeIn(1000);
+                        $("#info").html('<div class="alert alert-danger" role="alert">' + response + '</div>')
+                    }
+                },
+            });
+        });
+    });
+</script>

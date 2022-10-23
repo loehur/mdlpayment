@@ -1,8 +1,8 @@
 <?php
 
-class Home extends Controller
+class SetHarga extends Controller
 {
-   public $page = "Home";
+   public $page = "SetHarga";
 
    public function __construct()
    {
@@ -24,12 +24,7 @@ class Home extends Controller
 
    public function load()
    {
-      $this->view($this->view_content);
-   }
-
-   public function load_content()
-   {
       $data = $this->saldo();
-      $this->view($this->page . "/load", $data);
+      $this->view($this->view_content, $data);
    }
 }

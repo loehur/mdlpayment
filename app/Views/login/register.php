@@ -25,7 +25,7 @@
 <body class="login-page" style="min-height: 496.781px;">
     <div class="login-box">
         <div class="login-logo">
-            <a href="#">MDL <b>Laundry</b></a>
+            <a href="#">MDL <b>Payment</b></a>
         </div>
         <div class="card">
             <div class="card-body register-card-body small">

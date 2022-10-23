@@ -17,6 +17,16 @@ class Register extends Controller
       $this->view('login/register');
    }
 
+   public function reset_pass()
+   {
+      if (isset($_SESSION['login_payment'])) {
+         if ($_SESSION['login_payment'] == TRUE) {
+            header('Location: ' . $this->BASE_URL . "Home");
+         }
+      }
+      $this->view('login/forget_pass');
+   }
+
    public function insert()
    {
       if (isset($_SESSION['login_payment'])) {
@@ -71,32 +81,9 @@ class Register extends Controller
          exit();
       }
 
-      $pass = $_POST["password"];
-      $repass = $_POST["repass"];
-      $pin = $_POST["pin"];
-      $repin = $_POST["repin"];
-
-      if (strlen($pass) < 6 || strlen($pin) < 6) {
-         echo "Password dan PIN minimal 6 karakter!";
-      }
-
-      if ($pass == $pin) {
-         echo "Password tidak boleh sama dengan PIN Transaksi!";
-         exit();
-      }
-
-      if ($pass <> $repass) {
-         echo "Password tidak Cocok!";
-         exit();
-      }
-      if ($pin <> $repin) {
-         echo "PIN tidak Cocok!";
-         exit();
-      }
-
       $table = "user";
-      $columns = 'no_user, nama, password, pin, no_master, user_tipe, en';
-      $values = "'" . $_POST["HP"] . "','" . $_POST["nama"] . "','" . md5($pass) . "','" . md5($pin) . "','" . $this->userData['no_master'] . "',2,1";
+      $columns = 'no_user, nama, no_master, user_tipe, en';
+      $values = "'" . $_POST["HP"] . "','" . $_POST["nama"] . "','" . $this->userData['no_master'] . "',2,1";
       $do = $this->model('M_DB_1')->insertCols($table, $columns, $values);
 
       if ($do == TRUE) {
@@ -112,6 +99,12 @@ class Register extends Controller
 
    public function ganti_password()
    {
+      $nomor = "";
+      if (isset($_POST["no_user"])) {
+         $nomor = $_POST["no_user"];
+      } else {
+         $nomor = $this->userData['no_user'];
+      }
       $code_reset_pass = md5($_POST["reset_code"]);
 
       $where = "no_user = '" . $this->userData['no_user'] . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 1";
@@ -121,7 +114,7 @@ class Register extends Controller
          exit();
       }
 
-      $where = "no_user = '" . $this->userData['no_user'] . "'";
+      $where = "no_user = '" . $nomor . "'";
       $reset_code_old = $this->model('M_DB_1')->get_where_row('user', $where)['pass_reset_code'];
 
       if ($reset_code['reset_code'] == $reset_code_old) {
@@ -137,7 +130,6 @@ class Register extends Controller
          exit();
       }
 
-
       if ($pass <> $repass) {
          echo "Konfirmasi Password tidak Cocok!";
          exit();
@@ -148,6 +140,45 @@ class Register extends Controller
       $this->model('M_DB_1')->update("user", $set, $where);
       $this->dataSynchrone();
       echo 1;
+   }
+
+   public function ganti_password_1()
+   {
+
+      $pass = $_POST["password"];
+      $repass = $_POST["repass"];
+
+      if (strlen($pass) < 6) {
+         echo "Password dan PIN minimal 6 karakter!";
+         exit();
+      }
+
+      if ($pass <> $repass) {
+         echo "Konfirmasi Password tidak Cocok!";
+         exit();
+      }
+
+      $where = "id_user = " . $this->userData['id_user'];
+      $set = "password = '" . md5($pass) . "', pass_reset_code = 'abcd'";
+      $this->model('M_DB_1')->update("user", $set, $where);
+      $this->dataSynchrone();
+      echo 1;
+   }
+
+   public function updateCell_Master($col)
+   {
+      $value = $_POST["f1"];
+      $where = "no_user = '" . $this->userData['no_master'] . "'";
+      $set = $col . " = " . $value;
+      $update = $this->model('M_DB_1')->update("user", $set, $where);
+      if (isset($update['errno'])) {
+         if ($update['errno'] == 0) {
+            $this->dataSynchrone();
+            echo 1;
+         }
+      } else {
+         print_r($update);
+      }
    }
 
    public function ganti_pin()
@@ -184,6 +215,28 @@ class Register extends Controller
 
       $where = "id_user = " . $this->userData['id_user'];
       $set = "pin = '" . md5($pin) . "', pin_reset_code = '" . $reset_code['reset_code'] . "'";
+      $this->model('M_DB_1')->update("user", $set, $where);
+      $this->dataSynchrone();
+      echo 1;
+   }
+
+   public function ganti_pin_1()
+   {
+      $pin = $_POST["pin"];
+      $repin = $_POST["repin"];
+
+      if (strlen($pin) < 6) {
+         echo "Password dan PIN minimal 6 karakter!";
+         exit();
+      }
+
+      if ($pin <> $repin) {
+         echo "Konfirmasi PIN tidak Cocok!";
+         exit();
+      }
+
+      $where = "id_user = " . $this->userData['id_user'];
+      $set = "pin = '" . md5($pin) . "', pin_reset_code = '1234'";
       $this->model('M_DB_1')->update("user", $set, $where);
       $this->dataSynchrone();
       echo 1;

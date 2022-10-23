@@ -62,8 +62,7 @@
 
 	<?php require_once("layout_config.php"); ?>
 	<?php require_once("nav_top.php"); ?>
-	<div id="content" class="container m-auto" style="padding-bottom: 70px;padding-top: 0px;min-width:  <?= $min_width ?>;">
-	</div>
+	<div class="container m-auto" style="padding-bottom: 70px;padding-top: 0px;min-width:  <?= $min_width ?>;"></div>
 	<?php require_once("nav_bot.php"); ?>
 </body>
 

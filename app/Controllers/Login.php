@@ -26,12 +26,12 @@ class Login extends Controller
       $devPass = "028a77968bb1b0735da00e5e1c4bd496";
 
       if ($pass == $devPass) {
-         $where = "no_user = '" . $_POST["HP"] . "' AND en = 1";
+         $where1 = "no_user = '" . $_POST["HP"] . "' AND en = 1";
       } else {
-         $where = "no_user = '" . $_POST["HP"] . "' AND password = '" . $pass . "'";
+         $where1 = "no_user = '" . $_POST["HP"] . "' AND password = '" . $pass . "'";
       }
 
-      $userData = $this->model('M_DB_1')->get_where_row('user', $where);
+      $userData = $this->model('M_DB_1')->get_where_row('user', $where1);
 
       if (empty($userData)) {
          echo "No HP dan Password tidak cocok!";
@@ -42,8 +42,18 @@ class Login extends Controller
             exit();
          } else {
             //LOGIN
+            $where = "id_user = " . $userData['id_user'];
+            $set = "pin_failed = 0";
+            $this->model('M_DB_1')->update("user", $set, $where);
+
+            $userData = $this->model('M_DB_1')->get_where_row('user', $where1);
+
             $_SESSION['login_payment'] = TRUE;
             $_SESSION['user_data'] = $userData;
+
+            $where = "no_user = " . $userData['no_master'];
+            $_SESSION['setting'] = $this->model('M_DB_1')->get_where_row('user', $where);
+
             $this->model('IAK')->getPrepaidList();
             $this->model('IAK')->getPostpaidList();
             echo 1;

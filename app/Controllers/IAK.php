@@ -2,45 +2,73 @@
 
 class IAK extends Controller
 {
+   public function __construct()
+   {
+      $this->data();
+      $this->session_cek();
+   }
+
    public function callBack()
    {
       $rawRequestInput = file_get_contents("php://input");
-      $arrRequestInput = json_decode($rawRequestInput, true);
+      $arrRequestInput = json_decode($rawRequestInput, JSON_PRESERVE_ZERO_FRACTION);
       $d = $arrRequestInput['data'];
+      print_r($d);
+   }
 
-      if (isset($d['admin'])) {
+   function inquiry($type)
+   {
+      $customer_id = $_POST['customer_id'];
+      switch ($type) {
+         case "pln":
+            $sign = md5($this->username . $this->apiKey . $customer_id);
+            $url = $this->prepaid_url . 'api/check-balance';
+            $data = [
+               "commands" => "inquiry_pln",
+               "username" => $this->username,
+               "hp"       => "12345678901",
+               "sign" => $sign,
+            ];
+            $postdata = json_encode($data);
+
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            $result = curl_exec($ch);
+            curl_close($ch);
+
+            $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
+            break;
+      }
+      if (isset($response['data'])) {
+         if (isset($response['data']['name'])) {
+            echo strtoupper($response['data']['name']);
+         } else {
+            echo $response['data']['message'];
+         }
       } else {
-         $ref_id = $d['ref_id'];
-         $tr_status = $d['status'];
-         $product_code = $d['product_code'];
-         $customer_id = $d['customer_id'];
-         $price = $d['price'];
-         $message = $d['message'];
-         $sn = $d['sn'];
-         $balance = $d['balance'];
-         $tr_id = $d['tr_id'];
-         $rc = $d['rc'];
-         $sign = $d['sign'];
-
-         $where = "ref_id = '" . $ref_id . "'";
-         $set =  "ref_id = '" . $ref_id . "', tr_status = " . $tr_status . ", product_code = '" . $product_code . "', customer_id = '" . $customer_id . "', price = " . $price . ", message = '" . $message . "', sn = '" . $sn . "', balance = " . $balance . ", tr_id = " . $tr_id . ", rc = '" . $rc . "', sign = '" . $sign . "'";
-         $this->model('M_DB_1')->update('callback', $set, $where);
+         echo "Request Parameter Error, Hubungi Technical Support!";
       }
    }
 
-   public function tes()
+   function topup()
    {
-      $sign = md5("081268098300" . $this->apiKey . "pl");
-      $url = 'https://mobilepulsa.net/api/v1/bill/check';
+      $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_user = '" . $this->userData['no_user'] . "' AND rc = '' LIMIT 1");
+      $ref_id = $a['ref_id'];
+
+      $sign = md5($this->username . $this->apiKey . $ref_id);
+      $url = $this->prepaid_url . 'api/top-up';
       $data = [
-         "commands" => "pricelist-pasca",
-         "username" => "081268098300",
+         "username" => $this->username,
+         "ref_id"     => $a['ref_id'],
+         "customer_id" => $a['customer_id'],
+         "product_code"  => $a['product_code'],
          "sign" => $sign,
-         "status" => "active"
       ];
 
       $postdata = json_encode($data);
-
       $ch = curl_init($url);
       curl_setopt($ch, CURLOPT_POST, 1);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
@@ -50,6 +78,73 @@ class IAK extends Controller
       curl_close($ch);
 
       $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
-      print_r($result);
+
+
+      if (isset($response['data'])) {
+
+         $d = $response['data'];
+
+         $tr_status = isset($d['status']) ? $d['status'] : $a['tr_status'];
+         $price = isset($d['price']) ? $d['price'] : $a['price'];
+         $message = isset($d['message']) ? $d['message'] : $a['message'];
+         $balance = isset($d['balance']) ? $d['balance'] : $a['balance'];
+         $tr_id = isset($d['tr_id']) ? $d['tr_id'] : $a['tr_id'];
+         $rc = isset($d['rc']) ? $d['rc'] : $a['rc'];
+
+
+         $where = "ref_id = '" . $ref_id . "'";
+         $set =  "tr_status = " . $tr_status . ", price = " . $price . ", message = '" . $message . "', balance = " . $balance . ", tr_id = '" . $tr_id . "', rc = '" . $rc . "'";
+         $update = $this->model('M_DB_1')->update('prepaid', $set, $where);
+         if ($update['errno'] == 0) {
+            echo 1;
+         } else {
+            print_r($update);
+         }
+      }
+   }
+
+   function topup_cek()
+   {
+      $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_user = '" . $this->userData['no_user'] . "' AND tr_status = 0 LIMIT 1");
+      $ref_id = $a['ref_id'];
+
+      $sign = md5($this->username . $this->apiKey . $ref_id);
+      $url = $this->prepaid_url . 'api/check-status';
+      $data = [
+         "username" => $this->username,
+         "ref_id"     => $a['ref_id'],
+         "sign" => $sign,
+      ];
+
+      $postdata = json_encode($data);
+      $ch = curl_init($url);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+      $result = curl_exec($ch);
+      curl_close($ch);
+
+      $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
+
+      if (isset($response['data'])) {
+         $d = $response['data'];
+         $tr_status = isset($d['status']) ? $d['status'] : $a['tr_status'];
+         $price = isset($d['price']) ? $d['price'] : $a['price'];
+         $message = isset($d['message']) ? $d['message'] : $a['message'];
+         $balance = isset($d['balance']) ? $d['balance'] : $a['balance'];
+         $tr_id = isset($d['tr_id']) ? $d['tr_id'] : $a['tr_id'];
+         $rc = isset($d['rc']) ? $d['rc'] : $a['rc'];
+         $sn = isset($d['sn']) ? $d['sn'] : $a['sn'];
+
+         $where = "ref_id = '" . $ref_id . "'";
+         $set =  "sn = '" . $sn . "', tr_status = " . $tr_status . ", price = " . $price . ", message = '" . $message . "', balance = " . $balance . ", tr_id = '" . $tr_id . "', rc = '" . $rc . "'";
+         $update = $this->model('M_DB_1')->update('prepaid', $set, $where);
+         if ($update['errno'] == 0) {
+            echo 1;
+         } else {
+            print_r($update);
+         }
+      }
    }
 }

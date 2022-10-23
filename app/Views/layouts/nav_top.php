@@ -10,7 +10,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="<?= $this->BASE_URL ?>Akun" class="nav-link text-secondary text-nowrap"><i class="fas fa-receipt"></i><br>Penarikan</a>
+						<a href="#" class="nav-link text-secondary text-nowrap"><i class="fas fa-receipt"></i><br>Penarikan</a>
 					</li>
 					<li class="nav-item">
 						<a href="<?= $this->BASE_URL ?>Akun" class="nav-link text-secondary text-nowrap"><i class="fas fa-user"></i><br>Akun</a>

@@ -6,7 +6,7 @@
 						<a href="<?= $this->BASE_URL ?>Staff" class="nav-link text-secondary text-nowrap"><i class="fas fa-users"></i><br>Staff</a>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="nav-link text-secondary text-nowrap"><i class="fas fa-tags"></i><br>Set Harga</a>
+						<a href="<?= $this->BASE_URL ?>SetHarga" class="nav-link text-secondary text-nowrap"><i class="fas fa-tags"></i><br>Set Harga</a>
 					</li>
 					<li class="nav-item">
 						<a href="<?= $this->BASE_URL ?>Setor" class="nav-link text-secondary text-nowrap">

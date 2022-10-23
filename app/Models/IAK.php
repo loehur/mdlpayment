@@ -1,8 +1,6 @@
 <?php
 
-require 'app/Config/IAK_Variables.php';
-
-class IAK extends IAK_Variables
+class IAK extends Public_Variables
 {
     public function getPrepaidList()
     {
@@ -76,5 +74,10 @@ class IAK extends IAK_Variables
 
         $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
         return $response;
+    }
+
+    function ref_id()
+    {
+        return "mdl" . "-" . date('Ymdhis') . "-" . rand(1000000000, 9999999999);
     }
 }

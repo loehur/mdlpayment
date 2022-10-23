@@ -62,7 +62,7 @@ class DB_1 extends DB_Config
                     break;
             }
         } else {
-            return array('query' => $query, 'info' => $this->mysqli->error);
+            return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno);
         }
     }
 
@@ -131,11 +131,8 @@ class DB_1 extends DB_Config
     {
         $query = "INSERT INTO $table($columns) VALUES($values)";
         $run = $this->mysqli->query($query);
-        if ($run) {
-            return TRUE;
-        } else {
-            return array('query' => $query, 'info' => $this->mysqli->errno . " : " . $this->mysqli->error);
-        }
+        return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno);
+       
     }
 
     public function delete_where($table, $where)
@@ -148,11 +145,8 @@ class DB_1 extends DB_Config
     {
         $query = "UPDATE $table SET $set WHERE $where";
         $run = $this->mysqli->query($query);
-        if ($run) {
-            return TRUE;
-        } else {
-            return array('query' => $query, 'info' => $this->mysqli->error);
-        }
+        return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno);
+      
     }
 
     public function count_where($table, $where)
