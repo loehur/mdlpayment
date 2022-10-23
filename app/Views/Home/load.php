@@ -34,10 +34,10 @@
                 <div class="col-md-12 border pb-1">
                     <table class="table table-borderless table-sm mb-0 pb-0">
                         <tr>
-                            <td>User:<br><small><?= $a['no_user'] ?></small></td>
+                            <td><small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?></small></td>
                             <td><?= $a['customer_id'] ?><br><small><?= $a['description'] ?></small></td>
-                            <td><small>#<?= $a['tr_id'] ?><br><?= substr($a['updateTime'], 2, -3) ?></small></td>
-                            <td>Rp<?= number_format($a['price_sell']) ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
+                            <td><small><?= substr($a['updateTime'], 2, -3) ?></small></td>
+                            <td>Rp<?= number_format($a['price_sell']) ?> <small>(-<?= number_format($a['price_master']) ?>)</small><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
                             <td></td>
                         </tr>
                     </table>

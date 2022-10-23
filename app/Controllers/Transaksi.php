@@ -144,7 +144,7 @@ class Transaksi extends Controller
             $array['data'] = array();
             foreach ($this->prepaidList['list'] as $a) {
                if ($a['product_description'] == $des) {
-                  $array['data'][$a['product_code']] = array($a['product_nominal'], $a['product_details'], ($a['product_price'] + $margin + $this->setting['margin_prepaid']));
+                  $array['data'][$a['product_code']] = array($a['product_nominal'], $a['product_details'], ($a['product_price'] + $margin + $this->setting['margin_prepaid']), $a['product_price'] + $margin);
                }
             };
 
