@@ -41,6 +41,12 @@ class Transaksi extends Controller
       $customer_id = $_POST['customer_id'];
       $pin = $_POST['pin'];
 
+      //PIN DILARANG DEFAULT
+      if ($this->userData['pin'] == md5("123456")) {
+         echo "Silahkan mengganti PIN terlebih dahulu!";
+         exit();
+      }
+
       //CEK USER MASIH AKTIF ATAU TIDAK
       if ($this->userData['en'] <> 1) {
          echo "Access Forbiden";

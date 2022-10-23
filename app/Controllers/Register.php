@@ -77,17 +77,29 @@ class Register extends Controller
          exit();
       }
 
+      //CEK PIN FAILED 3X LOGOUT
+      if ($this->userData['pin_failed'] > 2) {
+         echo 0;
+         exit();
+      }
+
+      //CEK PIN BENER ATAU ENGGA
+      $pin = $_POST['pin'];
+      if ($this->userData['pin'] <> md5($pin)) {
+         $where = "id_user = " . $this->userData['id_user'];
+         $set = "pin_failed = pin_failed + 1";
+         $this->model('M_DB_1')->update("user", $set, $where);
+         echo "PIN Salah! 3x akan Logout!";
+         exit();
+      }
+
       $table = "user";
       $columns = 'no_user, nama, no_master, user_tipe, en';
       $values = "'" . $_POST["HP"] . "','" . $_POST["nama"] . "','" . $this->userData['no_master'] . "',2,1";
       $do = $this->model('M_DB_1')->insertCols($table, $columns, $values);
 
-      if ($do == TRUE) {
-         if ($do == 1) {
-            echo $do;
-         } else {
-            print_r($do['info']);
-         }
+      if ($do['errno'] == 0) {
+         echo 1;
       } else {
          print_r($do);
       }

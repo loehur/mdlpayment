@@ -24,6 +24,12 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col">
+                            <label>PIN Transaksi</label>
+                            <input type="password" class="form-control form-control-sm" name="pin" placeholder="PIN Transaksi" required>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
                             <button type="submit" class="btn btn-sm btn-primary btn-block">
                                 Tambah Staff
                             </button>
@@ -97,6 +103,8 @@
                 success: function(response) {
                     if (response == 1) {
                         location.reload(true);
+                    } else if (response == 0) {
+                        window.location.href = "<?= $this->BASE_URL ?>Login/logout";
                     } else {
                         $("#info").hide();
                         $("#info").fadeIn(1000);
