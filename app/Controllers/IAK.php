@@ -78,7 +78,20 @@ class IAK extends Controller
 
             $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
 
-            print_r($response);
+            if (isset($response['data'])) {
+               if (isset($response['response_code'])) {
+                  switch ($response['response_code']) {
+                     case "01":
+                     case "102":
+                        echo strtoupper($response['message']);
+                        break;
+                  }
+               } else {
+                  echo $response['data']['message'];
+               }
+            } else {
+               echo "Request Parameter Error, Hubungi Technical Support!";
+            }
             break;
       }
    }
