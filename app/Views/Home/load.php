@@ -36,8 +36,8 @@
                         <tr>
                             <td>User:<br><small><?= $a['no_user'] ?></small></td>
                             <td><?= $a['customer_id'] ?><br><small><?= $a['description'] ?></small></td>
-                            <td><small>#<?= $a['tr_id'] ?><br><?= $a['updateTime'] ?></small></td>
-                            <td>Rp<?= number_format($a['price_sell']) ?><br><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></td>
+                            <td><small>#<?= $a['tr_id'] ?><br><?= substr($a['updateTime'], 2, -3) ?></small></td>
+                            <td>Rp<?= number_format($a['price_sell']) ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
                             <td></td>
                         </tr>
                     </table>
