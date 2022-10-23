@@ -62,6 +62,7 @@ class IAK extends Controller
                "username" => $this->username,
                "code"       => $code,
                "hp" => $customer_id,
+               "ref_id" => $ref_id,
                "sign" => $sign,
             ];
 
