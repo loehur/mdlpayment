@@ -194,14 +194,15 @@ class Transaksi extends Controller
             }
             $array['type'] = $type;
             $array['jenis'] = $jenis;
-
+            
             $this->view($this->page . "/product_des", $array);
             break;
       }
    }
 
-   public function product_code($des, $type, $jenis)
+   public function product_code($de, $type, $jenis)
    {
+      $des = str_replace('_SPACE_', ' ', $de);
       $margin = 0;
       $this->index();
       switch ($jenis) {

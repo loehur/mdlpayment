@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-auto mb-2">
-                <a href="<?= $this->BASE_URL ?>Transaksi/product_type/1"><button class="btn btn-sm btn-outline-info">PRA BAYAR</button></a>
+                <a href="<?= $this->BASE_URL ?>Transaksi/product_type/1"><button class="btn btn-sm btn-outline-info">PRABAYAR</button></a>
             </div>
             <div class="col mr-auto mb-2">
                 <a href="<?= $this->BASE_URL ?>Transaksi/product_type/2"><button class="btn btn-sm btn-outline-success text-nowrap">PASCA BAYAR</button></a>
