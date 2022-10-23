@@ -22,11 +22,10 @@ class IAK extends Controller
       switch ($type) {
          case "pln":
             $sign = md5($this->username . $this->apiKey . $customer_id);
-            $url = $this->prepaid_url . 'api/check-balance';
+            $url = $this->prepaid_url . 'api/inquiry-pln';
             $data = [
-               "commands" => "inquiry_pln",
                "username" => $this->username,
-               "hp"       => "12345678901",
+               "customer_id" => $customer_id,
                "sign" => $sign,
             ];
             $postdata = json_encode($data);
