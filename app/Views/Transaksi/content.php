@@ -5,7 +5,7 @@
                 <a href="<?= $this->BASE_URL ?>Transaksi/product_type/1"><button class="btn btn-sm btn-outline-info">PRABAYAR</button></a>
             </div>
             <div class="col mr-auto mb-2">
-                <a href=""><button class="btn btn-sm btn-outline-success">PASCA BAYAR</button></a>
+                <a href=""><button class="btn btn-sm btn-outline-success text-nowrap">PASCA BAYAR</button></a>
             </div>
             <div class="col float-right">
                 <span class="float-right">Saldo</span><br>
