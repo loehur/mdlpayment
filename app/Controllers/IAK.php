@@ -56,7 +56,7 @@ class IAK extends Controller
             $code = $_POST['code'];
             $ref_id = $this->model('M_IAK')->ref_id();
             $sign = md5($this->username . $this->apiKey . $ref_id);
-            $url = $this->prepaid_url . 'api/inquiry-pln';
+            $url = $this->postpaid_url . 'api/inquiry-pln';
             $data = [
                "commands"   => "inq-pasca",
                "username" => $this->username,
