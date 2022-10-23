@@ -30,6 +30,11 @@ class Transaksi extends Controller
 
    public function proses($jenis, $product_code)
    {
+      if ($jenis == 2) {
+         echo "SEDANG DALAM PENGERJAAN";
+         exit();
+      }
+
       $this->dataSynchrone();
       $this->data();
 
@@ -57,33 +62,32 @@ class Transaksi extends Controller
          exit();
       }
 
-      //CEK DUPLIKAT GAK
-
-
-
-      //CEK SALDO CUKUP GAK
-      $harga = array();
-      $saldo = $this->saldo();
-      foreach ($this->prepaidList['list'] as $a) {
-         if ($a['product_code'] == $product_code) {
-            if ($jenis == 1) {
-               $harga = [
-                  "price_master" => $a['product_price'] + $this->margin_prepaid,
-                  "price_cell" => $a['product_price'] + $this->margin_prepaid + $this->setting['margin_prepaid'],
-                  "desc" => $a['product_description'] . " " . $a['product_nominal'] . " " . $a['product_details']
-               ];
-            }
-         }
-      };
-
-      $limit = $saldo['saldo'] - $harga['price_master'];
-      if ($limit < $this->setting['min_saldo']) {
-         echo "Saldo Tidak Cukup!";
-         exit();
-      }
 
       if ($jenis == 1) {
-         $ref_id = $this->model('IAK')->ref_id();
+
+         //CEK DUPLIKAT GAK
+         //CEK SALDO CUKUP GAK
+         $harga = array();
+         $saldo = $this->saldo();
+         foreach ($this->prepaidList['list'] as $a) {
+            if ($a['product_code'] == $product_code) {
+               if ($jenis == 1) {
+                  $harga = [
+                     "price_master" => $a['product_price'] + $this->margin_prepaid,
+                     "price_cell" => $a['product_price'] + $this->margin_prepaid + $this->setting['margin_prepaid'],
+                     "desc" => $a['product_description'] . " " . $a['product_nominal'] . " " . $a['product_details']
+                  ];
+               }
+            }
+         };
+
+         $limit = $saldo['saldo'] - $harga['price_master'];
+         if ($limit < $this->setting['min_saldo']) {
+            echo "Saldo Tidak Cukup!";
+            exit();
+         }
+
+         $ref_id = $this->model('M_IAK')->ref_id();
          $col = "no_user, no_master, ref_id, product_code, customer_id, price_master, price_sell, description";
          $val = "'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $product_code . "','" . $customer_id . "'," . $harga['price_master'] . "," . $harga['price_cell'] . ",'" . $harga['desc'] . "'";
          $do = $this->model('M_DB_1')->insertCols("prepaid", $col, $val);
@@ -98,13 +102,7 @@ class Transaksi extends Controller
    public function product_type($jenis)
    {
       $this->index();
-      switch ($jenis) {
-         case 1:
-            $this->view($this->page . "/product_type", $jenis);
-            break;
-         case 2:
-            break;
-      }
+      $this->view($this->page . "/product_type", $jenis);
    }
 
    public function product_des($type, $jenis)
@@ -128,6 +126,17 @@ class Transaksi extends Controller
             $this->view($this->page . "/product_des", $array);
             break;
          case 2:
+            $array = array();
+            $array['data'] = array();
+            foreach ($this->postpaidList['list'] as $a) {
+               if ($a['type'] == $type) {
+                  $array['data']['product_code'][$a['code']] = $a['name'];
+               }
+            }
+            $array['type'] = $type;
+            $array['jenis'] = $jenis;
+
+            $this->view($this->page . "/product_des", $array);
             break;
       }
    }
@@ -135,7 +144,6 @@ class Transaksi extends Controller
    public function product_code($des, $type, $jenis)
    {
       $margin = 0;
-      $saldo = $this->saldo()['saldo'];
       $this->index();
       switch ($jenis) {
          case 1:
@@ -156,6 +164,7 @@ class Transaksi extends Controller
             $this->view($this->page . "/product_code", $array);
             break;
          case 2:
+            $this->confirmationPOST($des, $jenis);
             break;
       }
    }
@@ -163,10 +172,7 @@ class Transaksi extends Controller
    public function confirmation($code, $nominal, $des, $type, $jenis, $harga)
    {
       $this->index();
-      switch ($jenis) {
-         case 1:
-
-            $array = array();
+      $array = array();
             $array['data'] = array();
             $array['detail'] = "";
 
@@ -182,12 +188,31 @@ class Transaksi extends Controller
                      'detail' => $a['product_details']
                   ];
                }
-            };       
+      };
+      $this->view($this->page . "/confirmation", $array);
+   }
 
-            $this->view($this->page . "/confirmation", $array);
-            break;
-         case 2:
-            break;
+   public function confirmationPOST($code, $jenis)
+   {
+      $this->index();
+      $array = array();
+      $array['data'] = array();
+      $array['detail'] = "";
+
+      foreach ($this->postpaidList['list'] as $a) {
+         if ($a['code'] == $code) {
+            $array = [
+               'code' => $code,
+               'nominal' => "",
+               'des' => $a['name'],
+               'type' => $a['type'],
+               'jenis' => $jenis,
+               'harga' => $a['fee'] + $a['komisi'] + $this->admin_postpaid,
+               'detail' => "",
+            ];
+         }
       }
+
+      $this->view($this->page . "/confirmation", $array);
    }
 }

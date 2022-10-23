@@ -54,8 +54,8 @@ class Login extends Controller
             $where = "no_user = " . $userData['no_master'];
             $_SESSION['setting'] = $this->model('M_DB_1')->get_where_row('user', $where);
 
-            $this->model('IAK')->getPrepaidList();
-            $this->model('IAK')->getPostpaidList();
+            $this->model('M_IAK')->getPrepaidList();
+            $this->model('M_IAK')->getPostpaidList();
             echo 1;
          }
       }

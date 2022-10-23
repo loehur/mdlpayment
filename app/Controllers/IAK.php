@@ -39,16 +39,46 @@ class IAK extends Controller
             curl_close($ch);
 
             $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
+
+            if (isset($response['data'])) {
+               if (isset($response['data']['name'])) {
+                  echo strtoupper($response['data']['name']);
+               } else {
+                  echo $response['data']['message'];
+               }
+            } else {
+               echo "Request Parameter Error, Hubungi Technical Support!";
+            }
+
             break;
-      }
-      if (isset($response['data'])) {
-         if (isset($response['data']['name'])) {
-            echo strtoupper($response['data']['name']);
-         } else {
-            echo $response['data']['message'];
-         }
-      } else {
-         echo "Request Parameter Error, Hubungi Technical Support!";
+
+         case "post":
+            $code = $_POST['code'];
+            $ref_id = $this->model('M_IAK')->ref_id();
+            $sign = md5($this->username . $this->apiKey . $ref_id);
+            $url = $this->prepaid_url . 'api/inquiry-pln';
+            $data = [
+               "commands"   => "inq-pasca",
+               "username" => $this->username,
+               "code"       => $code,
+               "hp" => $customer_id,
+               "sign" => $sign,
+            ];
+
+            $postdata = json_encode($data);
+
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            $result = curl_exec($ch);
+            curl_close($ch);
+
+            $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
+
+            print_r($response['data']);
+            break;
       }
    }
 

@@ -45,9 +45,12 @@ class Controller extends Public_Variables
         if (isset($_SESSION['login_payment'])) {
             if ($_SESSION['login_payment'] == true) {
                 $this->userData = $_SESSION['user_data'];
+                
                 $this->prepaidList['list'] = $_SESSION['prepaid_list'];
                 $this->prepaidList['product_type'] = $this->model('Functions')->array_group_by_col($this->prepaidList['list'], "product_type");
                 $this->postpaidList['list'] = $_SESSION['postpaid_list'];
+                $this->postpaidList['product_type'] = $this->model('Functions')->array_group_by_col($this->postpaidList['list'], "type");
+
                 $this->setting = $_SESSION['setting'];
             }
         }

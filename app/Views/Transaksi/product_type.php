@@ -7,11 +7,19 @@
         </div>
         <div class="row ml-1">
             <?php
-            foreach ($this->prepaidList['product_type'] as $a) { ?>
-                <div class="col-auto pr-1 pl-1 mr-1 m-0 mb-2 border rounded">
-                    <a class="text-decoration-none" href="<?= $this->BASE_URL ?>Transaksi/product_des/ <?= $a ?>/<?= $data ?>"><?= strtoupper($a) ?></a>
-                </div>
-            <?php  } ?>
+            if ($data == 1) {
+                foreach ($this->prepaidList['product_type'] as $a) { ?>
+                    <div class="col-auto pr-1 pl-1 mr-1 m-0 mb-2 border rounded">
+                        <a class="text-decoration-none" href="<?= $this->BASE_URL ?>Transaksi/product_des/ <?= $a ?>/<?= $data ?>"><?= strtoupper($a) ?></a>
+                    </div>
+                <?php  }
+            } else {
+                foreach ($this->postpaidList['product_type'] as $a) { ?>
+                    <div class="col-auto pr-1 pl-1 mr-1 m-0 mb-2 border rounded">
+                        <a class="text-decoration-none" href="<?= $this->BASE_URL ?>Transaksi/product_des/ <?= $a ?>/<?= $data ?>"><?= strtoupper($a) ?></a>
+                    </div>
+            <?php }
+            } ?>
         </div>
     </div>
 </div>

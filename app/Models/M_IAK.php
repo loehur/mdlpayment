@@ -1,6 +1,6 @@
 <?php
 
-class IAK extends Public_Variables
+class M_IAK extends Public_Variables
 {
     public function getPrepaidList()
     {
