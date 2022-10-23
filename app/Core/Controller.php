@@ -111,7 +111,7 @@ class Controller extends Public_Variables
         $return['data_pre'] = $data['prepaid'];
         $return['total_pre'] = $total_pre_success;
 
-        if ($saldo >= $this->setting['min_saldo']) {
+        if ($saldo >= 0) {
             $this->margin_prepaid = $this->margin_prepaid1;
             $this->admin_postpaid = $this->admin_postpaid1;
         } else {
