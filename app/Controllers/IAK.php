@@ -58,9 +58,9 @@ class IAK extends Controller
             $sign = md5($this->username . $this->apiKey . $ref_id);
             $url = $this->postpaid_url . 'api/v1/bill/check';
             $data = [
-               "commands"   => "inq-pasca",
+               "commands" => "inq-pasca",
                "username" => $this->username,
-               "code"       => $code,
+               "code" => $code,
                "hp" => $customer_id,
                "ref_id" => $ref_id,
                "sign" => $sign,
