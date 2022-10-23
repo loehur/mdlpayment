@@ -64,7 +64,7 @@ if ($a['jenis'] == 1) {
                     <div class="row mb-2">
                         <div class="col">
                             <button type="submit" class="btn btn-sm btn-primary btn-block">
-                                Proses
+                                <?= $data['jenis'] == 1 ? "Proses" : "Bayar" ?>
                             </button>
                         </div>
                     </div>

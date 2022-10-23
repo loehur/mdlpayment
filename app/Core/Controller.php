@@ -91,29 +91,40 @@ class Controller extends Public_Variables
         }
         $total_topup_success = array_sum($arr_topup_success);
 
-        $arr_pre_success_kas = array();
-        $arr_pre_success_master = array();
-        $total_pre_success = 0;
+        $arr_success_kas = array();
+        $arr_success_master = array();
+
         $data['prepaid'] = $this->model('M_DB_1')->get_where('prepaid', "no_master = " . $this->userData['no_master'] . " ORDER BY id DESC");
         foreach ($data['prepaid'] as $a) {
-            if ($a['rc'] == "00" || $a['rc'] == "39" || $a['rc'] == "201" || $a['rc'] == "") {
+            if ($a['rc'] == "00" || $a['rc'] == "39" || $a['rc'] == "201" || $a['rc'] == "" || strlen($a['sn']) > 0) {
                 if ($this->userData['no_user'] == $a['no_user']) {
-                    array_push($arr_pre_success_kas, $a['price_sell']);
+                    array_push($arr_success_kas, $a['price_sell']);
                 }
-                array_push($arr_pre_success_master, $a['price_master']);
+                array_push($arr_success_master, $a['price_master']);
             }
         }
 
-        $total_pre_success_kas = array_sum($arr_pre_success_kas);
-        $total_pre_success_master = array_sum($arr_pre_success_master);
-        $saldo = $total_topup_success - $total_pre_success_master;
+        $data['postpaid'] = $this->model('M_DB_1')->get_where('postpaid', "no_master = " . $this->userData['no_master'] . " ORDER BY id DESC");
+        foreach ($data['postpaid'] as $a) {
+            if (strlen($a['noref'] > 0) || strlen($a['datetime']) > 0) {
+                if ($this->userData['no_user'] == $a['no_user']) {
+                    array_push($arr_success_kas, $a['price_sell']);
+                }
+                array_push($arr_success_master, $a['price']);
+            }
+        }
+
+        $total_success_kas = array_sum($arr_success_kas);
+
+        $total_success_master = array_sum($arr_success_master);
+        $saldo = $total_topup_success - $total_success_master;
 
         $return['saldo'] = $saldo;
-        $return['kas'] = $total_pre_success_kas;
+        $return['kas'] = $total_success_kas;
         $return['data_topup'] = $data['topup'];
         $return['data_pre'] = $data['prepaid'];
-        $return['total_pre'] = $total_pre_success;
-
+        $return['data_post'] = $data['postpaid'];
+     
         if ($saldo >= 0) {
             $this->margin_prepaid = $this->margin_prepaid1;
             $this->admin_postpaid = $this->admin_postpaid1;

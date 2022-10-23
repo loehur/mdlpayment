@@ -30,11 +30,6 @@ class Transaksi extends Controller
 
    public function proses($jenis, $product_code)
    {
-      if ($jenis == 2) {
-         echo "SEDANG DALAM PENGERJAAN";
-         exit();
-      }
-
       $this->dataSynchrone();
       $this->data();
 
@@ -68,10 +63,7 @@ class Transaksi extends Controller
          exit();
       }
 
-
-      if ($jenis == 1) {
-
-         //CEK DUPLIKAT GAK
+      if ($jenis == 1) {     
          //CEK SALDO CUKUP GAK
          $harga = array();
          $saldo = $this->saldo();
@@ -101,6 +93,67 @@ class Transaksi extends Controller
             echo 1;
          } else {
             print_r($do);
+         }
+      } elseif ($jenis == 2) {
+         //CEK SALDO CUKUP GAK
+         $saldo = $this->saldo();
+         $where = "customer_id = '" . $customer_id . "' AND product_code = '" . $product_code . "' AND noref = ''";
+         $cek = $this->model("M_DB_1")->get_where_row("postpaid", $where);
+         if (is_array($cek)) {
+            $a = $cek;
+            $tr_id = $cek['tr_id'];
+            $ref_id = $cek['ref_id'];
+            $harga = $cek['price'];
+            $limit = $saldo['saldo'] - $harga;
+            if ($limit < $this->setting['min_saldo']) {
+               echo "Saldo Tidak Cukup!";
+               exit();
+            } else {
+               $sign = md5($this->username . $this->apiKey . $tr_id);
+               $url = $this->postpaid_url . 'api/v1/bill/check';
+               $data = [
+                  "commands" => "pay-pasca",
+                  "username" => $this->username,
+                  "tr_id"    => $tr_id,
+                  "sign" => $sign,
+               ];
+
+               $postdata = json_encode($data);
+               $ch = curl_init($url);
+               curl_setopt($ch, CURLOPT_POST, 1);
+               curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+               curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+               curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+               $result = curl_exec($ch);
+               curl_close($ch);
+
+               $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
+
+
+               if (isset($response['data'])) {
+                  $d = $response['data'];
+                  $price = isset($d['price']) ? $d['price'] : $a['price'];
+                  $message = isset($d['message']) ? $d['message'] : $a['message'];
+                  $balance = isset($d['balance']) ? $d['balance'] : $a['balance'];
+                  $tr_id = isset($d['tr_id']) ? $d['tr_id'] : $a['tr_id'];
+                  $rc = isset($d['response_code']) ? $d['response_code'] : $a['rc'];
+                  $datetime = isset($d['datetime']) ? $d['datetime'] : $a['datetime'];
+                  $noref = isset($d['noref']) ? $d['noref'] : $a['noref'];
+
+                  $where = "ref_id = '" . $ref_id . "'";
+                  $set =  "datetime = '" . $datetime . "', noref = '" . $noref . "', price = " . $price . ", message = '" . $message . "', balance = " . $balance . ", tr_id = '" . $tr_id . "', rc = '" . $rc . "'";
+                  $update = $this->model('M_DB_1')->update('postpaid', $set, $where);
+                  if ($update['errno'] == 0) {
+                     echo 1;
+                  } else {
+                     print_r($update);
+                  }
+               } else {
+                  echo "Request Parameter Error, Hubungi Technical Support!";
+               }
+            }
+         } else {
+            echo "Silahkan Tagihan Terlebih Dahulu!";
          }
       }
    }

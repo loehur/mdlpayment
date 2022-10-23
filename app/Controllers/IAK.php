@@ -5,7 +5,6 @@ class IAK extends Controller
    public function __construct()
    {
       $this->data();
-      $this->session_cek();
    }
 
    public function callBack()
@@ -54,7 +53,25 @@ class IAK extends Controller
 
          case "post":
             $code = $_POST['code'];
+            //CEK DULU UDAH PERNAH CEK BELUM;
+            $where = "customer_id = '" . $customer_id . "' AND noref = ''";
+            $cek = $this->model("M_DB_1")->get_where_row("postpaid", $where);
+
+            if (is_array($cek)) {
+               $d = $cek;
+               echo "<b>" . $d['tr_name'] . "</b>";
+               echo "<br>--------------------------------------";
+               echo "<br>Nominal: Rp" . number_format($d['nominal']);
+               echo "<br>Periode: " . $d['period'];
+               echo "<br>Admin Server: Rp" . number_format($d['admin']);
+               echo "<br>Admin Loket: Rp" . number_format($this->setting['admin_postpaid']);
+               echo "<br>-------------------------------------------";
+               echo "<br><b>Total Tagihan: Rp" . number_format($d['nominal'] + $d['admin'] + $this->setting['admin_postpaid']) . "</b>";
+               exit();
+            }
+
             $ref_id = $this->model('M_IAK')->ref_id();
+            
             $sign = md5($this->username . $this->apiKey . $ref_id);
             $url = $this->postpaid_url . 'api/v1/bill/check';
             $data = [
@@ -77,17 +94,37 @@ class IAK extends Controller
             curl_close($ch);
 
             $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
-
+           
             if (isset($response['data'])) {
-               if (isset($response['response_code'])) {
-                  switch ($response['response_code']) {
-                     case "01":
-                     case "102":
-                        echo strtoupper($response['message']);
+               $d = $response['data'];
+               if (isset($d['response_code'])) {
+                  switch ($d['response_code']) {
+                     case "00":
+                     case "05":
+                     case "39":
+                     case "201":
+                        $col = "rc, message, tr_id, tr_name, period, nominal, admin, no_user, no_master, ref_id, product_code, customer_id, price, selling_price, description, price_sell";
+                        $val = "'" . $d['response_code'] . "','" . $d['message'] . "'," . $d['tr_id'] . ",'" . $d['tr_name'] . "','" . $d['period'] . "'," . $d['nominal'] . "," . $d['admin'] . ",'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $d['code'] . "','" . $d['hp'] . "'," . $d['price'] . "," . $d['selling_price'] . ",'" . serialize($d['desc']) . "'," . ($d['price'] + $this->setting['admin_postpaid']);
+                        $do = $this->model('M_DB_1')->insertCols("postpaid", $col, $val);
+                        if ($do['errno'] == 0) {
+                           echo "<b>" . $d['tr_name'] . "</b>";
+                           echo "<br>--------------------------------------";
+                           echo "<br>Nominal: Rp" . number_format($d['nominal']);
+                           echo "<br>Periode: " . $d['period'];
+                           echo "<br>Admin Server: Rp" . number_format($d['admin']);
+                           echo "<br>Admin Loket: Rp" . number_format($this->setting['admin_postpaid']);
+                           echo "<br>-------------------------------------------";
+                           echo "<br><b>Total Tagihan: Rp" . number_format($d['nominal'] + $d['admin'] + $this->setting['admin_postpaid']) . "</b>";
+                        } else {
+                           echo "Request Parameter Error, Hubungi Technical Support!";
+                        }
+                        break;
+                     default:
+                        echo strtoupper($d['message']);
                         break;
                   }
                } else {
-                  echo $response['data']['message'];
+                  print_r($response);
                }
             } else {
                echo "Request Parameter Error, Hubungi Technical Support!";
@@ -143,6 +180,8 @@ class IAK extends Controller
          } else {
             print_r($update);
          }
+      } else {
+         echo "Request Parameter Error, Hubungi Technical Support!";
       }
    }
 
