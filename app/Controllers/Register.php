@@ -63,15 +63,11 @@ class Register extends Controller
       $values = "'" . $_POST["HP"] . "','" . $_POST["nama"] . "','" . md5($pass) . "','" . md5($pin) . "','" . $_POST["HP"] . "'";
       $do = $this->model('M_DB_1')->insertCols($table, $columns, $values);
 
-      if ($do == TRUE) {
-         if ($do == 1) {
-            echo $do;
-         } else {
-            print_r($do['info']);
-         }
+      if ($do['errno'] == 0) {
+         echo 1;
       } else {
          print_r($do);
-      }
+      } 
    }
 
    public function tambah_staff()
