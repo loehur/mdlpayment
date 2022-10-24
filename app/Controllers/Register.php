@@ -72,7 +72,7 @@ class Register extends Controller
 
    public function tambah_staff()
    {
-      if ($this->userData['tipe'] <> 1) {
+      if ($this->userData['user_tipe'] <> 1) {
          echo "Forbidden Access";
          exit();
       }
@@ -175,7 +175,7 @@ class Register extends Controller
 
    public function updateCell_Master($col)
    {
-      if ($this->userData['tipe'] <> 1) {
+      if ($this->userData['user_tipe'] <> 1) {
          echo "Forbidden Access";
          exit();
       }

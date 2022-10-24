@@ -64,7 +64,7 @@
                 <div id="info"></div>
                 <form action="<?= $this->BASE_URL ?>Login/cek_login" method="post">
                     <div class="input-group mb-3">
-                        <input type="text" name="HP" class="form-control" placeholder="Nomor Handphone" required>
+                        <input type="text" name="HP" class="form-control" placeholder="No. Handphone / ID" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span<i class="fas fa-mobile-alt"></i></span>
