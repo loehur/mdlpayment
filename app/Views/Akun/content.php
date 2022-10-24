@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-auto mr-auto">
-                <?php if ($this->userData['pass_reset_code'] == "abc") { ?>
+                <?php if ($this->userData['pass_reset_code'] == "abc" && $this->userData['user_tipe'] == 2) { ?>
                     <form id="form" class="pass" action="<?= $this->BASE_URL ?>Register/ganti_password_1" method="post">
                         <div class="row mb-2">
                             <div class="col">
