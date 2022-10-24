@@ -69,7 +69,7 @@
         <div class="row">
             <div class="col-auto mr-auto">
                 <div id="info"></div>
-                <?php if ($this->userData['pin_reset_code'] == "123") { ?>
+                <?php if ($this->userData['pin_reset_code'] == "123" && $this->userData['user_tipe'] == 2) { ?>
                     <form class="pin" action="<?= $this->BASE_URL ?>Register/ganti_pin_1" method="post">
                         <div class="row mb-2">
                             <div class="col">
