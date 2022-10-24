@@ -90,9 +90,30 @@ class Transaksi extends Controller
          $val = "'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $product_code . "','" . $customer_id . "'," . $harga['price_master'] . "," . $harga['price_cell'] . ",'" . $harga['desc'] . "'";
          $do = $this->model('M_DB_1')->insertCols("prepaid", $col, $val);
          if ($do['errno'] == 0) {
+
+            //EKSEKUSI TOPUP
+            $sign = md5($this->username . $this->apiKey . $ref_id);
+            $url = $this->prepaid_url . 'api/top-up';
+            $data = [
+               "username" => $this->username,
+               "ref_id"     => $ref_id,
+               "customer_id" => $customer_id,
+               "product_code"  => $product_code,
+               "sign" => $sign,
+            ];
+
+            $postdata = json_encode($data);
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            $result = curl_exec($ch);
+            curl_close($ch);
+
             echo 1;
          } else {
-            print_r($do);
+            print_r($do['error']);
          }
       } elseif ($jenis == 2) {
 

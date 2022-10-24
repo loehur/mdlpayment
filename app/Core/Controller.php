@@ -148,7 +148,7 @@ class Controller extends Public_Variables
         $total_penarikan_success = 0;
 
         $arr_success_tarik = array();
-        $data = $this->model('M_DB_1')->get_where('kas', "no_user = " . $this->userData['no_user'] . " ORDER BY id DESC");
+        $data = $this->model('M_DB_1')->get_where('kas', "no_user = '" . $this->userData['no_user'] . "' ORDER BY id DESC");
         foreach ($data as $a) {
             if ($a['kas_mutasi'] == 0 && $a['kas_status'] == 1) {
                 array_push($arr_success_tarik, $a['jumlah']);
