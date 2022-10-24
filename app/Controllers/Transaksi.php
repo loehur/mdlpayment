@@ -63,7 +63,7 @@ class Transaksi extends Controller
          exit();
       }
 
-      if ($jenis == 1) {     
+      if ($jenis == 1) {
          //CEK SALDO CUKUP GAK
          $harga = array();
          $saldo = $this->saldo();
@@ -95,14 +95,25 @@ class Transaksi extends Controller
             print_r($do);
          }
       } elseif ($jenis == 2) {
-         //CEK SALDO CUKUP GAK
-         $saldo = $this->saldo();
+
          $where = "customer_id = '" . $customer_id . "' AND product_code = '" . $product_code . "' AND noref = ''";
          $cek = $this->model("M_DB_1")->get_where_row("postpaid", $where);
          if (is_array($cek)) {
             $a = $cek;
             $tr_id = $cek['tr_id'];
             $ref_id = $cek['ref_id'];
+
+            //AMANKAN DULU STATUS TRANSAKSI
+            $where = "ref_id = '" . $ref_id . "'";
+            $set =  "tr_status = 4";
+            $update = $this->model('M_DB_1')->update('postpaid', $set, $where);
+            if ($update['errno'] <> 0) {
+               print_r($update['error']);
+               exit();
+            }
+
+            //CEK SALDO CUKUP GAK
+            $saldo = $this->saldo();
             $harga = $cek['price'];
             $limit = $saldo['saldo'] - $harga;
             if ($limit < $this->setting['min_saldo']) {
@@ -146,7 +157,7 @@ class Transaksi extends Controller
                   if ($update['errno'] == 0) {
                      echo 1;
                   } else {
-                     print_r($update);
+                     print_r($update['error']);
                   }
                } else {
                   echo "Request Parameter Error, Hubungi Technical Support!";
@@ -194,7 +205,7 @@ class Transaksi extends Controller
             }
             $array['type'] = $type;
             $array['jenis'] = $jenis;
-            
+
             $this->view($this->page . "/product_des", $array);
             break;
       }
@@ -233,21 +244,21 @@ class Transaksi extends Controller
    {
       $this->index();
       $array = array();
-            $array['data'] = array();
-            $array['detail'] = "";
+      $array['data'] = array();
+      $array['detail'] = "";
 
-            foreach ($this->prepaidList['list'] as $a) {
-               if ($a['product_code'] == $code) {
-                  $array = [
-                     'code' => $code,
-                     'nominal' => $nominal,
-                     'des' => $des,
-                     'type' => $type,
-                     'jenis' => $jenis,
-                     'harga' => $harga,
-                     'detail' => $a['product_details']
-                  ];
-               }
+      foreach ($this->prepaidList['list'] as $a) {
+         if ($a['product_code'] == $code) {
+            $array = [
+               'code' => $code,
+               'nominal' => $nominal,
+               'des' => $des,
+               'type' => $type,
+               'jenis' => $jenis,
+               'harga' => $harga,
+               'detail' => $a['product_details']
+            ];
+         }
       };
       $this->view($this->page . "/confirmation", $array);
    }

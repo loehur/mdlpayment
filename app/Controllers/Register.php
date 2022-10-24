@@ -67,12 +67,12 @@ class Register extends Controller
          echo 1;
       } else {
          print_r($do);
-      } 
+      }
    }
 
    public function tambah_staff()
    {
-      if ($this->userData['no_master'] <> $this->userData['no_user']) {
+      if ($this->userData['tipe'] <> 1) {
          echo "Forbidden Access";
          exit();
       }
@@ -101,7 +101,7 @@ class Register extends Controller
       if ($do['errno'] == 0) {
          echo 1;
       } else {
-         print_r($do);
+         print_r($do['error']);
       }
    }
 
@@ -175,7 +175,21 @@ class Register extends Controller
 
    public function updateCell_Master($col)
    {
-      $value = $_POST["f1"];
+      if ($this->userData['tipe'] <> 1) {
+         echo "Forbidden Access";
+         exit();
+      }
+
+      if (isset($_POST["f1"])) {
+         $value = $_POST["f1"];
+      } else {
+         if (isset($_POST[$col])) {
+            $value = $_POST[$col];
+         } else {
+            $value = 0;
+         }
+      }
+
       $where = "no_user = '" . $this->userData['no_master'] . "'";
       $set = $col . " = " . $value;
       $update = $this->model('M_DB_1')->update("user", $set, $where);

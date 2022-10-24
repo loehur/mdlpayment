@@ -45,13 +45,18 @@ class Controller extends Public_Variables
         if (isset($_SESSION['login_payment'])) {
             if ($_SESSION['login_payment'] == true) {
                 $this->userData = $_SESSION['user_data'];
-                
+
                 $this->prepaidList['list'] = $_SESSION['prepaid_list'];
                 $this->prepaidList['product_type'] = $this->model('Functions')->array_group_by_col($this->prepaidList['list'], "product_type");
                 $this->postpaidList['list'] = $_SESSION['postpaid_list'];
                 $this->postpaidList['product_type'] = $this->model('Functions')->array_group_by_col($this->postpaidList['list'], "type");
 
                 $this->setting = $_SESSION['setting'];
+                if ($this->userData['user_tipe'] == 1) {
+                    $this->setting['v_price'] = $this->userData['price_view'];
+                } else {
+                    $this->setting['v_price'] = 0;
+                }
             }
         }
     }
@@ -106,7 +111,7 @@ class Controller extends Public_Variables
 
         $data['postpaid'] = $this->model('M_DB_1')->get_where('postpaid', "no_master = " . $this->userData['no_master'] . " ORDER BY id DESC");
         foreach ($data['postpaid'] as $a) {
-            if (strlen($a['noref'] > 0) || strlen($a['datetime']) > 0) {
+            if (strlen($a['noref'] > 0) || strlen($a['datetime']) > 0 || $a['tr_status'] == 1 || $a['tr_status'] == 3 || $a['tr_status'] == 4) {
                 if ($this->userData['no_user'] == $a['no_user']) {
                     array_push($arr_success_kas, $a['price_sell']);
                 }
@@ -119,12 +124,14 @@ class Controller extends Public_Variables
         $total_success_master = array_sum($arr_success_master);
         $saldo = $total_topup_success - $total_success_master;
 
+        $total_kas = $total_success_kas - $this->kas()['total_tarik'];
+
         $return['saldo'] = $saldo;
-        $return['kas'] = $total_success_kas;
+        $return['kas'] = $total_kas;
         $return['data_topup'] = $data['topup'];
         $return['data_pre'] = $data['prepaid'];
         $return['data_post'] = $data['postpaid'];
-     
+
         if ($saldo >= 0) {
             $this->margin_prepaid = $this->margin_prepaid1;
             $this->admin_postpaid = $this->admin_postpaid1;
@@ -132,6 +139,26 @@ class Controller extends Public_Variables
             $this->margin_prepaid = $this->margin_prepaid2;
             $this->admin_postpaid = $this->admin_postpaid2;
         }
+
+        return $return;
+    }
+
+    public function kas()
+    {
+        $total_penarikan_success = 0;
+
+        $arr_success_tarik = array();
+        $data = $this->model('M_DB_1')->get_where('kas', "no_user = " . $this->userData['no_user'] . " ORDER BY id DESC");
+        foreach ($data as $a) {
+            if ($a['kas_mutasi'] == 0 && $a['kas_status'] == 1) {
+                array_push($arr_success_tarik, $a['jumlah']);
+            }
+        }
+
+        $total_penarikan_success = array_sum($arr_success_tarik);
+
+        $return['data'] = $data;
+        $return['total_tarik'] = $total_penarikan_success;
 
         return $return;
     }

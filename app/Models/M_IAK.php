@@ -4,10 +4,10 @@ class M_IAK extends Public_Variables
 {
     public function getPrepaidList()
     {
-        $sign = md5("081268098300" . $this->apiKey . "pl");
-        $url = 'https://prepaid.iak.id/api/pricelist';
+        $sign = md5($this->username . $this->apiKey_price . "pl");
+        $url = $this->prepaid_url_price . 'api/pricelist';
         $data = [
-            "username" => "081268098300",
+            "username" => $this->username,
             "sign" => $sign,
             "status" => "active"
         ];
@@ -29,11 +29,11 @@ class M_IAK extends Public_Variables
 
     public function getPostpaidList()
     {
-        $sign = md5("081268098300" . $this->apiKey . "pl");
-        $url = 'https://mobilepulsa.net/api/v1/bill/check';
+        $sign = md5($this->username . $this->apiKey_price . "pl");
+        $url = $this->postpaid_url_price . 'api/v1/bill/check';
         $data = [
             "commands" => "pricelist-pasca",
-            "username" => "081268098300",
+            "username" => $this->username,
             "sign" => $sign,
             "status" => "active"
         ];
@@ -55,10 +55,10 @@ class M_IAK extends Public_Variables
 
     function check_balance()
     {
-        $sign = md5("081268098300" . $this->apiKey . "bl");
+        $sign = md5($this->username . $this->apiKey . "bl");
         $url = $this->prepaid_url . 'api/check-balance';
         $data = [
-            "username" => "081268098300",
+            "username" => $this->username,
             "sign" => $sign,
         ];
 

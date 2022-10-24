@@ -14,7 +14,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-auto mr-auto">
-                <div class="row mb-4">
+                <div class="row mb-3">
                     <div class="col">
                         <form action="<?= $this->BASE_URL ?>Register/updateCell_Master/margin_prepaid" method="post">
                             <label>Margin Prabayar</label>
@@ -25,11 +25,26 @@
                         </form>
                     </div>
                 </div>
-                <div class="row mb-2">
+                <div class="row mb-3">
                     <div class="col">
                         <form action="<?= $this->BASE_URL ?>Register/updateCell_Master/admin_postpaid" method="post">
                             <label>Admin Pascabayar</label>
                             <input type="number" class="form-control form-control-sm" name="f1" value="<?= $this->setting['admin_postpaid'] ?>">
+                            <button type="submit" class="btn mt-1 btn-sm btn-primary btn-block">
+                                Simpan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <form action="<?= $this->BASE_URL ?>Register/updateCell_Master/price_view" method="post">
+                            <div class="form-check">
+                                <input class="form-check-input" name="price_view" value="1" type="checkbox" <?= ($this->setting['v_price'] == 1) ? "checked" : "" ?>>
+                                <label class="form-check-label">
+                                    Tampilkan Harga Modal
+                                </label>
+                            </div>
                             <button type="submit" class="btn mt-1 btn-sm btn-primary btn-block">
                                 Simpan
                             </button>

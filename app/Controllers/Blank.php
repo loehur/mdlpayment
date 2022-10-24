@@ -1,6 +1,6 @@
 <?php
 
-class Home extends Controller
+class Blank extends Controller
 {
    public $page = "Blank";
 
@@ -13,6 +13,15 @@ class Home extends Controller
    }
 
    public function index()
+   {
+      $this->view("layouts/layout_main", [
+         "view_load" => $this->view_load,
+         "title" => $this->page
+      ]);
+      $this->load();
+   }
+
+   public function load()
    {
       $this->view($this->view_content);
    }

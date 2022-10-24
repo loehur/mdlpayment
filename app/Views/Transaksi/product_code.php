@@ -10,7 +10,7 @@
             foreach ($data['data'] as $key => $a) { ?>
                 <div class="col-auto pr-1 pl-1 mr-1 m-0 mb-2 border rounded">
                     <a class="text-decoration-none" href="<?= $this->BASE_URL ?>Transaksi/confirmation/<?= $key ?>/<?= $a[0] ?>/<?= $data['des'] ?>/<?= $data['type'] ?>/<?= $data['jenis'] ?>/<?= $a[2] ?>">
-                        <?= $a[0] . ", " . $a[1] . "<br><b>Harga Rp" . number_format($a[2]) ?> <small>(<?= number_format($a[3]) ?>)</small></b>
+                        <?= $a[0] . ", " . $a[1] . "<br><b>Harga Rp" . number_format($a[2]) ?></b> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a[3]) . ")</small>" : "" ?>
                     </a>
                 </div>
             <?php  }

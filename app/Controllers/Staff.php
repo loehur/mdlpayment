@@ -24,7 +24,7 @@ class Staff extends Controller
 
    public function load()
    {
-      $data = $this->model('M_DB_1')->get_where_order('user', "no_master = " . $this->userData['no_user'] . " AND no_user <> " . $this->userData['no_user'], "en DESC");
+      $data = $this->model('M_DB_1')->get_where_order('user', "no_master = '" . $this->userData['no_user'] . "' AND no_user <> '" . $this->userData['no_user'] . "'", "en DESC");
       $this->view($this->view_content, $data);
    }
 

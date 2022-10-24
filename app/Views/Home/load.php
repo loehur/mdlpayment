@@ -43,7 +43,7 @@
                             <td><small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?></small></td>
                             <td><?= $a['customer_id'] ?><br><small><?= $a['description'] ?></small></td>
                             <td class="text-right"><small><?= substr($a['updateTime'], 2, -3) ?></small></td>
-                            <td class="text-right">Rp<?= number_format($a['price_sell']) ?> <small>(<?= number_format($a['price_master']) ?>)</small><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
+                            <td class="text-right">Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price_master']) . ")</small>" : "" ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
                             <td></td>
                         </tr>
                     </table>
@@ -62,12 +62,14 @@
         <div class="row">
             <?php
             $no = 0;
-            $antri_pre_count = 0;
-            $proses_pre_count = 0;
+            $proses_post_count = 0;
             foreach ($data['data_post'] as $a) {
                 $no++;
                 if ($no > 5) {
                     break;
+                }
+                if ($a['tr_status'] == 4 || $a['tr_status'] == 3) {
+                    $proses_post_count += 1;
                 }
             ?>
                 <div class="col-md-12 border pb-1">
@@ -76,12 +78,13 @@
                             <td><small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?></small></td>
                             <td><?= $a['customer_id'] ?><br><small><?= $a['product_code'] ?></small></td>
                             <td class="text-right"><small><?= $a['datetime'] ?></small><br><?= $a['period'] ?></td>
-                            <td class="text-right">Rp<?= number_format($a['price_sell']) ?> <small>(<?= number_format($a['price']) ?>)</small><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
+                            <td class="text-right">Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
                         </tr>
                     </table>
                     <b><span class="text-success"><?= $a['noref'] ?></span></b>
                 </div>
             <?php } ?>
+            <span class="d-none" id="tr_proses_post"><?= $proses_post_count ?></span>
         </div>
     </div>
 </div>
