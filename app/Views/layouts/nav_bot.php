@@ -13,7 +13,7 @@
 							<a href="<?= $this->BASE_URL ?>SetHarga" class="nav-link text-secondary text-nowrap"><i class="fas fa-tags"></i><br>Set Harga</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= $this->BASE_URL ?>Blank" class="nav-link text-secondary text-nowrap"><i class="fas fa-check-double"></i><br>Approval</a>
+							<a href="<?= $this->BASE_URL ?>Approval" class="nav-link text-secondary text-nowrap"><i class="fas fa-check-double"></i><br>Approval</a>
 						</li>
 						<li class="nav-item">
 							<a href="<?= $this->BASE_URL ?>Setor" class="nav-link text-secondary text-nowrap">

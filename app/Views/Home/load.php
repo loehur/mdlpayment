@@ -30,7 +30,7 @@
                 $rc = $a['rc'];
                 $tr_status = $a['tr_status'];
                 $no++;
-                if ($no > 5) {
+                if ($no > 6) {
                     break;
                 }
                 if (($a['tr_status'] == 0) && strlen($a['rc']) == 0) {
@@ -40,17 +40,22 @@
                     $proses_pre_count += 1;
                 }
             ?>
-                <div class="col-md-12 border pb-1">
+                <div class="col-md-6 border pb-1">
                     <table class="table table-borderless table-sm mb-0 pb-0">
                         <tr>
-                            <td><small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?></small></td>
-                            <td><?= $a['customer_id'] ?><br><small><?= $a['description'] . $tr_status . $rc ?></small></td>
-                            <td class="text-right"><small><?= substr($a['updateTime'], 2, -3) ?></small></td>
-                            <td class="text-right">Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price_master']) . ")</small>" : "" ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
-                            <td>
-                                <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
-                                    <button class="btn btn-sm btn-outline-primary" onclick="Print('<?= $id ?>')">Cetak</button>
+                            <td> <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
+                                    <a href="" class="noact badge btn btn-outline-primary pt-1" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
                                 <?php } ?>
+                                <small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= substr($a['updateTime'], 2, -3) ?></small>
+                            </td>
+                            <td class="text-right">
+                                <span class="text-info"><?= $a['customer_id'] ?></span><br>
+                                Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price_master']) . ")</small>" : "" ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" colspan="3"><small><?= $a['description'] . $tr_status . $rc ?></small><br>
+                                <b><span class="text-success"><?= $a['sn'] ?></span></b>
                             </td>
                         </tr>
                         <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
@@ -143,9 +148,7 @@
                                 </td>
                             </tr>
                         <?php } ?>
-
                     </table>
-                    <b><span class="text-success"><?= $a['sn'] ?></span></b>
                 </div>
             <?php } ?>
             <span class="d-none" id="tr_antri_pre"><?= $antri_pre_count ?></span>
@@ -164,24 +167,27 @@
             foreach ($data['data_post'] as $a) {
                 $id = $a['id'];
                 $no++;
-                if ($no > 5) {
+                if ($no > 6) {
                     break;
                 }
                 if ($a['tr_status'] == 4 || $a['tr_status'] == 3) {
                     $proses_post_count += 1;
                 }
             ?>
-                <div class="col-md-12 border pb-1">
+                <div class="col-md-6 border pb-1">
                     <table class="table table-borderless table-sm mb-0 pb-0">
                         <tr>
-                            <td><small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?></small></td>
-                            <td><?= $a['customer_id'] ?><br><small><?= $a['product_code'] ?></small></td>
-                            <td class="text-right"><small><?= $a['datetime'] ?></small><br><?= $a['period'] ?></td>
-                            <td class="text-right">Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
                             <td>
                                 <?php if ($a['tr_status'] == 1) { ?>
-                                    <button class="btn btn-sm btn-outline-primary" onclick="Print('<?= $id ?>')">Cetak</button>
+                                    <a href="" class="noact badge btn btn-outline-primary pt-1" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
                                 <?php } ?>
+                                <small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= $a['datetime'] ?></small>
+                            </td>
+                            <td class="text-right"><span class="text-info"><?= $a['customer_id'] ?></span><br>Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
+                        </tr>
+                        <tr>
+                            <td align="right" colspan="2"><small><?= $a['product_code'] ?>, <b><?= $a['tr_name'] ?></b>, <?= $a['period'] ?></small><br>
+                                <b><span class="text-success"><?= $a['noref'] ?></span></b>
                             </td>
                         </tr>
                         <?php if ($a['tr_status'] == 1) { ?>
@@ -295,7 +301,6 @@
                             </tr>
                         <?php } ?>
                     </table>
-                    <b><span class="text-success"><?= $a['noref'] ?></span></b>
                 </div>
             <?php } ?>
             <span class="d-none" id="tr_proses_post"><?= $proses_post_count ?></span>

@@ -73,7 +73,7 @@ class Transaksi extends Controller
                   $harga = [
                      "price_master" => $a['product_price'] + $this->margin_prepaid,
                      "price_cell" => ceil(($a['product_price'] + $this->margin_prepaid + $this->setting['margin_prepaid']) / 1000) * 1000,
-                     "desc" => $a['product_description'] . " " . $a['product_nominal'] . " " . $a['product_details']
+                     "desc" => $a['product_description'] . " " . $a['product_nominal'] . ", " . $a['product_details']
                   ];
                }
             }

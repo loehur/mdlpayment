@@ -3,12 +3,12 @@
         <h6><b><?= strtoupper($data['des']) ?></b></h6>
     </div>
 </div>
-<div class="content">
+<div class="content" style="padding-bottom: 70px;">
     <div class="container-fluid">
         <div class="row ml-1 mr-1">
             <?php
             foreach ($data['data'] as $key => $a) { ?>
-                <div class="col-auto pr-1 pl-1 mr-1 m-0 mb-2 border rounded">
+                <div class="col-auto pb-1 pt-1 pr-2 pl-2 mr-2 mb-2 border border-success rounded">
                     <a class="text-decoration-none" href="<?= $this->BASE_URL ?>Transaksi/confirmation/<?= $key ?>/<?= $a[0] ?>/<?= $data['des'] ?>/<?= $data['type'] ?>/<?= $data['jenis'] ?>/<?= $a[2] ?>">
                         <?= $a[0] . ", " . $a[1] . "<br><b>Harga Rp" . number_format($a[2]) ?></b> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a[3]) . ")</small>" : "" ?>
                     </a>
@@ -17,6 +17,7 @@
             ?>
         </div>
     </div>
+    <hr>
 </div>
 
 <!-- SCRIPT -->

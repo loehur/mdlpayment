@@ -163,6 +163,26 @@ class Controller extends Public_Variables
         return $return;
     }
 
+    public function kas_staff()
+    {
+        $total_penarikan_success = 0;
+
+        $arr_success_tarik = array();
+        $data = $this->model('M_DB_1')->get_where('kas', "no_master = '" . $this->userData['no_master'] . "' AND no_user <> '" . $this->userData['no_user'] . "' ORDER BY id DESC");
+        foreach ($data as $a) {
+            if ($a['kas_mutasi'] == 0 && $a['kas_status'] == 1) {
+                array_push($arr_success_tarik, $a['jumlah']);
+            }
+        }
+
+        $total_penarikan_success = array_sum($arr_success_tarik);
+
+        $return['data'] = $data;
+        $return['total_tarik'] = $total_penarikan_success;
+
+        return $return;
+    }
+
     public function topup_data()
     {
         return $this->model('M_DB_1')->get_where('topup', "no_master = " . $this->userData['no_master']);

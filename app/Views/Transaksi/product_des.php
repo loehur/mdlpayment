@@ -9,13 +9,13 @@
             <?php
             if ($data['jenis'] == 1) {
                 foreach ($data['data'] as $a) { ?>
-                    <div class="col-auto pr-1 pl-1 mr-1 m-0 mb-2 border rounded">
+                    <div class="col-auto pb-1 pt-1 pr-2 pl-2 mr-2 mb-2 border border-success rounded">
                         <a class="text-decoration-none" href="<?= $this->BASE_URL ?>Transaksi/product_code/<?= str_replace(' ', '_SPACE_', $a) ?>/<?= $data['type'] ?>/<?= $data['jenis'] ?>"><?= strtoupper($a) ?></a>
                     </div>
                 <?php  }
             } else {
                 foreach ($data['data']['product_code'] as $key => $a) { ?>
-                    <div class="col-auto pr-1 pl-1 mr-1 m-0 mb-2 border rounded">
+                    <div class="col-auto pb-1 pt-1 pr-2 pl-2 mr-2 mb-2 border border-success rounded">
                         <a class="text-decoration-none" href="<?= $this->BASE_URL ?>Transaksi/product_code/<?= $key  ?>/<?= $data['type'] ?>/<?= $data['jenis'] ?>"><?= strtoupper($a) ?></a>
                     </div>
             <?php }

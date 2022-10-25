@@ -7,6 +7,7 @@
         </div>
     </div>
 </div>
+<hr>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -14,18 +15,20 @@
                 <form id="form" action="<?= $this->BASE_URL ?>Register/tambah_staff" method="post">
                     <div class="row mb-2">
                         <div class="col">
+                            <label>Nama Panggilan</label>
                             <input type="text" class="form-control form-control-sm" id="nama" name="nama" placeholder="Nama Panggilan" required>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
+                            <label>Nomor HP / ID Loket</label>
                             <input type="text" class="form-control form-control-sm" id="HP" name="HP" placeholder="Nomor HP" required>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
                             <label>PIN Transaksi</label>
-                            <input type="password" class="form-control form-control-sm" name="pin" placeholder="PIN Transaksi" required>
+                            <input type="text" class="pw form-control form-control-sm" name="pin" placeholder="PIN Transaksi" required>
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -40,21 +43,14 @@
         </div>
     </div>
 </div>
-<span class="ml-3">Default, Password: abcdef, PIN: 123456</span>
+<hr>
+<label class="ml-3">Default [Password: abcdef], [PIN: 123456]</label>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-auto mr-auto">
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th>No. HP</th>
-                            <th>Nama</th>
-                            <th>Registered</th>
-                            <th>Status</th>
-                            <th>Ops</th>
-                        </tr>
-                    </thead>
+            <div class="col-md-6 border pb-1">
+                <table class="table table-borderless table-sm mb-0 pb-0">
+
                     <?php
                     $no = 0;
                     echo "<tbody>";
@@ -63,15 +59,24 @@
                         foreach ($a as $key => $value) {
                             switch ($key) {
                                 case "no_user":
+                                    echo "<td><span style='cursor:pointer' data-value='" . $value  . "' data-mode='" . $key . "'>" . $value . "</span><br>";
+                                    break;
                                 case "nama":
+                                    echo "<span style='cursor:pointer' data-value='" . $value  . "' data-mode='" . $key . "'>" . $value . "</span></td>";
+                                    break;
                                 case "insertTime":
+                                    echo "<td><span style='cursor:pointer' data-value='" . $value  . "' data-mode='" . $key . "'>" . $value . "</span>";
+                                    break;
                                 case "en":
-                                    echo "<td><span style='cursor:pointer' data-value='" . $value . "' data-mode='" . $key . "'>" . $value . "</span></td>";
+                                    echo "<br>Status: <span style='cursor:pointer' data-value='" . $value . "' data-mode='" . $key . "'>";
+                                    echo ($value == 1) ? "<span class='text-success'><b>Enabled</b></span>" : "<span class='text-secondary text-bold'><b>Disabled</b></span>";
+                                    echo "</span></>";
+                                    break;
                             }
                         }
-                        echo "<td>
-                        <a href='" . $this->BASE_URL . "Staff/updateCell_Staff/en/0/" . $a['no_user'] . "'><i class='text-danger fas fa-times-circle'></i></a>
-                        <a href='" . $this->BASE_URL . "Staff/updateCell_Staff/en/1/" . $a['no_user'] . "'><i class='fas fa-check-circle'></i></a>
+                        echo "<td nowrap>
+                        <a class='text-success text-decoration-none' href='" . $this->BASE_URL . "Staff/updateCell_Staff/en/1/" . $a['no_user'] . "'><i class='fas fa-check-circle'></i></a>
+                        <br><a class='text-danger text-decoration-none' href='" . $this->BASE_URL . "Staff/updateCell_Staff/en/0/" . $a['no_user'] . "'><i class='fas fa-times-circle'></i></a>
                         </td>";
                         echo "</tr>";
                         $no++;
@@ -92,6 +97,7 @@
 
 <script>
     $(document).ready(function() {
+        $("input.pw").css("-webkit-text-security", "disc");
         $("#info").fadeOut();
         $("form").on("submit", function(e) {
             $("#spinner").show();

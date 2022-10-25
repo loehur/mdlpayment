@@ -15,34 +15,32 @@
         <div class="row">
             <?php
             foreach ($data['data_topup'] as $z) { ?>
-                <div class="col p-0 m-1 rounded">
-                    <div class="bg-white rounded">
-                        <table class="table border table-sm w-100">
-                            <tbody>
-                                <?php
-                                $id = $z['id_topup'];
-                                $stBayar = "<b>Proses</b>";
-                                $active = "";
+                <div class="col-md-6 border pb-1">
+                    <table class="table table-borderless table-sm mb-0 pb-0">
+                        <tbody>
+                            <?php
+                            $id = $z['id_topup'];
+                            $stBayar = "<b>Proses</b>";
+                            $active = "";
 
-                                switch ($z['topup_status']) {
-                                    case 0:
-                                        $stBayar = "<b><span class='text-warning'>Proses</span></b>";
-                                        break;
-                                    case 1:
-                                        $stBayar = "<b><span class='text-success'>Sukses</span></b>";
-                                        break;
-                                }
+                            switch ($z['topup_status']) {
+                                case 0:
+                                    $stBayar = "<b><span class='text-warning'>Proses</span></b>";
+                                    break;
+                                case 1:
+                                    $stBayar = "<b><span class='text-success'>Sukses</span></b>";
+                                    break;
+                            }
 
-                                $classTR = "";
-                                $dibuat = substr($z['insertTime'], 8, 2) . "-" . substr($z['insertTime'], 5, 2) . "-" . substr($z['insertTime'], 0, 4)
-                                ?>
-                                <tr class="<?= $classTR ?>">
-                                    <td><small>#<?= $dibuat ?></small><br><?= strtoupper($z['bank']) . " " . $z['rek'] . "<br>" . $z['nama'] ?></td>
-                                    <td><small>Jumlah/Status</small><br><b><?= number_format($z['jumlah']) ?><br><small><?= $stBayar ?></b></small></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                            $classTR = "";
+                            $dibuat = substr($z['insertTime'], 8, 2) . "-" . substr($z['insertTime'], 5, 2) . "-" . substr($z['insertTime'], 0, 4)
+                            ?>
+                            <tr class="<?= $classTR ?>">
+                                <td><small>#<?= $dibuat ?></small><br><?= strtoupper($z['bank']) . " " . $z['rek'] . "<br>" . $z['nama'] ?></td>
+                                <td><small>Jumlah/Status</small><br><b><?= number_format($z['jumlah']) ?><br><small><?= $stBayar ?></b></small></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             <?php
             } ?>

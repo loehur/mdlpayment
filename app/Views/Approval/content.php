@@ -1,23 +1,3 @@
-<?php $s = $data['saldo'] ?>
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-auto mr-auto">
-                Outlate/Staff
-                <h6><b class="text-success"><?= ($this->userData['nama'] == $this->setting['nama']) ? $this->setting['nama'] : $this->setting['nama'] . "/" . $this->userData['nama']; ?></b></h6>
-            </div>
-            <div class="col-auto">
-                <span class="float-right">Kas</span><br>
-                <h6><b class="text-success"><?= number_format($s['kas']) ?></b></h6>
-            </div>
-            <div class="col-auto">
-                <span class="float-right">Saldo</span><br>
-                <h6><b class="text-success"><?= number_format($s['saldo']) ?></b></h6>
-            </div>
-        </div>
-    </div>
-</div>
-<hr>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -28,42 +8,7 @@
     </div>
 </div>
 <hr>
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-auto mr-auto">
-                <form action="<?= $this->BASE_URL ?>Penarikan/insert" method="post">
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label>Jumlah Penarikan</label>
-                            <input type="number" class="form-control form-control-sm" name="jumlah" placeholder="Jumlah" required>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label>Keterangan (Optional)</label>
-                            <input type="text" class="form-control form-control-sm" name="ket" placeholder="Keterangan">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label>PIN Transaksi</label>
-                            <input type="text" class="pw form-control form-control-sm" name="pin" placeholder="PIN Transaksi" required>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <button type="submit" class="btn btn-sm btn-primary btn-block">
-                                Tarik Kas
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<hr>
+<span class="ml-3"><b>Penarikan Kas Staff</b></span>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -82,23 +27,28 @@
                     $no = 0;
                     echo "<tbody>";
                     foreach ($data['kas'] as $a) {
+                        $id = $a['id'];
                         echo "<tr>";
-                        echo "<td class='text-info'>" . $a['keterangan'] . "</td>";
+                        echo "<td>" . $a['insertTime'] . " <span class='text-info'>" . $a['keterangan'] . "</span></td>";
                         echo "</tr>";
                         echo "<tr>";
                         echo "<td>" . $a['no_user'] . "</td>";
                         echo "<td>" . number_format($a['jumlah']) . "</td>";
-                        echo "<td>" . $a['insertTime'] . "</td>";
-                        echo "<td>";
+
                         switch ($a['kas_status']) {
                             case 1:
+                                echo "<td>";
                                 echo "<i class='text-success fas fa-check-circle'></i>";
+                                echo "</td>";
                                 break;
                             case 0;
-                                echo "<span class='text-warning'>Proses</span>";
+                                echo "<td><a class='text-danger text-decoration-none' href='" . $this->BASE_URL . "Approval/penarikan/" . $id . "/2'><i class='fas fa-times-circle'></i> Tolak</a></td>";
+                                echo "<td><a class='text-success text-decoration-none' href='" . $this->BASE_URL . "Approval/penarikan/" . $id . "/1'><i class='fas fa-check-circle'></i> Terima</a></td>";
                                 break;
                             case 2;
+                                echo "<td>";
                                 echo "<span class='text-danger'>Ditolak</span>";
+                                echo "</td>";
                                 break;
                         }
                         echo "</td>";
@@ -120,7 +70,6 @@
 
 <script>
     $(document).ready(function() {
-        $("input.pw").css("-webkit-text-security", "disc");
         $("#info").fadeOut();
         $("form").on("submit", function(e) {
             $("#spinner").show();

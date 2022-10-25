@@ -1,12 +1,13 @@
 <div class="content mb-2">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-auto mb-2">
-                <a href="<?= $this->BASE_URL ?>Transaksi/product_type/1"><button class="btn btn-sm btn-outline-info">PRABAYAR</button></a>
+            <div class="col-auto mb-2 pr-0">
+                <a href="<?= $this->BASE_URL ?>Transaksi/product_type/1"><button class="btn btn-sm btn-outline-info"><b>PRA BAYAR</b></button></a>
             </div>
             <div class="col mr-auto mb-2">
-                <a href="<?= $this->BASE_URL ?>Transaksi/product_type/2"><button class="btn btn-sm btn-outline-success text-nowrap">PASCA BAYAR</button></a>
+                <a href="<?= $this->BASE_URL ?>Transaksi/product_type/2"><button class="btn btn-sm btn-outline-success text-nowrap"><b>PASCA BAYAR</b></button></a>
             </div>
+
             <div class="col float-right">
                 <span class="float-right">Saldo</span><br>
                 <h6><b class="float-right text-success"><?= number_format($data['saldo']) ?></b></h6>
