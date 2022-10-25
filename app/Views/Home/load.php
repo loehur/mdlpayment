@@ -158,7 +158,7 @@
 </div>
 <hr>
 <span class="ml-3"><b>PASCA BAYAR</b></span>
-<div class="content">
+<div class="content" style="padding-bottom: 70px;">
     <div class="container-fluid">
         <div class="row">
             <?php
