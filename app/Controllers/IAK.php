@@ -220,12 +220,6 @@ class IAK extends Controller
             }
          }
 
-         if (isset($d['status'])) {
-            if ($d['status'] == $a['tr_status']) {
-               exit();
-            }
-         }
-
          $tr_status = isset($d['status']) ? $d['status'] : $a['tr_status'];
          $price = isset($d['price']) ? $d['price'] : $a['price'];
          $message = isset($d['message']) ? $d['message'] : $a['message'];
@@ -299,6 +293,14 @@ class IAK extends Controller
          }
       } else {
          echo "Request Parameter Error, Hubungi Technical Support!";
+      }
+   }
+
+   public function cek($mode, $ref_id) //mode: 1 pre, 2 post
+   {
+      if ($mode == 1) {
+         print_r($this->model("M_IAK")->pre_cek($ref_id));
+      } else {
       }
    }
 }
