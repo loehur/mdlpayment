@@ -101,7 +101,6 @@ class M_IAK extends Public_Variables
         $result = curl_exec($ch);
         curl_close($ch);
 
-        $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
-        return $response;
+        return $result;
     }
 }
