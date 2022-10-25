@@ -36,7 +36,7 @@
                 if (($a['tr_status'] == 0) && strlen($a['rc']) == 0) {
                     $antri_pre_count += 1;
                 }
-                if ($a['rc'] == "39" || $a['rc'] == "201" || strlen($a['sn']) == 0) {
+                if (($a['tr_status'] == 0 && ($a['rc'] == "39" || $a['rc'] == "201" || strlen($a['sn']) == 0)) || ($a['tr_status'] == 1 && strlen($a['sn']) == 0)) {
                     $proses_pre_count += 1;
                 }
             ?>
@@ -148,6 +148,7 @@
                                 </td>
                             </tr>
                         <?php } ?>
+                        <div class="pt-1 text-secondary" style="padding-left:150px; position: absolute;"><small>[<span><?= $antri_pre_count ?></span><span><?= $proses_pre_count ?></span>]</small></div>
                     </table>
                 </div>
             <?php } ?>
