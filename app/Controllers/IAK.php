@@ -222,7 +222,9 @@ class IAK extends Controller
          //BATALKAN JIKA STATUS SAMA AJA
          if (isset($d['status'])) {
             if ($d['status'] == $a['tr_status']) {
-               exit();
+               if (strlen($a['sn']) <> 0) {
+                  exit();
+               }
             }
          }
 
