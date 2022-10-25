@@ -187,7 +187,13 @@ class IAK extends Controller
 
    function topup_cek()
    {
-      $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND (tr_status = 0 OR sn = '') LIMIT 1");
+      $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 0 LIMIT 1");
+      if (!is_array($a)) {
+         $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 1 AND sn = '' LIMIT 1");
+         if (!is_array($a)) {
+            exit();
+         }
+      }
       $ref_id = $a['ref_id'];
 
       $sign = md5($this->username . $this->apiKey . $ref_id);

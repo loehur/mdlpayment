@@ -54,7 +54,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="right" colspan="3"><small><?= $a['description'] . $tr_status . $rc ?></small><br>
+                            <td align="right" colspan="3"><small><?= $a['description'] ?></small><br>
                                 <b><span class="text-success"><?= $a['sn'] ?></span></b>
                             </td>
                         </tr>
