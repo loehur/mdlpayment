@@ -58,7 +58,7 @@ if ($a['jenis'] == 1) {
                     <div class="row mb-2">
                         <div class="col">
                             <label>PIN Transaksi</label>
-                            <input type="password" class="form-control form-control-sm" name="pin" placeholder="PIN Transaksi" required>
+                            <input type="text" class="pw form-control form-control-sm" name="pin" placeholder="PIN Transaksi" required>
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -81,6 +81,8 @@ if ($a['jenis'] == 1) {
 
 <script>
     $(document).ready(function() {
+        $("input.pw").css("-webkit-text-security", "disc");
+
         $("form").on("submit", function(e) {
             e.preventDefault();
             $.ajax({

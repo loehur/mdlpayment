@@ -20,6 +20,10 @@
   height: 100%;
 }
 
+input.pw {
+  -webkit-text-security: disc;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% {

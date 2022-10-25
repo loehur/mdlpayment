@@ -85,4 +85,13 @@
             },
         });
     }
+
+    function Print(id) {
+        var printContents = document.getElementById("print" + id).innerHTML;
+        var originalContents = document.body.innerHTML;
+        window.document.body.style = 'margin:0';
+        window.document.writeln(printContents);
+        window.print();
+        location.reload(true);
+    }
 </script>

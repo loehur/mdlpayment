@@ -211,6 +211,8 @@ class IAK extends Controller
 
       if (isset($response['data'])) {
 
+         $d = $response['data'];
+         
          //BATALKAN JIKA STATUS SAMA AJA
          if (isset($d['status'])) {
             if ($d['status'] == $a['tr_status']) {
@@ -218,7 +220,12 @@ class IAK extends Controller
             }
          }
 
-         $d = $response['data'];
+         if (isset($d['status'])) {
+            if ($d['status'] == $a['tr_status']) {
+               exit();
+            }
+         }
+
          $tr_status = isset($d['status']) ? $d['status'] : $a['tr_status'];
          $price = isset($d['price']) ? $d['price'] : $a['price'];
          $message = isset($d['message']) ? $d['message'] : $a['message'];
@@ -264,7 +271,8 @@ class IAK extends Controller
       $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
 
       if (isset($response['data'])) {
-
+         $d = $response['data'];
+         
          //BATALKAN JIKA STATUS SAMA AJA
          if (isset($d['status'])) {
             if ($d['status'] == $a['tr_status']) {
@@ -272,7 +280,6 @@ class IAK extends Controller
             }
          }
 
-         $d = $response['data'];
          $price = isset($d['price']) ? $d['price'] : $a['price'];
          $message = isset($d['message']) ? $d['message'] : $a['message'];
          $balance = isset($d['balance']) ? $d['balance'] : $a['balance'];
