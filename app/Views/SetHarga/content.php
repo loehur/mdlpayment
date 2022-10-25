@@ -17,31 +17,34 @@
                 <div class="row mb-3">
                     <div class="col">
                         <form action="<?= $this->BASE_URL ?>Register/updateCell_Master/margin_prepaid" method="post">
-                            <label>Margin Prabayar</label>
-                            <input type="number" class="form-control form-control-sm" name="f1" value="<?= $this->setting['margin_prepaid'] ?>">
+                            <label><b>Margin Minimal Prabayar</b><br>Harga akan digenapkan ke Atas<br>
+                                Contoh 21.300 -> 22.000</label>
+                            <input type="number" class="text-right form-control form-control-sm" name="f1" value="<?= $this->setting['margin_prepaid'] ?>">
                             <button type="submit" class="btn mt-1 btn-sm btn-primary btn-block">
                                 Simpan
                             </button>
                         </form>
                     </div>
                 </div>
+                <hr>
                 <div class="row mb-3">
                     <div class="col">
                         <form action="<?= $this->BASE_URL ?>Register/updateCell_Master/admin_postpaid" method="post">
-                            <label>Admin Pascabayar</label>
-                            <input type="number" class="form-control form-control-sm" name="f1" value="<?= $this->setting['admin_postpaid'] ?>">
+                            <label><b>Admin Loket/Counter Pascabayar</b><br>Admin Counter akan tertera pada Nota</label>
+                            <input type="number" class="text-right form-control form-control-sm" name="f1" value="<?= $this->setting['admin_postpaid'] ?>">
                             <button type="submit" class="btn mt-1 btn-sm btn-primary btn-block">
                                 Simpan
                             </button>
                         </form>
                     </div>
                 </div>
+                <hr>
                 <div class="row mb-2">
                     <div class="col">
                         <form action="<?= $this->BASE_URL ?>Register/updateCell_Master/price_view" method="post">
                             <div class="form-check">
                                 <input class="form-check-input" name="price_view" value="1" type="checkbox" <?= ($this->setting['v_price'] == 1) ? "checked" : "" ?>>
-                                <label class="form-check-label">
+                                <label class="form-check-label pt-1">
                                     Tampilkan Harga Modal
                                 </label>
                             </div>

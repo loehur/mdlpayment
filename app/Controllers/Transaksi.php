@@ -72,7 +72,7 @@ class Transaksi extends Controller
                if ($jenis == 1) {
                   $harga = [
                      "price_master" => $a['product_price'] + $this->margin_prepaid,
-                     "price_cell" => $a['product_price'] + $this->margin_prepaid + $this->setting['margin_prepaid'],
+                     "price_cell" => ceil(($a['product_price'] + $this->margin_prepaid + $this->setting['margin_prepaid']) / 1000) * 1000,
                      "desc" => $a['product_description'] . " " . $a['product_nominal'] . " " . $a['product_details']
                   ];
                }
@@ -244,7 +244,7 @@ class Transaksi extends Controller
             $array['data'] = array();
             foreach ($this->prepaidList['list'] as $a) {
                if ($a['product_description'] == $des) {
-                  $array['data'][$a['product_code']] = array($a['product_nominal'], $a['product_details'], ($a['product_price'] + $margin + $this->setting['margin_prepaid']), $a['product_price'] + $margin);
+                  $array['data'][$a['product_code']] = array($a['product_nominal'], $a['product_details'], ceil(($a['product_price'] + $margin + $this->setting['margin_prepaid']) / 1000) * 1000, $a['product_price'] + $margin);
                }
             };
 
