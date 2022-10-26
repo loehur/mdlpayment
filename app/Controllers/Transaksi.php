@@ -298,7 +298,7 @@ class Transaksi extends Controller
                'des' => $a['name'],
                'type' => $a['type'],
                'jenis' => $jenis,
-               'harga' => $a['fee'] + $a['komisi'] + $this->admin_postpaid,
+               'harga' => $this->admin_postpaid,
                'detail' => "",
             ];
          }
