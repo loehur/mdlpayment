@@ -24,8 +24,7 @@ class Transaksi extends Controller
 
    public function load()
    {
-      $data = $this->saldo();
-      $this->view($this->view_content, $data);
+      $this->view($this->view_content);
    }
 
    public function proses($jenis, $product_code)

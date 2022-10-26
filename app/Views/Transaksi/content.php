@@ -7,11 +7,6 @@
             <div class="col mr-auto mb-2">
                 <a href="<?= $this->BASE_URL ?>Transaksi/product_type/2"><button class="btn btn-sm btn-outline-success text-nowrap"><b>PASCA BAYAR</b></button></a>
             </div>
-
-            <div class="col float-right">
-                <span class="float-right">Saldo</span><br>
-                <h6><b class="float-right text-success"><?= number_format($data['saldo']) ?></b></h6>
-            </div>
         </div>
     </div>
 </div>
