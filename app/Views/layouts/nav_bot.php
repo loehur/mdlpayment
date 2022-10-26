@@ -21,7 +21,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link text-secondary text-nowrap">
+							<a href="<?= $this->BASE_URL ?>Rekap" class="nav-link text-secondary text-nowrap">
 								<i class="fas fa-chart-line"></i><br>Rekap
 							</a>
 						</li>

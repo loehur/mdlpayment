@@ -40,17 +40,11 @@ class IAK extends Controller
             $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
 
             if (isset($response['data'])) {
-               if (isset($response['data']['name'])) {
-                  echo strtoupper($response['data']['name']);
-               } else {
-                  echo $response['data']['message'];
-               }
+               print_r($result);
             } else {
-               echo "Request Parameter Error, Hubungi Technical Support!";
+               $error["data"] = ["message" => "PARSE ERROR"];
             }
-
             break;
-
          case "post":
             $code = $_POST['code'];
             //CEK DULU UDAH PERNAH CEK BELUM;
@@ -59,14 +53,17 @@ class IAK extends Controller
 
             if (is_array($cek)) {
                $d = $cek;
-               echo "<b>" . $d['tr_name'] . "</b>";
-               echo "<br>--------------------------------------";
-               echo "<br>Nominal: Rp" . number_format($d['nominal']);
-               echo "<br>Periode: " . $d['period'];
-               echo "<br>Admin Server: Rp" . number_format($d['admin']);
-               echo "<br>Admin Loket: Rp" . number_format($this->setting['admin_postpaid']);
-               echo "<br>-------------------------------------------";
-               echo "<br><b>Total Tagihan: Rp" . number_format($d['nominal'] + $d['admin'] + $this->setting['admin_postpaid']) . "</b>";
+
+               $data['data'] = [
+                  'customer_id' => $d['customer_id'],
+                  'tr_name' => $d['tr_name'],
+                  'nominal' => $d['nominal'],
+                  'period' => $d['period'],
+                  'admin' => $d['admin'],
+                  'response_code' => '00'
+               ];
+
+               print_r(json_encode($data));
                exit();
             }
 
@@ -107,27 +104,33 @@ class IAK extends Controller
                         $val = "'" . $d['response_code'] . "','" . $d['message'] . "'," . $d['tr_id'] . ",'" . $d['tr_name'] . "','" . $d['period'] . "'," . $d['nominal'] . "," . $d['admin'] . ",'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $d['code'] . "','" . $d['hp'] . "'," . $d['price'] . "," . $d['selling_price'] . ",'" . serialize($d['desc']) . "'," . ($d['price'] + $this->setting['admin_postpaid']);
                         $do = $this->model('M_DB_1')->insertCols("postpaid", $col, $val);
                         if ($do['errno'] == 0) {
-                           echo "<b>" . $d['tr_name'] . "</b>";
-                           echo "<br>--------------------------------------";
-                           echo "<br>Nominal: Rp" . number_format($d['nominal']);
-                           echo "<br>Periode: " . $d['period'];
-                           echo "<br>Admin Server: Rp" . number_format($d['admin']);
-                           echo "<br>Admin Loket: Rp" . number_format($this->setting['admin_postpaid']);
-                           echo "<br>-------------------------------------------";
-                           echo "<br><b>Total Tagihan: Rp" . number_format($d['nominal'] + $d['admin'] + $this->setting['admin_postpaid']) . "</b>";
+                           $data['data'] = [
+                              'customer_id' => $d['customer_id'],
+                              'tr_name' => $d['tr_name'],
+                              'nominal' => $d['nominal'],
+                              'period' => $d['period'],
+                              'admin' => $d['admin'],
+                              'response_code' => '00'
+                           ];
+                           print_r(json_encode($data));
+                           exit();
                         } else {
-                           echo "Request Parameter Error, Hubungi Technical Support!";
+                           $data['data']['message'] = $do['error'];
+                           print_r(json_encode($data));
                         }
                         break;
                      default:
-                        echo strtoupper($d['message']);
+                        $data['data']['message'] = $d['message'];
+                        print_r(json_encode($data));
                         break;
                   }
                } else {
-                  print_r($response);
+                  $data['data']['message'] = "NO RESPONSE CODE!";
+                  print_r(json_encode($data));
                }
             } else {
-               echo "Request Parameter Error, Hubungi Technical Support!";
+               $data['data']['message'] = "PARSE ERROR!";
+               print_r(json_encode($data));
             }
             break;
       }
@@ -218,7 +221,7 @@ class IAK extends Controller
       if (isset($response['data'])) {
 
          $d = $response['data'];
-         
+
          //BATALKAN JIKA STATUS SAMA AJA
          if (isset($d['status'])) {
             if ($d['status'] == $a['tr_status']) {
@@ -274,7 +277,7 @@ class IAK extends Controller
 
       if (isset($response['data'])) {
          $d = $response['data'];
-         
+
          //BATALKAN JIKA STATUS SAMA AJA
          if (isset($d['status'])) {
             if ($d['status'] == $a['tr_status']) {

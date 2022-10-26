@@ -28,7 +28,7 @@
                     <div class="row mb-2">
                         <div class="col">
                             <label>PIN Transaksi</label>
-                            <input type="text" class="pw form-control form-control-sm" name="pin" placeholder="PIN Transaksi" required>
+                            <input type="password" class="form-control form-control-sm" name="pin" placeholder="PIN Transaksi" required>
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -97,7 +97,6 @@
 
 <script>
     $(document).ready(function() {
-        $("input.pw").css("-webkit-text-security", "disc");
         $("#info").fadeOut();
         $("form").on("submit", function(e) {
             $("#spinner").show();

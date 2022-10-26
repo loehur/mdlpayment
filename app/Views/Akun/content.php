@@ -17,12 +17,12 @@
                     <form id="form" class="pass" action="<?= $this->BASE_URL ?>Register/ganti_password_1" method="post">
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" class="pw form-control form-control-sm" minlength="6" id="password" name="password" placeholder="Password Baru" required>
+                                <input type="password" class="form-control form-control-sm" minlength="6" id="password" name="password" placeholder="Password Baru" required>
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" class="pw form-control form-control-sm" minlength="6" id="repass" name="repass" placeholder="Ulangi Password" required>
+                                <input type="password" class="form-control form-control-sm" minlength="6" id="repass" name="repass" placeholder="Ulangi Password" required>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -42,12 +42,12 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" class="pw form-control form-control-sm" minlength="6" id="password" name="password" placeholder="Password Baru" required>
+                                <input type="password" class="form-control form-control-sm" minlength="6" id="password" name="password" placeholder="Password Baru" required>
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" class="pw form-control form-control-sm" minlength="6" id="repass" name="repass" placeholder="Ulangi Password" required>
+                                <input type="password" class="form-control form-control-sm" minlength="6" id="repass" name="repass" placeholder="Ulangi Password" required>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -98,12 +98,12 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" class="pw form-control form-control-sm" minlength="6" id="pin" name="pin" placeholder="PIN Transaksi BARU" required>
+                                <input type="password" class="form-control form-control-sm" minlength="6" id="pin" name="pin" placeholder="PIN Transaksi BARU" required>
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" class="pw form-control form-control-sm" minlength="6" id="repin" name="repin" placeholder="Ulangi PIN Transaksi" required>
+                                <input type="password" class="form-control form-control-sm" minlength="6" id="repin" name="repin" placeholder="Ulangi PIN Transaksi" required>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -128,7 +128,6 @@
 
 <script>
     $(document).ready(function() {
-        $("input.pw").css("-webkit-text-security", "disc");
         $("#info").fadeOut();
         $("form.pass").on("submit", function(e) {
             e.preventDefault();

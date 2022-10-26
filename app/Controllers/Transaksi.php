@@ -117,7 +117,7 @@ class Transaksi extends Controller
          }
       } elseif ($jenis == 2) {
 
-         $where = "customer_id = '" . $customer_id . "' AND product_code = '" . $product_code . "' AND noref = ''";
+         $where = "customer_id = '" . $customer_id . "' AND product_code = '" . $product_code . "' AND tr_status = 4";
          $cek = $this->model("M_DB_1")->get_where_row("postpaid", $where);
          if (is_array($cek)) {
             $a = $cek;
@@ -181,11 +181,11 @@ class Transaksi extends Controller
                      print_r($update['error']);
                   }
                } else {
-                  echo "Request Parameter Error, Hubungi Technical Support!";
+                  print_r($response);
                }
             }
          } else {
-            echo "Silahkan Tagihan Terlebih Dahulu!";
+            echo "Cek Tagihan Terlebih Dahulu!";
          }
       }
    }

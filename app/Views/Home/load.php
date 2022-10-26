@@ -17,7 +17,7 @@
     </div>
 </div>
 <hr>
-<span class="ml-3"><b>PRA BAYAR</b></span>
+<div><span class="ml-3"><b>PRA BAYAR</b></span> <small class="text-secondary">[<span id="pre_antri"></span>]</small></div>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -148,7 +148,6 @@
                                 </td>
                             </tr>
                         <?php } ?>
-                        <div class="pt-1 text-secondary" style="padding-left:150px; position: absolute;"><small>[<span><?= $antri_pre_count ?></span><span><?= $proses_pre_count ?></span>]</small></div>
                     </table>
                 </div>
             <?php } ?>
@@ -158,7 +157,7 @@
     </div>
 </div>
 <hr>
-<span class="ml-3"><b>PASCA BAYAR</b></span>
+<div class="ml-3"><b>PASCA BAYAR</b> <small class="text-secondary">[<span id="post_antri"></span>]</small></div>
 <div class="content" style="padding-bottom: 70px;">
     <div class="container-fluid">
         <div class="row">
@@ -308,3 +307,21 @@
         </div>
     </div>
 </div>
+
+<!-- SCRIPT -->
+<script src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
+<script src="<?= $this->ASSETS_URL ?>js/popper.min.js"></script>
+<script src="<?= $this->ASSETS_URL ?>plugins/bootstrap-5.1/bootstrap.bundle.min.js"></script>
+
+<script>
+    var antri_pre_count;
+    var proses_pre_count;
+    var proses_post_count;
+    $(document).ready(function() {
+        antri_pre_count = $("span#tr_antri_pre").html();
+        proses_pre_count = $("span#tr_proses_pre").html();
+        $("span#pre_antri").html(antri_pre_count + "" + proses_pre_count);
+
+        proses_post_count = $("span#tr_proses_post").html();
+        $("span#post_antri").html(proses_post_count);
+    });

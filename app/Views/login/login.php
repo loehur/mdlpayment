@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="PASS" class="form-control pw" placeholder="Password" required autocomplete="off">
+                        <input type="password" name="PASS" class="form-control" placeholder="Password" required autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -79,9 +79,6 @@
 
 <script>
     $(document).ready(function() {
-
-        $("input.pw").css("-webkit-text-security", "disc");
-
         $("#info").hide();
         $("#spinner").hide();
 
