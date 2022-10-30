@@ -22,6 +22,7 @@ class Route extends DB_Config
             $this->controller = $url[0];
         } else {
             require_once "app/Views/error/404.php";
+            exit();
         }
 
         require_once 'app/Controllers/' . $this->controller . '.php';

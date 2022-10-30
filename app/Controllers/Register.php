@@ -115,7 +115,7 @@ class Register extends Controller
       }
       $code_reset_pass = md5($_POST["reset_code"]);
 
-      $where = "no_user = '" . $this->userData['no_user'] . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 1";
+      $where = "no_user = '" . $nomor . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 1";
       $reset_code = $this->model('M_DB_1')->get_where_row('reset_code', $where);
       if (!isset($reset_code['reset_code'])) {
          echo "Reset Code Salah!";

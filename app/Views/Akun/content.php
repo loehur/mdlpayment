@@ -73,12 +73,12 @@
                     <form class="pin" action="<?= $this->BASE_URL ?>Register/ganti_pin_1" method="post">
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" class="form-control form-control-sm" minlength="6" id="pin" name="pin" placeholder="PIN Transaksi BARU" required>
+                                <input type="password" class="form-control form-control-sm" minlength="6" id="pin" name="pin" placeholder="PIN Transaksi BARU" required>
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" class="form-control form-control-sm" minlength="6" id="repin" name="repin" placeholder="Ulangi PIN Transaksi" required>
+                                <input type="password" class="form-control form-control-sm" minlength="6" id="repin" name="repin" placeholder="Ulangi PIN Transaksi" required>
                             </div>
                         </div>
                         <div class="row mb-2">
