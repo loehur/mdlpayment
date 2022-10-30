@@ -45,7 +45,7 @@
                 <form id="form" action="<?= $this->BASE_URL ?>Register/ganti_password" method="post">
                     <div class="row mb-2">
                         <div class="col">
-                            <input type="text" class="form-control" name="no_user" placeholder="No HP">
+                            <input type="text" class="form-control" name="no_user" placeholder="ID / No HP">
                         </div>
                     </div>
                     <div class="row mb-2">
