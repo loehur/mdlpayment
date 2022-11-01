@@ -94,14 +94,18 @@
 <script src="<?= $this->ASSETS_URL ?>plugins/bootstrap-5.1/bootstrap.bundle.min.js"></script>
 
 <script>
-    $("form").on("submit", function(e) {
+    $("form.ajax").on("submit", function(e) {
         e.preventDefault();
         $.ajax({
             url: $(this).attr('action'),
             data: $(this).serialize(),
             type: $(this).attr("method"),
-            success: function() {
-                location.reload(true);
+            success: function(res) {
+                if (res == 1) {
+                    location.reload(true);
+                } else {
+                    alert(res);
+                }
             },
         });
     });
