@@ -117,6 +117,7 @@ class Register extends Controller
 
       $where = "no_user = '" . $nomor . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 1";
       $reset_code = $this->model('M_DB_1')->get_where_row('reset_code', $where);
+     
       if (!isset($reset_code['reset_code'])) {
          echo "Reset Code Salah!";
          exit();
@@ -142,11 +143,14 @@ class Register extends Controller
          echo "Konfirmasi Password tidak Cocok!";
          exit();
       }
-
-      $where = "id_user = " . $this->userData['id_user'];
+      $where = "no_user = '" . $nomor . "'";
       $set = "password = '" . md5($pass) . "', pass_reset_code = '" . $reset_code['reset_code'] . "'";
       $this->model('M_DB_1')->update("user", $set, $where);
-      $this->dataSynchrone();
+
+      if (!isset($_POST["no_user"])) {
+         $this->dataSynchrone();
+      }
+
       echo 1;
    }
 

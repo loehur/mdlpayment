@@ -45,22 +45,22 @@
                 <form id="form" action="<?= $this->BASE_URL ?>Register/ganti_password" method="post">
                     <div class="row mb-2">
                         <div class="col">
-                            <input type="text" class="form-control" name="no_user" placeholder="ID / No HP">
+                            <input type="text" class="form-control" name="no_user" placeholder="ID / No HP" required>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
-                            <input type="text" class="form-control" id="reset_code" name="reset_code" placeholder="Reset Code">
+                            <input type="text" class="form-control" id="reset_code" name="reset_code" placeholder="Reset Code" required>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password Baru">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password Baru" required>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
-                            <input type="password" class="form-control" id="repass" name="repass" placeholder="Retype password">
+                            <input type="password" class="form-control" id="repass" name="repass" placeholder="Retype password" required>
                         </div>
                     </div>
                     <div class="row mb-2">

@@ -132,7 +132,6 @@ class DB_1 extends DB_Config
         $query = "INSERT INTO $table($columns) VALUES($values)";
         $run = $this->mysqli->query($query);
         return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno);
-       
     }
 
     public function delete_where($table, $where)
@@ -146,7 +145,6 @@ class DB_1 extends DB_Config
         $query = "UPDATE $table SET $set WHERE $where";
         $run = $this->mysqli->query($query);
         return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno);
-      
     }
 
     public function count_where($table, $where)
