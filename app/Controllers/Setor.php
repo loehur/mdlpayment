@@ -50,7 +50,7 @@ class Setor extends Controller
       $dataCount = $this->model('M_DB_1')->count_where('topup', $whereCount);
       if ($dataCount == 0) {
          $do = $this->model('M_DB_1')->insertCols('topup', $cols, $vals);
-         if ($do['errno'] == 0) {
+         if ($do['errno'] == 0 || $do['errno'] == 1062) {
             echo 1;
          } else {
             print_r($do['error']);
