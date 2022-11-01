@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6 border pb-1">
                 <b>
-                    <div class="pt-2 pb-2 mb-2 border-bottom">PRA BAYAR</div>
+                    <div class="pt-2 pb-2 mb-2 border-bottom">PRA BAYAR <?= $data['mon'][1] . "/" . $data['mon'][0]  ?></div>
                 </b>
                 <table class="table table-sm table-borderless">
                     <tr>
@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-6 border pb-1">
                 <b>
-                    <div class="pt-2 pb-2 mb-2 border-bottom">PASCA BAYAR</div>
+                    <div class="pt-2 pb-2 mb-2 border-bottom">PASCA BAYAR <?= $data['mon'][1] . "/" . $data['mon'][0]  ?></div>
                 </b>
                 <table class="table table-sm table-borderless">
                     <tr>

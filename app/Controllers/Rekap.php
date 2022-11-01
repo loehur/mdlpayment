@@ -42,6 +42,8 @@ class Rekap extends Controller
       $where = "insertTime like '%" . $month . "%' AND tr_status = 1 AND no_master = '" . $this->userData['no_user'] . "'";
       $data['post'] = $this->model('M_DB_1')->get_where('postpaid', $where);
 
+      $data['mon'] = array($_POST['y'], $_POST['m']);
+
       $this->index();
       $this->view($this->page . "/data", $data);
    }
