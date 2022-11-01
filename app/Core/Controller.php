@@ -86,7 +86,7 @@ class Controller extends Public_Variables
         $saldo = 0;
         $arr_topup_success = array();
         $total_topup_success = 0;
-        $data['topup'] = $this->model('M_DB_1')->get_where('topup', "no_master = " . $this->userData['no_master']);
+        $data['topup'] = $this->model('M_DB_1')->get_where('topup', "no_master = '" . $this->userData['no_master'] . "'");
         foreach ($data['topup'] as $a) {
             switch ($a['topup_status']) {
                 case 1:

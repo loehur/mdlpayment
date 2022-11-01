@@ -44,9 +44,9 @@ class Setor extends Controller
       }
 
       $cols = 'no_master, jumlah, bank, rek, nama, kode_bank';
-      $vals = $this->userData['no_master'] . "," . $jumlah . ",'" . $bank . "','" . $norek . "','" . $narek . "','" . $kode_bank . "'";
+      $vals = "'" . $this->userData['no_master'] . "'," . $jumlah . ",'" . $bank . "','" . $norek . "','" . $narek . "','" . $kode_bank . "'";
 
-      $whereCount = "no_master = " . $this->userData['no_master'] . " AND topup_status = 0";
+      $whereCount = "no_master = '" . $this->userData['no_master'] . "' AND topup_status = 0";
       $dataCount = $this->model('M_DB_1')->count_where('topup', $whereCount);
       if ($dataCount == 0) {
          $do = $this->model('M_DB_1')->insertCols('topup', $cols, $vals);
