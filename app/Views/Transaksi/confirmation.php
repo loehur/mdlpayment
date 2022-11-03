@@ -280,7 +280,6 @@ if ($a['jenis'] == 1) {
         }
 
         function resetPost() {
-            $("#cust_id_post").html("");
             $("#cust_name_post").html("");
             $("span#adm_server").html("");
             $("span#period").html("");
