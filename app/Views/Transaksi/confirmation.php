@@ -270,7 +270,6 @@ if ($a['jenis'] == 1) {
         });
 
         function setPost(res) {
-            $("#cust_id_post").html(res.customer_id);
             $("#cust_name_post").html(res.tr_name);
             $("span#adm_server").html(res.admin);
             $("span#period").html(res.period);
