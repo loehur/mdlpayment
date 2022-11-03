@@ -88,7 +88,7 @@ if ($a['jenis'] == 1) {
                         <tr>
                             <td>Admin Counter</td>
                             <td>:</td>
-                            <td><span id="adm_counter" data-val="<?= $a['harga'] ?>">Rp<?= number_format($a['harga']) ?></span></td>
+                            <td>Rp<span id="adm_counter"></span></td>
                         </tr>
                         <tr>
                             <td>Total Tagihan</td>
