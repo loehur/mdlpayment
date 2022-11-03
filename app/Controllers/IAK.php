@@ -60,7 +60,9 @@ class IAK extends Controller
                   'nominal' => $d['nominal'],
                   'period' => $d['period'],
                   'admin' => $d['admin'],
-                  'response_code' => '00'
+                  'response_code' => '00',
+                  'adm_counter' => $d['price_sell'] - $d['price'],
+                  'total_bill' => $d['price_sell']
                ];
 
                print_r(json_encode($data));
@@ -110,7 +112,9 @@ class IAK extends Controller
                               'nominal' => $d['nominal'],
                               'period' => $d['period'],
                               'admin' => $d['admin'],
-                              'response_code' => '00'
+                              'response_code' => '00',
+                              'adm_counter' => $this->setting['admin_postpaid'],
+                              'total_bill' => $d['price'] + $this->setting['admin_postpaid']
                            ];
                            print_r(json_encode($data));
                            exit();

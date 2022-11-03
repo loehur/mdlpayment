@@ -275,16 +275,17 @@ if ($a['jenis'] == 1) {
             $("span#adm_server").html(res.admin);
             $("span#period").html(res.period);
             $("span#nominal").html(res.nominal);
-
-            var adm_counter = $("span#adm_counter").attr("data-val");
-            $("span#total_bill").html(parseInt(res.nominal) + parseInt(res.admin) + parseInt(adm_counter));
+            $("span#adm_counter").html(res.adm_counter)
+            $("span#total_bill").html(res.total_bill);
         }
 
         function resetPost() {
-            $("span#cust_name_post").html("");
+            $("#cust_id_post").html("");
+            $("#cust_name_post").html("");
             $("span#adm_server").html("");
             $("span#period").html("");
             $("span#nominal").html("");
+            $("span#adm_counter").html("")
             $("span#total_bill").html("");
         }
     });

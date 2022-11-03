@@ -116,21 +116,13 @@ class Transaksi extends Controller
          }
       } elseif ($jenis == 2) {
 
-         $where = "customer_id = '" . $customer_id . "' AND product_code = '" . $product_code . "' AND tr_status = 4";
+         $where = "customer_id = '" . $customer_id . "' AND product_code = '" . $product_code . "' AND tr_status = 0";
          $cek = $this->model("M_DB_1")->get_where_row("postpaid", $where);
          if (is_array($cek)) {
             $a = $cek;
             $tr_id = $cek['tr_id'];
             $ref_id = $cek['ref_id'];
 
-            //AMANKAN DULU STATUS TRANSAKSI
-            $where = "ref_id = '" . $ref_id . "'";
-            $set =  "tr_status = 4";
-            $update = $this->model('M_DB_1')->update('postpaid', $set, $where);
-            if ($update['errno'] <> 0) {
-               print_r($update['error']);
-               exit();
-            }
 
             //CEK SALDO CUKUP GAK
             $saldo = $this->saldo();
@@ -140,6 +132,16 @@ class Transaksi extends Controller
                echo "Saldo Tidak Cukup!";
                exit();
             } else {
+
+               //AMANKAN DULU STATUS TRANSAKSI
+               $where = "ref_id = '" . $ref_id . "'";
+               $set =  "tr_status = 4";
+               $update = $this->model('M_DB_1')->update('postpaid', $set, $where);
+               if ($update['errno'] <> 0) {
+                  print_r($update['error']);
+                  exit();
+               }
+
                $sign = md5($this->username . $this->apiKey . $tr_id);
                $url = $this->postpaid_url . 'api/v1/bill/check';
                $data = [
