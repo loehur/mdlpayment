@@ -252,6 +252,11 @@
                                                 <td><?= $a['customer_id'] ?></td>
                                             </tr>
                                             <tr>
+                                                <td>Name</td>
+                                                <td>:</td>
+                                                <td><?= $a['tr_name'] ?></td>
+                                            </tr>
+                                            <tr>
                                                 <td>Product</td>
                                                 <td>:</td>
                                                 <td><?= $a['product_code'] ?></td>
