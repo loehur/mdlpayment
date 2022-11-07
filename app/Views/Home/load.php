@@ -179,7 +179,7 @@
                         <tr>
                             <td>
                                 <?php if ($a['tr_status'] == 1) { ?>
-                                    <a href="" class="noact btn btn-outline-primary" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
+                                    <a href="" class="noact btn-sm btn-outline-primary" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
                                 <?php } ?>
                                 <small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= $a['datetime'] ?></small>
                             </td>
