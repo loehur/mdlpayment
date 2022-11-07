@@ -2,7 +2,7 @@
 
 class Home extends Controller
 {
-   public $page = "Home";
+   public $page = __CLASS__;
 
    public function __construct()
    {

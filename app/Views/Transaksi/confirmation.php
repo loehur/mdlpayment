@@ -16,7 +16,7 @@ if ($a['jenis'] == 1) {
 <div class="content mb-2">
     <div class="container-fluid">
         <div class="row">
-            <div class="col border ml-3 mr-3 pt-2 pb-2 rounded border-success">
+            <div class="col border mx-3 pt-2 pb-2 rounded border-success">
                 <?php if ($data['jenis'] == 1) { ?>
                     <table class="">
                         <tr>

@@ -137,7 +137,8 @@ class DB_1 extends DB_Config
     public function delete_where($table, $where)
     {
         $query = "DELETE FROM $table WHERE $where";
-        $this->mysqli->query($query);
+        $run = $this->mysqli->query($query);
+        return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno);
     }
 
     public function update($table, $set, $where)
@@ -236,6 +237,21 @@ class DB_1 extends DB_Config
             return $reply;
         } else {
             return FALSE;
+        }
+    }
+
+    //============================================
+
+    public function sum_col_where($table, $col, $where)
+    {
+        $query = "SELECT SUM($col) as Total FROM $table WHERE $where";
+        $result = $this->mysqli->query($query);
+
+        $reply = $result->fetch_assoc();
+        if ($result) {
+            return $reply["Total"];
+        } else {
+            return array('query' => $query, 'info' => $this->mysqli->error);
         }
     }
 }

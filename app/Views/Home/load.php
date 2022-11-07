@@ -1,7 +1,7 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-auto mr-auto">
+            <div class="col-auto me-auto">
                 Outlate/Staff
                 <h6><b class="text-success"><?= ($this->userData['nama'] == $this->setting['nama']) ? $this->setting['nama'] : $this->setting['nama'] . "/" . $this->userData['nama']; ?></b></h6>
             </div>
@@ -17,7 +17,7 @@
     </div>
 </div>
 <hr>
-<div><span class="ml-3"><b>PRA BAYAR</b></span> <small class="text-secondary">[<span id="pre_antri"></span>]</small></div>
+<div><span class="ms-3"><b>PRA BAYAR</b></span> <small class="text-secondary">[<span id="pre_antri"></span>]</small></div>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -44,11 +44,11 @@
                     <table class="table table-borderless table-sm mb-0 pb-0">
                         <tr>
                             <td> <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
-                                    <a href="" class="noact badge btn btn-outline-primary pt-1" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
+                                    <a href="" class="noact btn btn-sm btn-outline-primary" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
                                 <?php } ?>
                                 <small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= substr($a['updateTime'], 2, -3) ?></small>
                             </td>
-                            <td class="text-right">
+                            <td class="text-end">
                                 <span class="text-info"><?= $a['customer_id'] ?></span><br>
                                 Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price_master']) . ")</small>" : "" ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small>
                             </td>
@@ -157,7 +157,7 @@
     </div>
 </div>
 <hr>
-<div class="ml-3"><b>PASCA BAYAR</b> <small class="text-secondary">[<span id="post_antri"></span>]</small></div>
+<div class="ms-3"><b>PASCA BAYAR</b> <small class="text-secondary">[<span id="post_antri"></span>]</small></div>
 <div class="content" style="padding-bottom: 70px;">
     <div class="container-fluid">
         <div class="row">
@@ -183,7 +183,7 @@
                                 <?php } ?>
                                 <small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= $a['datetime'] ?></small>
                             </td>
-                            <td class="text-right"><span class="text-info"><?= $a['customer_id'] ?></span><br>Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
+                            <td class="text-end"><span class="text-info"><?= $a['customer_id'] ?></span><br>Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
                         </tr>
                         <tr>
                             <td align="right" colspan="2"><small><?= $a['product_code'] ?>, <b><?= $a['tr_name'] ?></b>, <?= $a['period'] ?></small><br>
@@ -313,11 +313,9 @@
     </div>
 </div>
 
-<!-- SCRIPT -->
 <script src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
 <script src="<?= $this->ASSETS_URL ?>js/popper.min.js"></script>
-<script src="<?= $this->ASSETS_URL ?>plugins/bootstrap-5.1/bootstrap.bundle.min.js"></script>
-
+<script src="<?= $this->ASSETS_URL ?>plugins/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
 <script>
     var antri_pre_count;
     var proses_pre_count;

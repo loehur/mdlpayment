@@ -62,6 +62,22 @@ class Transaksi extends Controller
          exit();
       }
 
+      //CEK SISA LIMIT PRIBADI
+      $used = 0;
+      $month = date("Y-m");
+      $data_limit = $this->model("M_DB_1")->get_where_row("paid_use", "no_master = '" . $this->userData['no_master'] . "' AND customer_id = '" . $customer_id . "'");
+      $sisa_limit = 0;
+
+      if (isset($data_limit['limit_bulanan'])) {
+         $used = 1;
+         $limit = $data_limit['limit_bulanan'];
+         $used_pre = $this->model("M_DB_1")->sum_col_where("prepaid", "price_sell", "insertTime LIKE '%" . $month . "%' AND rc in (00,39,201)");
+         $used_post = $this->model("M_DB_1")->sum_col_where("postpaid", "price_sell", "insertTime LIKE '%" . $month . "%' AND tr_status in (1,3,4)");
+         $total_use = $used_pre + $used_post;
+
+         $sisa_limit = $limit - $total_use;
+      }
+
       if ($jenis == 1) {
          //CEK SALDO CUKUP GAK
          $harga = array();
@@ -78,6 +94,12 @@ class Transaksi extends Controller
             }
          };
 
+
+         if ($harga['price_cell'] > $sisa_limit) {
+            echo "Limit Bulanan Sudah Tercapai!";
+            exit();
+         }
+
          $limit = $saldo['saldo'] - $harga['price_master'];
          if ($limit < $this->setting['min_saldo']) {
             echo "Saldo Tidak Cukup!";
@@ -85,8 +107,8 @@ class Transaksi extends Controller
          }
 
          $ref_id = $this->model('M_IAK')->ref_id();
-         $col = "no_user, no_master, ref_id, product_code, customer_id, price_master, price_sell, description";
-         $val = "'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $product_code . "','" . $customer_id . "'," . $harga['price_master'] . "," . $harga['price_cell'] . ",'" . $harga['desc'] . "'";
+         $col = "no_user, no_master, ref_id, product_code, customer_id, price_master, price_sell, description, used";
+         $val = "'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $product_code . "','" . $customer_id . "'," . $harga['price_master'] . "," . $harga['price_cell'] . ",'" . $harga['desc'] . "'," . $used;
          $do = $this->model('M_DB_1')->insertCols("prepaid", $col, $val);
          if ($do['errno'] == 0) {
 
@@ -123,6 +145,10 @@ class Transaksi extends Controller
             $tr_id = $cek['tr_id'];
             $ref_id = $cek['ref_id'];
 
+            if ($cek['price_cell'] > $sisa_limit) {
+               echo "Limit Bulanan Sudah Tercapai!";
+               exit();
+            }
 
             //CEK SALDO CUKUP GAK
             $saldo = $this->saldo();
@@ -135,7 +161,7 @@ class Transaksi extends Controller
 
                //AMANKAN DULU STATUS TRANSAKSI
                $where = "ref_id = '" . $ref_id . "'";
-               $set =  "tr_status = 4";
+               $set =  "tr_status = 4, used = " . $used;
                $update = $this->model('M_DB_1')->update('postpaid', $set, $where);
                if ($update['errno'] <> 0) {
                   print_r($update['error']);

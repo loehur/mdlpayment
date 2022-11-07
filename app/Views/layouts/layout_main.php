@@ -7,7 +7,7 @@
 	<link rel="icon" href="<?= $this->ASSETS_URL ?>icon/logo.png">
 	<title>Payment | <?= $data['title'] ?></title>
 	<link rel="stylesheet" href="<?= $this->ASSETS_URL ?>plugins/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet">
-	<link rel="stylesheet" href="<?= $this->ASSETS_URL ?>/css/bootstrap-4.3.1.min.css">
+	<link rel="stylesheet" href="<?= $this->ASSETS_URL ?>/plugins/bootstrap-5.2.2-dist/css/bootstrap.min.css">
 
 
 	<script src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
@@ -51,18 +51,11 @@
 	</style>
 </head>
 
-<?php if (isset($data['view_load'])) {
-	$method = $data['view_load'];
-} else {
-	$method = "Blank";
-} ?>
-
+<?php require_once("layout_config.php"); ?>
 
 <body style="max-width: 752px; min-width:  <?= $min_width ?>;" class="m-auto small border border-bottom-0">
-
-	<?php require_once("layout_config.php"); ?>
 	<?php require_once("nav_top.php"); ?>
-	<div class="container m-auto" style="padding-bottom: 70px;padding-top: 0px;"></div>
+	<div class="container" style="padding-bottom: 70px;padding-top: 0px;"></div>
 	<?php require_once("nav_bot.php"); ?>
 </body>
 

@@ -99,4 +99,8 @@ class M_DB_1
     {
         return $this->db->innerJoin2_where($table, $tb_join1, $join_where1, $tb_join2, $join_where2, $where);
     }
+    public function sum_col_where($table, $col, $where)
+    {
+        return $this->db->sum_col_where($table, $col, $where);
+    }
 }
