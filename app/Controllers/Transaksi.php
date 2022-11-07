@@ -94,11 +94,12 @@ class Transaksi extends Controller
             }
          };
 
-
-         if ($harga['price_cell'] > $sisa_limit) {
-            echo "Limit Bulanan Sudah Tercapai!";
-            exit();
-         }
+         if ($used == 1) {
+            if ($harga['price_cell'] > $sisa_limit) {
+               echo "Limit Bulanan Sudah Tercapai!";
+               exit();
+            }
+         }       
 
          $limit = $saldo['saldo'] - $harga['price_master'];
          if ($limit < $this->setting['min_saldo']) {
@@ -145,9 +146,11 @@ class Transaksi extends Controller
             $tr_id = $cek['tr_id'];
             $ref_id = $cek['ref_id'];
 
-            if ($cek['price_cell'] > $sisa_limit) {
-               echo "Limit Bulanan Sudah Tercapai!";
-               exit();
+            if ($used == 1) {
+               if ($cek['price_cell'] > $sisa_limit) {
+                  echo "Limit Bulanan Sudah Tercapai!";
+                  exit();
+               }
             }
 
             //CEK SALDO CUKUP GAK

@@ -170,11 +170,15 @@ class Register extends Controller
          exit();
       }
 
-      $where = "id_user = " . $this->userData['id_user'];
+      $where = "no_user = '" . $this->userData['no_user'] . "'";
       $set = "password = '" . md5($pass) . "', pass_reset_code = 'abcd'";
-      $this->model('M_DB_1')->update("user", $set, $where);
-      $this->dataSynchrone();
-      echo 1;
+      $do = $this->model('M_DB_1')->update("user", $set, $where);
+      if ($do['errno'] == 0) {
+         $this->dataSynchrone();
+         echo 1;
+      } else {
+         print_r($do);
+      }
    }
 
    public function updateCell_Master($col)
@@ -230,7 +234,7 @@ class Register extends Controller
       $repin = $_POST["repin"];
 
       if (strlen($pin) < 6) {
-         echo "Password dan PIN minimal 6 karakter!";
+         echo "PIN minimal 6 karakter!";
          exit();
       }
 
@@ -239,11 +243,16 @@ class Register extends Controller
          exit();
       }
 
-      $where = "id_user = " . $this->userData['id_user'];
+      $where = "no_user = '" . $this->userData['no_user'] . "'";
       $set = "pin = '" . md5($pin) . "', pin_reset_code = '" . $reset_code['reset_code'] . "'";
-      $this->model('M_DB_1')->update("user", $set, $where);
-      $this->dataSynchrone();
-      echo 1;
+      $do = $this->model('M_DB_1')->update("user", $set, $where);
+
+      if ($do['errno'] == 0) {
+         $this->dataSynchrone();
+         echo 1;
+      } else {
+         print_r($do);
+      }
    }
 
    public function ganti_pin_1()
@@ -252,7 +261,7 @@ class Register extends Controller
       $repin = $_POST["repin"];
 
       if (strlen($pin) < 6) {
-         echo "Password dan PIN minimal 6 karakter!";
+         echo "PIN minimal 6 karakter!";
          exit();
       }
 
@@ -261,10 +270,15 @@ class Register extends Controller
          exit();
       }
 
-      $where = "id_user = " . $this->userData['id_user'];
+      $where = "no_user = '" . $this->userData['no_user'] . "'";
       $set = "pin = '" . md5($pin) . "', pin_reset_code = '1234'";
-      $this->model('M_DB_1')->update("user", $set, $where);
-      $this->dataSynchrone();
-      echo 1;
+      $do = $this->model('M_DB_1')->update("user", $set, $where);
+
+      if ($do['errno'] == 0) {
+         $this->dataSynchrone();
+         echo 1;
+      } else {
+         print_r($do);
+      }
    }
 }
