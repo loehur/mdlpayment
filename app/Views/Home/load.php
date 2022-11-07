@@ -44,7 +44,7 @@
                     <table class="table table-borderless table-sm mb-0 pb-0">
                         <tr>
                             <td> <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
-                                    <a href="" class="noact btn btn-sm btn-outline-primary" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
+                                    <a href="" class="noact noact text-primary" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
                                 <?php } ?>
                                 <small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= substr($a['updateTime'], 2, -3) ?></small>
                             </td>
@@ -179,7 +179,7 @@
                         <tr>
                             <td>
                                 <?php if ($a['tr_status'] == 1) { ?>
-                                    <a href="" class="noact btn-sm btn-outline-primary" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
+                                    <a href="" class="noact text-primary" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
                                 <?php } ?>
                                 <small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= $a['datetime'] ?></small>
                             </td>
