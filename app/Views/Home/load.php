@@ -313,9 +313,9 @@
     </div>
 </div>
 
-<script src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
-<script src="<?= $this->ASSETS_URL ?>js/popper.min.js"></script>
-<script src="<?= $this->ASSETS_URL ?>plugins/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="<?= $this->ASSETS_URL ?>js/popper.min.js"></script>
+<script type="text/javascript" src="<?= $this->ASSETS_URL ?>plugins/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
 <script>
     var antri_pre_count;
     var proses_pre_count;
@@ -328,3 +328,4 @@
         proses_post_count = $("span#tr_proses_post").html();
         $("span#post_antri").html(proses_post_count);
     });
+</script>

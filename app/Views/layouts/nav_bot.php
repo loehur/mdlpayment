@@ -10,16 +10,7 @@
 							<a href="<?= $this->BASE_URL ?>Staff" class="nav-link text-secondary text-nowrap"><i class="fas fa-users"></i><br>Staff</a>
 						</li>
 						<li class="nav-item">
-							<div class="btn-group dropup">
-								<button type="button" class="btn btn-sm btn-light dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false">
-									<i class="fas fa-cog"></i><br>
-									Set
-								</button>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="<?= $this->BASE_URL ?>SetHarga">Set Harga</a></li>
-									<li><a class="dropdown-item" href="<?= $this->BASE_URL ?>Usage">Prabayar Pribadi</a></li>
-								</ul>
-							</div>
+							<a href="<?= $this->BASE_URL ?>SubMenu" class="nav-link text-secondary text-nowrap"><i class="fas fa-cog"></i><br>Set Up</a>
 						</li>
 						<li class="nav-item">
 							<a href="<?= $this->BASE_URL ?>Approval" class="nav-link text-secondary text-nowrap"><i class="fas fa-check-double"></i><br>Approval</a>
