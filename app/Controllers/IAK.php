@@ -73,17 +73,33 @@ class IAK extends Controller
 
             $sign = md5($this->username . $this->apiKey . $ref_id);
             $url = $this->postpaid_url . 'api/v1/bill/check';
-            $data = [
-               "commands" => "inq-pasca",
-               "username" => $this->username,
-               "code" => $code,
-               "hp" => $customer_id,
-               "ref_id" => $ref_id,
-               "sign" => $sign,
-            ];
+
+            switch ($code) {
+               case 'BPJS':
+                  $data = [
+                     "commands" => "inq-pasca",
+                     "username" => $this->username,
+                     "code" => $code,
+                     "hp" => $customer_id,
+                     "ref_id" => $ref_id,
+                     "sign" => $sign,
+                     "month" => "1"
+                  ];
+                  break;
+               default:
+                  $data = [
+                     "commands" => "inq-pasca",
+                     "username" => $this->username,
+                     "code" => $code,
+                     "hp" => $customer_id,
+                     "ref_id" => $ref_id,
+                     "sign" => $sign,
+                  ];
+                  break;
+            }
 
             $postdata = json_encode($data);
-
+           
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
