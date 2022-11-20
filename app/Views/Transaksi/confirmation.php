@@ -112,7 +112,7 @@ if ($a['jenis'] == 1) {
                     <div class="row mb-2">
                         <div class="col">
                             <label>No. <?= strtoupper($des) ?></label>
-                            <input id="cust_id<?= $a['jenis'] ?>" type="text" class="form-control form-control-sm" autocomplete="off" name="customer_id" placeholder="No. <?= $des ?>" required>
+                            <input id="cust_id<?= $a['jenis'] ?>" type="text" class="form-control form-control-sm" autocomplete="off" name="customer_id" placeholder="No. <?= $des ?>" autocomplete="off" required>
                         </div>
                     </div>
 
@@ -139,7 +139,7 @@ if ($a['jenis'] == 1) {
                     <div class="row mb-2">
                         <div class="col">
                             <label>PIN Transaksi</label>
-                            <input type="password" class="form-control form-control-sm" name="pin" placeholder="PIN Transaksi" required>
+                            <input type="password" class="form-control form-control-sm" name="pin" placeholder="PIN Transaksi" autocomplete="new-password" required>
                         </div>
                     </div>
                     <div class="row mb-2">
