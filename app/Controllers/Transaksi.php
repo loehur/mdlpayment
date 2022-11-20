@@ -139,7 +139,7 @@ class Transaksi extends Controller
          }
       } elseif ($jenis == 2) {
 
-         $where = "no_user = '" . $this->userData['no_user'] . "' AND customer_id = '" . $customer_id . "' AND product_code = '" . $product_code . "' AND tr_status = 0";
+         $where = "no_user = '" . $this->userData['no_user'] . "' AND customer_id = '" . $customer_id . "' AND product_code = '" . $product_code . "' AND tr_status = 0 AND rc = '00'";
          $cek = $this->model("M_DB_1")->get_where_row("postpaid", $where);
          if (is_array($cek)) {
             $a = $cek;
