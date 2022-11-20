@@ -107,7 +107,7 @@ class Transaksi extends Controller
             exit();
          }
 
-         $ref_id = "mdl" . "-" . date('Ymdhis') . "-" . $customer_id . "-" . $product_code;
+         $ref_id = "mdl" . "-" . date('Ymd') . "-" . $customer_id . "-" . $product_code;
          $col = "no_user, no_master, ref_id, product_code, customer_id, price_master, price_sell, description, used";
          $val = "'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $product_code . "','" . $customer_id . "'," . $harga['price_master'] . "," . $harga['price_cell'] . ",'" . $harga['desc'] . "'," . $used;
          $do = $this->model('M_DB_1')->insertCols("prepaid", $col, $val);
