@@ -158,7 +158,7 @@ class IAK extends Controller
 
    function topup()
    {
-      $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_user = '" . $this->userData['no_user'] . "' AND (rc = '' OR rc = '06') LIMIT 1");
+      $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND (rc = '' OR rc = '06') LIMIT 1");
       if (!is_array($a)) {
          echo 2;
          exit();
