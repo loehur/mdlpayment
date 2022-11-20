@@ -158,7 +158,7 @@
 </div>
 <hr>
 <div class="ms-3"><b>PASCA BAYAR</b> <small class="text-secondary">[<span id="post_antri"></span>]</small></div>
-<div class="content" style="background-color:lightcyan">
+<div class="content" style="background-color:wheat">
     <div class="container-fluid">
         <div class="row">
             <?php
