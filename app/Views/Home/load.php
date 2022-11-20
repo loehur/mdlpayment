@@ -33,10 +33,10 @@
                 if ($no > 6) {
                     break;
                 }
-                if (($a['tr_status'] == 0) && strlen($a['rc']) == 0) {
+                if (strlen($a['rc']) == 0 || $a['rc'] == "06") {
                     $antri_pre_count += 1;
                 }
-                if (($a['tr_status'] == 0 && ($a['rc'] == "39" || $a['rc'] == "201" || $a['rc'] == "06" || strlen($a['sn']) == 0)) || ($a['tr_status'] == 1 && strlen($a['sn']) == 0)) {
+                if (($a['tr_status'] == 0 && ($a['rc'] == "39" || $a['rc'] == "201" || strlen($a['sn']) == 0)) || ($a['tr_status'] == 1 && strlen($a['sn']) == 0)) {
                     $proses_pre_count += 1;
                 }
             ?>
