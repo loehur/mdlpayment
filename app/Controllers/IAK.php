@@ -48,7 +48,7 @@ class IAK extends Controller
          case "post":
             $code = $_POST['code'];
             //CEK DULU UDAH PERNAH CEK BELUM;
-            $where = "customer_id = '" . $customer_id . "' AND noref = ''";
+            $where = "customer_id = '" . $customer_id . "' AND noref = '' AND rc = '00'";
             $cek = $this->model("M_DB_1")->get_where_row("postpaid", $where);
 
             if (is_array($cek)) {
