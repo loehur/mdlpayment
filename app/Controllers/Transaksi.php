@@ -201,9 +201,10 @@ class Transaksi extends Controller
                   $rc = isset($d['response_code']) ? $d['response_code'] : $a['rc'];
                   $datetime = isset($d['datetime']) ? $d['datetime'] : $a['datetime'];
                   $noref = isset($d['noref']) ? $d['noref'] : $a['noref'];
+                  $tr_status = isset($d['status']) ? $d['status'] : $a['tr_status'];
 
                   $where = "ref_id = '" . $ref_id . "'";
-                  $set =  "datetime = '" . $datetime . "', noref = '" . $noref . "', price = " . $price . ", message = '" . $message . "', balance = " . $balance . ", tr_id = '" . $tr_id . "', rc = '" . $rc . "'";
+                  $set =  "tr_status = " . $tr_status . ", datetime = '" . $datetime . "', noref = '" . $noref . "', price = " . $price . ", message = '" . $message . "', balance = " . $balance . ", tr_id = '" . $tr_id . "', rc = '" . $rc . "'";
                   $update = $this->model('M_DB_1')->update('postpaid', $set, $where);
                   if ($update['errno'] == 0) {
                      echo 1;
