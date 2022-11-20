@@ -159,6 +159,13 @@ class IAK extends Controller
    function topup()
    {
       $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_user = '" . $this->userData['no_user'] . "' AND rc = '' LIMIT 1");
+      if (!is_array($a)) {
+         exit();
+      } else {
+         if (count($a) == 0) {
+            exit();
+         }
+      }
       $ref_id = $a['ref_id'];
 
       $sign = md5($this->username . $this->apiKey . $ref_id);
