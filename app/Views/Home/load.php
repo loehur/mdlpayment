@@ -50,7 +50,7 @@
                             </td>
                             <td class="text-end">
                                 <span class="text-info"><?= $a['customer_id'] ?></span><br>
-                                Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price_master']) . ")</small>" : "" ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small>
+                                Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price_master']) . ")</small>" : "" ?><br><small><b>[<?= $a['rc'] ?>] <?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small>
                             </td>
                         </tr>
                         <tr>
@@ -183,7 +183,7 @@
                                 <?php } ?>
                                 <small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= $a['datetime'] ?></small>
                             </td>
-                            <td class="text-end"><span class="text-info"><?= $a['customer_id'] ?></span><br>Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?><br><small><b><?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
+                            <td class="text-end"><span class="text-info"><?= $a['customer_id'] ?></span><br>Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?><br><small><b>[<?= $a['rc'] ?>] <?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
                         </tr>
                         <tr>
                             <td align="right" colspan="2"><small><?= $a['product_code'] ?>, <b><?= $a['tr_name'] ?></b>, <?= $a['period'] ?></small><br>
