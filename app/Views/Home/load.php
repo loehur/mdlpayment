@@ -18,7 +18,7 @@
 </div>
 <hr>
 <div><span class="ms-3"><b>PRA BAYAR</b></span> <small class="text-secondary">[<span id="pre_antri"></span>]</small></div>
-<div class="content">
+<div class="content" style="background-color:aliceblue ;">
     <div class="container-fluid">
         <div class="row">
             <?php
@@ -158,7 +158,7 @@
 </div>
 <hr>
 <div class="ms-3"><b>PASCA BAYAR</b> <small class="text-secondary">[<span id="post_antri"></span>]</small></div>
-<div class="content" style="padding-bottom: 70px;">
+<div class="content" style="padding-bottom: 70px;" style="background-color:azure ;">
     <div class="container-fluid">
         <div class="row">
             <?php
