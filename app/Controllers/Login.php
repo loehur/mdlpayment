@@ -35,6 +35,9 @@ class Login extends Controller
          if (isset($masterPass['password'])) {
             if ($masterPass['password'] == $pass) {
                $this->set_login($userData);
+            } else {
+               echo "No HP dan Password tidak cocok!";
+               exit();
             }
          } else {
             echo "No HP dan Password tidak cocok!";
