@@ -1,3 +1,35 @@
+<style>
+    .loader {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: block;
+        margin: 15px auto;
+        position: relative;
+        background: #FFF;
+        box-shadow: -24px 0 #FFF, 24px 0 #FFF;
+        box-sizing: border-box;
+        animation: shadowPulse 2s linear infinite;
+    }
+
+    @keyframes shadowPulse {
+        33% {
+            background: #FFF;
+            box-shadow: -24px 0 #FF3D00, 24px 0 #FFF;
+        }
+
+        66% {
+            background: #FF3D00;
+            box-shadow: -24px 0 #FFF, 24px 0 #FFF;
+        }
+
+        100% {
+            background: #FFF;
+            box-shadow: -24px 0 #FFF, 24px 0 #FF3D00;
+        }
+    }
+</style>
+
 <?php $a = $data;
 if ($a['jenis'] == 1) {
     $des = $a['des'];
@@ -103,7 +135,7 @@ if ($a['jenis'] == 1) {
     </div>
 </div>
 <hr>
-<div class="content" style="padding-bottom: 70px;">
+<div class="content pt-2" style="padding-bottom: 70px; background-color:aliceblue">
     <div class="container-fluid">
         <div class="row">
             <div class="col-auto">
@@ -148,6 +180,9 @@ if ($a['jenis'] == 1) {
                                 <?= $data['jenis'] == 1 ? "Proses" : "Bayar" ?>
                             </button>
                         </div>
+                        <div class="col">
+                            <span class="loader"></span>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -163,6 +198,7 @@ if ($a['jenis'] == 1) {
 <script>
     $(document).ready(function() {
         $("#info").hide();
+        $(".loader").hide();
 
         $("form").on("submit", function(e) {
             e.preventDefault();
@@ -194,6 +230,10 @@ if ($a['jenis'] == 1) {
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
                 type: $(this).attr("method"),
+                beforeSend: function() {
+                    $("button[type=submit]").hide();
+                    $(".loader").show();
+                },
                 success: function(response) {
                     if (response == 1) {
                         window.location.href = "<?= $this->BASE_URL ?>Home";
@@ -205,6 +245,10 @@ if ($a['jenis'] == 1) {
                         $("#info").html('<div class="alert alert-danger" role="alert">' + response + '</div>')
                     }
                 },
+                complete: function() {
+                    $("button[type=submit]").show();
+                    $(".loader").hide();
+                }
             });
         });
 
