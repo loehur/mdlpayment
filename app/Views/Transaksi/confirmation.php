@@ -316,6 +316,10 @@ if ($a['jenis'] == 1) {
                 },
                 type: "POST",
                 dataType: 'JSON',
+                beforeSend: function() {
+                    $("button.cek").hide();
+                    $(".loader2").show();
+                },
                 success: function(res) {
                     if (res.data.response_code == '00') {
                         setPost(res.data);
@@ -325,6 +329,10 @@ if ($a['jenis'] == 1) {
                         $("#info").html('<div class="alert alert-danger" role="alert">' + res.data.message + '</div>');
                     }
                 },
+                complete: function() {
+                    $("button.cek").show();
+                    $(".loader2").hide();
+                }
             });
         });
 
