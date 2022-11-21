@@ -151,19 +151,25 @@ if ($a['jenis'] == 1) {
                     <?php if ($a['type'] == 'pln' && $data['jenis'] == 1) { ?>
                         <div class="row mb-2">
                             <div class="col">
-                                <button type="button" id="cekPLN" class="btn btn-sm btn-success btn-block">
+                                <button type="button" id="cekPLN" class="btn cek btn-sm btn-success btn-block">
                                     Cek ID
                                 </button>
+                            </div>
+                            <div class="col">
+                                <span class="loader loader2"></span>
                             </div>
                         </div>
                     <?php } ?>
 
                     <?php if ($data['jenis'] == 2) { ?>
                         <div class="row mb-2">
-                            <div class="col">
-                                <button type="button" id="cekPOST" class="btn btn-sm btn-success btn-block">
+                            <div class="col-auto">
+                                <button type="button" id="cekPOST" class="btn cek btn-sm btn-success btn-block">
                                     Cek Tagihan
                                 </button>
+                            </div>
+                            <div class="col">
+                                <span class="loader loader2"></span>
                             </div>
                         </div>
                     <?php } ?>
@@ -181,7 +187,7 @@ if ($a['jenis'] == 1) {
                             </button>
                         </div>
                         <div class="col">
-                            <span class="loader"></span>
+                            <span class="loader loader1"></span>
                         </div>
                     </div>
                 </form>
@@ -198,7 +204,8 @@ if ($a['jenis'] == 1) {
 <script>
     $(document).ready(function() {
         $("#info").hide();
-        $(".loader").hide();
+        $(".loader1").hide();
+        $(".loader2").hide();
 
         $("form").on("submit", function(e) {
             e.preventDefault();
@@ -232,7 +239,7 @@ if ($a['jenis'] == 1) {
                 type: $(this).attr("method"),
                 beforeSend: function() {
                     $("button[type=submit]").hide();
-                    $(".loader").show();
+                    $(".loader1").show();
                 },
                 success: function(response) {
                     if (response == 1) {
@@ -247,7 +254,7 @@ if ($a['jenis'] == 1) {
                 },
                 complete: function() {
                     $("button[type=submit]").show();
-                    $(".loader").hide();
+                    $(".loader1").hide();
                 }
             });
         });
@@ -274,6 +281,10 @@ if ($a['jenis'] == 1) {
                 },
                 type: "POST",
                 dataType: 'JSON',
+                beforeSend: function() {
+                    $("button.cek").hide();
+                    $(".loader2").show();
+                },
                 success: function(res) {
                     if (res.data.rc == "00") {
                         $("#info").hide();
@@ -287,6 +298,10 @@ if ($a['jenis'] == 1) {
                         $("#info").html('<div class="alert alert-danger" role="alert">' + res.data.message + '</div>')
                     }
                 },
+                complete: function() {
+                    $("button.cek").show();
+                    $(".loader2").hide();
+                }
             });
         });
         $("button#cekPOST").on("click", function(e) {
