@@ -190,7 +190,7 @@
                                 <b><span class="text-success"><?= $a['noref'] ?></span></b>
                             </td>
                         </tr>
-                        <?php if ($a['tr_status'] == 1) { ?>
+                        <?php if ($a['tr_status'] == 1 || strlen($a['noref'] > 0) || strlen($a['datetime'] > 0)) { ?>
                             <tr class="d-none">
                                 <td colspan="10">
                                     <div class="d-none" id="print<?= $id ?>" style="width:50mm;background-color:white; border:1px solid grey">
