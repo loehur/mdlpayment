@@ -4,9 +4,9 @@
     <div class="container-fluid">
         <form action="<?= $this->BASE_URL ?>Rekap/profit" method="post">
             <div class="row">
-                <div class="col-auto pr-0">
+                <div class="col-auto">
                     <label>Month</label>
-                    <select name="m" class="form-control form-control-sm" onchange="hideAll()" style="width: auto;">
+                    <select name="m" class="form-control form-control-sm">
                         <option class="text-right" value="01" <?php if ($currentMonth == '01') {
                                                                     echo 'selected';
                                                                 } ?>>01</option>
@@ -45,7 +45,7 @@
                                                                 } ?>>12</option>
                     </select>
                 </div>
-                <div class="col-auto pr-0">
+                <div class="col-auto ps-0">
                     <label>Year</label>
                     <select name="y" class="form-control form-control-sm" onchange="hideAll()" style="width: auto;">
                         <?php
@@ -60,8 +60,8 @@
                         ?>
                     </select>
                 </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-sm btn-primary position-absolute" style="bottom:0">Submit</button>
+                <div class="col-auto ps-0 mt-auto">
+                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                 </div>
             </div>
         </form>
