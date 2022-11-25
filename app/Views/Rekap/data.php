@@ -7,10 +7,10 @@
                 </b>
                 <table class="table table-sm table-borderless">
                     <tr>
-                        <td class="text-right">ID</td>
-                        <td class="text-right">Price</td>
-                        <td class="text-right">Sell</td>
-                        <td class="text-right">Margin</td>
+                        <td class="text-end">ID</td>
+                        <td class="text-end">Price</td>
+                        <td class="text-end">Sell</td>
+                        <td class="text-end">Margin</td>
                     </tr>
                     <?php
                     $margin_total = 0;
@@ -18,17 +18,17 @@
                         $margin = $dp['price_sell'] - $dp['price_master'];
                     ?>
                         <tr>
-                            <td class="text-right">#<?= $dp['id'] ?></td>
-                            <td class="text-right"><?= number_format($dp['price_master']) ?></td>
-                            <td class="text-right"><?= number_format($dp['price_sell']) ?></td>
-                            <td class="text-right"><?= number_format($margin) ?></td>
+                            <td class="text-end">#<?= $dp['id'] ?></td>
+                            <td class="text-end"><?= number_format($dp['price_master']) ?></td>
+                            <td class="text-end"><?= number_format($dp['price_sell']) ?></td>
+                            <td class="text-end"><?= number_format($margin) ?></td>
                         </tr>
                     <?php
                         $margin_total += $margin;
                     }
                     ?>
                     <tr>
-                        <td class="text-right" colspan="4"><b><?= number_format($margin_total) ?></b></td>
+                        <td class="text-end" colspan="4"><b><?= number_format($margin_total) ?></b></td>
                     </tr>
                 </table>
             </div>
@@ -38,10 +38,10 @@
                 </b>
                 <table class="table table-sm table-borderless">
                     <tr>
-                        <td class="text-right">ID</td>
-                        <td class="text-right">Price</td>
-                        <td class="text-right">Sell</td>
-                        <td class="text-right">Admin</td>
+                        <td class="text-end">ID</td>
+                        <td class="text-end">Price</td>
+                        <td class="text-end">Sell</td>
+                        <td class="text-end">Admin</td>
                     </tr>
                     <?php
                     $margin_total = 0;
@@ -49,17 +49,17 @@
                         $margin = $dp['price_sell'] - $dp['price'];
                     ?>
                         <tr>
-                            <td class="text-right">#<?= $dp['id'] ?></td>
-                            <td class="text-right"><?= number_format($dp['price']) ?></td>
-                            <td class="text-right"><?= number_format($dp['price_sell']) ?></td>
-                            <td class="text-right"><?= number_format($margin) ?></td>
+                            <td class="text-end">#<?= $dp['id'] ?></td>
+                            <td class="text-end"><?= number_format($dp['price']) ?></td>
+                            <td class="text-end"><?= number_format($dp['price_sell']) ?></td>
+                            <td class="text-end"><?= number_format($margin) ?></td>
                         </tr>
                     <?php
                         $margin_total += $margin;
                     }
                     ?>
                     <tr>
-                        <td class="text-right" colspan="4"><b><?= number_format($margin_total) ?></b></td>
+                        <td class="text-end" colspan="4"><b><?= number_format($margin_total) ?></b></td>
                     </tr>
                 </table>
             </div>
