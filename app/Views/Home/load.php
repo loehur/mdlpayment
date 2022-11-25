@@ -140,7 +140,7 @@
                                             <tr>
                                                 <td colspan="3">
                                                     <hr>
-                                                    <br>.
+                                                    <br>.<br>.<br>.<br>.
                                                 </td>
                                             </tr>
                                         </table>
@@ -297,7 +297,7 @@
                                             <tr>
                                                 <td colspan="3">
                                                     <hr>
-                                                    <br>.
+                                                    <br>.<br>.<br>.<br>.
                                                 </td>
                                             </tr>
                                         </table>
