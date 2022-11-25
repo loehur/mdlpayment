@@ -178,7 +178,7 @@
                     <table class="table table-borderless table-sm mb-0 pb-0">
                         <tr>
                             <td>
-                                <?php if ($a['tr_status'] == 1) { ?>
+                                <?php if ($a['tr_status'] == 1 || strlen($a['noref'] > 0) || strlen($a['datetime'] > 0)) { ?>
                                     <a href="" class="noact text-primary" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
                                 <?php } ?>
                                 <small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= $a['datetime'] ?></small>
