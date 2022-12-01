@@ -22,10 +22,17 @@
     <div class="container-fluid">
         <div class="row">
             <?php
+
             $no = 0;
             $antri_pre_count = 0;
             $proses_pre_count = 0;
             foreach ($data['data_pre'] as $a) {
+
+                if ($a['no_user'] <> $this->userData['no_user'] && $this->userData['user_tipe'] <> 1) {
+                    continue;
+                }
+
+
                 $id = $a['id'];
                 $rc = $a['rc'];
                 $tr_status = $a['tr_status'];
@@ -165,6 +172,11 @@
             $no = 0;
             $proses_post_count = 0;
             foreach ($data['data_post'] as $a) {
+
+                if ($a['no_user'] <> $this->userData['no_user'] && $this->userData['user_tipe'] <> 1) {
+                    continue;
+                }
+
                 $id = $a['id'];
                 $no++;
                 if ($no > 6) {

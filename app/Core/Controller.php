@@ -88,8 +88,8 @@ class Controller extends Public_Variables
         $total_topup_success = 0;
 
         $data['topup'] = $this->model('M_DB_1')->get_where('topup', "no_master = '" . $this->userData['no_master'] . "'");
-        
-        
+
+
         foreach ($data['topup'] as $a) {
             switch ($a['topup_status']) {
                 case 1:
@@ -102,12 +102,9 @@ class Controller extends Public_Variables
         $arr_success_kas = array();
         $arr_success_master = array();
 
-        if ($this->userData['user_tipe'] == 1) {
-            $data['prepaid'] = $this->model('M_DB_1')->get_where('prepaid', "no_master = '" . $this->userData['no_master'] . "' ORDER BY id DESC");
-        } else {
-            $data['prepaid'] = $this->model('M_DB_1')->get_where('prepaid', "no_user = '" . $this->userData['no_user'] . "' ORDER BY id DESC");
-        }
-        
+
+        $data['prepaid'] = $this->model('M_DB_1')->get_where('prepaid', "no_master = '" . $this->userData['no_master'] . "' ORDER BY id DESC");
+
         foreach ($data['prepaid'] as $a) {
             if ($a['rc'] == "00" || $a['rc'] == "39" || $a['rc'] == "201" || $a['rc'] == "" || strlen($a['sn']) > 0) {
                 if ($this->userData['no_user'] == $a['no_user'] && $a['used'] == 0) {
@@ -117,11 +114,8 @@ class Controller extends Public_Variables
             }
         }
 
-        if ($this->userData['user_tipe'] == 1) {
-            $data['postpaid'] = $this->model('M_DB_1')->get_where('postpaid', "no_master = '" . $this->userData['no_master'] . "' ORDER BY id DESC");
-        } else {
-            $data['postpaid'] = $this->model('M_DB_1')->get_where('postpaid', "no_user = '" . $this->userData['no_user'] . "' ORDER BY id DESC");
-        }
+        $data['postpaid'] = $this->model('M_DB_1')->get_where('postpaid', "no_master = '" . $this->userData['no_master'] . "' ORDER BY id DESC");
+
         foreach ($data['postpaid'] as $a) {
             if (strlen($a['noref'] > 0) || strlen($a['datetime']) > 0 || $a['tr_status'] == 1 || $a['tr_status'] == 3 || $a['tr_status'] == 4) {
                 if ($this->userData['no_user'] == $a['no_user'] && $a['used'] == 0) {
