@@ -208,10 +208,10 @@ class IAK extends Controller
          $balance = isset($d['balance']) ? $d['balance'] : $a['balance'];
          $tr_id = isset($d['tr_id']) ? $d['tr_id'] : $a['tr_id'];
          $rc = isset($d['rc']) ? $d['rc'] : $a['rc'];
-
+         $sn = isset($d['sn']) ? $d['sn'] : $a['sn'];
 
          $where = "ref_id = '" . $ref_id . "'";
-         $set =  "tr_status = " . $tr_status . ", price = " . $price . ", message = '" . $message . "', balance = " . $balance . ", tr_id = '" . $tr_id . "', rc = '" . $rc . "'";
+         $set =  "sn = '" . $sn . "', tr_status = " . $tr_status . ", price = " . $price . ", message = '" . $message . "', balance = " . $balance . ", tr_id = '" . $tr_id . "', rc = '" . $rc . "'";
          $update = $this->model('M_DB_1')->update('prepaid', $set, $where);
          if ($update['errno'] == 0) {
             echo 1;
