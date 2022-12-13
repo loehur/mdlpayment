@@ -69,7 +69,7 @@ class IAK extends Controller
                exit();
             }
 
-            $ref_id = $this->model('M_IAK')->ref_id();
+            $ref_id = $this->userData['no_user'] . "-" . $this->model('M_IAK')->ref_id();
 
             $sign = md5($this->username . $this->apiKey . $ref_id);
             $url = $this->postpaid_url . 'api/v1/bill/check';

@@ -78,7 +78,7 @@ class M_IAK extends Public_Variables
 
     function ref_id()
     {
-        return "mdl" . "-" . date('Ymdhis') . "-" . rand(1000000000, 9999999999);
+        return date('Ymdhis') . "-" . rand(1000000000, 9999999999);
     }
 
     function pre_cek($ref_id)

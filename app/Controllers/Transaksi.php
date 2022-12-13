@@ -99,7 +99,7 @@ class Transaksi extends Controller
                echo "Limit Bulanan Sudah Tercapai!";
                exit();
             }
-         }       
+         }
 
          $limit = $saldo['saldo'] - $harga['price_master'];
          if ($limit < $this->setting['min_saldo']) {
@@ -107,7 +107,7 @@ class Transaksi extends Controller
             exit();
          }
 
-         $ref_id = "mdl" . "-" . date('Ymd') . "-" . $customer_id . "-" . $product_code;
+         $ref_id = $this->userData['no_user'] . "-" . date('Ymd') . "-" . $customer_id . "-" . $product_code;
          $col = "no_user, no_master, ref_id, product_code, customer_id, price_master, price_sell, description, used";
          $val = "'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $product_code . "','" . $customer_id . "'," . $harga['price_master'] . "," . $harga['price_cell'] . ",'" . $harga['desc'] . "'," . $used;
          $do = $this->model('M_DB_1')->insertCols("prepaid", $col, $val);
@@ -145,13 +145,6 @@ class Transaksi extends Controller
             $a = $cek;
             $tr_id = $cek['tr_id'];
             $ref_id = $cek['ref_id'];
-
-            if ($used == 1) {
-               if ($cek['price_cell'] > $sisa_limit) {
-                  echo "Limit Bulanan Sudah Tercapai!";
-                  exit();
-               }
-            }
 
             //CEK SALDO CUKUP GAK
             $saldo = $this->saldo();
