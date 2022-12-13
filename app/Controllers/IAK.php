@@ -224,7 +224,7 @@ class IAK extends Controller
       if (!is_array($a)) {
          $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 1 AND sn = '' LIMIT 1");
          if (!is_array($a)) {
-            $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 4 AND rc = '39' LIMIT 1");
+            $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 2 AND rc = '39' LIMIT 1");
             if (!is_array($a)) {
                exit();
             }
