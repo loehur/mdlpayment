@@ -273,8 +273,10 @@ class IAK extends Controller
             }
          }
 
-         if ($d['rc'] == $a['rc']) {
-            exit();
+         if (!isset($d['sn'])) {
+            if ($d['rc'] == $a['rc']) {
+               exit();
+            }
          }
 
          $tr_status = isset($d['status']) ? $d['status'] : $a['tr_status'];
