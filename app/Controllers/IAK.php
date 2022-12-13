@@ -99,7 +99,7 @@ class IAK extends Controller
             }
 
             $postdata = json_encode($data);
-           
+
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
@@ -168,7 +168,7 @@ class IAK extends Controller
             exit();
          }
       }
-      
+
       $ref_id = $a['ref_id'];
 
       $sign = md5($this->username . $this->apiKey . $ref_id);
@@ -224,9 +224,13 @@ class IAK extends Controller
       if (!is_array($a)) {
          $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 1 AND sn = '' LIMIT 1");
          if (!is_array($a)) {
-            exit();
+            $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 4 AND rc = '39' LIMIT 1");
+            if (!is_array($a)) {
+               exit();
+            }
          }
       }
+
       $ref_id = $a['ref_id'];
 
       $sign = md5($this->username . $this->apiKey . $ref_id);
@@ -259,6 +263,10 @@ class IAK extends Controller
                   exit();
                }
             }
+         }
+
+         if ($d['rc'] == $a['rc']) {
+            exit();
          }
 
          $tr_status = isset($d['status']) ? $d['status'] : $a['tr_status'];
