@@ -291,7 +291,7 @@ class IAK extends Controller
          $set =  "sn = '" . $sn . "', tr_status = " . $tr_status . ", price = " . $price . ", message = '" . $message . "', balance = " . $balance . ", tr_id = '" . $tr_id . "', rc = '" . $rc . "'";
          $update = $this->model('M_DB_1')->update('prepaid', $set, $where);
          if ($update['errno'] == 0) {
-            echo 1;
+            print_r($update[$d]);
          } else {
             print_r($update['error']);
          }
