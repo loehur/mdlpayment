@@ -72,8 +72,7 @@ class Transaksi extends Controller
          $used = 1;
          $limit = $data_limit['limit_bulanan'];
          $used_pre = $this->model("M_DB_1")->sum_col_where("prepaid", "price_sell", "customer_id = '" . $customer_id . "' AND insertTime LIKE '%" . $month . "%' AND rc IN (00,39,201)");
-         $used_post = $this->model("M_DB_1")->sum_col_where("postpaid", "price_sell", "customer_id = '" . $customer_id . "' AND insertTime LIKE '%" . $month . "%' AND tr_status IN (1,3,4)");
-         $total_use = $used_pre + $used_post;
+         $total_use = $used_pre;
 
          $sisa_limit = $limit - $total_use;
       }

@@ -69,6 +69,11 @@ class IAK extends Controller
                exit();
             }
 
+            $data_limit = $this->model("M_DB_1")->get_where_row("paid_use", "no_master = '" . $this->userData['no_master'] . "' AND customer_id = '" . $customer_id . "'");
+            if (isset($data_limit['limit_bulanan'])) {
+               $used = 1;
+            }
+
             $ref_id = $this->userData['no_user'] . "-" . $this->model('M_IAK')->ref_id();
 
             $sign = md5($this->username . $this->apiKey . $ref_id);
@@ -118,8 +123,8 @@ class IAK extends Controller
                      case "05":
                      case "39":
                      case "201":
-                        $col = "rc, message, tr_id, tr_name, period, nominal, admin, no_user, no_master, ref_id, product_code, customer_id, price, selling_price, description, price_sell";
-                        $val = "'" . $d['response_code'] . "','" . $d['message'] . "'," . $d['tr_id'] . ",'" . $d['tr_name'] . "','" . $d['period'] . "'," . $d['nominal'] . "," . $d['admin'] . ",'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $d['code'] . "','" . $d['hp'] . "'," . $d['price'] . "," . $d['selling_price'] . ",'" . serialize($d['desc']) . "'," . ($d['price'] + $this->setting['admin_postpaid']);
+                        $col = "rc, message, tr_id, tr_name, period, nominal, admin, no_user, no_master, ref_id, product_code, customer_id, price, selling_price, description, price_sell, used";
+                        $val = "'" . $d['response_code'] . "','" . $d['message'] . "'," . $d['tr_id'] . ",'" . $d['tr_name'] . "','" . $d['period'] . "'," . $d['nominal'] . "," . $d['admin'] . ",'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $d['code'] . "','" . $d['hp'] . "'," . $d['price'] . "," . $d['selling_price'] . ",'" . serialize($d['desc']) . "'," . ($d['price'] + $this->setting['admin_postpaid']) . "," . $used;
                         $do = $this->model('M_DB_1')->insertCols("postpaid", $col, $val);
                         if ($do['errno'] == 0) {
                            $data['data'] = [
@@ -226,7 +231,10 @@ class IAK extends Controller
          if (!is_array($a)) {
             $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 2 AND rc = '39' LIMIT 1");
             if (!is_array($a)) {
-               exit();
+               $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 1 AND sn = '' LIMIT 1");
+               if (!is_array($a)) {
+                  exit();
+               }
             }
          }
       }

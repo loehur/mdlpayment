@@ -47,6 +47,8 @@
                     $proses_pre_count += 1;
                 } elseif ($a['tr_status'] == 2 && $a['rc'] == "39") {
                     $proses_pre_count += 1;
+                } elseif ($a['tr_status'] == 1 && strlen($a['sn']) == 0) {
+                    $proses_pre_count += 1;
                 }
             ?>
                 <div class="col-md-6 border pb-1">
