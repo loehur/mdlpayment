@@ -69,6 +69,7 @@ class IAK extends Controller
                exit();
             }
 
+            $used = 0;
             $data_limit = $this->model("M_DB_1")->get_where_row("paid_use", "no_master = '" . $this->userData['no_master'] . "' AND customer_id = '" . $customer_id . "'");
             if (isset($data_limit['limit_bulanan'])) {
                $used = 1;
