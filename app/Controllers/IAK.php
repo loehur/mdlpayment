@@ -140,7 +140,7 @@ class IAK extends Controller
                            print_r(json_encode($data));
                            exit();
                         } else {
-                           $data['data']['message'] = $do['error'];
+                           $data['data']['message'] = $do['error'] . " " . $do['query'];
                            print_r(json_encode($data));
                         }
                         break;
