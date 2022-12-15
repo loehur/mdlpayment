@@ -104,7 +104,7 @@ if ($a['jenis'] == 1) {
                         <tr>
                             <td>Period</td>
                             <td>:</td>
-                            <td>Rp<span id="period"></span></td>
+                            <td><span id="period"></span></td>
                         </tr>
                         <tr>
                         <tr>
