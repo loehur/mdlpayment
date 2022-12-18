@@ -44,7 +44,7 @@
                         <td class="text-end">Admin</td>
                     </tr>
                     <?php
-                    $margin_total = 0;
+                    $fee_total = 0;
                     foreach ($data['post'] as $dp) {
                         $margin = $dp['price_sell'] - $dp['price'];
                     ?>
@@ -55,13 +55,20 @@
                             <td class="text-end"><?= number_format($margin) ?></td>
                         </tr>
                     <?php
-                        $margin_total += $margin;
+                        $fee_total += $margin;
                     }
                     ?>
                     <tr>
                         <td class="text-end" colspan="4"><b><?= number_format($margin_total) ?></b></td>
                     </tr>
                 </table>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-auto m-auto">
+                <p class="text-center mb-0"><b>Total Profit</b>
+                </p>
+                <h5 class="text-success text-center m-auto pt-0"><?= number_format($margin_total + $fee_total) ?></h5>
             </div>
         </div>
     </div>
