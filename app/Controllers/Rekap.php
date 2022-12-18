@@ -46,5 +46,6 @@ class Rekap extends Controller
 
       $this->index();
       $this->view($this->page . "/data", $data);
+      print_r($data['post']);
    }
 }
