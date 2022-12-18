@@ -59,7 +59,7 @@
                     }
                     ?>
                     <tr>
-                        <td class="text-end" colspan="4"><b><?= number_format($margin_total) ?></b></td>
+                        <td class="text-end" colspan="4"><b><?= number_format($fee_total) ?></b></td>
                     </tr>
                 </table>
             </div>
