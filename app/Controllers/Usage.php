@@ -36,8 +36,8 @@ class Usage extends Controller
       }
 
       $table = "paid_use";
-      $columns = 'no_master, customer_id, limit_bulanan';
-      $values = "'" . $this->userData['no_master'] . "','" . $_POST["id"] . "'," . $_POST["limit"];
+      $columns = 'no_master, customer_id, limit_bulanan, note';
+      $values = "'" . $this->userData['no_master'] . "','" . $_POST['id'] . "'," . $_POST['limit'] . ",'" . $_POST['note'] . "'";
       $do = $this->model('M_DB_1')->insertCols($table, $columns, $values);
 
       if ($do['errno'] == 0) {
