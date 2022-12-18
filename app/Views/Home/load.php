@@ -189,6 +189,10 @@
                 if ($a['tr_status'] == 4 || $a['tr_status'] == 3) {
                     $proses_post_count += 1;
                 }
+
+                if ($a['tr_status'] == 0 && strlen($a['noref'] > 0)) {
+                    $proses_post_count += 1;
+                }
             ?>
                 <div class="col-md-6 border pb-1">
                     <table class="table table-borderless table-sm mb-0 pb-0">
