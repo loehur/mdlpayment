@@ -81,6 +81,8 @@
             success: function(res) {
                 if (res == 1) {
                     location.reload(true);
+                } else {
+                    alert(res);
                 }
             },
         });
