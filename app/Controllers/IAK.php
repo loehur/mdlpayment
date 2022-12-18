@@ -302,6 +302,13 @@ class IAK extends Controller
    function post_cek()
    {
       $a = $this->model('M_DB_1')->get_where_row("postpaid", "no_master = '" . $this->userData['no_master'] . "' AND (tr_status = 4 OR tr_status = 3) LIMIT 1");
+      if (!is_array($a)) {
+         $a = $this->model('M_DB_1')->get_where_row("postpaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 0 AND noref <> '') LIMIT 1");
+         if (!is_array($a)) {
+            exit();
+         }
+      }
+
       $ref_id = $a['ref_id'];
 
       $sign = md5($this->username . $this->apiKey . "cs");
