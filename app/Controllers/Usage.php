@@ -24,7 +24,7 @@ class Usage extends Controller
 
    public function load()
    {
-      $data = $this->model('M_DB_1')->get_where('paid_use', "no_master = '" . $this->userData['no_user'] . "'");
+      $data = $this->model('M_DB_1')->get_where('paid_use', "no_master = '" . $this->userData['no_user'] . "' ORDER BY note ASC");
       $this->view($this->view_content, $data);
    }
 
