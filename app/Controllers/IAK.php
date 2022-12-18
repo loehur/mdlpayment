@@ -341,9 +341,6 @@ class IAK extends Controller
             }
          }
 
-         print_r($d);
-         exit();
-
          $price = isset($d['price']) ? $d['price'] : $a['price'];
          $message = isset($d['message']) ? $d['message'] : $a['message'];
          $balance = isset($d['balance']) ? $d['balance'] : $a['balance'];
