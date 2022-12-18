@@ -309,6 +309,9 @@ class IAK extends Controller
          }
       }
 
+      print_r($a);
+      exit();
+
       $ref_id = $a['ref_id'];
 
       $sign = md5($this->username . $this->apiKey . "cs");
