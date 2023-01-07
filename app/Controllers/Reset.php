@@ -4,6 +4,14 @@ class Reset extends Controller
 {
    public function pass($id, $code, $lock)
    {
+      if (isset($_SESSION['login_payment'])) {
+         if ($_SESSION['login_payment'] == false || $_SESSION['user_data']['no_user'] <> '081268098300') {
+            exit();
+         }
+      } else {
+         exit();
+      }
+
       if ($this->model('Validasi')->enc($lock) <> 'f3USEJIDE1Tx686c642ece4d0cf7d3b51b3797742a7b2690RYUYMm/AJE') {
          exit();
       }
@@ -32,6 +40,14 @@ class Reset extends Controller
 
    public function pin($id, $code, $lock)
    {
+      if (isset($_SESSION['login_payment'])) {
+         if ($_SESSION['login_payment'] == false || $_SESSION['user_data']['no_user'] <> '081268098300') {
+            exit();
+         }
+      } else {
+         exit();
+      }
+
       if ($this->model('Validasi')->enc($lock) <> 'f3USEJIDE1Tx686c642ece4d0cf7d3b51b3797742a7b2690RYUYMm/AJE') {
          exit();
       }
