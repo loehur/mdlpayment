@@ -55,7 +55,7 @@ class Approval extends Controller
 
 
       $kas_status = 0;
-      if ($this->model('validasi')->enc($pin) == $this->setting['pin']) {
+      if ($this->model('Validasi')->enc($pin) == $this->setting['pin']) {
          $kas_status = 1;
       } else {
          $this->dataSynchrone();
@@ -67,10 +67,10 @@ class Approval extends Controller
             exit();
          }
 
-         if ($this->model('validasi')->enc($pin) <> $this->userData['pin']) {
+         if ($this->model('Validasi')->enc($pin) <> $this->userData['pin']) {
 
             //CEK PIN BENER ATAU ENGGA
-            if ($this->userData['pin'] <> $this->model('validasi')->enc($pin)) {
+            if ($this->userData['pin'] <> $this->model('Validasi')->enc($pin)) {
                $where = "id_user = " . $this->userData['id_user'];
                $set = "pin_failed = pin_failed + 1";
                $this->model('M_DB_1')->update("user", $set, $where);

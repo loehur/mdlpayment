@@ -58,8 +58,8 @@ class Register extends Controller
          exit();
       }
 
-      $pass_save = $this->model('validasi')->enc($pass);
-      $pin_save = $this->model('validasi')->enc($pin);
+      $pass_save = $this->model('Validasi')->enc($pass);
+      $pin_save = $this->model('Validasi')->enc($pin);
 
       $table = "user";
       $columns = 'no_user, nama, password, pin, no_master';
@@ -88,7 +88,7 @@ class Register extends Controller
 
       //CEK PIN BENER ATAU ENGGA
       $pin = $_POST['pin'];
-      if ($this->userData['pin'] <> $this->model('validasi')->enc($pin)) {
+      if ($this->userData['pin'] <> $this->model('Validasi')->enc($pin)) {
          $where = "id_user = " . $this->userData['id_user'];
          $set = "pin_failed = pin_failed + 1";
          $this->model('M_DB_1')->update("user", $set, $where);
@@ -116,7 +116,7 @@ class Register extends Controller
       } else {
          $nomor = $this->userData['no_user'];
       }
-      $code_reset_pass = $this->model('validasi')->enc($_POST["reset_code"]);
+      $code_reset_pass = $this->model('Validasi')->enc($_POST["reset_code"]);
 
       $where = "no_user = '" . $nomor . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 1";
       $reset_code = $this->model('M_DB_1')->get_where_row('reset_code', $where);
@@ -147,7 +147,7 @@ class Register extends Controller
          exit();
       }
       $where = "no_user = '" . $nomor . "'";
-      $set = "password = '" . $this->model('validasi')->enc($pass) . "', pass_reset_code = '" . $reset_code['reset_code'] . "'";
+      $set = "password = '" . $this->model('Validasi')->enc($pass) . "', pass_reset_code = '" . $reset_code['reset_code'] . "'";
       $this->model('M_DB_1')->update("user", $set, $where);
 
       if (!isset($_POST["no_user"])) {
@@ -189,7 +189,7 @@ class Register extends Controller
 
    public function ganti_pin()
    {
-      $code_reset_pass = $this->model('validasi')->enc($_POST["reset_code"]);
+      $code_reset_pass = $this->model('Validasi')->enc($_POST["reset_code"]);
 
       $where = "no_user = '" . $this->userData['no_user'] . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 2";
       $reset_code = $this->model('M_DB_1')->get_where_row('reset_code', $where);
@@ -220,7 +220,7 @@ class Register extends Controller
       }
 
       $where = "no_user = '" . $this->userData['no_user'] . "'";
-      $set = "pin = '" . $this->model('validasi')->enc($pin) . "', pin_reset_code = '" . $reset_code['reset_code'] . "'";
+      $set = "pin = '" . $this->model('Validasi')->enc($pin) . "', pin_reset_code = '" . $reset_code['reset_code'] . "'";
       $do = $this->model('M_DB_1')->update("user", $set, $where);
 
       if ($do['errno'] == 0) {

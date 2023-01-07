@@ -36,7 +36,7 @@ class Transaksi extends Controller
       $pin = $_POST['pin'];
 
       //PIN DILARANG DEFAULT
-      if ($this->userData['pin'] == $this->model('validasi')->enc("1234")) {
+      if ($this->userData['pin'] == $this->model('Validasi')->enc("1234")) {
          echo "Silahkan mengganti PIN terlebih dahulu!";
          exit();
       }
@@ -58,7 +58,7 @@ class Transaksi extends Controller
       }
 
       //CEK PIN BENER ATAU ENGGA
-      if ($this->userData['pin'] <> $this->model('validasi')->enc($pin)) {
+      if ($this->userData['pin'] <> $this->model('Validasi')->enc($pin)) {
          $where = "id_user = " . $this->userData['id_user'];
          $set = "pin_failed = pin_failed + 1";
          $this->model('M_DB_1')->update("user", $set, $where);
@@ -111,7 +111,7 @@ class Transaksi extends Controller
          }
 
          $ref_id = $this->userData['no_user'] . "-" . $this->model('M_IAK')->ref_id() . "-" . $saldo['saldo'];
-         $verify = $this->model('validasi')->enc($ref_id);
+         $verify = $this->model('Validasi')->enc($ref_id);
 
          $col = "no_user, no_master, ref_id, product_code, customer_id, price_master, price_sell, description, used, balance_user, verify";
          $val = "'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $product_code . "','" . $customer_id . "'," . $harga['price_master'] . "," . $harga['price_cell'] . ",'" . $harga['desc'] . "'," . $used . "," . $limit . ",'" . $verify . "'";
@@ -151,9 +151,9 @@ class Transaksi extends Controller
             $a = $cek;
             $tr_id = $cek['tr_id'];
             $ref_id = $cek['ref_id'];
-            $verify = $this->model('validasi')->enc($ref_id);
+            $verify = $this->model('Validasi')->enc($ref_id);
 
-            if ($this->model('validasi')->enc($ref_id) <> $a['verify']) {
+            if ($this->model('Validasi')->enc($ref_id) <> $a['verify']) {
                $where = "ref_id = '" . $ref_id . "'";
                $set =  "tr_status = 2, message = 'HACKER WARNING!'";
                $update = $this->model('M_DB_1')->update('postpaid', $set, $where);

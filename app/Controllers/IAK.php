@@ -77,7 +77,7 @@ class IAK extends Controller
 
             $saldo = $this->saldo()['saldo'];
             $ref_id = $this->userData['no_user'] . "-" . $this->model('M_IAK')->ref_id() . "-" . $saldo;
-            $verify = $this->model('validasi')->enc($ref_id);
+            $verify = $this->model('Validasi')->enc($ref_id);
 
             $sign = md5($this->username . $this->apiKey . $ref_id);
             $url = $this->postpaid_url . 'api/v1/bill/check';
@@ -181,7 +181,7 @@ class IAK extends Controller
 
       $ref_id = $a['ref_id'];
 
-      if ($this->model('validasi')->enc($ref_id) <> $a['verify']) {
+      if ($this->model('Validasi')->enc($ref_id) <> $a['verify']) {
          $where = "ref_id = '" . $ref_id . "'";
          $set =  "tr_status = 2, message = 'HACKER WARNING!'";
          $update = $this->model('M_DB_1')->update('prepaid', $set, $where);

@@ -22,7 +22,7 @@ class Login extends Controller
          }
       }
 
-      $pass = $this->model('validasi')->enc($_POST["PASS"]);
+      $pass = $this->model('Validasi')->enc($_POST["PASS"]);
       $where = "no_user = '" . $_POST["HP"] . "' AND password = '" . $pass . "'";
       $userData = $this->model('M_DB_1')->get_where_row('user', $where);
 
