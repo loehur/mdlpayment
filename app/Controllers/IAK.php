@@ -75,7 +75,9 @@ class IAK extends Controller
                $used = 1;
             }
 
-            $ref_id = $this->userData['no_user'] . "-" . $this->model('M_IAK')->ref_id();
+            $saldo = $this->saldo()['saldo'];
+            $ref_id = $this->userData['no_user'] . "-" . $this->model('M_IAK')->ref_id() . "-" . $saldo;
+            $verify = $this->model('validasi')->enc($ref_id);
 
             $sign = md5($this->username . $this->apiKey . $ref_id);
             $url = $this->postpaid_url . 'api/v1/bill/check';
@@ -118,14 +120,16 @@ class IAK extends Controller
 
             if (isset($response['data'])) {
                $d = $response['data'];
+
                if (isset($d['response_code'])) {
                   switch ($d['response_code']) {
                      case "00":
                      case "05":
                      case "39":
                      case "201":
-                        $col = "rc, message, tr_id, tr_name, period, nominal, admin, no_user, no_master, ref_id, product_code, customer_id, price, selling_price, description, price_sell, used";
-                        $val = "'" . $d['response_code'] . "','" . $d['message'] . "'," . $d['tr_id'] . ",'" . $d['tr_name'] . "','" . $d['period'] . "'," . $d['nominal'] . "," . $d['admin'] . ",'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $d['code'] . "','" . $d['hp'] . "'," . $d['price'] . "," . $d['selling_price'] . ",'" . serialize($d['desc']) . "'," . ($d['price'] + $this->setting['admin_postpaid']) . "," . $used;
+                        $limit = $saldo - $d['price'];
+                        $col = "rc, message, tr_id, tr_name, period, nominal, admin, no_user, no_master, ref_id, product_code, customer_id, price, selling_price, description, price_sell, used, balance_user, verify";
+                        $val = "'" . $d['response_code'] . "','" . $d['message'] . "'," . $d['tr_id'] . ",'" . $d['tr_name'] . "','" . $d['period'] . "'," . $d['nominal'] . "," . $d['admin'] . ",'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $d['code'] . "','" . $d['hp'] . "'," . $d['price'] . "," . $d['selling_price'] . ",'" . serialize($d['desc']) . "'," . ($d['price'] + $this->setting['admin_postpaid']) . "," . $used . "," . $limit . ",'" . $verify . "'";
                         $do = $this->model('M_DB_1')->insertCols("postpaid", $col, $val);
                         if ($do['errno'] == 0) {
                            $data['data'] = [
@@ -164,7 +168,7 @@ class IAK extends Controller
 
    function topup()
    {
-      $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND (rc = '' OR rc = '06') LIMIT 1");
+      $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_user = '" . $this->userData['no_user'] . "' AND (rc = '' OR rc = '06') LIMIT 1");
       if (!is_array($a)) {
          echo 2;
          exit();
@@ -176,6 +180,13 @@ class IAK extends Controller
       }
 
       $ref_id = $a['ref_id'];
+
+      if ($this->model('validasi')->enc($ref_id) <> $a['verify']) {
+         $where = "ref_id = '" . $ref_id . "'";
+         $set =  "tr_status = 2, message = 'HACKER WARNING!'";
+         $update = $this->model('M_DB_1')->update('prepaid', $set, $where);
+         exit();
+      }
 
       $sign = md5($this->username . $this->apiKey . $ref_id);
       $url = $this->prepaid_url . 'api/top-up';
@@ -226,13 +237,13 @@ class IAK extends Controller
 
    function topup_cek()
    {
-      $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 0 LIMIT 1");
+      $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_user = '" . $this->userData['no_user'] . "' AND tr_status = 0 LIMIT 1");
       if (!is_array($a)) {
-         $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 1 AND sn = '' LIMIT 1");
+         $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_user = '" . $this->userData['no_user'] . "' AND tr_status = 1 AND sn = '' LIMIT 1");
          if (!is_array($a)) {
-            $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 2 AND rc = '39' LIMIT 1");
+            $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_user = '" . $this->userData['no_user'] . "' AND tr_status = 2 AND rc = '39' LIMIT 1");
             if (!is_array($a)) {
-               $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 1 AND sn = '' LIMIT 1");
+               $a = $this->model('M_DB_1')->get_where_row("prepaid", "no_user = '" . $this->userData['no_user'] . "' AND tr_status = 1 AND sn = '' LIMIT 1");
                if (!is_array($a)) {
                   exit();
                }
@@ -301,9 +312,9 @@ class IAK extends Controller
 
    function post_cek()
    {
-      $a = $this->model('M_DB_1')->get_where_row("postpaid", "no_master = '" . $this->userData['no_master'] . "' AND (tr_status = 4 OR tr_status = 3) LIMIT 1");
+      $a = $this->model('M_DB_1')->get_where_row("postpaid", "no_user = '" . $this->userData['no_user'] . "' AND (tr_status = 4 OR tr_status = 3) LIMIT 1");
       if (!is_array($a)) {
-         $a = $this->model('M_DB_1')->get_where_row("postpaid", "no_master = '" . $this->userData['no_master'] . "' AND tr_status = 0 AND noref <> '' LIMIT 1");
+         $a = $this->model('M_DB_1')->get_where_row("postpaid", "no_user = '" . $this->userData['no_user'] . "' AND tr_status = 0 AND noref <> '' LIMIT 1");
          if (!is_array($a)) {
             exit();
          }

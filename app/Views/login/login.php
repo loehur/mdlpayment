@@ -54,10 +54,6 @@
                         <div class="col-4">
                             <button type="submit" class="btn btn-success btn-block">Sign In</button>
                         </div>
-                        <div id="spinner" class="spinner-border text-primary col-auto" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <!-- /.col -->
                     </div>
                 </form>
                 <p class="mb-0">
@@ -74,34 +70,3 @@
 </body>
 
 </html>
-
-<script src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $("#info").hide();
-        $("#spinner").hide();
-
-        $("form").on("submit", function(e) {
-            $("#spinner").show();
-            e.preventDefault();
-            $.ajax({
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
-                type: $(this).attr("method"),
-
-                success: function(response) {
-                    if (response == 1) {
-                        $("#spinner").hide();
-                        location.reload(true);
-                    } else {
-                        $("#info").hide();
-                        $("#info").html('<div class="alert alert-danger" role="alert">' + response + '</div>')
-                        $("#info").fadeIn();
-                        $("#spinner").hide();
-                    }
-                },
-            });
-        });
-    });
-</script>

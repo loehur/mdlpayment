@@ -37,7 +37,7 @@ class Penarikan extends Controller
 
 
       $kas_status = 0;
-      if (md5($pin) == $this->setting['pin']) {
+      if ($this->model('validasi')->enc($pin) == $this->setting['pin']) {
          $kas_status = 1;
       } else {
          $this->dataSynchrone();
@@ -49,10 +49,10 @@ class Penarikan extends Controller
             exit();
          }
 
-         if (md5($pin) <> $this->userData['pin']) {
+         if ($this->model('validasi')->enc($pin) <> $this->userData['pin']) {
 
             //CEK PIN BENER ATAU ENGGA
-            if ($this->userData['pin'] <> md5($pin)) {
+            if ($this->userData['pin'] <> $this->model('validasi')->enc($pin)) {
                $where = "id_user = " . $this->userData['id_user'];
                $set = "pin_failed = pin_failed + 1";
                $this->model('M_DB_1')->update("user", $set, $where);

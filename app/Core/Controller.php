@@ -13,6 +13,8 @@ class Controller extends Public_Variables
     public $margin_prepaid;
     public $admin_postpaid;
 
+    public $view_load, $view_content, $load;
+
     public function view($file, $data = [])
     {
         require_once "app/Views/" . $file . ".php";

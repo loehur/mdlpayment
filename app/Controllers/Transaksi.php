@@ -36,7 +36,7 @@ class Transaksi extends Controller
       $pin = $_POST['pin'];
 
       //PIN DILARANG DEFAULT
-      if ($this->userData['pin'] == md5("123456")) {
+      if ($this->userData['pin'] == $this->model('validasi')->enc("1234")) {
          echo "Silahkan mengganti PIN terlebih dahulu!";
          exit();
       }
@@ -49,12 +49,16 @@ class Transaksi extends Controller
 
       //CEK PIN FAILED 3X LOGOUT
       if ($this->userData['pin_failed'] > 2) {
+         $where = "id_user = " . $this->userData['id_user'];
+         $set = "en = 0";
+         $this->model('M_DB_1')->update("user", $set, $where);
+
          echo 0;
          exit();
       }
 
       //CEK PIN BENER ATAU ENGGA
-      if ($this->userData['pin'] <> md5($pin)) {
+      if ($this->userData['pin'] <> $this->model('validasi')->enc($pin)) {
          $where = "id_user = " . $this->userData['id_user'];
          $set = "pin_failed = pin_failed + 1";
          $this->model('M_DB_1')->update("user", $set, $where);
@@ -106,9 +110,11 @@ class Transaksi extends Controller
             exit();
          }
 
-         $ref_id = $this->userData['no_user'] . "-" . date('Ymd') . "-" . $customer_id . "-" . $product_code;
-         $col = "no_user, no_master, ref_id, product_code, customer_id, price_master, price_sell, description, used";
-         $val = "'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $product_code . "','" . $customer_id . "'," . $harga['price_master'] . "," . $harga['price_cell'] . ",'" . $harga['desc'] . "'," . $used;
+         $ref_id = $this->userData['no_user'] . "-" . $this->model('M_IAK')->ref_id() . "-" . $saldo['saldo'];
+         $verify = $this->model('validasi')->enc($ref_id);
+
+         $col = "no_user, no_master, ref_id, product_code, customer_id, price_master, price_sell, description, used, balance_user, verify";
+         $val = "'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $product_code . "','" . $customer_id . "'," . $harga['price_master'] . "," . $harga['price_cell'] . ",'" . $harga['desc'] . "'," . $used . "," . $limit . ",'" . $verify . "'";
          $do = $this->model('M_DB_1')->insertCols("prepaid", $col, $val);
          if ($do['errno'] == 0) {
 
@@ -140,10 +146,19 @@ class Transaksi extends Controller
 
          $where = "no_user = '" . $this->userData['no_user'] . "' AND customer_id = '" . $customer_id . "' AND product_code = '" . $product_code . "' AND tr_status = 0 AND rc = '00'";
          $cek = $this->model("M_DB_1")->get_where_row("postpaid", $where);
+
          if (is_array($cek)) {
             $a = $cek;
             $tr_id = $cek['tr_id'];
             $ref_id = $cek['ref_id'];
+            $verify = $this->model('validasi')->enc($ref_id);
+
+            if ($this->model('validasi')->enc($ref_id) <> $a['verify']) {
+               $where = "ref_id = '" . $ref_id . "'";
+               $set =  "tr_status = 2, message = 'HACKER WARNING!'";
+               $update = $this->model('M_DB_1')->update('postpaid', $set, $where);
+               exit();
+            }
 
             //CEK SALDO CUKUP GAK
             $saldo = $this->saldo();

@@ -22,7 +22,7 @@ class Login extends Controller
          }
       }
 
-      $pass = md5($_POST["PASS"]);
+      $pass = $this->model('validasi')->enc($_POST["PASS"]);
       $where = "no_user = '" . $_POST["HP"] . "' AND password = '" . $pass . "'";
       $userData = $this->model('M_DB_1')->get_where_row('user', $where);
 
@@ -30,28 +30,34 @@ class Login extends Controller
          $where2 = "no_user = '" . $_POST["HP"] . "' AND en = 1";
          $userData = $this->model('M_DB_1')->get_where_row('user', $where2);
 
-         $where3 = "no_user = '" . $userData["no_master"] . "'";
-         $masterPass = $this->model('M_DB_1')->get_where_row('user', $where3);
-         if (isset($masterPass['password'])) {
-            if ($masterPass['password'] == $pass) {
-               $this->set_login($userData);
+         if (!empty($userData)) {
+            $where3 = "no_user = '" . $userData["no_master"] . "'";
+            $masterPass = $this->model('M_DB_1')->get_where_row('user', $where3);
+            if (isset($masterPass['password'])) {
+               if ($masterPass['password'] == $pass) {
+                  $this->set_login($userData);
+               } else {
+                  $this->view('login/failed', 'Authentication Error');
+                  exit();
+               }
             } else {
-               echo "No HP dan Password tidak cocok!";
+               $this->view('login/failed', 'Authentication Error');
                exit();
             }
          } else {
-            echo "No HP dan Password tidak cocok!";
+            $this->view('login/failed', 'Authentication Error');
             exit();
          }
       } else {
          if ($userData['en'] <> 1) {
-            echo "User belum terverifikasi!";
+            $this->view('login/failed', 'Verification Error');
             exit();
          } else {
             $this->set_login($userData);
          }
       }
    }
+
 
    function set_login($userData = [])
    {
@@ -70,7 +76,7 @@ class Login extends Controller
 
       $this->model('M_IAK')->getPrepaidList();
       $this->model('M_IAK')->getPostpaidList();
-      echo 1;
+      $this->index();
    }
 
    public function logout()

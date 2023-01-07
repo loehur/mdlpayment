@@ -58,9 +58,12 @@ class Register extends Controller
          exit();
       }
 
+      $pass_save = $this->model('validasi')->enc($pass);
+      $pin_save = $this->model('validasi')->enc($pin);
+
       $table = "user";
       $columns = 'no_user, nama, password, pin, no_master';
-      $values = "'" . $_POST["HP"] . "','" . $_POST["nama"] . "','" . md5($pass) . "','" . md5($pin) . "','" . $_POST["HP"] . "'";
+      $values = "'" . $_POST["HP"] . "','" . $_POST["nama"] . "','" . $pass_save . "','" . $pin_save . "','" . $_POST["HP"] . "'";
       $do = $this->model('M_DB_1')->insertCols($table, $columns, $values);
 
       if ($do['errno'] == 0) {
@@ -85,7 +88,7 @@ class Register extends Controller
 
       //CEK PIN BENER ATAU ENGGA
       $pin = $_POST['pin'];
-      if ($this->userData['pin'] <> md5($pin)) {
+      if ($this->userData['pin'] <> $this->model('validasi')->enc($pin)) {
          $where = "id_user = " . $this->userData['id_user'];
          $set = "pin_failed = pin_failed + 1";
          $this->model('M_DB_1')->update("user", $set, $where);
@@ -113,11 +116,11 @@ class Register extends Controller
       } else {
          $nomor = $this->userData['no_user'];
       }
-      $code_reset_pass = md5($_POST["reset_code"]);
+      $code_reset_pass = $this->model('validasi')->enc($_POST["reset_code"]);
 
       $where = "no_user = '" . $nomor . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 1";
       $reset_code = $this->model('M_DB_1')->get_where_row('reset_code', $where);
-     
+
       if (!isset($reset_code['reset_code'])) {
          echo "Reset Code Salah!";
          exit();
@@ -144,7 +147,7 @@ class Register extends Controller
          exit();
       }
       $where = "no_user = '" . $nomor . "'";
-      $set = "password = '" . md5($pass) . "', pass_reset_code = '" . $reset_code['reset_code'] . "'";
+      $set = "password = '" . $this->model('validasi')->enc($pass) . "', pass_reset_code = '" . $reset_code['reset_code'] . "'";
       $this->model('M_DB_1')->update("user", $set, $where);
 
       if (!isset($_POST["no_user"])) {
@@ -152,33 +155,6 @@ class Register extends Controller
       }
 
       echo 1;
-   }
-
-   public function ganti_password_1()
-   {
-
-      $pass = $_POST["password"];
-      $repass = $_POST["repass"];
-
-      if (strlen($pass) < 6) {
-         echo "Password dan PIN minimal 6 karakter!";
-         exit();
-      }
-
-      if ($pass <> $repass) {
-         echo "Konfirmasi Password tidak Cocok!";
-         exit();
-      }
-
-      $where = "no_user = '" . $this->userData['no_user'] . "'";
-      $set = "password = '" . md5($pass) . "', pass_reset_code = 'abcd'";
-      $do = $this->model('M_DB_1')->update("user", $set, $where);
-      if ($do['errno'] == 0) {
-         $this->dataSynchrone();
-         echo 1;
-      } else {
-         print_r($do);
-      }
    }
 
    public function updateCell_Master($col)
@@ -213,7 +189,7 @@ class Register extends Controller
 
    public function ganti_pin()
    {
-      $code_reset_pass = md5($_POST["reset_code"]);
+      $code_reset_pass = $this->model('validasi')->enc($_POST["reset_code"]);
 
       $where = "no_user = '" . $this->userData['no_user'] . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 2";
       $reset_code = $this->model('M_DB_1')->get_where_row('reset_code', $where);
@@ -244,34 +220,7 @@ class Register extends Controller
       }
 
       $where = "no_user = '" . $this->userData['no_user'] . "'";
-      $set = "pin = '" . md5($pin) . "', pin_reset_code = '" . $reset_code['reset_code'] . "'";
-      $do = $this->model('M_DB_1')->update("user", $set, $where);
-
-      if ($do['errno'] == 0) {
-         $this->dataSynchrone();
-         echo 1;
-      } else {
-         print_r($do);
-      }
-   }
-
-   public function ganti_pin_1()
-   {
-      $pin = $_POST["pin"];
-      $repin = $_POST["repin"];
-
-      if (strlen($pin) < 6) {
-         echo "PIN minimal 6 karakter!";
-         exit();
-      }
-
-      if ($pin <> $repin) {
-         echo "Konfirmasi PIN tidak Cocok!";
-         exit();
-      }
-
-      $where = "no_user = '" . $this->userData['no_user'] . "'";
-      $set = "pin = '" . md5($pin) . "', pin_reset_code = '1234'";
+      $set = "pin = '" . $this->model('validasi')->enc($pin) . "', pin_reset_code = '" . $reset_code['reset_code'] . "'";
       $do = $this->model('M_DB_1')->update("user", $set, $where);
 
       if ($do['errno'] == 0) {

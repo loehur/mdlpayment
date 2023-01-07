@@ -69,53 +69,30 @@
         <div class="row">
             <div class="col-auto mr-auto">
                 <div id="info"></div>
-                <?php if ($this->userData['pin_reset_code'] == "123" && $this->userData['user_tipe'] == 2) { ?>
-                    <form class="pin" action="<?= $this->BASE_URL ?>Register/ganti_pin_1" method="post">
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="password" class="form-control form-control-sm" minlength="6" id="pin" name="pin" placeholder="PIN Transaksi BARU" required>
-                            </div>
+                <form class="pin" action="<?= $this->BASE_URL ?>Register/ganti_pin" method="post">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <input type="text" class="form-control form-control-sm" name="reset_code" placeholder="Reset Code" required>
                         </div>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="password" class="form-control form-control-sm" minlength="6" id="repin" name="repin" placeholder="Ulangi PIN Transaksi" required>
-                            </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <input type="password" class="form-control form-control-sm" minlength="6" id="pin" name="pin" placeholder="PIN Transaksi BARU" required>
                         </div>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <button type="submit" class="btn btn-sm btn-primary btn-block">
-                                    Ubah PIN Transaksi
-                                </button>
-                            </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <input type="password" class="form-control form-control-sm" minlength="6" id="repin" name="repin" placeholder="Ulangi PIN Transaksi" required>
                         </div>
-                    </form>
-                <?php } else { ?>
-                    <form class="pin" action="<?= $this->BASE_URL ?>Register/ganti_pin" method="post">
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="text" class="form-control form-control-sm" name="reset_code" placeholder="Reset Code" required>
-                            </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <button type="submit" class="btn btn-sm btn-success btn-block">
+                                Simpan PIN Transaksi
+                            </button>
                         </div>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="password" class="form-control form-control-sm" minlength="6" id="pin" name="pin" placeholder="PIN Transaksi BARU" required>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="password" class="form-control form-control-sm" minlength="6" id="repin" name="repin" placeholder="Ulangi PIN Transaksi" required>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <button type="submit" class="btn btn-sm btn-success btn-block">
-                                    Simpan PIN Transaksi
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                <?php } ?>
-
+                    </div>
+                </form>
             </div>
         </div>
     </div>
