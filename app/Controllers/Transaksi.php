@@ -41,6 +41,12 @@ class Transaksi extends Controller
          exit();
       }
 
+      //PIN DILARANG DEFAULT
+      if ($this->userData['pin'] == $this->userData['password']) {
+         echo "PIN tidak boleh sama dengan Password!";
+         exit();
+      }
+
       //CEK USER MASIH AKTIF ATAU TIDAK
       if ($this->userData['en'] <> 1) {
          echo "Access Forbiden";
