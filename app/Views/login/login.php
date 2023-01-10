@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
     <link rel="stylesheet" href="<?= $this->ASSETS_URL ?>plugins/bootstrap-4.6/bootstrap.min.css">
     <link rel="stylesheet" href="<?= $this->ASSETS_URL ?>css/ionicons.min.css">
+    <link rel="stylesheet" href="<?= $this->ASSETS_URL ?>css/style.css">
     <link href="<?= $this->ASSETS_URL ?>plugins/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= $this->ASSETS_URL ?>plugins/adminLTE-3.1.0/css/adminlte.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet">
@@ -19,6 +20,8 @@
                 sans-serif;
         }
     </style>
+
+
 </head>
 
 <body class="login-page small" style="min-height: 496.781px;">
@@ -50,9 +53,9 @@
                     </div>
 
                     <div class="row">
-                        <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-success btn-block">Sign In</button>
+                            <span id="span_loader" class="loader d-none"></span>
+                            <button type="submit" id="btnSubmit" onclick="hide()" class="btn btn-success btn-block">Sign In</button>
                         </div>
                     </div>
                 </form>
@@ -70,3 +73,12 @@
 </body>
 
 </html>
+
+<script>
+    function hide() {
+        var element = document.getElementById("span_loader");
+        element.classList.remove("d-none");
+
+        document.getElementById('btnSubmit').style.visibility = 'hidden';
+    }
+</script>

@@ -8,6 +8,7 @@
 	<title>Payment | <?= $data['title'] ?></title>
 	<link rel="stylesheet" href="<?= $this->ASSETS_URL ?>plugins/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?= $this->ASSETS_URL ?>/plugins/bootstrap-5.2.2-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?= $this->ASSETS_URL ?>css/style.css">
 
 
 	<script src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
