@@ -18,7 +18,7 @@
 </div>
 <hr>
 <div><span class="ms-3"><b>PRA BAYAR</b></span> <small class="text-secondary">[<span id="pre_antri"></span>]</small></div>
-<div class="content" style="background-color:aliceblue ;">
+<div class="content px-1">
     <div class="container-fluid">
         <div class="row">
             <?php
@@ -51,7 +51,7 @@
                     $proses_pre_count += 1;
                 }
             ?>
-                <div class="col-md-6 border pb-1">
+                <div class="col-md-6 border border-white border-3 pb-1 rounded" style="background-color:ghostwhite ;">
                     <table class="table table-borderless table-sm mb-0 pb-0">
                         <tr>
                             <td nowrap> <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
@@ -64,9 +64,11 @@
                                 Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price_master']) . ")</small>" : "" ?><br><small><b>[<?= $a['rc'] ?>] <?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small>
                             </td>
                         </tr>
-                        <tr>
-                            <td align="right" colspan="3"><small><?= $a['description'] ?></small><br>
-                                <?php if ($a['tr_status'] == 1 && $rc == "00") { ?><b><span class="text-success bg-white px-4 rounded"><?= $a['sn'] ?></span></b><?php } ?>
+                        <tr class="border-top">
+                            <td align="center" colspan="2"><small><?= $a['description'] ?></small><br>
+                                <?php if (strlen($a['sn'] > 0)) { ?><b><span class="text-success"><?= $a['sn'] ?></span></b><?php } else { ?>
+
+                                    <br> <?php } ?>
                             </td>
                         </tr>
                         <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
@@ -169,7 +171,7 @@
 </div>
 <hr>
 <div class="ms-3"><b>PASCA BAYAR</b> <small class="text-secondary">[<span id="post_antri"></span>]</small></div>
-<div class="content" style="background-color:oldlace">
+<div class="content px-1">
     <div class="container-fluid">
         <div class="row">
             <?php
@@ -194,7 +196,7 @@
                     $proses_post_count += 1;
                 }
             ?>
-                <div class="col-md-6 border pb-1">
+                <div class="col-md-6 border border-white border-3 pb-1 rounded" style="background-color:oldlace">
                     <table class="table table-borderless table-sm mb-0 pb-0">
                         <tr>
                             <td nowrap>
