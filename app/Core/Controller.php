@@ -59,6 +59,11 @@ class Controller extends Public_Variables
                 } else {
                     $this->setting['v_price'] = 0;
                 }
+
+                $this->username = $_SESSION['iak']['user'];
+                $this->apiKey = $_SESSION['iak']['key'];
+                $this->prepaid_url = $_SESSION['iak']['url_pre'];
+                $this->postpaid_url = $_SESSION['iak']['url_post'];
             }
         }
     }

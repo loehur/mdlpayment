@@ -2,10 +2,19 @@
 
 class M_IAK extends Public_Variables
 {
+
+    public function __construct()
+    {
+        $this->username = $_SESSION['iak']['user'];
+        $this->apiKey = $_SESSION['iak']['key'];
+        $this->prepaid_url = $_SESSION['iak']['url_pre'];
+        $this->postpaid_url = $_SESSION['iak']['url_post'];
+    }
+
     public function getPrepaidList()
     {
-        $sign = md5($this->username . $this->apiKey_price . "pl");
-        $url = $this->prepaid_url_price . 'api/pricelist';
+        $sign = md5($this->username . $this->apiKey . "pl");
+        $url = $this->prepaid_url . 'api/pricelist';
         $data = [
             "username" => $this->username,
             "sign" => $sign,
@@ -29,8 +38,8 @@ class M_IAK extends Public_Variables
 
     public function getPostpaidList()
     {
-        $sign = md5($this->username . $this->apiKey_price . "pl");
-        $url = $this->postpaid_url_price . 'api/v1/bill/check';
+        $sign = md5($this->username . $this->apiKey . "pl");
+        $url = $this->postpaid_url . 'api/v1/bill/check';
         $data = [
             "commands" => "pricelist-pasca",
             "username" => $this->username,

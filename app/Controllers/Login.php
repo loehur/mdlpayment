@@ -71,6 +71,11 @@ class Login extends Controller
       $_SESSION['login_payment'] = TRUE;
       $_SESSION['user_data'] = $userData;
 
+      $_SESSION['iak']['user'] = $this->model("Validasi")->dec_2("QTBc9AMLsNbRuyZH");
+      $_SESSION['iak']['key'] = $this->model("Validasi")->dec_2("RjBY81EE5NfZvy5HYgvhSluatw==");
+      $_SESSION['iak']['url_pre'] = "https://" . $this->model("Validasi")->dec_2("AXoItlRa5MGA6X1ZO18=") . "/";
+      $_SESSION['iak']['url_post'] = "https://" . $this->model("Validasi")->dec_2("HGcPr1lW8JqF+3dZPF6i") . "/";
+
       $where = "no_user = " . $userData['no_master'];
       $_SESSION['setting'] = $this->model('M_DB_1')->get_where_row('user', $where);
 

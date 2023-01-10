@@ -4,8 +4,11 @@
             <div class="col-auto mb-2 pe-0">
                 <a href="<?= $this->BASE_URL ?>Transaksi/product_type/1"><button class="btn btn-sm btn-outline-info"><b>PRA BAYAR</b></button></a>
             </div>
-            <div class="col mr-auto mb-2">
+            <div class="col-auto pe-0 mb-2">
                 <a href="<?= $this->BASE_URL ?>Transaksi/product_type/2"><button class="btn btn-sm btn-outline-success text-nowrap"><b>PASCA BAYAR</b></button></a>
+            </div>
+            <div class="col mb-2">
+                <a href="<?= $this->BASE_URL ?>Manual"><button class="btn btn-sm btn-outline-dark text-nowrap"><b>MANUAL</b></button></a>
             </div>
         </div>
     </div>
