@@ -42,7 +42,7 @@
             type: "POST",
             success: function(res) {
                 if (res == 1) {
-                    location.reload(true);
+                    load();
                 } else if (res == 2) {
                     return;
                 } else {
@@ -59,7 +59,7 @@
             type: "POST",
             success: function(res) {
                 if (res == 1) {
-                    location.reload(true);
+                    load();
                 }
             },
         });
@@ -80,7 +80,7 @@
             type: "POST",
             success: function(res) {
                 if (res == 1) {
-                    location.reload(true);
+                    load();
                 } else if (res == 2) {
                     return;
                 } else {

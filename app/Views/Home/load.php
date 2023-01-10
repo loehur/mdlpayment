@@ -54,10 +54,10 @@
                 <div class="col-md-6 border pb-1">
                     <table class="table table-borderless table-sm mb-0 pb-0">
                         <tr>
-                            <td> <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
+                            <td nowrap> <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
                                     <a href="" class="noact noact text-primary" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
                                 <?php } ?>
-                                <small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= substr($a['updateTime'], 2, -3) ?></small>
+                                <small><?= $a['insertTime'] ?>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= substr($a['updateTime'], 2, -3) ?></small>
                             </td>
                             <td class="text-end">
                                 <span class="text-info"><?= $a['customer_id'] ?></span><br>
@@ -66,7 +66,7 @@
                         </tr>
                         <tr>
                             <td align="right" colspan="3"><small><?= $a['description'] ?></small><br>
-                                <b><span class="text-success"><?= $a['sn'] ?></span></b>
+                                <?php if ($a['tr_status'] == 1 && $rc == "00") { ?><b><span class="text-success bg-white px-4 rounded"><?= $a['sn'] ?></span></b><?php } ?>
                             </td>
                         </tr>
                         <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
@@ -197,11 +197,11 @@
                 <div class="col-md-6 border pb-1">
                     <table class="table table-borderless table-sm mb-0 pb-0">
                         <tr>
-                            <td>
+                            <td nowrap>
                                 <?php if ($a['tr_status'] == 1 || strlen($a['noref'] > 0) || strlen($a['datetime'] > 0)) { ?>
                                     <a href="" class="noact text-primary" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
                                 <?php } ?>
-                                <small>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= $a['datetime'] ?></small>
+                                <small><?= $a['insertTime'] ?>#<?= $a['tr_id'] ?><br><?= $a['no_user'] ?><br><?= $a['datetime'] ?></small>
                             </td>
                             <td class="text-end"><span class="text-info"><?= $a['customer_id'] ?></span><br>Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?><br><small><b>[<?= $a['rc'] ?>] <?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
                         </tr>
