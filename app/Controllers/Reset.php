@@ -12,7 +12,7 @@ class Reset extends Controller
          exit();
       }
 
-      if ($this->model('Validasi')->enc($lock) <> 'f3USEJIDE1Tx686c642ece4d0cf7d3b51b3797742a7b2690RYUYMm/AJE') {
+      if ($this->model('Validasi')->enc($lock) <> '7ckqRbk9seKXA35dcd899fa8b07537f12b8dc97d8a00869XTSFx8PS1xk') {
          exit();
       }
 
