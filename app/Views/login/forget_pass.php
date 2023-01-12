@@ -45,21 +45,25 @@
                 <form id="form" action="<?= $this->BASE_URL ?>Register/ganti_password" method="post">
                     <div class="row mb-2">
                         <div class="col">
+                            <label>Nomor Handphone</label>
                             <input type="text" class="form-control" name="no_user" placeholder="ID / No HP" required>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
+                            <label>Reset Code</label>
                             <input type="text" class="form-control" id="reset_code" name="reset_code" placeholder="Reset Code" required>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
+                            <label>Password Baru</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password Baru" required>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
+                            <label>Ulangi Password Baru</label>
                             <input type="password" class="form-control" id="repass" name="repass" placeholder="Retype password" required>
                         </div>
                     </div>
@@ -83,43 +87,3 @@
 </body>
 
 </html>
-
-<script>
-    $(document).ready(function() {
-        $("#info").fadeOut();
-        $("#spinner").hide();
-
-        $("form").on("submit", function(e) {
-            e.preventDefault();
-            if ($('#password').val() != $('#repass').val()) {
-                $("#info").hide();
-                $("#info").fadeIn(1000);
-                $("#info").html('<div class="alert alert-danger" role="alert">Konfirmasi Password tidak cocok!</div>')
-                return;
-            }
-            if ($('#pin').val() != $('#repin').val()) {
-                $("#info").hide();
-                $("#info").fadeIn(1000);
-                $("#info").html('<div class="alert alert-danger" role="alert">Konfirmasi PIN tidak cocok!</div>')
-                return;
-            }
-            $.ajax({
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
-                type: $(this).attr("method"),
-                success: function(response) {
-                    if (response == 1) {
-                        $("#info").hide();
-                        $('form').trigger("reset");
-                        $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-success" role="alert">Perubahan Password Success!</div>')
-                    } else {
-                        $("#info").hide();
-                        $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-danger" role="alert">' + response + '</div>')
-                    }
-                },
-            });
-        });
-    });
-</script>

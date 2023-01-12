@@ -146,7 +146,7 @@ class Transaksi extends Controller
 
             echo 1;
          } else {
-            print_r($do['error']);
+            print_r($do['errno']);
          }
       } elseif ($jenis == 2) {
 
@@ -180,7 +180,7 @@ class Transaksi extends Controller
                $set =  "tr_status = 4, used = " . $used;
                $update = $this->model('M_DB_1')->update('postpaid', $set, $where);
                if ($update['errno'] <> 0) {
-                  print_r($update['error']);
+                  print_r($update['errno']);
                   exit();
                }
 
@@ -222,7 +222,7 @@ class Transaksi extends Controller
                   if ($update['errno'] == 0) {
                      echo 1;
                   } else {
-                     print_r($update['error']);
+                     print_r($update['errno']);
                   }
                } else {
                   print_r($response);

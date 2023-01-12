@@ -110,12 +110,15 @@ class Register extends Controller
 
    public function ganti_password()
    {
-      $nomor = "";
-      if (isset($_POST["no_user"])) {
-         $nomor = $_POST["no_user"];
-      } else {
-         $nomor = $this->userData['no_user'];
+
+      $nomor = $_POST["no_user"];
+
+      if (strlen($_POST["reset_code"]) <> 4) {
+         echo "Code Reset Salah";
+         echo '<br><button onclick="history.back()">Go Back</button>';
+         exit();
       }
+
       $code_reset_pass = $this->model('Validasi')->enc($_POST["reset_code"]);
 
       $where = "no_user = '" . $nomor . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 1";
@@ -123,14 +126,7 @@ class Register extends Controller
 
       if (!isset($reset_code['reset_code'])) {
          echo "Reset Code Salah!";
-         exit();
-      }
-
-      $where = "no_user = '" . $nomor . "'";
-      $reset_code_old = $this->model('M_DB_1')->get_where_row('user', $where)['pass_reset_code'];
-
-      if ($reset_code['reset_code'] == $reset_code_old) {
-         echo "Reset Code Expired!";
+         echo '<br><button onclick="history.back()">Go Back</button>';
          exit();
       }
 
@@ -139,22 +135,35 @@ class Register extends Controller
 
       if (strlen($pass) < 6) {
          echo "Password dan PIN minimal 6 karakter!";
+         echo '<br><button onclick="history.back()">Go Back</button>';
          exit();
       }
 
       if ($pass <> $repass) {
          echo "Konfirmasi Password tidak Cocok!";
+         echo '<br><button onclick="history.back()">Go Back</button>';
          exit();
       }
-      $where = "no_user = '" . $nomor . "'";
-      $set = "password = '" . $this->model('Validasi')->enc($pass) . "', pass_reset_code = '" . $reset_code['reset_code'] . "'";
-      $this->model('M_DB_1')->update("user", $set, $where);
 
-      if (!isset($_POST["no_user"])) {
-         $this->dataSynchrone();
+      $where = "no_user = '" . $nomor . "'";
+      $reset_code_old = $this->model('M_DB_1')->get_where_row('user', $where)['pass_reset_code'];
+
+      if ($reset_code['reset_code'] == $reset_code_old) {
+         echo "Reset Code Expired!";
+         echo '<br><button onclick="history.back()">Go Back</button>';
+         exit();
       }
 
-      echo 1;
+      $where = "no_user = '" . $nomor . "'";
+      $set = "password = '" . $this->model('Validasi')->enc($pass) . "', pass_reset_code = '" . $reset_code['reset_code'] . "'";
+      $do = $this->model('M_DB_1')->update("user", $set, $where);
+      if ($do['errno'] == 0) {
+         echo "GANTI PASSWORD SUKSES!";
+         echo '<br><button onclick="history.back()">Go Back</button>';
+      } else {
+         echo "DATABASE ERROR";
+         echo '<br><button onclick="history.back()">Go Back</button>';
+      }
    }
 
    public function updateCell_Master($col)
@@ -189,20 +198,19 @@ class Register extends Controller
 
    public function ganti_pin()
    {
+      if (strlen($_POST["reset_code"]) <> 4) {
+         echo "Code Reset Salah";
+         echo '<br><button onclick="history.back()">Go Back</button>';
+         exit();
+      }
+
       $code_reset_pass = $this->model('Validasi')->enc($_POST["reset_code"]);
 
       $where = "no_user = '" . $this->userData['no_user'] . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 2";
       $reset_code = $this->model('M_DB_1')->get_where_row('reset_code', $where);
       if (!isset($reset_code['reset_code'])) {
          echo "Reset Code Salah!";
-         exit();
-      }
-
-      $where = "no_user = '" . $this->userData['no_user'] . "'";
-      $reset_code_old = $this->model('M_DB_1')->get_where_row('user', $where)['pin_reset_code'];
-
-      if ($reset_code['reset_code'] == $reset_code_old) {
-         echo "Reset Code Expired!";
+         echo '<br><button onclick="history.back()">Go Back</button>';
          exit();
       }
 
@@ -211,11 +219,22 @@ class Register extends Controller
 
       if (strlen($pin) < 6) {
          echo "PIN minimal 6 karakter!";
+         echo '<br><button onclick="history.back()">Go Back</button>';
          exit();
       }
 
       if ($pin <> $repin) {
          echo "Konfirmasi PIN tidak Cocok!";
+         echo '<br><button onclick="history.back()">Go Back</button>';
+         exit();
+      }
+
+      $where = "no_user = '" . $this->userData['no_user'] . "'";
+      $reset_code_old = $this->model('M_DB_1')->get_where_row('user', $where)['pin_reset_code'];
+
+      if ($reset_code['reset_code'] == $reset_code_old) {
+         echo "Reset Code Expired!";
+         echo '<br><button onclick="history.back()">Go Back</button>';
          exit();
       }
 
@@ -225,9 +244,11 @@ class Register extends Controller
 
       if ($do['errno'] == 0) {
          $this->dataSynchrone();
-         echo 1;
+         echo "GANTI PASSWORD SUKSES!";
+         echo '<br><button onclick="history.back()">Go Back</button>';
       } else {
-         print_r($do);
+         echo "DATABASE ERROR";
+         echo '<br><button onclick="history.back()">Go Back</button>';
       }
    }
 }

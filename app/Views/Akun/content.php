@@ -8,62 +8,6 @@
     </div>
 </div>
 <hr>
-
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-auto mr-auto">
-                <?php if ($this->userData['pass_reset_code'] == "abc" && $this->userData['user_tipe'] == 2) { ?>
-                    <form id="form" class="pass" action="<?= $this->BASE_URL ?>Register/ganti_password_1" method="post">
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="password" class="form-control form-control-sm" minlength="6" id="password" name="password" placeholder="Password Baru" required>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="password" class="form-control form-control-sm" minlength="6" id="repass" name="repass" placeholder="Ulangi Password" required>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <button type="submit" class="btn btn-sm btn-primary btn-block">
-                                    Simpan
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                <?php } else { ?>
-                    <form id="form" class="pass" action="<?= $this->BASE_URL ?>Register/ganti_password" method="post">
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="text" class="form-control form-control-sm" name="reset_code" placeholder="Reset Code" required>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="password" class="form-control form-control-sm" minlength="6" id="password" name="password" placeholder="Password Baru" required>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <input type="password" class="form-control form-control-sm" minlength="6" id="repass" name="repass" placeholder="Ulangi Password" required>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col">
-                                <button type="submit" class="btn btn-sm btn-primary btn-block">
-                                    Simpan Password
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                <?php } ?>
-            </div>
-        </div>
-    </div>
-</div>
-<hr>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -72,16 +16,19 @@
                 <form class="pin" action="<?= $this->BASE_URL ?>Register/ganti_pin" method="post">
                     <div class="row mb-2">
                         <div class="col">
+                            <label>Reset Code</label>
                             <input type="text" class="form-control form-control-sm" name="reset_code" placeholder="Reset Code" required>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
+                            <label>PIN Baru</label>
                             <input type="password" class="form-control form-control-sm" minlength="6" id="pin" name="pin" placeholder="PIN Transaksi BARU" required>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col">
+                            <label>Ulangi PIN Baru</label>
                             <input type="password" class="form-control form-control-sm" minlength="6" id="repin" name="repin" placeholder="Ulangi PIN Transaksi" required>
                         </div>
                     </div>
