@@ -357,7 +357,6 @@ class IAK extends Controller
          //BATALKAN JIKA STATUS SAMA AJA
          if (isset($d['status'])) {
             if ($d['status'] == $a['tr_status']) {
-               echo 2;
                exit();
             }
          }
@@ -377,7 +376,7 @@ class IAK extends Controller
          if ($update['errno'] == 0) {
             echo 1;
          } else {
-            print_r($update['error']);
+            print_r($update['errno']);
          }
       } else {
          echo "Request Parameter Error, Hubungi Technical Support!";

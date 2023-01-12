@@ -43,10 +43,6 @@
             success: function(res) {
                 if (res == 1) {
                     load();
-                } else if (res == 2) {
-                    return;
-                } else {
-                    alert(res);
                 }
             },
         });
@@ -81,10 +77,6 @@
             success: function(res) {
                 if (res == 1) {
                     load();
-                } else if (res == 2) {
-                    return;
-                } else {
-                    alert(res);
                 }
             },
         });
