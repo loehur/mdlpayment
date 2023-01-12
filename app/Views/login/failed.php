@@ -23,7 +23,7 @@
 
 <body>
     <div class="text-center mt-4">
-        Login Failed:
+        Operation Failed:
         <?= $data ?>
     </div>
     <div class="text-center mt-4">
