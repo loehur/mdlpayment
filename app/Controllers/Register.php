@@ -5,6 +5,7 @@ class Register extends Controller
    public function __construct()
    {
       $this->data();
+      $_SESSION['secure']['db_pass'] = $this->model("Validasi")->dec_2($this->db_pass);
    }
 
    public function index()
@@ -104,7 +105,7 @@ class Register extends Controller
       if ($do['errno'] == 0) {
          echo 1;
       } else {
-         print_r($do['error']);
+         echo "error: " . $do['errno'];
       }
    }
 
@@ -161,7 +162,7 @@ class Register extends Controller
          echo "GANTI PASSWORD SUKSES!";
          echo '<br><button onclick="history.back()">Go Back</button>';
       } else {
-         echo "DATABASE ERROR";
+         echo "error: " . $do['errno'];
          echo '<br><button onclick="history.back()">Go Back</button>';
       }
    }
@@ -192,7 +193,7 @@ class Register extends Controller
             echo 1;
          }
       } else {
-         print_r($update);
+         print_r($update['errno']);
       }
    }
 
@@ -247,7 +248,7 @@ class Register extends Controller
          echo "GANTI PASSWORD SUKSES!";
          echo '<br><button onclick="history.back()">Go Back</button>';
       } else {
-         echo "DATABASE ERROR";
+         echo "error: " . $do['errno'];
          echo '<br><button onclick="history.back()">Go Back</button>';
       }
    }
