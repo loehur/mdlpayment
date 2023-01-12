@@ -132,18 +132,27 @@ class IAK extends Controller
                         $val = "'" . $d['response_code'] . "','" . $d['message'] . "'," . $d['tr_id'] . ",'" . $d['tr_name'] . "','" . $d['period'] . "'," . $d['nominal'] . "," . $d['admin'] . ",'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $d['code'] . "','" . $d['hp'] . "'," . $d['price'] . "," . $d['selling_price'] . ",'" . serialize($d['desc']) . "'," . ($d['price'] + $this->setting['admin_postpaid']) . "," . $used . "," . $limit . ",'" . $verify . "'";
                         $do = $this->model('M_DB_1')->insertCols("postpaid", $col, $val);
                         if ($do['errno'] == 0) {
-                           $data['data'] = [
-                              'customer_id' => $d['customer_id'],
-                              'tr_name' => $d['tr_name'],
-                              'nominal' => $d['nominal'],
-                              'period' => $d['period'],
-                              'admin' => $d['admin'],
-                              'response_code' => '00',
-                              'adm_counter' => $this->setting['admin_postpaid'],
-                              'total_bill' => $d['price'] + $this->setting['admin_postpaid']
-                           ];
-                           print_r(json_encode($data));
-                           exit();
+
+                           $where = "no_user = '" . $this->userData['no_user'] . "' AND customer_id = '" . $customer_id . "' AND noref = '' AND rc = '00'";
+                           $cek = $this->model("M_DB_1")->get_where_row("postpaid", $where);
+                           if (is_array($cek)) {
+                              $d = $cek;
+                              $data['data'] = [
+                                 'customer_id' => $d['customer_id'],
+                                 'tr_name' => $d['tr_name'],
+                                 'nominal' => $d['nominal'],
+                                 'period' => $d['period'],
+                                 'admin' => $d['admin'],
+                                 'response_code' => '00',
+                                 'adm_counter' => $d['price_sell'] - $d['price'],
+                                 'total_bill' => $d['price_sell']
+                              ];
+
+                              print_r(json_encode($data));
+                              exit();
+                           } else {
+                              echo "Silahkan Refresh Halaman, dan Cek Tagihan Kembali";
+                           }
                         } else {
                            $data['data']['message'] = $do['error'] . " " . $do['query'];
                            print_r(json_encode($data));
