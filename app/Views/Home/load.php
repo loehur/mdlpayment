@@ -188,6 +188,9 @@
                 if ($no > 6) {
                     break;
                 }
+                if ($a['rc'] == "39") {
+                    $proses_post_count += 1;
+                }
                 if ($a['tr_status'] == 4 || $a['tr_status'] == 3) {
                     $proses_post_count += 1;
                 }
