@@ -64,8 +64,8 @@
                                 Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price_master']) . ")</small>" : "" ?><br><small><b>[<?= $a['rc'] ?>] <?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small>
                             </td>
                         </tr>
-                        <tr class="border-top">
-                            <td align="center" colspan="2"><small><?= $a['description'] ?></small><br>
+                        <tr>
+                            <td align="right" colspan="2"><small><?= $a['description'] ?></small><br>
                                 <?php if (strlen($a['sn'] > 0)) { ?><b><span class="text-success"><?= $a['sn'] ?></span></b><?php } else { ?>
 
                                     <br> <?php } ?>
