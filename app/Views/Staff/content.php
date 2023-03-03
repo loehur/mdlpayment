@@ -33,6 +33,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col">
+                            <label class="ml-3"><small>Default [Password: abcdef], [PIN: 123456]</small></label>
                             <button type="submit" class="btn btn-sm btn-primary btn-block">
                                 Tambah Staff
                             </button>
@@ -44,9 +45,8 @@
     </div>
 </div>
 <hr>
-<label class="ml-3">Default [Password: abcdef], [PIN: 123456]</label>
 <div class="content">
-    <div class="container-fluid">
+    <div class="container-fluid px-4">
         <div class="row">
             <div class="col-md-6 border pb-1">
                 <table class="table table-borderless table-sm mb-0 pb-0">

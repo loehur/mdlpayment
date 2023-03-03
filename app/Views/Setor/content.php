@@ -11,7 +11,7 @@
 </div>
 
 <div class="content">
-    <div class="container-fluid">
+    <div class="container-fluid px-4">
         <div class="row">
             <?php
             foreach ($data['data_topup'] as $z) { ?>

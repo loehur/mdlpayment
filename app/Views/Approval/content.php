@@ -8,11 +8,12 @@
     </div>
 </div>
 <hr>
-<span class="ml-3"><b>Penarikan Kas Staff</b></span>
 <div class="content">
-    <div class="container-fluid">
+    <div class="container-fluid px-4">
         <div class="row">
-            <div class="col-md-6 border pb-1">
+            <div class="col-md-6 border pb-1 pt-2">
+                <label><span class="ml-3"><b>Penarikan Kas Staff</b></span></label>
+                <hr>
                 <table class="table table-borderless table-sm mb-0 pb-0">
                     <thead class="d-none">
                         <tr>
@@ -33,22 +34,22 @@
                         echo "</tr>";
                         echo "<tr>";
                         echo "<td>" . $a['no_user'] . "</td>";
-                        echo "<td>" . number_format($a['jumlah']) . "</td>";
+                        echo "<td align='right'>" . number_format($a['jumlah']) . "</td>";
 
                         switch ($a['kas_status']) {
                             case 1:
-                                echo "<td>";
+                                echo "<td align='right'>";
                                 echo "<i class='text-success fas fa-check-circle'></i>";
                                 echo "</td>";
                                 break;
                             case 0;
-                                echo "<td><a class='text-danger text-decoration-none' href='" . $this->BASE_URL . "Approval/penarikan/" . $id . "/2'><i class='fas fa-times-circle'></i> Tolak</a></td>";
-                                echo "<td><a class='text-success text-decoration-none' href='" . $this->BASE_URL . "Approval/penarikan/" . $id . "/1'><i class='fas fa-check-circle'></i> Terima</a></td>";
+                                echo "<td align='right'><a class='text-danger text-decoration-none' href='" . $this->BASE_URL . "Approval/penarikan/" . $id . "/2'><i class='fas fa-times-circle'></i> Tolak</a></td>";
+                                echo "<td align='right'><a class='text-success text-decoration-none' href='" . $this->BASE_URL . "Approval/penarikan/" . $id . "/1'><i class='fas fa-check-circle'></i> Terima</a></td>";
                                 break;
                             case 2;
-                                echo "<td>";
+                                echo "<td align='right'>";
                                 echo "<span class='text-danger'>Ditolak</span>";
-                                echo "</td>";
+                                echo "</td align='right'>";
                                 break;
                         }
                         echo "</td>";

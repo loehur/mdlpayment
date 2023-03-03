@@ -74,4 +74,16 @@ class Usage extends Controller
          print_r($del);
       }
    }
+
+   public function updateCell()
+   {
+      $table  = "paid_use";
+      $id = $_POST['id'];
+      $value = $_POST['value'];
+      $where = "id = " . $id;
+
+      $set = "limit_bulanan = '" . $value . "'";
+      $update = $this->model('M_DB_1')->update($table, $set, $where);
+      echo $update['errno'];
+   }
 }

@@ -1,3 +1,4 @@
+<?php $used = 0; ?>
 <div class="content" style="padding-bottom: 70px;">
     <div class="container-fluid">
         <div class="row">
@@ -15,16 +16,20 @@
                     <?php
                     $margin_total = 0;
                     foreach ($data['pre'] as $dp) {
-                        $margin = $dp['price_sell'] - $dp['price_master'];
+                        if ($dp['used'] == 0) {
+                            $margin = $dp['price_sell'] - $dp['price_master'];
                     ?>
-                        <tr>
-                            <td class="text-end">#<?= $dp['id'] ?></td>
-                            <td class="text-end"><?= number_format($dp['price_master']) ?></td>
-                            <td class="text-end"><?= number_format($dp['price_sell']) ?></td>
-                            <td class="text-end"><?= number_format($margin) ?></td>
-                        </tr>
+                            <tr>
+                                <td class="text-end">#<?= $dp['id'] ?></td>
+                                <td class="text-end"><?= number_format($dp['price_master']) ?></td>
+                                <td class="text-end"><?= number_format($dp['price_sell']) ?></td>
+                                <td class="text-end"><?= number_format($margin) ?></td>
+                            </tr>
                     <?php
-                        $margin_total += $margin;
+                            $margin_total += $margin;
+                        } else {
+                            $used += $dp['price_master'];
+                        }
                     }
                     ?>
                     <tr>
@@ -46,16 +51,20 @@
                     <?php
                     $fee_total = 0;
                     foreach ($data['post'] as $dp) {
-                        $margin = $dp['price_sell'] - $dp['price'];
+                        if ($dp['used'] == 0) {
+                            $margin = $dp['price_sell'] - $dp['price'];
                     ?>
-                        <tr>
-                            <td class="text-end">#<?= $dp['id'] ?></td>
-                            <td class="text-end"><?= number_format($dp['price']) ?></td>
-                            <td class="text-end"><?= number_format($dp['price_sell']) ?></td>
-                            <td class="text-end"><?= number_format($margin) ?></td>
-                        </tr>
+                            <tr>
+                                <td class="text-end">#<?= $dp['id'] ?></td>
+                                <td class="text-end"><?= number_format($dp['price']) ?></td>
+                                <td class="text-end"><?= number_format($dp['price_sell']) ?></td>
+                                <td class="text-end"><?= number_format($margin) ?></td>
+                            </tr>
                     <?php
-                        $fee_total += $margin;
+                            $fee_total += $margin;
+                        } else {
+                            $used += $dp['price'];
+                        }
                     }
                     ?>
                     <tr>
@@ -68,7 +77,12 @@
             <div class="col-auto m-auto">
                 <p class="text-center mb-0"><b>Total Profit</b>
                 </p>
-                <h5 class="text-success text-center m-auto pt-0"><?= number_format($margin_total + $fee_total) ?></h5>
+                <h6 class="text-success text-center m-auto pt-0"><?= number_format($margin_total + $fee_total) ?></h6>
+            </div>
+            <div class="col-auto m-auto">
+                <p class="text-center mb-0"><b>Total Used</b>
+                </p>
+                <h6 class="text-danger text-center m-auto pt-0"><?= number_format($used) ?></h6>
             </div>
         </div>
     </div>
