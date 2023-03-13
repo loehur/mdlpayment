@@ -2,4 +2,4 @@
 app/Config/
 *copy*
 error_log
-logs
+logs/
