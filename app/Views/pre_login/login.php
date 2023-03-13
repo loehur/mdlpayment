@@ -24,27 +24,35 @@
 
 </head>
 
+<?php $failed = "";
+if (!is_array($data)) {
+    $failed = $data;
+}
+?>
+
 <body class="login-page small" style="min-height: 496.781px;">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="#">MDL | <b><span class="text-success">Payment</span></b></a><br>
+    <div class="login-box bg-light">
+        <div class="card">
+            <div class="card-body">
+                <span class="p-1 text-danger"><?= $failed ?></span>
+            </div>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Login Session Baru</p>
+                <p class="login-box-msg">PRE LOGIN</p>
                 <div id="info"></div>
-                <form action="<?= $this->BASE_URL ?>Login_99/cek_login" method="post">
+                <form action="<?= $this->BASE_URL ?>Login/cek_login" method="post">
                     <div class="input-group mb-3">
-                        <input type="text" name="HP" readonly value="<?= $data ?>" class="form-control" placeholder="No. Handphone / ID" required autocomplete="off">
+                        <input type="text" name="HP" class="form-control" placeholder="No. Handphone / ID" required autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span<i class="fas fa-mobile-alt"></i></span>
+                                <span><i class="fas fa-mobile-alt"></i></span>
                             </div>
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="PASS" class="form-control" placeholder="Password" required autocomplete="off">
+                        <input type="text" name="token_" class="form-control" placeholder="Secret Key" required autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -67,10 +75,6 @@
                         </div>
                     </div>
                 </form>
-                <p class="mb-0">
-                    <!-- <a href="< //$this->BASE_URL ?>Register" class="text-center">Daftar Baru</a> -->
-                    <a href="<?= $this->BASE_URL ?>Register/reset_pass" class="text-center text-info float-right mt-1">Lupa Password</a>
-                </p>
             </div>
         </div>
     </div>
@@ -81,7 +85,7 @@
 <script>
     function hide() {
         var input = document.querySelector('[name="HP"]').value;
-        var pass = document.querySelector('[name="PASS"]').value;
+        var pass = document.querySelector('[name="token_"]').value;
 
         if (input.length < 1 || pass.length < 1) {
             return;

@@ -42,7 +42,7 @@
                 <!-- ALERT -->
                 <div id="info"></div>
 
-                <form id="form" action="<?= $this->BASE_URL ?>Register/ganti_password" method="post">
+                <form id="form" action="<?= $this->BASE_URL ?>Register/ganti_password_99" method="post">
                     <div class="row mb-2">
                         <div class="col">
                             <label>Nomor Handphone</label>

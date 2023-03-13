@@ -9,10 +9,12 @@
                 <span class="float-right">Kas</span><br>
                 <h6><b class="text-success"><?= number_format($data['kas']) ?></b></h6>
             </div>
-            <div class="col-auto">
-                <span class="float-right">Saldo</span><br>
-                <h6><b class="text-success"><?= number_format($data['saldo']) ?></b></h6>
-            </div>
+            <?php if ($this->userData['no_user'] == $this->userData['no_master']) { ?>
+                <div class="col-auto">
+                    <span class="float-right">Saldo</span><br>
+                    <h6><b class="text-success"><?= number_format($data['saldo']) ?></b></h6>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </div>

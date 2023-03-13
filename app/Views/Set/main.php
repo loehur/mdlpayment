@@ -22,95 +22,161 @@
     </style>
 </head>
 
-<body class="login-page" style="min-height: 496.781px;">
-    <div class="login-box">
+<body style="max-width: 752px; min-width:  <?= $min_width ?>;" class="m-auto small border border-bottom-0 pt-5 pr-1 pl-1">
+    <div class="container-fluid">
         <div class="card">
-            <div class="card-body register-card-body small">
-                <!-- ALERT -->
-                <div id="info"></div>
-                <form id="form" action="<?= $this->BASE_URL ?>Enc/enc_post" method="post">
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="text" class="form-control" name="id" placeholder="id" required></input>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="password" class="form-control" name="lock" placeholder="lock" required>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">
-                                Submit
-                            </button>
-                        </div>
-                    </div>
-                </form>
+            <div class="card-body register-card-body small bg-light">
+                <b><?php print_r($data) ?></b>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body register-card-body small">
-                <!-- ALERT -->
-                <div id="info"></div>
-                <form id="form" action="<?= $this->BASE_URL ?>Reset/pass_post" method="post">
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="text" class="form-control" name="id" placeholder="id" required></input>
-                        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body register-card-body small">
+                        <!-- ALERT -->
+                        <div id="info">VERIFY</div>
+                        <form id="form" action="<?= $this->BASE_URL ?>Enc/enc_post" method="post">
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="id" placeholder="id" required></input>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="lock" placeholder="lock" required>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="text" class="form-control" name="code" placeholder="code" required></input>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="password" class="form-control" name="lock" placeholder="lock" required>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">
-                                Submit
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-body register-card-body small">
-                <!-- ALERT -->
-                <div id="info"></div>
-                <form id="form" action="<?= $this->BASE_URL ?>Reset/pin_post" method="post">
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="text" class="form-control" name="id" placeholder="id" required></input>
-                        </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body register-card-body small">
+                        <!-- ALERT -->
+                        <div id="info">PASSWORD</div>
+                        <form id="form" action="<?= $this->BASE_URL ?>Reset/pass_post" method="post">
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="id" placeholder="id" required></input>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="code" placeholder="code" required></input>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="lock" placeholder="lock" required>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="text" class="form-control" name="code" placeholder="code" required></input>
-                        </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body register-card-body small">
+                        <!-- ALERT -->
+                        <div id="info">PIN</div>
+                        <form id="form" action="<?= $this->BASE_URL ?>Reset/pin_post" method="post">
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="id" placeholder="id" required></input>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="code" placeholder="code" required></input>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="lock" placeholder="lock" required>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="password" class="form-control" name="lock" placeholder="lock" required>
-                        </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body register-card-body small">
+                        <!-- ALERT -->
+                        <div id="info">ENC</div>
+                        <form id="form" action="<?= $this->BASE_URL ?>Enc/enc_form" method="post">
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="text" placeholder="text" required></input>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="lock" placeholder="lock" required>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">
-                                Submit
-                            </button>
-                        </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body register-card-body small">
+                        <!-- ALERT -->
+                        <div id="info">ENC_2</div>
+                        <form id="form" action="<?= $this->BASE_URL ?>Enc/enc_form_2" method="post">
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="text" placeholder="text" required></input>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="lock" placeholder="lock" required>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

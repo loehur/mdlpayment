@@ -23,7 +23,7 @@
 
 <body>
     <div class="text-center mt-4">
-        Operation Failed:
+        Operation:
         <?= $data ?>
     </div>
     <div class="text-center mt-4">
