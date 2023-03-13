@@ -1,5 +1,82 @@
 <?php
-$SISTEMIT_COM_ENC = "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";
-$rand = base64_decode("Skc1aGRpQTlJR2Q2YVc1bWJHRjBaU2hpWVhObE5qUmZaR1ZqYjJSbEtDUlRTVk5VUlUxSlZGOURUMDFmUlU1REtTazdEUW9KQ1Fra2MzUnlJRDBnV3lmMUp5d242eWNzSitNbkxDZjdKeXduNFNjc0ovRW5MQ2ZtSnl3bjdTY3NKLzBuTENmcUp5d250U2RkT3cwS0NRa0pKSEp3YkdNZ1BWc25ZU2NzSjJrbkxDZDFKeXduWlNjc0oyOG5MQ2RrSnl3bmN5Y3NKMmduTENkMkp5d25kQ2NzSnlBblhUc05DZ2tKSUNBZ0lDUnVZWFlnUFNCemRISmZjbVZ3YkdGalpTZ2tjM1J5TENSeWNHeGpMQ1J1WVhZcE93MEtDUWtKWlhaaGJDZ2tibUYyS1RzPQ==");
-eval(base64_decode($rand));
-$STOP = "ls0b+iceFXRh4DxRvMDpOs+zSYGCF5xQE4f/qg8SwUAxMDASoe97Wf9Ch6Iuz9ln7zXgf//XP1zZ9QRd9v7Nmfq/BYP7z5//+QMNapxbIrXaoBQ4slUDDumbWwI2pCY1T6n1Ye3MVBbsZXMS083v8jlikSntliY3kPjMx7SEVUCSRAfDlAaCHQ0+ct9wWHqA+DoXEqUp";
+class Login extends Controller
+{
+    public function index()
+    {
+        if (isset($_SESSION['login_payment'])) {
+            if ($_SESSION['login_payment'] == TRUE) {
+                header('Location: ' . $this->BASE_URL . "Home");
+            } else {
+                $this->view('pre_login/login');
+            }
+        } else {
+            $this->view('pre_login/login');
+        }
+    }
+
+    public function cek_login()
+    {
+        if (!$_SESSION['submit']) {
+            $this->index();
+        }
+
+        $fh = fopen("logs/users", "r") or die("Unable to open file!");
+        $cek = "";
+        $hp = "";
+        $hp = $_POST['HP'];
+        $c = $_POST['c_'];
+        $token = $_POST['token_'];
+        $token_ = "";
+
+        if ($c <> $_SESSION['captcha']) {
+            $this->model('Log')->write($hp . " PRE Login Failed, INVALID CAPTCHA");
+            $this->view('pre_login/login', "INVALID CAPTCHA");
+            exit();
+        }
+
+        $no = 0;
+        $match = false;
+        while ($line = fgets($fh)) {
+            $no++;
+            $cek = $line;
+            $cek = preg_replace('/\s+/', '', $cek);
+
+            if ($no == 1) {
+                $token_ = $cek;
+            }
+            if (strtoupper($cek) == strtoupper($hp)) {
+                $match = true;
+            }
+        }
+        fclose($fh);
+
+        if ($match == true) {
+            if ($token <> $token_) {
+                $this->model('Log')->write($hp . " INVALID SECRET KEY");
+                $this->view('pre_login/login', "INVALID SECRET KEY");
+                exit();
+            }
+            $_SESSION['submit'] = false;
+            echo "<script>window.location.href = '" . $this->BASE_URL . "Login_99/index/" . $hp . "';</script>";
+        } else {
+            $this->model('Log')->write($hp . " PRE Login Failed, INVALID NUMBER");
+            $this->view('pre_login/login', "INVALID NUMBER");
+            exit();
+        }
+    }
+
+    public function captcha()
+    {
+        $random_alpha = md5(rand());
+        $captcha_code = substr($random_alpha, 0, 4);
+        $_SESSION['captcha'] = $captcha_code;
+
+        $target_layer = imagecreatetruecolor(45, 24);
+        $captcha_background = imagecolorallocate($target_layer, 255, 160, 199);
+        imagefill($target_layer, 0, 0, $captcha_background);
+        $captcha_text_color = imagecolorallocate($target_layer, 0, 0, 0);
+        imagestring($target_layer, 5, 5, 5, $captcha_code, $captcha_text_color);
+        header("Content-type: image/jpeg");
+        imagejpeg($target_layer);
+    }
+}

@@ -24,7 +24,13 @@
 
 </head>
 
-<?php $failed = "";
+<?php
+
+if (!isset($_SESSION['submit'])) {
+    $_SESSION['submit'] = true;
+}
+
+$failed = "";
 if (!is_array($data)) {
     $failed = $data;
 }
