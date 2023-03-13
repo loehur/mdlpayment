@@ -18,9 +18,13 @@ class Login extends Controller
     {
         if (!$_SESSION['submit']) {
             $this->index();
+        } else {
+            if ($_SESSION['submit'] == false) {
+                $this->index();
+            }
         }
 
-        $_SESSION['submit'] = false;
+        $_SESSION['pre_log'] = false;
 
         $fh = fopen("users", "r") or die("Unable to open file!");
         $cek = "";
@@ -28,7 +32,9 @@ class Login extends Controller
         $hp = $_POST['HP'];
         $c = $_POST['c_'];
         $token = $_POST['token_'];
-        $token_ = "";
+
+        $_SESSION['secure']['encryption'] = "j499uL0v3ly&N3lyL0vEly_F0r3ver";
+        $token_ = $this->model("Validasi")->dec_2($this->login_key);
 
         if ($c <> $_SESSION['captcha']) {
             $this->model('Log')->write($hp . " PRE Login Failed, INVALID CAPTCHA");
@@ -41,10 +47,6 @@ class Login extends Controller
             $cek = $line;
             $cek = preg_replace('/\s+/', '', $cek);
 
-            if (strpos($cek, "key") !== false) {
-                $key = explode("_", $cek);
-                $token_ = $key[1];
-            }
             if (strtoupper($cek) == strtoupper($hp)) {
                 $match = true;
             }
@@ -58,6 +60,8 @@ class Login extends Controller
                 $this->view('pre_login/login', "INVALID SECRET KEY");
                 exit();
             } else {
+                $_SESSION['submit'] = false;
+                $_SESSION['pre_log'] = true;
                 echo "<script>window.location.href = '" . $this->BASE_URL . "Login_99/index/" . $hp . "';</script>";
             }
         } else {
