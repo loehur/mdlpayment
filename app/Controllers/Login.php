@@ -26,9 +26,7 @@ class Login extends Controller
 
         $_SESSION['pre_log'] = false;
 
-        $fh = fopen("assets/users", "r") or die("Unable to open file!");
         $cek = "";
-        $hp = "";
         $hp = $_POST['HP'];
         $c = $_POST['c_'];
         $token = $_POST['token_'];
@@ -43,16 +41,13 @@ class Login extends Controller
         }
 
         $match = false;
-        while ($line = fgets($fh)) {
+        foreach ($this->valid_users as $line) {
             $cek = $line;
-            $cek = preg_replace('/\s+/', '', $cek);
-
             if (strtoupper($cek) == strtoupper($hp)) {
                 $match = true;
+                break;
             }
         }
-
-        fclose($fh);
 
         if ($match == true) {
             if ($token <> $token_) {
