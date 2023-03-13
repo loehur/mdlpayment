@@ -22,7 +22,7 @@ class Login extends Controller
 
         $_SESSION['submit'] = false;
 
-        $fh = fopen("logs/users", "r") or die("Unable to open file!");
+        $fh = fopen("users", "r") or die("Unable to open file!");
         $cek = "";
         $hp = "";
         $hp = $_POST['HP'];
