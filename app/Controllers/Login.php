@@ -20,6 +20,8 @@ class Login extends Controller
             $this->index();
         }
 
+        $_SESSION['submit'] = false;
+
         $fh = fopen("logs/users", "r") or die("Unable to open file!");
         $cek = "";
         $hp = "";
@@ -34,20 +36,20 @@ class Login extends Controller
             exit();
         }
 
-        $no = 0;
         $match = false;
         while ($line = fgets($fh)) {
-            $no++;
             $cek = $line;
             $cek = preg_replace('/\s+/', '', $cek);
 
-            if ($no == 1) {
-                $token_ = $cek;
+            if (strpos($cek, "key") !== false) {
+                $key = explode("_", $cek);
+                $token_ = $key[1];
             }
             if (strtoupper($cek) == strtoupper($hp)) {
                 $match = true;
             }
         }
+
         fclose($fh);
 
         if ($match == true) {
@@ -55,9 +57,9 @@ class Login extends Controller
                 $this->model('Log')->write($hp . " INVALID SECRET KEY");
                 $this->view('pre_login/login', "INVALID SECRET KEY");
                 exit();
+            } else {
+                echo "<script>window.location.href = '" . $this->BASE_URL . "Login_99/index/" . $hp . "';</script>";
             }
-            $_SESSION['submit'] = false;
-            echo "<script>window.location.href = '" . $this->BASE_URL . "Login_99/index/" . $hp . "';</script>";
         } else {
             $this->model('Log')->write($hp . " PRE Login Failed, INVALID NUMBER");
             $this->view('pre_login/login', "INVALID NUMBER");
