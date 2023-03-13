@@ -17,7 +17,7 @@
 						<a href="<?= $this->BASE_URL ?>Akun" class="nav-link text-secondary text-nowrap"><i class="fas fa-user"></i><br>Akun</a>
 					</li>
 					<li class="nav-item">
-						<a href="<?= $this->BASE_URL ?>Login/logout" class="nav-link text-secondary"><i class="fas fa-sign-out-alt"></i><br>Logout</a>
+						<a href="<?= $this->BASE_URL ?>Login_99/logout" class="nav-link text-secondary"><i class="fas fa-sign-out-alt"></i><br>Logout</a>
 					</li>
 				</ul>
 			</nav>
