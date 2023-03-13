@@ -26,7 +26,7 @@ class Login extends Controller
 
         $_SESSION['pre_log'] = false;
 
-        $fh = fopen("users", "r") or die("Unable to open file!");
+        $fh = fopen("assets/users", "r") or die("Unable to open file!");
         $cek = "";
         $hp = "";
         $hp = $_POST['HP'];
