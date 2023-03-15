@@ -169,7 +169,7 @@ if ($a['jenis'] == 1) {
             </div>
 
             <div class="col-auto ps-2 rounded border-start">
-                <label>Last Customers</label><br>
+                <label>Frequent Customers</label><br>
                 <?php foreach ($data['history'] as $h) { ?>
                     <div style="cursor: pointer;" data-ci="<?= $h['customer_id'] ?>" class="bg-white me-1 mb-1 px-2 rounded border ci">
                         <span style="cursor: pointer;"><?= $h['customer_id'] ?></span> <span class="text-success"><br><?= $h['tr_name'] ?></span>
