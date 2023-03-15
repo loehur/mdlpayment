@@ -12,10 +12,9 @@ if ($a['jenis'] == 1) {
     }
 </style>
 
-<hr class="m-0 p-1">
 <div class="content mb-2">
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid px-2">
+        <div class="row p-0">
             <div class="col border mx-3 pt-2 pb-2 rounded border-success">
                 <?php if ($data['jenis'] == 1) { ?>
                     <table class="">
@@ -96,29 +95,38 @@ if ($a['jenis'] == 1) {
                             <td class="text-success"><b>Rp<span id="total_bill"></span></b></td>
                         </tr>
                     </table>
-                    <b>
-                    <?php } ?>
+                <?php } ?>
             </div>
         </div>
     </div>
 </div>
-<hr>
-<div class="content pt-2" style="padding-bottom: 70px; background-color:aliceblue">
+
+<div class="content mt-2 mb-0 pb-0">
     <div class="container-fluid">
         <div class="row">
             <div class="col-auto">
-                <div id="info"></div>
+                <small>
+                    <div id="info"></div>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content mb-2 mt-0 pt-0" style="padding-bottom: 70px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col pe-2" style="max-width: 200px;">
                 <form action="<?= $this->BASE_URL ?>Transaksi/proses/<?= $a["jenis"] ?>/<?= $a["code"] ?>" method="post">
                     <div class="row mb-2">
                         <div class="col">
-                            <label>No. <?= strtoupper($des) ?></label>
-                            <input id="cust_id<?= $a['jenis'] ?>" type="text" class="form-control form-control-sm" autocomplete="off" name="customer_id" placeholder="No. <?= $des ?>" autocomplete="off" required>
+                            <input id="cust_id<?= $a['jenis'] ?>" type="text" class="form-control form-control-sm border-top-0 border-end-0 border-start-0 ci_n" autocomplete="off" name="customer_id" placeholder="No. <?= strtoupper($des) ?>" autocomplete="off" required>
+                            <input class="d-none" name="tr_name" id="tr_name">
                         </div>
                     </div>
 
                     <?php if ($a['type'] == 'pln' && $data['jenis'] == 1) { ?>
                         <div class="row mb-2">
-                            <div class="col">
+                            <div class="col-auto">
                                 <button type="button" id="cekPLN" class="btn cek btn-sm btn-success btn-block">
                                     Cek ID
                                 </button>
@@ -144,8 +152,7 @@ if ($a['jenis'] == 1) {
 
                     <div class="row mb-2">
                         <div class="col">
-                            <label>PIN Transaksi</label>
-                            <input type="password" class="form-control form-control-sm" name="pin" placeholder="PIN Transaksi" autocomplete="new-password" required>
+                            <input type="password" class="form-control form-control-sm border-top-0 border-end-0 border-start-0" name="pin" placeholder="PIN Transaksi" autocomplete="new-password" required>
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -159,6 +166,15 @@ if ($a['jenis'] == 1) {
                         </div>
                     </div>
                 </form>
+            </div>
+
+            <div class="col-auto ps-2 rounded border-start">
+                <label>Last Customers</label><br>
+                <?php foreach ($data['history'] as $h) { ?>
+                    <div style="cursor: pointer;" data-ci="<?= $h['customer_id'] ?>" class="bg-white me-1 mb-1 px-2 rounded border ci">
+                        <span style="cursor: pointer;"><?= $h['customer_id'] ?></span> <span class="text-success"><br><?= $h['tr_name'] ?></span>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -259,6 +275,7 @@ if ($a['jenis'] == 1) {
                         $("#info").fadeIn(1000);
                         $("#info").html('<div class="alert alert-success" role="alert">' + res.data.name + '</div>')
                         $("#cust_name").html("<span class='text-success'>" + res.data.name + "</span>");
+                        $("input#tr_name").val(res.data.name);
                         $("#cust_id").html("<span class='text-success'>" + res.data.customer_id + "</span>");
                     } else {
                         $("#info").hide();
@@ -322,4 +339,9 @@ if ($a['jenis'] == 1) {
             $("span#total_bill").html("");
         }
     });
+
+    $("div.ci").click(function() {
+        var ci = $(this).attr("data-ci");
+        $("input.ci_n").val(ci);
+    })
 </script>

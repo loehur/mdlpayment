@@ -40,6 +40,7 @@ class IAK extends Controller
             $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
 
             if (isset($response['data'])) {
+               $this->model('Log')->write($this->userData['no_user'] . " CEK PLN Token ID Sukses!");
                print_r($result);
             } else {
                $error["data"] = ["message" => "PARSE ERROR"];
@@ -93,6 +94,7 @@ class IAK extends Controller
                      "sign" => $sign,
                      "month" => "1"
                   ];
+                  $this->model('Log')->write($this->userData['no_user'] . " CEK BPJS Sukses!");
                   break;
                default:
                   $data = [
@@ -103,6 +105,7 @@ class IAK extends Controller
                      "ref_id" => $ref_id,
                      "sign" => $sign,
                   ];
+                  $this->model('Log')->write($this->userData['no_user'] . " CEK PLN Pasca Sukses!");
                   break;
             }
 
@@ -193,6 +196,7 @@ class IAK extends Controller
       if ($this->model('Validasi')->enc($ref_id) <> $a['verify']) {
          $where = "ref_id = '" . $ref_id . "'";
          $set =  "tr_status = 2, message = 'HACKER WARNING!'";
+         $this->model('Log')->write($this->userData['no_user'] . " Hacker Inject Prepaid!");
          $update = $this->model('M_DB_1')->update('prepaid', $set, $where);
          exit();
       }

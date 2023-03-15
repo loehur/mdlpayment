@@ -51,11 +51,13 @@ class Setor extends Controller
       if ($dataCount == 0) {
          $do = $this->model('M_DB_1')->insertCols('topup', $cols, $vals);
          if ($do['errno'] == 0) {
+            $this->model('Log')->write($this->userData['no_user'] . " Deposit Input Success!");
             echo 1;
          } else {
             print_r($do['error']);
          }
       } else {
+         $this->model('Log')->write($this->userData['no_user'] . " Repeat Deposit Blocked, On Going Deposit on Proses!");
          echo "Masih ada setoran dalam Proses, silahkan Tunggu!";
       }
    }
