@@ -103,11 +103,9 @@ if ($a['jenis'] == 1) {
 
 <div class="content mt-2 mb-0 pb-0">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row pb-0 mb-0">
             <div class="col-auto">
-                <small>
-                    <div id="info"></div>
-                </small>
+                <div id="info"></div>
             </div>
         </div>
     </div>
@@ -120,7 +118,7 @@ if ($a['jenis'] == 1) {
                     <div class="row mb-2">
                         <div class="col">
                             <input id="cust_id<?= $a['jenis'] ?>" type="text" class="form-control form-control-sm border-top-0 border-end-0 border-start-0 ci_n" autocomplete="off" name="customer_id" placeholder="No. <?= strtoupper($des) ?>" autocomplete="off" required>
-                            <input class="d-none" name="tr_name" id="tr_name">
+                            <input class="d-none" name="tr_name" value="" id="tr_name">
                         </div>
                     </div>
 
@@ -169,9 +167,9 @@ if ($a['jenis'] == 1) {
             </div>
 
             <div class="col-auto ps-2 rounded border-start">
-                <label>Frequent Customers</label><br>
+                <label class="pb-1">Frequent Customers</label><br>
                 <?php foreach ($data['history'] as $h) { ?>
-                    <div style="cursor: pointer;" data-ci="<?= $h['customer_id'] ?>" class="bg-white me-1 mb-1 px-2 rounded border ci">
+                    <div style="cursor: pointer;" data-ci="<?= $h['customer_id'] ?>" class="bg-white me-1 mb-1 px-2 py-1 rounded border ci">
                         <span style="cursor: pointer;"><?= $h['customer_id'] ?></span> <span class="text-success"><br><?= $h['tr_name'] ?></span>
                     </div>
                 <?php } ?>
@@ -203,7 +201,7 @@ if ($a['jenis'] == 1) {
                     if (customer_name == '') {
                         $("#info").hide();
                         $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-danger" role="alert">Mohon Cek ID terlebih dahulu!</div>')
+                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 py-1 px5" role="alert">Mohon Cek ID terlebih dahulu!</div>')
                         return;
                     }
                 }
@@ -212,7 +210,7 @@ if ($a['jenis'] == 1) {
                 if (customer_name == '') {
                     $("#info").hide();
                     $("#info").fadeIn(1000);
-                    $("#info").html('<div class="alert alert-danger" role="alert">Cek Tagihan terlebih dahulu!</div>')
+                    $("#info").html('<div class="alert alert-danger mb-1 mt-1 py-1 px5" role="alert">Cek Tagihan terlebih dahulu!</div>')
                     return;
                 }
             }
@@ -233,7 +231,7 @@ if ($a['jenis'] == 1) {
                     } else {
                         $("#info").hide();
                         $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-danger" role="alert">' + response + '</div>')
+                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 py-1 px5" role="alert">' + response + '</div>')
                     }
                 },
                 complete: function() {
@@ -273,14 +271,14 @@ if ($a['jenis'] == 1) {
                     if (res.data.rc == "00") {
                         $("#info").hide();
                         $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-success" role="alert">' + res.data.name + '</div>')
+                        $("#info").html('<div class="alert alert-success mb-1 mt-1 py-1 px5" role="alert">' + res.data.name + '</div>')
                         $("#cust_name").html("<span class='text-success'>" + res.data.name + "</span>");
                         $("input#tr_name").val(res.data.name);
                         $("#cust_id").html("<span class='text-success'>" + res.data.customer_id + "</span>");
                     } else {
                         $("#info").hide();
                         $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-danger" role="alert">' + res.data.message + '</div>')
+                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 py-1 px5" role="alert">' + res.data.message + '</div>')
                     }
                 },
                 complete: function() {
@@ -311,7 +309,7 @@ if ($a['jenis'] == 1) {
                     } else {
                         $("#info").hide();
                         $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-danger" role="alert">' + res.data.message + '</div>');
+                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 py-1 px5" role="alert">' + res.data.message + '</div>');
                     }
                 },
                 complete: function() {
