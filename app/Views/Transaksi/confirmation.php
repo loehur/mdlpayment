@@ -343,5 +343,6 @@ if ($a['jenis'] == 1) {
     $("div.ci").click(function() {
         var ci = $(this).attr("data-ci");
         $("input.ci_n").val(ci);
+        $("span#cust_id").html("<span class='text-success'>" + ci + "</span>");
     })
 </script>
