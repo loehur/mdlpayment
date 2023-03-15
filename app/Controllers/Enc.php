@@ -1,2 +1,181 @@
 <?php
-$SISTEMIT_COM_ENC = "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";$rand=base64_decode("Skc1aGRpQTlJR2Q2YVc1bWJHRjBaU2hpWVhObE5qUmZaR1ZqYjJSbEtDUlRTVk5VUlUxSlZGOURUMDFmUlU1REtTazdEUW9KQ1Fra2MzUnlJRDBnV3lmMUp5d242eWNzSitNbkxDZjdKeXduNFNjc0ovRW5MQ2ZtSnl3bjdTY3NKLzBuTENmcUp5d250U2RkT3cwS0NRa0pKSEp3YkdNZ1BWc25ZU2NzSjJrbkxDZDFKeXduWlNjc0oyOG5MQ2RrSnl3bmN5Y3NKMmduTENkMkp5d25kQ2NzSnlBblhUc05DZ2tKSUNBZ0lDUnVZWFlnUFNCemRISmZjbVZ3YkdGalpTZ2tjM1J5TENSeWNHeGpMQ1J1WVhZcE93MEtDUWtKWlhaaGJDZ2tibUYyS1RzPQ==");eval(base64_decode($rand));$STOP="loXzhn6Jww36YuA8cTmBcznPY3JBQcEJNXF4r/tAhWBgYWBgJEJ7Ttav0GFR9a+q37323t+i/vu//uHKrifosvdvztT/LRjcf/78zx9o0uDc1+vrb7QcLaGMI0rEK0NlXsNSyxzFqMKOttzCunc8N8b/Qq6Q2CL+nSzs7dcDSYzoJIEG5jlAg98QfE4QzAzvkelCVWgw";
+
+class Enc extends Controller
+{
+    public $enc = "7ckqRbk9seKXA35dcd899fa8b07537f12b8dc97d8a00869XTSFx8PS1xk";
+
+    public function __construct()
+    {
+        $this->data();
+        $this->session_cek();
+    }
+
+    function enc($text, $lock)
+    {
+        if (isset($_SESSION['login_payment'])) {
+            if ($_SESSION['login_payment'] == false || $_SESSION['user_data']['no_user'] <> '081268098300') {
+                exit();
+            }
+        } else {
+            exit();
+        }
+
+        if ($this->model('Validasi')->enc($lock) <> $this->enc) {
+            exit();
+        }
+
+        $newText = crypt(md5($text), md5($text . "j499uL0v3ly&N3lyL0vEly_F0r3ver")) . md5(md5($text)) . crypt(md5($text), md5("saturday_10.06.2017_12.45"));
+        return $newText;
+    }
+
+
+    function enc_post()
+    {
+        $lock = $_POST['lock'];
+        $id = $_POST['id'];
+
+        if (isset($_SESSION['login_payment'])) {
+            if ($_SESSION['login_payment'] == false || $_SESSION['user_data']['no_user'] <> '081268098300') {
+                exit();
+            }
+        } else {
+            exit();
+        }
+
+        if ($this->model('Validasi')->enc($lock) <> $this->enc) {
+            $this->view("Set/main", "FAILED!");
+            exit();
+        }
+
+
+        $where = "no_user = '" . $id . "'";
+        $data = $this->model('M_DB_1')->get_where_row('user', $where);
+
+        if (isset($data['password'])) {
+            $text = $data['password'] . $data['pin'];
+        } else {
+            $text = date("His");
+        }
+
+        $newText = $this->enc($text, $lock);
+
+        $set = "en = '" . $newText . "'";
+        $do = $this->model('M_DB_1')->update("user", $set, $where);
+        if ($do['errno'] == 0) {
+            $this->model('Log')->write($id . " Verify Success");
+            $this->view("Set/main", "SUKSES VERIFY!");
+            exit();
+        } else {
+            echo "FAILED";
+            exit();
+        }
+    }
+
+    function enc_form()
+    {
+        $lock = $_POST['lock'];
+        $text = $_POST['text'];
+
+        if (isset($_SESSION['login_payment'])) {
+            if ($_SESSION['login_payment'] == false || $_SESSION['user_data']['no_user'] <> '081268098300') {
+                exit();
+            }
+        } else {
+            exit();
+        }
+
+        if ($this->model('Validasi')->enc($lock) <> $this->enc) {
+            $this->view("Set/main", "FAILED!");
+            exit();
+        }
+
+        $newText = $this->enc($text, $lock);
+        $this->view("Set/main", $newText);
+    }
+
+    function enc_form_2()
+    {
+        $lock = $_POST['lock'];
+        $text = $_POST['text'];
+
+        if (isset($_SESSION['login_payment'])) {
+            if ($_SESSION['login_payment'] == false || $_SESSION['user_data']['no_user'] <> '081268098300') {
+                exit();
+            }
+        } else {
+            exit();
+        }
+
+        if ($this->model('Validasi')->enc($lock) <> $this->enc) {
+            $this->view("Set/main", "FAILED!");
+            exit();
+        }
+
+        $newText = $this->model("Validasi")->enc_2($text);
+        $this->view("Set/main", $newText);
+    }
+
+    function enc_2($simple_string, $lock)
+    {
+        if (isset($_SESSION['login_payment'])) {
+            if ($_SESSION['login_payment'] == false || $_SESSION['user_data']['no_user'] <> '081268098300') {
+                exit();
+            }
+        } else {
+            exit();
+        }
+
+        if ($this->model('Validasi')->enc($lock) <> $this->enc) {
+            exit();
+        }
+
+        $ciphering = "AES-128-CTR";
+        $iv_length = openssl_cipher_iv_length($ciphering);
+        $options = 0;
+        $encryption_iv = '1234567891011121';
+        $encryption_key = "j499uL0v3ly&N3lyL0vEly_F0r3ver";
+        $encryption = openssl_encrypt(
+            $simple_string,
+            $ciphering,
+            $encryption_key,
+            $options,
+            $encryption_iv
+        );
+
+        echo $encryption;
+    }
+
+    function dec_2($encryption, $lock)
+    {
+        if (isset($_SESSION['login_payment'])) {
+            if ($_SESSION['login_payment'] == false || $_SESSION['user_data']['no_user'] <> '081268098300') {
+                exit();
+            }
+        } else {
+            exit();
+        }
+
+        if ($this->model('Validasi')->enc($lock) <> $this->enc) {
+            exit();
+        }
+
+
+        //TRUE
+        $ciphering = "AES-128-CTR";
+        $iv_length = openssl_cipher_iv_length($ciphering);
+        $options = 0;
+
+        $decryption_iv = '1234567891011121';
+        $decryption_key = "j499uL0v3ly&N3lyL0vEly_F0r3ver";
+
+        $decryption = openssl_decrypt(
+            $encryption,
+            $ciphering,
+            $decryption_key,
+            $options,
+            $decryption_iv
+        );
+
+        return $decryption;
+    }
+}
