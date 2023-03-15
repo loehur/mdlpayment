@@ -201,7 +201,7 @@ if ($a['jenis'] == 1) {
                     if (customer_name == '') {
                         $("#info").hide();
                         $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 py-1 px5" role="alert">Mohon Cek ID terlebih dahulu!</div>')
+                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 pt-1 pb-3 px5" role="alert">Mohon Cek ID terlebih dahulu!</div>')
                         return;
                     }
                 }
@@ -210,7 +210,7 @@ if ($a['jenis'] == 1) {
                 if (customer_name == '') {
                     $("#info").hide();
                     $("#info").fadeIn(1000);
-                    $("#info").html('<div class="alert alert-danger mb-1 mt-1 py-1 px5" role="alert">Cek Tagihan terlebih dahulu!</div>')
+                    $("#info").html('<div class="alert alert-danger mb-1 mt-1 pt-1 pb-3 px5" role="alert">Cek Tagihan terlebih dahulu!</div>')
                     return;
                 }
             }
@@ -231,7 +231,7 @@ if ($a['jenis'] == 1) {
                     } else {
                         $("#info").hide();
                         $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 py-1 px5" role="alert">' + response + '</div>')
+                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 pt-1 pb-3 px5" role="alert">' + response + '</div>')
                     }
                 },
                 complete: function() {
@@ -271,14 +271,14 @@ if ($a['jenis'] == 1) {
                     if (res.data.rc == "00") {
                         $("#info").hide();
                         $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-success mb-1 mt-1 py-1 px5" role="alert">' + res.data.name + '</div>')
+                        $("#info").html('<div class="alert alert-success mb-1 mt-1 pt-1 pb-3 px5" role="alert">' + res.data.name + '</div>')
                         $("#cust_name").html("<span class='text-success'>" + res.data.name + "</span>");
                         $("input#tr_name").val(res.data.name);
                         $("#cust_id").html("<span class='text-success'>" + res.data.customer_id + "</span>");
                     } else {
                         $("#info").hide();
                         $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 py-1 px5" role="alert">' + res.data.message + '</div>')
+                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 pt-1 pb-3 px5" role="alert">' + res.data.message + '</div>')
                     }
                 },
                 complete: function() {
@@ -309,7 +309,7 @@ if ($a['jenis'] == 1) {
                     } else {
                         $("#info").hide();
                         $("#info").fadeIn(1000);
-                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 py-1 px5" role="alert">' + res.data.message + '</div>');
+                        $("#info").html('<div class="alert alert-danger mb-1 mt-1 pt-1 pb-3 px5" role="alert">' + res.data.message + '</div>');
                     }
                 },
                 complete: function() {

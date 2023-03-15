@@ -82,8 +82,9 @@
     function hide() {
         var input = document.querySelector('[name="HP"]').value;
         var pass = document.querySelector('[name="PASS"]').value;
+        var cap = document.querySelector('[name="c_"]').value;
 
-        if (input.length < 1 || pass.length < 1) {
+        if (input.length < 1 || pass.length < 1 || cap.length < 1) {
             return;
         }
 
