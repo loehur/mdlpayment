@@ -27,7 +27,7 @@
         <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Pasca Bayar [<span id="post_antri"></span>]</button>
     </li>
 </ul>
-<div class="tab-content mx-2 border border-top-0" id="myTabContent">
+<div class="tab-content mx-1 pt-1" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="content">
             <div class="container-fluid">
@@ -62,7 +62,7 @@
                             $proses_pre_count += 1;
                         }
                     ?>
-                        <div class="col-md-6 border border-white border-3 pb-1 rounded" style="background-color:aliceblue;">
+                        <div class="col-md-6 border border-white border-3 pb-1 rounded px-1" style="background-color:aliceblue;">
                             <table class="table table-borderless table-sm mb-0 pb-0">
                                 <tr>
                                     <td nowrap> <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
@@ -210,7 +210,7 @@
                             $proses_post_count += 1;
                         }
                     ?>
-                        <div class="col-md-6 border border-white border-3 pb-1 rounded" style="background-color:blanchedalmond">
+                        <div class="col-md-6 border border-white border-3 pb-1 rounded px-1" style="background-color:blanchedalmond">
                             <table class="table table-borderless table-sm mb-0 pb-0">
                                 <tr>
                                     <td nowrap>
