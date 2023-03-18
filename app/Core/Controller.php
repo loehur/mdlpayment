@@ -110,7 +110,7 @@ class Controller extends Public_Variables
         $arr_success_master = array();
 
 
-        $data['prepaid'] = $this->model('M_DB_1')->get_where('prepaid', "no_master = '" . $this->userData['no_master'] . "' ORDER BY id DESC");
+        $data['prepaid'] = $this->model('M_DB_1')->get_where('prepaid', "no_master = '" . $this->userData['no_master'] . "' ORDER BY updateTime DESC");
 
         foreach ($data['prepaid'] as $a) {
             if ($a['rc'] == "00" || $a['rc'] == "39" || $a['rc'] == "201" || $a['rc'] == "" || strlen($a['sn']) > 0) {
@@ -121,7 +121,7 @@ class Controller extends Public_Variables
             }
         }
 
-        $data['postpaid'] = $this->model('M_DB_1')->get_where('postpaid', "no_master = '" . $this->userData['no_master'] . "' ORDER BY id DESC");
+        $data['postpaid'] = $this->model('M_DB_1')->get_where('postpaid', "no_master = '" . $this->userData['no_master'] . "' ORDER BY updateTime DESC");
 
         foreach ($data['postpaid'] as $a) {
             if (strlen($a['noref'] > 0) || strlen($a['datetime']) > 0 || $a['tr_status'] == 1 || $a['tr_status'] == 3 || $a['tr_status'] == 4) {
