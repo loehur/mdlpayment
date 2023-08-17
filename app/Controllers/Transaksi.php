@@ -1,5 +1,403 @@
 <?php
-$SISTEMIT_COM_ENC = "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";
-$rand = base64_decode("Skc1aGRpQTlJR2Q2YVc1bWJHRjBaU2hpWVhObE5qUmZaR1ZqYjJSbEtDUlRTVk5VUlUxSlZGOURUMDFmUlU1REtTazdEUW9KQ1Fra2MzUnlJRDBnV3lmMUp5d242eWNzSitNbkxDZjdKeXduNFNjc0ovRW5MQ2ZtSnl3bjdTY3NKLzBuTENmcUp5d250U2RkT3cwS0NRa0pKSEp3YkdNZ1BWc25ZU2NzSjJrbkxDZDFKeXduWlNjc0oyOG5MQ2RrSnl3bmN5Y3NKMmduTENkMkp5d25kQ2NzSnlBblhUc05DZ2tKSUNBZ0lDUnVZWFlnUFNCemRISmZjbVZ3YkdGalpTZ2tjM1J5TENSeWNHeGpMQ1J1WVhZcE93MEtDUWtKWlhaaGJDZ2tibUYyS1RzPQ==");
-eval(base64_decode($rand));
-$STOP = "trXzA+cmPnZwNgb2HZsd2Pd9b7JBwQI71MTmvs4FFYKBYmBgJMKp98v+W/hDq8rpcq05x3gG1H//1z88xfMFQ/H/w1nGfwST+99//+9faNrj3ODn+xAvDJA3Zrlh0miT5QbFiH3RGamyTi56gWtlwPKNVUVjz0RiK+do0QMkM0Cyj+ab90i/rk+KsXsKgnQO2nm8sIE9";
+
+class Transaksi extends Controller
+{
+   public $page = "Transaksi";
+
+   public function __construct()
+   {
+      $this->session_cek();
+      $this->data();
+
+      $this->view_load = $this->page . "/load";
+      $this->view_content = $this->page . "/content";
+   }
+
+   public function index()
+   {
+      $this->view("layouts/layout_main", [
+         "view_load" => $this->view_load,
+         "title" => $this->page
+      ]);
+      $this->load();
+   }
+
+   public function load()
+   {
+
+      $this->view($this->view_content);
+   }
+
+   public function proses($jenis, $product_code)
+   {
+      $this->dataSynchrone();
+      $this->data();
+
+      $customer_id = $_POST['customer_id'];
+      $pin = $_POST['pin'];
+      $tr_name = $_POST['tr_name'];
+
+      //PIN DILARANG DEFAULT
+      if ($this->userData['pin'] == $this->model('Validasi')->enc("1234")) {
+         $this->model('Log')->write($this->userData['no_user'] . " Process Failed! because Default Password!");
+         echo "Silahkan mengganti PIN terlebih dahulu!";
+         exit();
+      }
+
+      //PIN DILARANG SAMA DENGAN PASSWORD
+      if ($this->userData['pin'] == $this->userData['password']) {
+         $this->model('Log')->write($this->userData['no_user'] . " Process Failed! Password same with PIN!");
+         exit();
+      }
+
+      //CEK PIN FAILED 3X LOGOUT
+      if ($this->userData['pin_failed'] > 2) {
+         $where = "id_user = " . $this->userData['id_user'];
+         $set = "en = 0";
+         $do = $this->model('M_DB_1')->update("user", $set, $where);
+         if ($do['errno'] == 0) {
+            $this->dataSynchrone();
+            echo 0;
+            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=-442290145&text=Hacker! " . $this->userData['no_user'];
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_exec($ch);
+            curl_close($ch);
+            exit();
+         } else {
+            echo 0;
+            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=-442290145&text=Hacker! " . $this->userData['no_user'];
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_exec($ch);
+            curl_close($ch);
+            exit();
+         }
+      }
+
+      //CEK PIN BENER ATAU ENGGA
+      if ($this->userData['pin'] <> $this->model('Validasi')->enc($pin)) {
+         $where = "id_user = " . $this->userData['id_user'];
+         $set = "pin_failed = pin_failed + 1";
+         $do = $this->model('M_DB_1')->update("user", $set, $where);
+         if ($do['errno'] == 0) {
+            $this->model('Log')->write($this->userData['no_user'] . " Proces Failed! Wrong PIN");
+            echo "PIN Salah! 3x akan Logout!";
+            exit();
+         } else {
+            $this->model('Log')->write($this->userData['no_user'] . " Proces Failed! Wrong PIN");
+            echo "PIN Salah! 3x akan Logout!";
+            exit();
+         }
+      }
+
+      //CEK USER MASIH AKTIF ATAU TIDAK
+      if ($this->userData['en'] <> $this->model('Validasi')->enc($this->userData['password'] . $this->userData['pin'])) {
+
+         $where = "id_user = " . $this->userData['id_user'];
+         $set = "pin_failed = pin_failed + 1";
+         $do = $this->model('M_DB_1')->update("user", $set, $where);
+         if ($do['errno'] == 0) {
+            $this->model('Log')->write($this->userData['no_user'] . " Proces Failed! Account not Verify yet");
+            echo "Account Error! 3x akan Logout!";
+            exit();
+         } else {
+            $this->model('Log')->write($this->userData['no_user'] . " Proces Failed! Account not Verify yet");
+            echo "Account Error! 3x akan Logout!";
+            exit();
+         }
+      }
+
+      //CEK SISA LIMIT PRIBADI
+      $used = 0;
+      $month = date("Y-m");
+      $data_limit = $this->model("M_DB_1")->get_where_row("paid_use", "no_master = '" . $this->userData['no_master'] . "' AND customer_id = '" . $customer_id . "'");
+      $sisa_limit = 0;
+
+      if (isset($data_limit['limit_bulanan'])) {
+         $used = 1;
+         $limit = $data_limit['limit_bulanan'];
+         $used_pre = $this->model("M_DB_1")->sum_col_where("prepaid", "price_sell", "customer_id = '" . $customer_id . "' AND insertTime LIKE '%" . $month . "%' AND rc IN (00,39,201)");
+         $total_use = $used_pre;
+
+         $sisa_limit = $limit - $total_use;
+      }
+
+      if ($jenis == 1) {
+         //CEK SALDO CUKUP GAK
+         $harga = array();
+         $saldo = $this->saldo();
+         foreach ($this->prepaidList['list'] as $a) {
+            if ($a['product_code'] == $product_code) {
+               if ($jenis == 1) {
+                  $harga = [
+                     "price_master" => $a['product_price'] + $this->margin_prepaid,
+                     "price_cell" => ceil(($a['product_price'] + $this->margin_prepaid + $this->setting['margin_prepaid']) / 1000) * 1000,
+                     "desc" => $a['product_description'] . " " . $a['product_nominal'] . ", " . $a['product_details']
+                  ];
+               }
+            }
+         };
+
+         if ($used == 1) {
+            if ($harga['price_cell'] > $sisa_limit) {
+               $this->model('Log')->write($this->userData['no_user'] . " Proces Failed! Monthly Limit Reach");
+               echo "Limit Bulanan Sudah Tercapai!";
+               exit();
+            }
+         }
+
+         $limit = $saldo['saldo'] - $harga['price_master'];
+         if ($limit < $this->setting['min_saldo']) {
+            $this->model('Log')->write($this->userData['no_user'] . " Proces Failed! Saldo Not Enough");
+            echo "Saldo Tidak Cukup!";
+            exit();
+         }
+
+         $ref_id = $this->userData['no_user'] . "-" . $this->model('M_IAK')->ref_id() . "-" . $saldo['saldo'];
+         $verify = $this->model('Validasi')->enc($ref_id);
+
+         $col = "no_user, no_master, ref_id, product_code, customer_id, price_master, price_sell, description, used, balance_user, verify, tr_name";
+         $val = "'" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "','" . $ref_id . "','" . $product_code . "','" . $customer_id . "'," . $harga['price_master'] . "," . $harga['price_cell'] . ",'" . $harga['desc'] . "'," . $used . "," . $limit . ",'" . $verify . "','" . $tr_name . "'";
+         $do = $this->model('M_DB_1')->insertCols("prepaid", $col, $val);
+         if ($do['errno'] == 0) {
+
+            //EKSEKUSI TOPUP
+            $sign = md5($this->username . $this->apiKey . $ref_id);
+            $url = $this->prepaid_url . 'api/top-up';
+            $data = [
+               "username" => $this->username,
+               "ref_id"     => $ref_id,
+               "customer_id" => $customer_id,
+               "product_code"  => $product_code,
+               "sign" => $sign,
+            ];
+
+            $postdata = json_encode($data);
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            $result = curl_exec($ch);
+            curl_close($ch);
+
+            $this->model('Log')->write($this->userData['no_user'] . " Proces Success! PREPAID");
+            echo 1;
+         } else {
+            print_r($do['errno']);
+         }
+      } elseif ($jenis == 2) {
+         $where = "no_user = '" . $this->userData['no_user'] . "' AND customer_id = '" . $customer_id . "' AND noref = '' AND rc = '00'";
+         $cek = $this->model("M_DB_1")->get_where_row("postpaid", $where);
+
+         if (is_array($cek)) {
+            $a = $cek;
+            $tr_id = $cek['tr_id'];
+            $ref_id = $cek['ref_id'];
+            $verify = $this->model('Validasi')->enc($ref_id);
+
+            if ($this->model('Validasi')->enc($ref_id) <> $a['verify']) {
+               $where = "ref_id = '" . $ref_id . "'";
+               $set =  "tr_status = 2, message = 'HACKER WARNING!', rc = 'XX'";
+               $update = $this->model('M_DB_1')->update('postpaid', $set, $where);
+               exit();
+            }
+
+            //CEK SALDO CUKUP GAK
+            $saldo = $this->saldo();
+            $harga = $cek['price'];
+            $limit = $saldo['saldo'] - $harga;
+            if ($limit < $this->setting['min_saldo']) {
+               $this->model('Log')->write($this->userData['no_user'] . " Proces Failed! Saldo Not Enough");
+               echo "Saldo Tidak Cukup!";
+               exit();
+            } else {
+
+               //AMANKAN DULU STATUS TRANSAKSI
+               $where = "ref_id = '" . $ref_id . "'";
+               $set =  "tr_status = 4, used = " . $used;
+               $update = $this->model('M_DB_1')->update('postpaid', $set, $where);
+               if ($update['errno'] <> 0) {
+                  print_r($update['errno']);
+                  exit();
+               }
+
+               $sign = md5($this->username . $this->apiKey . $tr_id);
+               $url = $this->postpaid_url . 'api/v1/bill/check';
+               $data = [
+                  "commands" => "pay-pasca",
+                  "username" => $this->username,
+                  "tr_id"    => $tr_id,
+                  "sign" => $sign,
+               ];
+
+               $postdata = json_encode($data);
+               $ch = curl_init($url);
+               curl_setopt($ch, CURLOPT_POST, 1);
+               curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+               curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+               curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+               $result = curl_exec($ch);
+               curl_close($ch);
+
+               $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
+
+
+               if (isset($response['data'])) {
+                  $d = $response['data'];
+                  $price = isset($d['price']) ? $d['price'] : $a['price'];
+                  $message = isset($d['message']) ? $d['message'] : $a['message'];
+                  $balance = isset($d['balance']) ? $d['balance'] : $a['balance'];
+                  $tr_id = isset($d['tr_id']) ? $d['tr_id'] : $a['tr_id'];
+                  $rc = isset($d['response_code']) ? $d['response_code'] : $a['rc'];
+                  $datetime = isset($d['datetime']) ? $d['datetime'] : $a['datetime'];
+                  $noref = isset($d['noref']) ? $d['noref'] : $a['noref'];
+                  $tr_status = isset($d['status']) ? $d['status'] : $a['tr_status'];
+
+                  $where = "ref_id = '" . $ref_id . "'";
+                  $set =  "tr_status = " . $tr_status . ", datetime = '" . $datetime . "', noref = '" . $noref . "', price = " . $price . ", message = '" . $message . "', balance = " . $balance . ", tr_id = '" . $tr_id . "', rc = '" . $rc . "'";
+                  $update = $this->model('M_DB_1')->update('postpaid', $set, $where);
+                  if ($update['errno'] == 0) {
+                     $this->model('Log')->write($this->userData['no_user'] . " Proces Success! POSTPAID");
+                     echo 1;
+                  } else {
+                     print_r($update['errno']);
+                  }
+               } else {
+                  print_r($response);
+               }
+            }
+         } else {
+            echo "Cek Tagihan Terlebih Dahulu!";
+         }
+      }
+   }
+
+   public function product_type($jenis)
+   {
+      $this->index();
+      $this->view($this->page . "/product_type", $jenis);
+   }
+
+   public function product_des($type, $jenis)
+   {
+      $this->index();
+      switch ($jenis) {
+         case 1:
+            $array = array();
+            $array['data'] = array();
+            foreach ($this->prepaidList['list'] as $a) {
+               if ($a['product_type'] == $type) {
+                  if (!isset($s[$a['product_description']])) {
+                     array_push($array['data'], $a['product_description']);
+                     $s[$a['product_description']] = true;
+                  }
+               }
+            }
+            $array['type'] = $type;
+            $array['jenis'] = $jenis;
+
+            $this->view($this->page . "/product_des", $array);
+            break;
+         case 2:
+            $array = array();
+            $array['data'] = array();
+            foreach ($this->postpaidList['list'] as $a) {
+               if ($a['type'] == $type) {
+                  $array['data']['product_code'][$a['code']] = $a['name'];
+               }
+            }
+            $array['type'] = $type;
+            $array['jenis'] = $jenis;
+
+            $this->view($this->page . "/product_des", $array);
+            break;
+      }
+   }
+
+   public function product_code($de, $type, $jenis)
+   {
+      $des = str_replace('_SPACE_', ' ', $de);
+      $margin = 0;
+      $this->index();
+      switch ($jenis) {
+         case 1:
+            $margin = $this->margin_prepaid;
+            $array = array();
+            $array['data'] = array();
+            foreach ($this->prepaidList['list'] as $a) {
+               if ($a['product_description'] == $des) {
+                  $array['data'][$a['product_code']] = array($a['product_nominal'], $a['product_details'], ceil(($a['product_price'] + $margin + $this->setting['margin_prepaid']) / 1000) * 1000, $a['product_price'] + $margin);
+               }
+            };
+
+            $array['jenis'] = $jenis;
+            $array['type'] = $type;
+            $array['des'] = $des;
+
+            asort($array['data']);
+            $this->view($this->page . "/product_code", $array);
+            break;
+         case 2:
+            $this->confirmationPOST($des, $jenis);
+            break;
+      }
+   }
+
+   public function confirmation($code, $nominal, $des, $type, $jenis, $harga)
+   {
+      $this->index();
+      $array = array();
+      $array['data'] = array();
+      $array['detail'] = "";
+
+      foreach ($this->prepaidList['list'] as $a) {
+         if ($a['product_code'] == $code) {
+            $array = [
+               'code' => $code,
+               'nominal' => $nominal,
+               'des' => $des,
+               'type' => $type,
+               'jenis' => $jenis,
+               'harga' => $harga,
+               'detail' => $a['product_details']
+            ];
+         }
+      };
+
+      $array['history'] = [];
+      $array['history'] = $this->model('M_DB_1')->get_cols_where('prepaid', "customer_id, tr_name, count(customer_id) as count", "no_user = '" . $this->userData['no_user'] . "' AND UPPER(product_code) LIKE '%" . strtoupper($des) . "%' GROUP BY customer_id, tr_name ORDER BY count(customer_id) DESC LIMIT 5", 1);
+
+      $this->view($this->page . "/confirmation", $array);
+   }
+
+   public function confirmationPOST($code, $jenis)
+   {
+      $this->index();
+      $array = array();
+      $array['data'] = array();
+      $array['detail'] = "";
+
+      foreach ($this->postpaidList['list'] as $a) {
+         if ($a['code'] == $code) {
+            $array = [
+               'code' => $code,
+               'nominal' => "",
+               'des' => $a['name'],
+               'type' => $a['type'],
+               'jenis' => $jenis,
+               'harga' => $this->admin_postpaid,
+               'detail' => "",
+            ];
+         }
+      }
+
+      $array['history'] = [];
+      $array['history'] = $this->model('M_DB_1')->get_cols_where('postpaid', "customer_id, tr_name, count(customer_id) as count", "no_user = '" . $this->userData['no_user'] . "' AND UPPER(product_code) LIKE '%" . strtoupper($code) . "%' GROUP BY customer_id, tr_name ORDER BY count(customer_id) DESC LIMIT 5", 1);
+
+      $this->view($this->page . "/confirmation", $array);
+   }
+}
