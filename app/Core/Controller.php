@@ -198,7 +198,7 @@ class Controller extends Public_Variables
 
     public function topup_data()
     {
-        return $this->model('M_DB_1')->get_where('topup', "no_master = " . $this->userData['no_master']);
+        return $this->model('M_DB_1')->get_where('topup', "no_master = " . $this->userData['no_master'] . " ORDER BY id_topup DESC LIMIT 10");
     }
 
     public function logout()

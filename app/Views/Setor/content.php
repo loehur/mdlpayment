@@ -15,7 +15,7 @@
         <div class="row">
             <?php
             foreach ($data['data_topup'] as $z) { ?>
-                <div class="col-md-6 border pb-1">
+                <div class="col-md-6 border pb-1 mb-1">
                     <table class="table table-borderless table-sm mb-0 pb-0">
                         <tbody>
                             <?php
@@ -25,10 +25,16 @@
 
                             switch ($z['topup_status']) {
                                 case 0:
-                                    $stBayar = "<b><span class='text-warning'>Proses</span></b>";
+                                    $stBayar = "<b><span class='text-warning'>Menunggu Pembayaran</span></b>";
                                     break;
                                 case 1:
                                     $stBayar = "<b><span class='text-success'>Sukses</span></b>";
+                                    break;
+                                case 2:
+                                    $stBayar = "<b><span class='text-primary'>Dalam Pengecekan</span></b>";
+                                    break;
+                                case 3:
+                                    $stBayar = "<b><span class='text-danger'>Gagal</span></b>";
                                     break;
                             }
 
@@ -39,6 +45,11 @@
                                 <td><small>#<?= $dibuat ?></small><br><?= strtoupper($z['bank']) . " " . $z['rek'] . "<br>" . $z['nama'] ?></td>
                                 <td><small>Jumlah/Status</small><br><b><?= number_format($z['jumlah']) ?><br><small><?= $stBayar ?></b></small></td>
                             </tr>
+                            <?php if ($z['topup_status'] == 0) { ?>
+                                <tr class="<?= $classTR ?>">
+                                    <td colspan="3"><span class="btn btn-sm btn-outline-primary w-100" id="push" data-id="<?= $id ?>">Saya sudah Bayar/Transfer</span></td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -109,4 +120,16 @@
             },
         });
     });
+
+    $("span#push").click(function() {
+        var id = $(this).attr("data-id");
+        $.post("<?= $this->BASE_URL ?>Setor/push", {
+                id: id,
+            },
+            function() {
+                location.reload(true);
+            }).fail(function() {
+            alert("error");
+        });
+    })
 </script>

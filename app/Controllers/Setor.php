@@ -61,4 +61,48 @@ class Setor extends Controller
          echo "Masih ada setoran dalam Proses, silahkan Tunggu!";
       }
    }
+
+   function push()
+   {
+      $id = $_POST['id'];
+      $set = "topup_status = 2";
+      $where = "id_topup = " . $id;
+      $do = $this->model("M_DB_1")->update("topup", $set, $where);
+
+      if ($do['errno'] == 0) {
+         $message = "MDL Payment, payment.mdl.my.id/Setor/cp/" . $id;
+         $curl = curl_init();
+         curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.fonnte.com/send',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array('target' => '081268098300', 'message' => $message),
+            CURLOPT_HTTPHEADER => array('Authorization: M2tCJhb_mcr5tHFo5r4B')
+         ));
+         curl_exec($curl);
+         curl_close($curl);
+      }
+   }
+
+   function cp($id)
+   {
+      $where = "id_topup = " . $id;
+      $data['data'] = $this->model('M_DB_1')->get_where_row('topup', $where);
+      $this->view("Setor/cp", $data);
+   }
+
+   function confirm($id, $c)
+   {
+      $set = "topup_status = " . $c;
+      $where = "id_topup = " . $id;
+      echo "<pre>";
+      print_r($this->model("M_DB_1")->update("topup", $set, $where));
+      echo "<br>Confirm: " . $c;
+      echo "</pre>";
+   }
 }
