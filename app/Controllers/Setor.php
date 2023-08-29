@@ -70,7 +70,8 @@ class Setor extends Controller
       $do = $this->model("M_DB_1")->update("topup", $set, $where);
 
       if ($do['errno'] == 0) {
-         $message = "MDL Payment, payment.mdl.my.id/Setor/cp/" . $id;
+         $user = $this->userData['nama'] . " " . $this->userData['no_user'];
+         $message = "MDL Payment " . $user . ", payment.mdl.my.id/Setor_/cp/" . $id;
          $curl = curl_init();
          curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api.fonnte.com/send',
@@ -87,22 +88,5 @@ class Setor extends Controller
          curl_exec($curl);
          curl_close($curl);
       }
-   }
-
-   function cp($id)
-   {
-      $where = "id_topup = " . $id;
-      $data['data'] = $this->model('M_DB_1')->get_where_row('topup', $where);
-      $this->view("Setor/cp", $data);
-   }
-
-   function confirm($id, $c)
-   {
-      $set = "topup_status = " . $c;
-      $where = "id_topup = " . $id;
-      echo "<pre>";
-      print_r($this->model("M_DB_1")->update("topup", $set, $where));
-      echo "<br>Confirm: " . $c;
-      echo "</pre>";
    }
 }
