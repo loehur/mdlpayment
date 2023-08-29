@@ -11,7 +11,7 @@ $z = $data['data'] ?>
     <tr>
       <td><small>Tanggal</small><br><?= $dibuat ?></td>
       <td><small>Jumlah</small><br><b><?= number_format($z['jumlah']) ?></td>
-      <td><small>Metode Bayar</small><br><?= strtoupper($z['bank']) ?></td>
+      <td><small>Metode</small><br><?= strtoupper($z['bank']) ?></td>
     </tr>
     <tr>
       <td colspan="3">Status: <b><?= $z['topup_status'] ?></b></td>
