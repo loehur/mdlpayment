@@ -83,11 +83,22 @@
     }
 
     function Print(id) {
-        var printContents = document.getElementById("print" + id).innerHTML;
-        var originalContents = document.body.innerHTML;
-        window.document.body.style = 'margin:0';
-        window.document.writeln(printContents);
-        window.print();
-        location.reload(true);
+        var divContents = document.getElementById("print" + id).innerHTML;
+        var a = window.open('');
+        a.document.write('<html>');
+        a.document.write('<title>Print Page</title>');
+        a.document.write('<body style="margin-left: <?= $this->mdl_setting['print_ms'] ?>mm">');
+        a.document.write(divContents);
+        a.document.write('</body></html>');
+        var window_width = $(window).width();
+        a.print();
+
+        if (window_width > 600) {
+            a.close()
+        } else {
+            setTimeout(function() {
+                a.close()
+            }, 60000);
+        }
     }
 </script>
