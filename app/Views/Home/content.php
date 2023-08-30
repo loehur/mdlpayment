@@ -1,11 +1,65 @@
-<div id="content"></div>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-auto me-auto">
+                Outlate/Staff
+                <h6><b class="text-success"><?= ($this->userData['nama'] == $this->setting['nama']) ? $this->setting['nama'] : $this->setting['nama'] . "/" . $this->userData['nama']; ?></b></h6>
+            </div>
+            <div class="col-auto">
+                <span class="float-right">Kas</span><br>
+                <h6><b class="text-success"><?= number_format($data['kas']) ?></b></h6>
+            </div>
+            <?php if ($this->userData['no_user'] == $this->userData['no_master']) { ?>
+                <div class="col-auto">
+                    <span class="float-right">Saldo</span><br>
+                    <h6><b class="text-success"><?= number_format($data['saldo']) ?></b></h6>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+
+<ul class="nav nav-tabs mx-2 mt-2" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Pra Bayar [<span id="pre_antri"></span>]</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Pasca Bayar [<span id="post_antri"></span>]</button>
+    </li>
+</ul>
+<div class="tab-content mx-1 pt-1" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row" id="load_pre">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row" id="load_post"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="content" style="padding-bottom:80px">
+    <div class="container-fluid">
+    </div>
+</div>
 
 <script src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
 <script src="<?= $this->ASSETS_URL ?>js/popper.min.js"></script>
 <script src="<?= $this->ASSETS_URL ?>plugins/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
+
+
 <script>
     $(document).ready(function() {
-        load();
+        load_pre();
+        load_post();
 
         setInterval(function() {
             cek_antri_pre();
@@ -15,10 +69,13 @@
         }, 5000);
     });
 
-    function load() {
-        $("div#content").load('<?= $this->BASE_URL ?>Home/load_content');
+    function load_pre() {
+        $("div#load_pre").load('<?= $this->BASE_URL ?>Home/load_pre');
     }
 
+    function load_post() {
+        $("div#load_post").load('<?= $this->BASE_URL ?>Home/load_post');
+    }
 
     // PREPAID FUNCTIONS
     function cek_antri_pre() {
@@ -42,7 +99,7 @@
             type: "POST",
             success: function(res) {
                 if (res == 1) {
-                    load();
+                    load_pre();
                 }
             },
         });
@@ -55,7 +112,7 @@
             type: "POST",
             success: function(res) {
                 if (res == 1) {
-                    load();
+                    load_pre();
                 }
             },
         });
@@ -76,7 +133,7 @@
             type: "POST",
             success: function(res) {
                 if (res == 1) {
-                    load();
+                    load_post();
                 }
             },
         });
@@ -87,7 +144,6 @@
         var a = window.open('');
         a.document.write('<html>');
         a.document.write('<title>Print Page</title>');
-        a.document.write('<body style="margin-left: <?= $this->mdl_setting['print_ms'] ?>mm">');
         a.document.write(divContents);
         a.document.write('</body></html>');
         var window_width = $(window).width();

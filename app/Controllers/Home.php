@@ -24,12 +24,19 @@ class Home extends Controller
 
    public function load()
    {
-      $this->view($this->view_content);
+      $data = $this->saldo();
+      $this->view($this->view_content, $data);
    }
 
-   public function load_content()
+   public function load_pre()
    {
       $data = $this->saldo();
-      $this->view($this->page . "/load", $data);
+      $this->view($this->page . "/pre", $data);
+   }
+
+   public function load_post()
+   {
+      $data = $this->saldo();
+      $this->view($this->page . "/post", $data);
    }
 }
