@@ -83,7 +83,7 @@ class Setor extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array('target' => '081268098300', 'message' => $message),
-            CURLOPT_HTTPHEADER => array('Authorization: M2tCJhb_mcr5tHFo5r4B')
+            CURLOPT_HTTPHEADER => array('Authorization: ' . $this->token_wa)
          ));
          curl_exec($curl);
          curl_close($curl);
