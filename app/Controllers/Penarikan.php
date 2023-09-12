@@ -35,7 +35,6 @@ class Penarikan extends Controller
       $pin = $_POST["pin"];
       $ket = $_POST["ket"];
 
-
       $kas_status = 0;
       if ($this->model('Validasi')->enc($pin) == $this->setting['pin']) {
          $kas_status = 1;
