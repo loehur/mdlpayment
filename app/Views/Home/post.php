@@ -23,7 +23,7 @@ foreach ($data['data_post'] as $a) {
         $proses_post_count += 1;
     }
 ?>
-    <div class="col-md-6 border border-white border-3 pb-1 rounded px-1" style="background-color:blanchedalmond">
+    <div class="col border pb-1 rounded m-1 px-1 <?= (date("Y-m-d") == substr($a['updateTime'], 0, 10)) ? "border-secondary" : "" ?>">
         <table class="table table-borderless table-sm mb-0 pb-0">
             <tr>
                 <td nowrap>

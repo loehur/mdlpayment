@@ -4,7 +4,7 @@
 		?>
 
 			<b>
-				<nav class="navbar navbar-dark bg-light navbar-expand border-top fixed-bottom m-auto p-0" style="max-width: 750px;min-width: <?= $min_width ?>;">
+				<nav class="navbar navbar-dark bg-light navbar-expand border-top fixed-bottom m-auto p-0" style="max-width: <?= $max_width ?>;min-width: <?= $min_width ?>;">
 					<ul class="navbar-nav nav-justified w-100">
 						<li class="nav-item">
 							<a href="<?= $this->BASE_URL ?>Staff" class="<?= $class_menu ?>"><i class="fas fa-users"></i><br>Staff</a>

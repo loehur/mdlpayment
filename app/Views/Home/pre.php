@@ -27,13 +27,13 @@ foreach ($data['data_pre'] as $a) {
         $proses_pre_count += 1;
     }
 ?>
-    <div class="col-md-6 border border-white border-3 pb-1 rounded px-1" style="background-color:aliceblue;">
+    <div class="col border pb-1 rounded m-1 px-1 <?= (date("Y-m-d") == substr($a['updateTime'], 0, 10)) ? "border-secondary" : "" ?>">
         <table class="table table-borderless table-sm mb-0 pb-0">
             <tr>
                 <td nowrap> <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
                         <a href="" class="noact noact text-primary" onclick="Print('<?= $id ?>')"><i class="fas fa-print"></i></a>
                     <?php } ?>
-                    <small><?= $a['insertTime'] ?><br><?= $a['no_user'] ?><br><?= substr($a['updateTime'], 2, -3) ?> [<?= $a['tr_id'] ?>]</small>
+                    <small><?= $a['insertTime'] ?> [<?= $id ?>]<br><?= $a['no_user'] ?><br><?= substr($a['updateTime'], 2, -3) ?> [<?= $a['tr_id'] ?>]</small>
                 </td>
                 <td class="text-end">
                     <span class="text-info"><?= $a['customer_id'] ?></span><br>

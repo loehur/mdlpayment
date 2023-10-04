@@ -56,9 +56,10 @@
 
 <?php
 $class_menu = "m-1 p-1 btn btn-sm btn-outline-dark w-100 border-0 text-nowrap";
+$max_width = "800px";
 ?>
 
-<body style="max-width: 752px; min-width:  <?= $min_width ?>;" class="m-auto small border border-bottom-0">
+<body style="max-width: <?= $max_width ?>; min-width:  <?= $min_width ?>;" class="m-auto small border border-bottom-0">
 	<?php require_once("nav_top.php"); ?>
 	<div class="container" style="padding-bottom: 70px;padding-top: 0px;"></div>
 	<?php require_once("nav_bot.php"); ?>

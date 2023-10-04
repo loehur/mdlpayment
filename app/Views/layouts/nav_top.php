@@ -1,5 +1,5 @@
 		<b>
-			<nav class="navbar navbar-dark bg-light navbar-expand mx-auto border-bottom p-0 fixed-top" style="max-width: 750px;min-width: <?= $min_width ?>;">
+			<nav class="navbar navbar-dark bg-light navbar-expand mx-auto border-bottom p-0 fixed-top" style="max-width: <?= $max_width ?>;min-width: <?= $min_width ?>;">
 				<ul class="navbar-nav nav-justified w-100">
 					<li class="nav-item">
 						<a href="<?= $this->BASE_URL ?>Home" class="<?= $class_menu ?>">
