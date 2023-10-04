@@ -59,6 +59,12 @@ class Enc extends Controller
 
         $newText = $this->enc($text, $lock);
 
+        $count = $this->model('M_DB_1')->count_where("user", $where);
+        if ($count == 0) {
+            echo "FAILED! NOT FOUND ==> " . $id;
+            exit();
+        }
+
         $set = "en = '" . $newText . "'";
         $do = $this->model('M_DB_1')->update("user", $set, $where);
         if ($do['errno'] == 0) {

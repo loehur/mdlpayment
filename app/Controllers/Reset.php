@@ -104,6 +104,13 @@ class Reset extends Controller
          exit();
       }
 
+      $where_c = "no_user = '" . $id . "'";
+      $count = $this->model('M_DB_1')->count_where("user", $where_c);
+      if ($count == 0) {
+         echo "FAILED! NOT FOUND ==> " . $id;
+         exit();
+      }
+
       $where = "no_user = '" . $id . "' AND jenis = 1";
       $cek = $this->model('M_DB_1')->count_where('reset_code', $where);
       if ($cek > 0) {
@@ -146,6 +153,13 @@ class Reset extends Controller
       if ($this->model('Validasi')->enc($lock) <> $this->enc) {
          $this->model('Log')->write($id . strtoupper(__FUNCTION__) . " [Generate] Reset Code FAILED! TOKEN INVALID");
          echo "FAILED!";
+         exit();
+      }
+
+      $where_c = "no_user = '" . $id . "'";
+      $count = $this->model('M_DB_1')->count_where("user", $where_c);
+      if ($count == 0) {
+         echo "FAILED! NOT FOUND ==> " . $id;
          exit();
       }
 
