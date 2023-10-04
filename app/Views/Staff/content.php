@@ -50,7 +50,6 @@
         <div class="row">
             <div class="col-md-6 border pb-1">
                 <table class="table table-borderless table-sm mb-0 pb-0">
-
                     <?php
                     $no = 0;
                     echo "<tbody>";
@@ -58,6 +57,12 @@
                         echo "<tr>";
                         foreach ($a as $key => $value) {
                             switch ($key) {
+                                case "password":
+                                    $pass_ = $value;
+                                    break;
+                                case "pin":
+                                    $pin_ = $value;
+                                    break;
                                 case "no_user":
                                     echo "<td><span style='cursor:pointer' data-value='" . $value  . "' data-mode='" . $key . "'>" . $value . "</span><br>";
                                     break;
@@ -68,18 +73,19 @@
                                     echo "<td><span style='cursor:pointer' data-value='" . $value  . "' data-mode='" . $key . "'>" . $value . "</span>";
                                     break;
                                 case "en":
-                                    echo "<br>Status: <span style='cursor:pointer' data-value='" . $value . "' data-mode='" . $key . "'>";
-                                    echo ($value == 1) ? "<span class='text-success'><b>Enabled</b></span>" : "<span class='text-secondary text-bold'><b>Disabled</b></span>";
-                                    echo "</span></>";
-                                    break;
+                                    echo "<br>Status:";
+                                    if ($value == $this->model('Validasi')->enc($pass_ . $pin_)) { ?>
+                                        <span class='text-success'><b>Active</b></span>
+                                    <?php } else { ?>
+                                        <span class='text-secondary text-bold'><b>Blocked</b></span>
+                                    <?php } ?>
+                    <?php break;
                             }
                         }
                         echo "<td nowrap>
-                        <a class='text-success text-decoration-none' href='" . $this->BASE_URL . "Staff/updateCell_Staff/en/1/" . $a['no_user'] . "'><i class='fas fa-check-circle'></i></a>
-                        <br><a class='text-danger text-decoration-none' href='" . $this->BASE_URL . "Staff/updateCell_Staff/en/0/" . $a['no_user'] . "'><i class='fas fa-times-circle'></i></a>
+                        <br><a class='text-danger border px-2 rounded text-decoration-none' href='" . $this->BASE_URL . "Staff/updateCell_Staff/en/0/" . $a['no_user'] . "'>Block</a>
                         </td>";
                         echo "</tr>";
-                        $no++;
                     }
                     echo "</tbody>";
                     ?>

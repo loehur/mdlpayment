@@ -141,7 +141,10 @@ foreach ($data['data_post'] as $a) {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" style="text-align: center; padding-left:5mm; padding-right:5mm">No. Ref<br><small><?= substr($a['noref'], 0, 25) . " " . substr($a['noref'], 25) ?></small></td>
+                                    <td colspan="3" style="text-align: center; padding-left:5mm; padding-right:5mm">
+                                        No. Ref<br>
+                                        <b><?= substr($a['noref'], 0, 25) . " " . substr($a['noref'], 25) ?></b>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="3">

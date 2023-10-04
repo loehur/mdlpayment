@@ -72,7 +72,7 @@ foreach ($data['data_pre'] as $a) {
                                     vertical-align: top;
                                 }
                             </style>
-                            <table style="width:42mm; font-size:x-small; margin-top:10px; margin-bottom:10px">
+                            <table style="width:42mm; font-size:x-small; margin-top:10px;">
                                 <tr>
                                     <td colspan="3" style="text-align: center; padding:6px;">
                                         <b> <?= strtoupper($this->setting['nama']) ?> [ <?= $this->userData['id_user'] ?> ]</b>
@@ -94,7 +94,7 @@ foreach ($data['data_pre'] as $a) {
                                     <td><?= $a['updateTime'] ?></td>
                                 </tr>
                                 <tr>
-                                    <td><b>Status:</b></td>
+                                    <td><b>Status</b></td>
                                     <td><b>:</b></td>
                                     <td><b><?= $a['message'] ?></b></td>
                                 </tr>
@@ -123,13 +123,17 @@ foreach ($data['data_pre'] as $a) {
                                         <hr>
                                     </td>
                                 </tr>
+                            </table>
+                            <table style="table-layout:fixed;width:42mm;margin-top:0">
                                 <tr>
-                                    <td colspan="3" style="text-align: center; padding-left:5mm; padding-right:5mm">SN<br><b><?= $a['sn'] ?></b></td>
+                                    <td colspan="3" style="padding-left:5mm; padding-right:5mm; text-align: center; word-wrap: break-word; font-size:11px">
+                                        <b><?= $a['sn'] ?></b>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="3">
                                         <hr>
-                                        <br>.<br>.<br>.<br>.
+                                        <br>.
                                     </td>
                                 </tr>
                             </table>

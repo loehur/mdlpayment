@@ -43,7 +43,7 @@ class Enc extends Controller
         }
 
         if ($this->model('Validasi')->enc($lock) <> $this->enc) {
-            $this->view("Set/main", "FAILED!");
+            echo "FAILED!";
             exit();
         }
 
@@ -63,7 +63,7 @@ class Enc extends Controller
         $do = $this->model('M_DB_1')->update("user", $set, $where);
         if ($do['errno'] == 0) {
             $this->model('Log')->write($id . " Verify Success");
-            $this->view("Set/main", "SUKSES VERIFY!");
+            echo "VERIFIED! " . $id;
             exit();
         } else {
             echo "FAILED";
@@ -130,7 +130,6 @@ class Enc extends Controller
         }
 
         $ciphering = "AES-128-CTR";
-        $iv_length = openssl_cipher_iv_length($ciphering);
         $options = 0;
         $encryption_iv = '1234567891011121';
         $encryption_key = "j499uL0v3ly&N3lyL0vEly_F0r3ver";
@@ -162,7 +161,6 @@ class Enc extends Controller
 
         //TRUE
         $ciphering = "AES-128-CTR";
-        $iv_length = openssl_cipher_iv_length($ciphering);
         $options = 0;
 
         $decryption_iv = '1234567891011121';
