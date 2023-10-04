@@ -11,7 +11,7 @@
 <div class="content">
     <div class="container-fluid px-4">
         <div class="row">
-            <div class="col-md-6 border pb-1 pt-2">
+            <div class="col border pb-1 pt-2">
                 <label><span class="ml-3"><b>Penarikan Kas Staff</b></span></label>
                 <hr>
                 <table class="table table-borderless table-sm mb-0 pb-0">
@@ -62,6 +62,12 @@
         </div>
     </div>
 </div>
+
+<div class="content" style="padding-bottom:80px">
+    <div class="container-fluid">
+    </div>
+</div>
+
 
 
 <!-- SCRIPT -->

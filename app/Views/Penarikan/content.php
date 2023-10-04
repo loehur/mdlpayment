@@ -28,7 +28,7 @@
     </div>
 </div>
 <hr>
-<div class="content">
+<div class="content px-2">
     <div class="container-fluid">
         <div class="row">
             <div class="col-auto mr-auto">
@@ -66,8 +66,8 @@
 <hr>
 <div class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 border pb-1">
+        <div class="row px-2">
+            <div class="col border pb-1">
                 <table class="table table-borderless table-sm mb-0 pb-0">
                     <thead class="d-none">
                         <tr>
@@ -111,6 +111,11 @@
         </div>
     </div>
 </div>
+<div class="content" style="padding-bottom:80px">
+    <div class="container-fluid">
+    </div>
+</div>
+
 
 
 <!-- SCRIPT -->

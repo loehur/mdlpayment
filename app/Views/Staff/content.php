@@ -48,7 +48,7 @@
 <div class="content">
     <div class="container-fluid px-4">
         <div class="row">
-            <div class="col-md-6 border pb-1">
+            <div class="col border pb-1">
                 <table class="table table-borderless table-sm mb-0 pb-0">
                     <?php
                     $no = 0;
@@ -94,6 +94,11 @@
         </div>
     </div>
 </div>
+<div class="content" style="padding-bottom:80px">
+    <div class="container-fluid">
+    </div>
+</div>
+
 
 
 <!-- SCRIPT -->

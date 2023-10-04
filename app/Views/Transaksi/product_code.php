@@ -1,3 +1,9 @@
+<?php
+$class_col = "col mb-2 ps-0";
+$class_btn = "btn btn-sm shadow-sm btn-outline-success w-100";
+?>
+
+
 <div class="row ms-1">
     <div class="col-auto">
         <h6><b><?= strtoupper($data['des']) ?></b></h6>
@@ -8,8 +14,8 @@
         <div class="row mx-1">
             <?php
             foreach ($data['data'] as $key => $a) { ?>
-                <div class="col-auto pb-1 pt-1 px-2 me-2 mb-2 border border-success rounded">
-                    <a class="text-decoration-none" href="<?= $this->BASE_URL ?>Transaksi/confirmation/<?= $key ?>/<?= $a[0] ?>/<?= $data['des'] ?>/<?= $data['type'] ?>/<?= $data['jenis'] ?>/<?= $a[2] ?>">
+                <div class="<?= $class_col ?>">
+                    <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/confirmation/<?= $key ?>/<?= $a[0] ?>/<?= $data['des'] ?>/<?= $data['type'] ?>/<?= $data['jenis'] ?>/<?= $a[2] ?>">
                         <?= $a[0] . ", " . $a[1] . "<br><b>Harga Rp" . number_format($a[2]) ?></b> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a[3]) . ")</small>" : "" ?>
                     </a>
                 </div>

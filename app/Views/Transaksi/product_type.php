@@ -1,3 +1,8 @@
+<?php
+$class_col = "col mb-2 ps-0";
+$class_btn = "btn btn-sm shadow-sm btn-outline-success w-100";
+?>
+
 <div class="content">
     <div class="container-fluid">
         <div class="row ml-1">
@@ -9,14 +14,14 @@
             <?php
             if ($data == 1) {
                 foreach ($this->prepaidList['product_type'] as $a) { ?>
-                    <div class="col-auto pb-1 pt-1 px-2 me-2 mb-2 border border-success rounded">
-                        <a class="text-decoration-none" href="<?= $this->BASE_URL ?>Transaksi/product_des/ <?= $a ?>/<?= $data ?>"><?= strtoupper($a) ?></a>
+                    <div class="<?= $class_col ?>">
+                        <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/product_des/ <?= $a ?>/<?= $data ?>"><?= strtoupper($a) ?></a>
                     </div>
                 <?php  }
             } else {
                 foreach ($this->postpaidList['product_type'] as $a) { ?>
-                    <div class="col-auto pb-1 pt-1 px-2 me-2 mb-2 border border-success rounded">
-                        <a class="text-decoration-none" href="<?= $this->BASE_URL ?>Transaksi/product_des/ <?= $a ?>/<?= $data ?>"><?= strtoupper($a) ?></a>
+                    <div class="<?= $class_col ?>">
+                        <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/product_des/ <?= $a ?>/<?= $data ?>"><?= strtoupper($a) ?></a>
                     </div>
             <?php }
             } ?>
