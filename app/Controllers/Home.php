@@ -39,4 +39,10 @@ class Home extends Controller
       $data = $this->saldo();
       $this->view($this->page . "/post", $data);
    }
+
+   public function load_manual()
+   {
+      $data = $this->model("M_DB_1")->get_where("manual", "no_user = '" . $this->userData['no_user'] . "' ORDER BY id_manual DESC LIMIT 12");
+      $this->view($this->page . "/manual", $data);
+   }
 }

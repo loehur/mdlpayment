@@ -10,6 +10,11 @@
 							<i class="fas fa-window-maximize"></i></i><br>Penggunaan Pribadi
 						</a>
 					</li>
+					<li class="nav-item">
+						<a href="<?= $this->BASE_URL ?>Manual_Set" class="nav-link text-secondary text-nowrap">
+							<i class="fas fa-window-maximize"></i></i><br>Manual
+						</a>
+					</li>
 				</ul>
 			</nav>
 		</b>

@@ -8,7 +8,7 @@
                 <a href="<?= $this->BASE_URL ?>Transaksi/product_type/2"><button class="btn btn-sm btn-outline-danger text-nowrap"><b>PASCA BAYAR</b></button></a>
             </div>
             <div class="col mb-2">
-                <a href="#"><button class="btn btn-sm btn-outline-dark text-nowrap"><b>MANUAL</b></button></a>
+                <a href="<?= $this->BASE_URL ?>Transaksi/product_type/3"><button class="btn btn-sm btn-outline-dark text-nowrap"><b>MANUAL</b></button></a>
             </div>
         </div>
     </div>

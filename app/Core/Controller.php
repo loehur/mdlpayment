@@ -132,12 +132,26 @@ class Controller extends Public_Variables
             }
         }
 
-        $total_success_kas = array_sum($arr_success_kas);
+        $arr_manual_wd = array();
+        $data['manual'] = $this->model('M_DB_1')->get_where('manual', "no_master = '" . $this->userData['no_master'] . "' ORDER BY updateTime DESC");
+        foreach ($data['manual'] as $a) {
+            if ($a['tr_status'] <> 3) {
+                if ($this->userData['no_user'] == $a['no_user']) {
+                    if ($a['id_manual_jenis'] == 1 || $a['id_manual_jenis'] == 2 || $a['id_manual_jenis'] == 5) {
+                        array_push($arr_success_kas, $a['jumlah'] + $a['biaya']);
+                    } else {
+                        array_push($arr_manual_wd, $a['jumlah'] - $a['biaya']);
+                    }
+                }
+            }
+        }
 
+
+        $total_success_kas = array_sum($arr_success_kas);
         $total_success_master = array_sum($arr_success_master);
         $saldo = $total_topup_success - $total_success_master;
 
-        $total_kas = $total_success_kas - $this->kas()['total_tarik'];
+        $total_kas = $total_success_kas - $this->kas()['total_tarik'] - array_sum($arr_manual_wd);
 
         $return['saldo'] = $saldo;
         $return['kas'] = $total_kas;

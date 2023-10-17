@@ -21,10 +21,13 @@
 
 <ul class="nav nav-tabs mx-2 mt-2" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Pra Bayar [<span id="pre_antri"></span>]</button>
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Pra Bayar <small><span id="pre_antri"></span></small></button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Pasca Bayar [<span id="post_antri"></span>]</button>
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Pasca Bayar <small><span id="post_antri"></span></small></button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="manual-tab" data-bs-toggle="tab" data-bs-target="#manual" type="button" role="tab" aria-controls="manual" aria-selected="false">Manual <small><span id="manual_antri"></span></small></button>
     </li>
 </ul>
 <div class="tab-content mx-1 pt-1" id="myTabContent">
@@ -40,6 +43,13 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row" id="load_post"></div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="manual" role="tabpanel" aria-labelledby="manual-tab">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row" id="load_manual"></div>
             </div>
         </div>
     </div>
@@ -60,12 +70,13 @@
     $(document).ready(function() {
         load_pre();
         load_post();
+        load_manual();
 
         setInterval(function() {
             cek_antri_pre();
             cek_proses_pre();
-
             cek_proses_post();
+            cek_manual();
         }, 5000);
     });
 
@@ -75,6 +86,10 @@
 
     function load_post() {
         $("div#load_post").load('<?= $this->BASE_URL ?>Home/load_post');
+    }
+
+    function load_manual() {
+        $("div#load_manual").load('<?= $this->BASE_URL ?>Home/load_manual');
     }
 
     // PREPAID FUNCTIONS
@@ -89,6 +104,13 @@
         var proses_pre_count = $("span#tr_proses_pre").html();
         if (proses_pre_count > 0) {
             cek_pre();
+        }
+    }
+
+    function cek_manual() {
+        var antri_manual_count = $("span#tr_antri_manual").html();
+        if (antri_manual_count > 0) {
+            load_manual();
         }
     }
 

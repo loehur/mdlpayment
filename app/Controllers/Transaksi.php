@@ -276,6 +276,176 @@ class Transaksi extends Controller
       }
    }
 
+
+   public function proses_manual($jenis)
+   {
+      $this->dataSynchrone();
+      $this->data();
+      $pin = $_POST['pin'];
+
+      //PIN DILARANG DEFAULT
+      if ($this->userData['pin'] == $this->model('Validasi')->enc("1234")) {
+         $this->model('Log')->write($this->userData['no_user'] . " Process Failed! because Default Password!");
+         echo "Silahkan mengganti PIN terlebih dahulu!";
+         exit();
+      }
+
+      //PIN DILARANG SAMA DENGAN PASSWORD
+      if ($this->userData['pin'] == $this->userData['password']) {
+         $this->model('Log')->write($this->userData['no_user'] . " Process Failed! Password same with PIN!");
+         exit();
+      }
+
+      //CEK PIN FAILED 3X LOGOUT
+      if ($this->userData['pin_failed'] > 2) {
+         $where = "id_user = " . $this->userData['id_user'];
+         $set = "en = 0";
+         $do = $this->model('M_DB_1')->update("user", $set, $where);
+         if ($do['errno'] == 0) {
+            $this->dataSynchrone();
+            echo 0;
+            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=-442290145&text=Hacker! " . $this->userData['no_user'];
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_exec($ch);
+            curl_close($ch);
+            exit();
+         } else {
+            echo 0;
+            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=-442290145&text=Hacker! " . $this->userData['no_user'];
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_exec($ch);
+            curl_close($ch);
+            exit();
+         }
+      }
+
+      //CEK PIN BENER ATAU ENGGA
+      if ($this->userData['pin'] <> $this->model('Validasi')->enc($pin)) {
+         $where = "id_user = " . $this->userData['id_user'];
+         $set = "pin_failed = pin_failed + 1";
+         $do = $this->model('M_DB_1')->update("user", $set, $where);
+         if ($do['errno'] == 0) {
+            $this->model('Log')->write($this->userData['no_user'] . " Proces Failed! Wrong PIN");
+            echo "PIN Salah! 3x akan Logout!";
+            exit();
+         } else {
+            $this->model('Log')->write($this->userData['no_user'] . " Proces Failed! Wrong PIN");
+            echo "PIN Salah! 3x akan Logout!";
+            exit();
+         }
+      }
+
+      //CEK USER MASIH AKTIF ATAU TIDAK
+      if ($this->userData['en'] <> $this->model('Validasi')->enc($this->userData['password'] . $this->userData['pin'])) {
+
+         $where = "id_user = " . $this->userData['id_user'];
+         $set = "pin_failed = pin_failed + 1";
+         $do = $this->model('M_DB_1')->update("user", $set, $where);
+         if ($do['errno'] == 0) {
+            $this->model('Log')->write($this->userData['no_user'] . " Proces Failed! Account not Verify yet");
+            echo "Account Error! 3x akan Logout!";
+            exit();
+         } else {
+            $this->model('Log')->write($this->userData['no_user'] . " Proces Failed! Account not Verify yet");
+            echo "Account Error! 3x akan Logout!";
+            exit();
+         }
+      }
+
+      $target_id = $_POST['target_id'];
+      $target = "";
+      $data_tujuan = [];
+      switch ($jenis) {
+         case 1:
+         case 3:
+         case 5:
+            $data_tujuan = $this->model("M_DB_1")->get("_bank");
+            break;
+         case 2:
+         case 4:
+            $data_tujuan = $this->model("M_DB_1")->get("_ewallet");
+            break;
+      }
+
+      foreach ($data_tujuan as $dt) {
+         if ($dt['code'] == $target_id) {
+            $target = $dt['name'];
+         }
+      }
+
+      if (strlen($target) == 0) {
+         echo "Target NOT FOUND";
+         exit();
+      }
+
+      $target_number = $_POST['target_number'];
+      $target_name = $_POST['target_name'];
+      $jumlah = $_POST['jumlah'];
+      $note = $_POST['note'];
+
+      $harga = $this->model("M_DB_1")->get_where_row("manual_set", "no_master = '" . $this->userData['no_master'] . "' AND id_manual_jenis = " . $jenis);
+      $biaya_dasar = $harga['biaya_dasar'];
+      $tarif = $harga['biaya'];
+
+      $kelipatan = $harga['kelipatan'];
+      if ($jumlah >= $kelipatan) {
+         $pengali = ceil($jumlah / $kelipatan);
+         $biaya = $biaya_dasar + ($tarif * $pengali);
+      } else {
+         $biaya = $biaya_dasar;
+      }
+
+      $transaksi = "";
+      $manual = $this->model("M_DB_1")->get("manual_jenis");
+      foreach ($manual as $m) {
+         if ($m['id_manual_jenis'] == $jenis) {
+            $transaksi = urlencode("*" . strtoupper($m['manual_jenis']) . "*\n");
+         }
+      }
+
+      $id_manual = date("YmdHis") . rand(0, 9);
+      $col = "id_manual, no_user, no_master, id_manual_jenis, target_id, target, target_number, target_name, jumlah, note, biaya";
+      $val = "'" . $id_manual . "','" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "'," . $jenis . ",'" . $target_id . "','" . $target . "','" . $target_number . "','" . $target_name . "'," . $jumlah . ",'" . $note . "'," . $biaya;
+      $do = $this->model('M_DB_1')->insertCols("manual", $col, $val);
+      if ($do['errno'] == 0) {
+
+         $set = "sort = sort+1";
+         $whereSort = "code = " . $target_id;
+         switch ($jenis) {
+            case 1:
+            case 3:
+            case 5:
+               $this->model('M_DB_1')->update("_bank", $set, $whereSort);
+               break;
+            case 2:
+            case 4:
+               $this->model('M_DB_1')->update("_ewallet", $set, $whereSort);
+               break;
+         }
+
+         if (strlen($note) > 0) {
+            $text = urlencode($target . "\n" . strtoupper($target_name) . "\n_" . $note . "_\npayment.mdl.my.id/O/manual/" . $id_manual);
+         } else {
+            $text = urlencode($target . "\n" . strtoupper($target_name) . "\npayment.mdl.my.id/O/manual/" . $id_manual);
+         }
+         $id_telegram = $this->setting['telegram_id'];
+         $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $id_telegram . "&parse_mode=markdown&text=" . $transaksi . $text;
+         $ch = curl_init();
+         curl_setopt($ch, CURLOPT_URL, $url);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+         curl_exec($ch);
+         curl_close($ch);
+
+         echo $do['errno'];
+      } else {
+         echo $do['error'];
+      }
+   }
+
    public function product_type($jenis)
    {
       $this->index();
@@ -372,6 +542,12 @@ class Transaksi extends Controller
       $array['history'] = $this->model('M_DB_1')->get_cols_where('prepaid', "customer_id, tr_name, count(customer_id) as count", "no_user = '" . $this->userData['no_user'] . "' AND UPPER(product_code) LIKE '%" . strtoupper($des) . "%' GROUP BY customer_id, tr_name ORDER BY count(customer_id) DESC LIMIT 5", 1);
 
       $this->view($this->page . "/confirmation", $array);
+   }
+
+   public function confirmation_manual($jenis)
+   {
+      $this->index();
+      $this->view($this->page . "/confirmation_manual", $jenis);
    }
 
    public function confirmationPOST($code, $jenis)

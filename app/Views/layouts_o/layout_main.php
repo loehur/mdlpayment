@@ -55,30 +55,6 @@
 
 <?php require_once("layout_config.php"); ?>
 
-<?php
-$class_menu = "m-1 p-1 btn btn-sm btn-outline-dark w-100 border-0 text-nowrap";
-$max_width = "800px";
-?>
-
-<body style="max-width: <?= $max_width ?>; min-width:  <?= $min_width ?>;" class="m-auto small border border-bottom-0">
-	<?php require_once("nav_top.php"); ?>
-	<div class="container" style="padding-bottom: 70px;padding-top: 0px;"></div>
-	<?php require_once("nav_bot.php"); ?>
-</body>
+<body style="max-width: <?= $max_width ?>; min-width:  <?= $min_width ?>;" class="m-auto small border border-bottom-0;">
 
 </html>
-
-<script>
-	var time = new Date().getTime();
-	$(document.body).bind("mousemove keypress", function(e) {
-		time = new Date().getTime();
-	});
-
-	function refresh() {
-		if (new Date().getTime() - time >= 420000)
-			window.location.reload(true);
-		else
-			setTimeout(refresh, 10000);
-	}
-	setTimeout(refresh, 10000);
-</script>
