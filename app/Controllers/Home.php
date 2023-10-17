@@ -42,7 +42,13 @@ class Home extends Controller
 
    public function load_manual()
    {
-      $data = $this->model("M_DB_1")->get_where("manual", "no_user = '" . $this->userData['no_user'] . "' ORDER BY id_manual DESC LIMIT 12");
+      if ($this->userData['no_master'] == $this->userData['no_user']) {
+         $where = "no_master = '" . $this->userData['no_master'] . "'";
+      } else {
+         $where = "no_user = '" . $this->userData['no_user'] . "'";
+      }
+
+      $data = $this->model("M_DB_1")->get_where("manual", $where . " ORDER BY id_manual DESC LIMIT 12");
       $this->view($this->page . "/manual", $data);
    }
 }
