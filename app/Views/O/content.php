@@ -1,5 +1,4 @@
 <?php
-
 $jenis = $data['id_manual_jenis'];
 $tr_status = $data['tr_status'];
 $id = $data['id_manual'];
@@ -110,10 +109,10 @@ switch ($tr_status) {
                 <div class="col px-4 mx-4">
                     <div class="row mt-2">
                         <div class="col">
-                            <a href="<?= $this->BASE_URL ?>O/manual/<?= $id ?>/3" style="text-decoration: none;"><span class="text-danger">TOLAK</span></a>
+                            <a href="<?= $this->BASE_URL ?>O/action/<?= $id ?>/3" style="text-decoration: none;"><span class="text-danger">TOLAK</span></a>
                         </div>
                         <div class="col">
-                            <a href="<?= $this->BASE_URL ?>O/manual/<?= $id ?>/2"><span class="btn btn-success float-end">SUKSES</span></a>
+                            <a href="<?= $this->BASE_URL ?>O/action/<?= $id ?>/2"><span class="btn btn-success float-end">SUKSES</span></a>
                         </div>
                     </div>
                 </div>
@@ -126,7 +125,7 @@ switch ($tr_status) {
                 <div class="col px-4 text-center w-100">
                     <div class="row mt-2">
                         <div class="col pe-0">
-                            <a href="<?= $this->BASE_URL ?>O/manual/<?= $id ?>/1"><span class="btn btn-outline-primary">PROSES</span></a>
+                            <a href="<?= $this->BASE_URL ?>O/action/<?= $id ?>/1"><span class="btn btn-outline-primary">PROSES</span></a>
                         </div>
                     </div>
                 </div>
@@ -136,26 +135,26 @@ switch ($tr_status) {
 </div>
 
 <!-- SCRIPT -->
-<script src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
-<script src="<?= $this->ASSETS_URL ?>plugins/bootstrap-5.1/bootstrap.bundle.min.js"></script>
-
 <script>
-    $("span#push").click(function() {
-        var id = $(this).attr("data-id");
-        $.post("<?= $this->BASE_URL ?>O/update", {
-                id: id,
-            },
-            function() {
-                location.reload(true);
-            }).fail(function() {
-            alert("error");
+    $("a").click(function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        $.ajax({
+            url: href,
+            type: 'POST',
+            data: {},
+            success: function() {
+                content('<?= $id ?>');
+            }
         });
+
     })
 
     $("input.copy").click(function() {
         var textToCopy = $(this).val();
         $(this).select();
         document.execCommand('copy');
-        $(this).hide();
+        $(this).fadeOut(500);
+        $(this).fadeIn(500);
     })
 </script>
