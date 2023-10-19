@@ -428,9 +428,9 @@ class Transaksi extends Controller
          }
 
          if (strlen($note) > 0) {
-            $text = urlencode($target . "\n" . strtoupper($target_name) . "\n_" . $note . "_\npayment.mdl.my.id/O/manual/" . $id_manual);
+            $text = urlencode($target . "\n" . strtoupper($target_name) . "\n_" . $note . "_\npayment.mdl.my.id/O/m/" . $id_manual);
          } else {
-            $text = urlencode($target . "\n" . strtoupper($target_name) . "\npayment.mdl.my.id/O/manual/" . $id_manual);
+            $text = urlencode($target . "\n" . strtoupper($target_name) . "\npayment.mdl.my.id/O/m/" . $id_manual);
          }
          $id_telegram = $this->setting['telegram_id'];
          $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $id_telegram . "&parse_mode=markdown&text=" . $transaksi . $text;
