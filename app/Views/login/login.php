@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="c_" class="form-control" placeholder="Captcha Code" required autocomplete="off">
+                        <input type="number" name="c_" class="form-control" placeholder="Captcha Code" required autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <img src="<?= $this->BASE_URL ?>Login/captcha" alt="captcha" />

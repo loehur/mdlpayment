@@ -4,6 +4,13 @@ class O extends Controller
    public function __construct()
    {
       $this->CLASS = __CLASS__;
+
+      $_SESSION['secure']['encryption'] = "j499uL0v3ly&N3lyL0vEly_F0r3ver";
+      if (strlen($this->db_pass) == 0) {
+         $_SESSION['secure']['db_pass'] = "";
+      } else {
+         $_SESSION['secure']['db_pass'] = $this->model("Validasi")->dec_2($this->db_pass);
+      }
    }
 
    public function m($id = "", $action = null)
