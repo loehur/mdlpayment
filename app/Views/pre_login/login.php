@@ -58,7 +58,7 @@ if (!is_array($data)) {
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="token_" class="form-control" placeholder="Secret Key" required autocomplete="off">
+                        <input type="number" name="token_" class="form-control" placeholder="Secret Key" required autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
