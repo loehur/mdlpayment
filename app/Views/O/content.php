@@ -68,7 +68,12 @@ switch ($tr_status) {
                             <tr>
                                 <td class="pe-2">Jumlah</td>
                                 <td class="pe-1">:</td>
-                                <td><span class="text-dark"><?= number_format($data['jumlah']) ?></span></td>
+                                <td><span class="text-dark"><b>Rp<?= number_format($data['jumlah']) ?></b></span></td>
+                            </tr>
+                            <tr>
+                                <td class="pe-2">Biaya Admin</td>
+                                <td class="pe-1">:</td>
+                                <td><span class="text-dark">Rp<?= number_format($data['biaya']) ?></span></td>
                             </tr>
                             <tr>
                                 <td class="pe-2">Catatan</td>
@@ -90,11 +95,11 @@ switch ($tr_status) {
                 </div>
                 <?php if ($tr_status == 1) { ?>
                     <div class="row mt-2">
-                        <div class="col pe-0 text-center">
+                        <div class="col ps-0 text-center">
                             <span class="text-secondary">Nomor/ID</span><br>
                             <input class="btn btn-outline-primary copy" value="<?= $data['target_number'] ?>" readonly />
                         </div>
-                        <div class="col text-center">
+                        <div class="col ps-0 text-center">
                             <span class="text-secondary">Jumlah</span><br>
                             <input class="btn btn-outline-primary copy" value="<?= $data['jumlah'] ?>" readonly />
                         </div>
