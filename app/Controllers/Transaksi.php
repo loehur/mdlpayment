@@ -399,6 +399,10 @@ class Transaksi extends Controller
          $biaya = $biaya_dasar;
       }
 
+      if (isset($_POST['partner'])) {
+         $biaya = $biaya - 2000;
+      }
+
       $transaksi = "";
       $manual = $this->model("M_DB_1")->get("manual_jenis");
       foreach ($manual as $m) {

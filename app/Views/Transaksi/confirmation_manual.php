@@ -76,6 +76,16 @@ $harga = $this->model("M_DB_1")->get_where_row("manual_set", "no_master = '" . $
                         </div>
                     </div>
                     <div class="row mb-2">
+                        <div class="col ps-4">
+                            <input class="form-check-input" name="partner" type="checkbox" value="1" id="partner">
+                            <label class="form-check-label">
+                                Partner
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                    </div>
+                    <div class="row mb-2">
                         <div class="col">
                             <input type="password" class="form-control form-control-sm border-top-0 border-end-0 border-start-0" name="pin" placeholder="PIN Transaksi" autocomplete="new-password" required>
                         </div>
@@ -150,9 +160,17 @@ $harga = $this->model("M_DB_1")->get_where_row("manual_set", "no_master = '" . $
     });
 
     $("input[name=jumlah]").on("keyup change", function() {
+        f_biaya();
+    })
+
+    $("#partner").change(function() {
+        f_biaya();
+    });
+
+    function f_biaya() {
         var tarif = <?= $harga['biaya'] ?>;
         var kelipatan = <?= $harga['kelipatan'] ?>;
-        var jumlah = $(this).val();
+        var jumlah = $("input[name=jumlah]").val();
         var biaya_dasar = <?= $harga['biaya_dasar'] ?>;
         if (jumlah >= kelipatan) {
             var pengali = Math.ceil(jumlah / kelipatan);
@@ -160,8 +178,13 @@ $harga = $this->model("M_DB_1")->get_where_row("manual_set", "no_master = '" . $
         } else {
             biaya = biaya_dasar;
         }
+
+        if ($('input#partner').is(':checked')) {
+            biaya -= 2000;
+        }
+
         $("input[name=biaya]").val(biaya);
-    })
+    }
 
     $(".freq").click(function() {
         var id = $(this).attr("data-id");
