@@ -58,7 +58,7 @@ class Transaksi extends Controller
          if ($do['errno'] == 0) {
             $this->dataSynchrone();
             echo 0;
-            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=-442290145&text=Hacker! " . $this->userData['no_user'];
+            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $this->setting['telegram_id'] . "&text=Hacker! " . $this->userData['no_user'];
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -67,7 +67,7 @@ class Transaksi extends Controller
             exit();
          } else {
             echo 0;
-            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=-442290145&text=Hacker! " . $this->userData['no_user'];
+            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $this->setting['telegram_id'] . "&text=Hacker! " . $this->userData['no_user'];
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -301,10 +301,11 @@ class Transaksi extends Controller
          $where = "id_user = " . $this->userData['id_user'];
          $set = "en = 0";
          $do = $this->model('M_DB_1')->update("user", $set, $where);
+         $id_telegram = $this->setting['telegram_id'];
          if ($do['errno'] == 0) {
             $this->dataSynchrone();
             echo 0;
-            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=-442290145&text=Hacker! " . $this->userData['no_user'];
+            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $id_telegram . "&text=Hacker! " . $this->userData['no_user'];
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -313,7 +314,7 @@ class Transaksi extends Controller
             exit();
          } else {
             echo 0;
-            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=-442290145&text=Hacker! " . $this->userData['no_user'];
+            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $id_telegram . "&text=Hacker! " . $this->userData['no_user'];
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -419,10 +420,9 @@ class Transaksi extends Controller
       $col = "id_manual, no_user, no_master, id_manual_jenis, target_id, target, target_number, target_name, jumlah, note, biaya, telegram_id";
       $val = "'" . $id_manual . "','" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "'," . $jenis . ",'" . $target_id . "','" . $target . "','" . $target_number . "','" . $target_name . "'," . $jumlah . ",'" . $note . "'," . $biaya . ",'" . $id_telegram . "'";
 
-      $do = $this->model('M_DB_1')->insertCols("manual", $col, $val);
+      //$do = $this->model('M_DB_1')->insertCols("manual", $col, $val);
       $do['errno'] = 0;
       if ($do['errno'] == 0) {
-
          $set = "sort = sort+1";
          $whereSort = "code = " . $target_id;
          switch ($jenis) {
@@ -447,6 +447,8 @@ class Transaksi extends Controller
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
          curl_exec($ch);
          curl_close($ch);
+
+         echo $url;
       } else {
          echo $do['error'];
       }
