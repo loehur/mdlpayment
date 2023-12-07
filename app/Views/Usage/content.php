@@ -15,13 +15,13 @@
             <div class="col-auto mr-auto">
                 <form id="form" action="<?= $this->BASE_URL ?>Usage/simpan" method="post">
                     <div class="row mb-2">
-                        <div class="col">
+                        <div class="col pe-0">
                             <input type="text" class="form-control form-control-sm" name="note" placeholder="Keterangan" required>
                         </div>
-                        <div class="col">
+                        <div class="col pe-0">
                             <input type="text" class="form-control form-control-sm" name="id" placeholder="ID Pelanggan" required>
                         </div>
-                        <div class="col">
+                        <div class="col pe-0">
                             <input type="number" class="form-control form-control-sm" name="limit" placeholder="Limit Bulanan" required>
                         </div>
                     </div>
@@ -61,6 +61,10 @@
                 </table>
             </div>
         </div>
+    </div>
+</div>
+<div class="content" style="padding-bottom:80px">
+    <div class="container-fluid">
     </div>
 </div>
 

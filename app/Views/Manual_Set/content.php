@@ -15,7 +15,7 @@
             <div class="col-auto mr-auto">
                 <form id="form" action="<?= $this->BASE_URL . $this->CLASS ?>/simpan" method="post">
                     <div class="row mb-2">
-                        <div class="col-auto pe-0">
+                        <div class="col-auto pe-0 mb-1">
                             <select name="id_manual_jenis" class="form-select form-select-sm" aria-label=".form-select-sm example" required>
                                 <option selected value="">Jenis</option>
                                 <?php $manual = $this->model("M_DB_1")->get("manual_jenis");
@@ -25,13 +25,13 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="col-auto pe-0">
+                        <div class="col-auto pe-0 mb-1">
                             <input type="number" class="form-control form-control-sm" name="kelipatan" placeholder="Nominal Kelipatan" required>
                         </div>
-                        <div class="col-auto pe-0">
+                        <div class="col-auto pe-0 mb-1">
                             <input type="number" class="form-control form-control-sm" name="biaya" placeholder="Biaya" required>
                         </div>
-                        <div class="col-auto pe-0">
+                        <div class="col-auto pe-0 mb-1">
                             <input type="number" class="form-control form-control-sm" name="dasar_biaya" placeholder="Biaya Dasar" required>
                         </div>
                     </div>
@@ -108,6 +108,10 @@
                 </table>
             </div>
         </div>
+    </div>
+</div>
+<div class="content" style="padding-bottom:80px">
+    <div class="container-fluid">
     </div>
 </div>
 

@@ -99,6 +99,11 @@
     </div>
 </form>
 
+<div class="content" style="padding-bottom:80px">
+    <div class="container-fluid">
+    </div>
+</div>
+
 <!-- SCRIPT -->
 <script src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
 <script src="<?= $this->ASSETS_URL ?>js/popper.min.js"></script>

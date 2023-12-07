@@ -87,3 +87,7 @@
         </div>
     </div>
 </div>
+<div class="content" style="padding-bottom:30px">
+    <div class="container-fluid">
+    </div>
+</div>
