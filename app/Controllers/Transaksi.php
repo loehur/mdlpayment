@@ -421,6 +421,8 @@ class Transaksi extends Controller
       $val = "'" . $id_manual . "','" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "'," . $jenis . ",'" . $target_id . "','" . $target . "','" . $target_number . "','" . $target_name . "'," . $jumlah . ",'" . $note . "'," . $biaya . ",'" . $id_telegram . "'";
 
       $do = $this->model('M_DB_1')->insertCols("manual", $col, $val);
+      print_r($do);
+      exit();
       if ($do['errno'] == 0) {
          $set = "sort = sort+1";
          $whereSort = "code = " . $target_id;
