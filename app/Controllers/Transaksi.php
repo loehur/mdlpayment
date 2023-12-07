@@ -444,10 +444,10 @@ class Transaksi extends Controller
          $ch = curl_init();
          curl_setopt($ch, CURLOPT_URL, $url);
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-         curl_exec($ch);
+         $result = curl_exec($ch);
          curl_close($ch);
 
-         echo $url;
+         print_r($result);
       } else {
          echo $do['error'];
       }
