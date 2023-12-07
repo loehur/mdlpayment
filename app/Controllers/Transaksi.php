@@ -419,8 +419,7 @@ class Transaksi extends Controller
 
       $col = "id_manual, no_user, no_master, id_manual_jenis, target_id, target, target_number, target_name, jumlah, note, biaya, telegram_id";
       $val = "'" . $id_manual . "','" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "'," . $jenis . ",'" . $target_id . "','" . $target . "','" . $target_number . "','" . $target_name . "'," . $jumlah . ",'" . $note . "'," . $biaya . ",'" . $id_telegram . "'";
-      //$do = $this->model('M_DB_1')->insertCols("manual", $col, $val);
-      $do['errno'] = 0;
+      $do = $this->model('M_DB_1')->insertCols("manual", $col, $val);
       if ($do['errno'] == 0) {
          $set = "sort = sort+1";
          $whereSort = "code = " . $target_id;
@@ -444,8 +443,8 @@ class Transaksi extends Controller
          $ch = curl_init();
          curl_setopt($ch, CURLOPT_URL, $url);
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-         $result = curl_exec($ch);
-         echo $result;
+         $res = curl_exec($ch);
+         curl_close($ch);
       } else {
          echo $do['error'];
       }
