@@ -36,12 +36,37 @@ class O extends Controller
       $this->view(__CLASS__ . "/content", $data);
    }
 
-   function action($id, $action)
+   function action($id, $action, $id_telegram)
    {
+      switch ($action) {
+         case 1:
+            $status = "Dalam Proses";
+            break;
+         case 2:
+            $status = "Transaksi Sukses";
+            break;
+         case 3:
+            $status = "Transaksi Ditolak";
+            break;
+         default:
+            $status = "No Status";
+            break;
+      }
+
       $where = "id_manual = '" . $id . "'";
       if ($action <> null) {
          $set = "tr_status = " . $action;
-         $this->model("M_DB_1")->update("manual", $set, $where);
+         $up = $this->model("M_DB_1")->update("manual", $set, $where);
+         print_r($up);
+         if ($up['errno'] == 0) {
+            $text = substr($id, -2) . " - " . $status;
+            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $id_telegram . "&parse_mode=markdown&text=" . $text;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_exec($ch);
+            curl_close($ch);
+         }
       }
    }
 }

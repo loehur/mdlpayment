@@ -378,7 +378,7 @@ class Transaksi extends Controller
       }
 
       if (strlen($target) == 0) {
-         echo "Target NOT FOUND";
+         echo "Target Not Found";
          exit();
       }
 
@@ -404,17 +404,23 @@ class Transaksi extends Controller
       }
 
       $transaksi = "";
+      $id_manual = date("YmdHis") . rand(0, 9) . rand(0, 9);
       $manual = $this->model("M_DB_1")->get("manual_jenis");
       foreach ($manual as $m) {
          if ($m['id_manual_jenis'] == $jenis) {
-            $transaksi = urlencode("*" . strtoupper($m['manual_jenis']) . "*\n");
+            $transaksi = substr($id_manual, -2) . " - " . urlencode("*" . strtoupper($m['manual_jenis']) . "*\n");
          }
       }
 
-      $id_manual = date("YmdHis") . rand(0, 9);
-      $col = "id_manual, no_user, no_master, id_manual_jenis, target_id, target, target_number, target_name, jumlah, note, biaya";
-      $val = "'" . $id_manual . "','" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "'," . $jenis . ",'" . $target_id . "','" . $target . "','" . $target_number . "','" . $target_name . "'," . $jumlah . ",'" . $note . "'," . $biaya;
+      $head = urlencode(strtoupper($this->setting['nama'] . "\n"));
+      $transaksi = $head . $transaksi;
+      $id_telegram = $this->setting['telegram_id'];
+
+      $col = "id_manual, no_user, no_master, id_manual_jenis, target_id, target, target_number, target_name, jumlah, note, biaya, telegram_id";
+      $val = "'" . $id_manual . "','" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "'," . $jenis . ",'" . $target_id . "','" . $target . "','" . $target_number . "','" . $target_name . "'," . $jumlah . ",'" . $note . "'," . $biaya . ",'" . $id_telegram . "'";
+
       $do = $this->model('M_DB_1')->insertCols("manual", $col, $val);
+      $do['errno'] = 0;
       if ($do['errno'] == 0) {
 
          $set = "sort = sort+1";
@@ -432,19 +438,15 @@ class Transaksi extends Controller
          }
 
          if (strlen($note) > 0) {
-            $text = urlencode($target . "\n" . strtoupper($target_name) . "\n_" . $note . "_\npayment.mdl.my.id/O/m/" . $id_manual);
-         } else {
-            $text = urlencode($target . "\n" . strtoupper($target_name) . "\npayment.mdl.my.id/O/m/" . $id_manual);
+            $note = "_" . $note . "_\n";
          }
-         $id_telegram = $this->setting['telegram_id'];
+         $text = urlencode($target . "\n" . strtoupper($target_name) . "\n" . number_format($jumlah) . " Adm. " . number_format($biaya) . "\n" . $note . "payment.mdl.my.id/O/m/" . $id_manual);
          $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $id_telegram . "&parse_mode=markdown&text=" . $transaksi . $text;
          $ch = curl_init();
          curl_setopt($ch, CURLOPT_URL, $url);
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
          curl_exec($ch);
          curl_close($ch);
-
-         echo $do['errno'];
       } else {
          echo $do['error'];
       }

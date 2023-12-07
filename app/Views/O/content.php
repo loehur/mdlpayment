@@ -2,6 +2,7 @@
 $jenis = $data['id_manual_jenis'];
 $tr_status = $data['tr_status'];
 $id = $data['id_manual'];
+$tele_id = $data['telegram_id'];
 
 $transaksi = "";
 $manual = $this->model("M_DB_1")->get("manual_jenis");
@@ -114,10 +115,10 @@ switch ($tr_status) {
                 <div class="col px-4 mx-4">
                     <div class="row mt-2">
                         <div class="col">
-                            <a href="<?= $this->BASE_URL ?>O/action/<?= $id ?>/3" style="text-decoration: none;"><span class="text-danger">TOLAK</span></a>
+                            <a href="<?= $this->BASE_URL ?>O/action/<?= $id ?>/3/<?= $tele_id ?>" style="text-decoration: none;"><span class="text-danger">TOLAK</span></a>
                         </div>
                         <div class="col">
-                            <a href="<?= $this->BASE_URL ?>O/action/<?= $id ?>/2"><span class="btn btn-success float-end">SUKSES</span></a>
+                            <a href="<?= $this->BASE_URL ?>O/action/<?= $id ?>/2/<?= $tele_id ?>"><span class="btn btn-success float-end">SUKSES</span></a>
                         </div>
                     </div>
                 </div>
@@ -130,7 +131,7 @@ switch ($tr_status) {
                 <div class="col px-4 text-center w-100">
                     <div class="row mt-2">
                         <div class="col pe-0">
-                            <a href="<?= $this->BASE_URL ?>O/action/<?= $id ?>/1"><span class="btn btn-outline-primary">PROSES</span></a>
+                            <a href="<?= $this->BASE_URL ?>O/action/<?= $id ?>/1/<?= $tele_id ?>"><span class="btn btn-outline-primary">PROSES</span></a>
                         </div>
                     </div>
                 </div>
@@ -148,7 +149,7 @@ switch ($tr_status) {
             url: href,
             type: 'POST',
             data: {},
-            success: function() {
+            success: function(res) {
                 content('<?= $id ?>');
             }
         });

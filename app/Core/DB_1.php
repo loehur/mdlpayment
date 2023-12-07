@@ -132,21 +132,21 @@ class DB_1 extends DB_Config
     public function insertCols($table, $columns, $values)
     {
         $query = "INSERT INTO $table($columns) VALUES($values)";
-        $run = $this->mysqli->query($query);
+        $this->mysqli->query($query);
         return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno);
     }
 
     public function delete_where($table, $where)
     {
         $query = "DELETE FROM $table WHERE $where";
-        $run = $this->mysqli->query($query);
+        $this->mysqli->query($query);
         return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno);
     }
 
     public function update($table, $set, $where)
     {
         $query = "UPDATE $table SET $set WHERE $where";
-        $run = $this->mysqli->query($query);
+        $this->mysqli->query($query);
         return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno);
     }
 
