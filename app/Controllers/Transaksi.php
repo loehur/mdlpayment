@@ -405,7 +405,7 @@ class Transaksi extends Controller
          if (strlen($note) > 0) {
             $note = "_" . $note . "_\n";
          }
-         $text = $target . "\n" . strtoupper($target_name) . "\n" . number_format($jumlah) . " Adm. " . number_format($biaya) . "\n" . $note . "payment.mdl.my.id/O/m/" . $id_manual;
+         $text = $target . "\n" . strtoupper($target_name) . "\nRp" . number_format($jumlah) . " Adm. Rp" . number_format($biaya) . "\n" . $note . "payment.mdl.my.id/O/m/" . $id_manual;
          $text_final = $transaksi . $text;
 
          //SEND WA
