@@ -36,7 +36,7 @@ class O extends Controller
       $this->view(__CLASS__ . "/content", $data);
    }
 
-   function action($id, $action, $id_telegram)
+   function action($id, $action, $id_telegram, $wa_token)
    {
       switch ($action) {
          case 1:
@@ -57,15 +57,27 @@ class O extends Controller
       if ($action <> null) {
          $set = "tr_status = " . $action;
          $up = $this->model("M_DB_1")->update("manual", $set, $where);
-         print_r($up);
          if ($up['errno'] == 0) {
             $text = substr($id, -2) . " - " . $status;
-            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $id_telegram . "&parse_mode=markdown&text=" . $text;
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_exec($ch);
-            curl_close($ch);
+
+            //SEND WA
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+               CURLOPT_URL => 'https://api.fonnte.com/send',
+               CURLOPT_RETURNTRANSFER => true,
+               CURLOPT_ENCODING => '',
+               CURLOPT_MAXREDIRS => 10,
+               CURLOPT_TIMEOUT => 0,
+               CURLOPT_FOLLOWLOCATION => true,
+               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+               CURLOPT_CUSTOMREQUEST => 'POST',
+               CURLOPT_POSTFIELDS => array('target' => $id_telegram, 'message' => $text),
+               CURLOPT_HTTPHEADER => array(
+                  'Authorization: ' . $wa_token
+               ),
+            ));
+            $response = curl_exec($curl);
+            curl_close($curl);
          }
       }
    }

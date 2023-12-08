@@ -58,21 +58,6 @@ class Transaksi extends Controller
          if ($do['errno'] == 0) {
             $this->dataSynchrone();
             echo 0;
-            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $this->setting['telegram_id'] . "&text=Hacker! " . $this->userData['no_user'];
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_exec($ch);
-            curl_close($ch);
-            exit();
-         } else {
-            echo 0;
-            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $this->setting['telegram_id'] . "&text=Hacker! " . $this->userData['no_user'];
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_exec($ch);
-            curl_close($ch);
             exit();
          }
       }
@@ -301,27 +286,9 @@ class Transaksi extends Controller
          $where = "id_user = " . $this->userData['id_user'];
          $set = "en = 0";
          $do = $this->model('M_DB_1')->update("user", $set, $where);
-         $id_telegram = $this->setting['telegram_id'];
-         if ($do['errno'] == 0) {
-            $this->dataSynchrone();
-            echo 0;
-            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $id_telegram . "&text=Hacker! " . $this->userData['no_user'];
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_exec($ch);
-            curl_close($ch);
-            exit();
-         } else {
-            echo 0;
-            $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $id_telegram . "&text=Hacker! " . $this->userData['no_user'];
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_exec($ch);
-            curl_close($ch);
-            exit();
-         }
+         $this->dataSynchrone();
+         echo 0;
+         exit();
       }
 
       //CEK PIN BENER ATAU ENGGA
@@ -409,16 +376,16 @@ class Transaksi extends Controller
       $manual = $this->model("M_DB_1")->get("manual_jenis");
       foreach ($manual as $m) {
          if ($m['id_manual_jenis'] == $jenis) {
-            $transaksi = substr($id_manual, -2) . " - " . urlencode("*" . strtoupper($m['manual_jenis']) . "*\n");
+            $transaksi = substr($id_manual, -2) . " - " . "*" . strtoupper($m['manual_jenis']) . "*\n";
          }
       }
 
-      $head = urlencode(strtoupper($this->setting['nama'] . "\n"));
+      $head = strtoupper($this->setting['nama'] . "\n");
       $transaksi = $head . $transaksi;
       $id_telegram = $this->setting['telegram_id'];
 
-      $col = "id_manual, no_user, no_master, id_manual_jenis, target_id, target, target_number, target_name, jumlah, note, biaya, telegram_id";
-      $val = "'" . $id_manual . "','" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "'," . $jenis . ",'" . $target_id . "','" . $target . "','" . $target_number . "','" . $target_name . "'," . $jumlah . ",'" . $note . "'," . $biaya . ",'" . $id_telegram . "'";
+      $col = "id_manual, no_user, no_master, id_manual_jenis, target_id, target, target_number, target_name, jumlah, note, biaya, telegram_id, wa_token";
+      $val = "'" . $id_manual . "','" . $this->userData['no_user'] . "','" . $this->userData['no_master'] . "'," . $jenis . ",'" . $target_id . "','" . $target . "','" . $target_number . "','" . $target_name . "'," . $jumlah . ",'" . $note . "'," . $biaya . ",'" . $id_telegram . "','" . $this->setting['wa_api'] . "'";
       $do = $this->model('M_DB_1')->insertCols("manual", $col, $val);
       if ($do['errno'] == 0) {
          $set = "sort = sort+1";
@@ -438,13 +405,27 @@ class Transaksi extends Controller
          if (strlen($note) > 0) {
             $note = "_" . $note . "_\n";
          }
-         $text = urlencode($target . "\n" . strtoupper($target_name) . "\n" . number_format($jumlah) . " Adm. " . number_format($biaya) . "\n" . $note . "payment.mdl.my.id/O/m/" . $id_manual);
-         $url = "https://api.telegram.org/bot898378947:AAFSNdF0452DsRfTCKC9d9xp39hisvhCle8/sendMessage?chat_id=" . $id_telegram . "&parse_mode=markdown&text=" . $transaksi . $text;
-         $ch = curl_init();
-         curl_setopt($ch, CURLOPT_URL, $url);
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-         $res = curl_exec($ch);
-         curl_close($ch);
+         $text = $target . "\n" . strtoupper($target_name) . "\n" . number_format($jumlah) . " Adm. " . number_format($biaya) . "\n" . $note . "payment.mdl.my.id/O/m/" . $id_manual;
+         $text_final = $transaksi . $text;
+
+         //SEND WA
+         $curl = curl_init();
+         curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.fonnte.com/send',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array('target' => $this->setting['telegram_id'], 'message' => $text_final),
+            CURLOPT_HTTPHEADER => array(
+               'Authorization: ' . $this->setting['wa_api']
+            ),
+         ));
+         $response = curl_exec($curl);
+         curl_close($curl);
       } else {
          echo $do['error'];
       }

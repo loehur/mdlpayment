@@ -47,10 +47,33 @@
         </div>
         <div class="row">
             <div class="col-auto mr-auto">
+                <form id="form" action="<?= $this->BASE_URL . $this->CLASS ?>/update_wa_api" method="post">
+                    <div class="row mb-2">
+                        <div class="col-auto pe-0">
+                            <input type="text" class="form-control form-control-sm" name="wa_api" placeholder="WA Api Token" required>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <button type="submit" class="btn btn-sm btn-primary btn-block">
+                                Update
+                            </button>
+                        </div>
+                        <div class="col-auto text-primary ps-0 mt-auto">
+                            <?php if (strlen($this->userData['wa_api']) > 0) { ?>
+                                <a href="<?= $this->BASE_URL . $this->CLASS ?>/cek_group" target="_blank"><?= $this->userData['wa_api'] ?></a>
+                            <?php } else {
+                                echo "Belum Ter-set";
+                            } ?>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-auto mr-auto">
                 <form id="form" action="<?= $this->BASE_URL . $this->CLASS ?>/update_telegram" method="post">
                     <div class="row mb-2">
                         <div class="col-auto pe-0">
-                            <input type="text" class="form-control form-control-sm" name="telegram" placeholder="Telegram ID" required>
+                            <input type="text" class="form-control form-control-sm" name="telegram" placeholder="WA Group ID" required>
                         </div>
                     </div>
                     <div class="row mb-2">

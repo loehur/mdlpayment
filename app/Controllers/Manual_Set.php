@@ -92,7 +92,7 @@ class Manual_Set extends Controller
    {
       $telegram = $_POST['telegram'];
       $where = "no_user = '" . $this->userData['no_master'] . "'";
-      $set = "telegram_id = " . $telegram;
+      $set = "telegram_id = '" . $telegram . "'";
       $update = $this->model('M_DB_1')->update("user", $set, $where);
       if (isset($update['errno'])) {
          $this->dataSynchrone();
@@ -100,5 +100,63 @@ class Manual_Set extends Controller
       } else {
          print_r($update);
       }
+   }
+
+   public function update_wa_api()
+   {
+      $telegram = $_POST['wa_api'];
+      $where = "no_user = '" . $this->userData['no_master'] . "'";
+      $set = "wa_api = '" . $telegram . "'";
+      $update = $this->model('M_DB_1')->update("user", $set, $where);
+      if (isset($update['errno'])) {
+         $this->dataSynchrone();
+         echo $update['errno'];
+      } else {
+         print_r($update);
+      }
+   }
+
+   function cek_group()
+   {
+      $curl = curl_init();
+      curl_setopt_array($curl, array(
+         CURLOPT_URL => 'https://api.fonnte.com/fetch-group',
+         CURLOPT_RETURNTRANSFER => true,
+         CURLOPT_ENCODING => '',
+         CURLOPT_MAXREDIRS => 10,
+         CURLOPT_TIMEOUT => 0,
+         CURLOPT_FOLLOWLOCATION => true,
+         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+         CURLOPT_CUSTOMREQUEST => 'POST',
+         CURLOPT_HTTPHEADER => array(
+            'Authorization: ' . $this->setting['wa_api']
+         ),
+      ));
+      $response = curl_exec($curl);
+      curl_close($curl);
+
+
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+         CURLOPT_URL => 'https://api.fonnte.com/get-whatsapp-group',
+         CURLOPT_RETURNTRANSFER => true,
+         CURLOPT_ENCODING => '',
+         CURLOPT_MAXREDIRS => 10,
+         CURLOPT_TIMEOUT => 0,
+         CURLOPT_FOLLOWLOCATION => true,
+         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+         CURLOPT_CUSTOMREQUEST => 'POST',
+         CURLOPT_HTTPHEADER => array(
+            'Authorization: ' . $this->setting['wa_api']
+         ),
+      ));
+
+      $response = curl_exec($curl);
+
+      curl_close($curl);
+      echo "<pre>";
+      print_r(json_decode($response));
+      echo "</pre>";
    }
 }
