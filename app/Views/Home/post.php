@@ -43,6 +43,11 @@ foreach ($data['data_post'] as $a) {
                             <?php } ?>
                         </span>
                         <br>
+                    <?php } else { ?>
+                        <?php if ($a['label'] <> "") { ?>
+                            <small><i class="fa-solid fa-bookmark"></i> <?= $a['label'] ?></small>
+                            <br>
+                        <?php } ?>
                     <?php } ?>
 
                     <?= $a['customer_id'] ?>
