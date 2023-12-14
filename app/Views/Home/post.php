@@ -23,7 +23,7 @@ foreach ($data['data_post'] as $a) {
         $proses_post_count += 1;
     }
 ?>
-    <div class="col border pb-1 rounded m-1 px-1 <?= (date("Y-m-d") == substr($a['updateTime'], 0, 10)) ? "border-secondary" : "" ?>">
+    <div class="col border border-top-0 border-start-0 shadow-sm pb-1 rounded m-1 px-1 <?= (date("Y-m-d") == substr($a['insertTime'], 0, 10)) ? "border-secondary" : "" ?>">
         <table class="table table-borderless table-sm mb-0 pb-0">
             <tr>
                 <td nowrap>
@@ -32,11 +32,23 @@ foreach ($data['data_post'] as $a) {
                     <?php } ?>
                     <small><?= $a['insertTime'] ?><br><?= $a['no_user'] ?><br><?= $a['datetime'] ?> [<?= $a['tr_id'] ?>]</small>
                 </td>
-                <td class="text-end"><span class="text-info"><?= $a['customer_id'] ?></span><br>Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?><br><small><b>[<?= $a['rc'] ?>] <?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small></td>
+                <td class="text-end">
+
+                    <span class="text-primary">
+                        <?php if ($a['label'] == "") { ?>
+                            <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','1')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><i class="fa-regular fa-bookmark"></i> Tandai</small></span>
+                        <?php } else { ?>
+                            <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','1')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><b class="text-primary"><i class="fa-solid fa-bookmark"></i> <?= $a['label'] ?></b></small></span>
+                        <?php } ?>
+                    </span>
+                    <br>
+                    <?= $a['customer_id'] ?>
+                    <br>Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?><br><small><b>[<?= $a['rc'] ?>] <?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small>
+                </td>
             </tr>
             <tr>
                 <td align="right" colspan="2"><small><?= $a['product_code'] ?>, <b><?= $a['tr_name'] ?></b>, <?= $a['period'] ?></small><br>
-                    <b><span class="text-success"><?= $a['noref'] ?></span></b>
+                    <span class="text-success"><?= $a['noref'] ?></span>
                 </td>
             </tr>
             <?php if ($a['tr_status'] == 1 || strlen($a['noref'] > 0) || strlen($a['datetime'] > 0)) { ?>

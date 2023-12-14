@@ -1,5 +1,5 @@
 <?php
-$class_col = "col mb-2 ps-0";
+$class_col = "col-md-3 mb-2 px-1";
 $class_btn = "btn btn-sm shadow-sm btn-outline-success w-100";
 ?>
 
@@ -11,7 +11,7 @@ $class_btn = "btn btn-sm shadow-sm btn-outline-success w-100";
 </div>
 <div class="content" style="padding-bottom: 70px;">
     <div class="container-fluid">
-        <div class="row mx-1">
+        <div class="row mx-0">
             <?php
             foreach ($data['data'] as $key => $a) { ?>
                 <div class="<?= $class_col ?>">

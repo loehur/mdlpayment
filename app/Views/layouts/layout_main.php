@@ -7,6 +7,7 @@
 	<link rel="icon" href="<?= $this->ASSETS_URL ?>icon/logo.png">
 	<title>Payment | <?= $data['title'] ?></title>
 	<link rel="stylesheet" href="<?= $this->ASSETS_URL ?>plugins/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" href="<?= $this->ASSETS_URL ?>plugins/fontawesome-free-6.4.0-web/css/all.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?= $this->ASSETS_URL ?>/plugins/bootstrap-5.2.2-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?= $this->ASSETS_URL ?>css/selectize.bootstrap3.min.css" rel="stylesheet" />
 	<link rel="stylesheet" href="<?= $this->ASSETS_URL ?>css/style.css">
@@ -49,6 +50,10 @@
 
 		body {
 			min-height: 100%;
+		}
+
+		.modal-backdrop {
+			opacity: 0.1 !important;
 		}
 	</style>
 </head>

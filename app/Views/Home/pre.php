@@ -27,7 +27,7 @@ foreach ($data['data_pre'] as $a) {
         $proses_pre_count += 1;
     }
 ?>
-    <div class="col border pb-1 rounded m-1 px-1 <?= (date("Y-m-d") == substr($a['updateTime'], 0, 10)) ? "border-secondary" : "" ?>">
+    <div class="col border pb-1 border-top-0 border-start-0 shadow-sm rounded m-1 px-1 <?= (date("Y-m-d") == substr($a['insertTime'], 0, 10)) ? "border-secondary" : "" ?>">
         <table class="table table-borderless table-sm mb-0 pb-0">
             <tr>
                 <td nowrap> <?php if ($a['tr_status'] == 1 && $rc == "00") { ?>
@@ -36,14 +36,22 @@ foreach ($data['data_pre'] as $a) {
                     <small><?= $a['insertTime'] ?> [<?= $id ?>]<br><?= $a['no_user'] ?><br><?= substr($a['updateTime'], 2, -3) ?> [<?= $a['tr_id'] ?>]</small>
                 </td>
                 <td class="text-end">
-                    <span class="text-info"><?= $a['customer_id'] ?></span><br>
+                    <span class="text-primary">
+                        <?php if ($a['label'] == "") { ?>
+                            <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','0')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><i class="fa-regular fa-bookmark"></i> Tandai</small></span>
+                        <?php } else { ?>
+                            <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','0')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><b class="text-primary"><i class="fa-solid fa-bookmark"></i> <?= $a['label'] ?></b></small></span>
+                        <?php } ?>
+                    </span>
+                    <br>
+                    <?= $a['customer_id'] ?>
+                    <br>
                     Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price_master']) . ")</small>" : "" ?><br><small><b>[<?= $a['rc'] ?>] <?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small>
                 </td>
             </tr>
             <tr>
                 <td align="right" colspan="2"><small><?= $a['description'] ?></small><br>
-                    <?php if (strlen($a['sn'] > 0)) { ?><b><span class="text-success"><?= $a['sn'] ?></span></b><?php } else { ?>
-
+                    <?php if (strlen($a['sn'] > 0)) { ?><span class="text-success"><?= $a['sn'] ?></span><?php } else { ?>
                         <br> <?php } ?>
                 </td>
             </tr>
@@ -154,6 +162,7 @@ foreach ($data['data_pre'] as $a) {
 <script>
     var antri_pre_count;
     var proses_pre_count;
+
     $(document).ready(function() {
         antri_pre_count = $("span#tr_antri_pre").html();
         proses_pre_count = $("span#tr_proses_pre").html();

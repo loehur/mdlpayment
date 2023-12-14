@@ -51,4 +51,29 @@ class Home extends Controller
       $data = $this->model("M_DB_1")->get_where("manual", $where . " ORDER BY id_manual DESC LIMIT 12");
       $this->view($this->page . "/manual", $data);
    }
+
+   function label()
+   {
+      $table = "";
+      $label_id = $_POST['label_id'];
+      $label_mode = $_POST['label_mode'];
+      $label_name = $_POST['label_name'];
+      switch ($label_mode) {
+         case 0:
+            $table = "prepaid";
+            break;
+         case 1:
+            $table = "postpaid";
+            break;
+         default:
+            break;
+      }
+
+      $where = "customer_id = '" . $label_id . "'";
+      $set = "label = '" . $label_name . "'";
+      $update = $this->model('M_DB_1')->update($table, $set, $where);
+      if (!$update['errno'] == 0) {
+         print_r($update);
+      }
+   }
 }

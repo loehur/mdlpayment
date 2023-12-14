@@ -14,8 +14,8 @@ if ($a['jenis'] == 1) {
 
 <div class="content mb-2">
     <div class="container-fluid px-2">
-        <div class="row p-0">
-            <div class="col border mx-3 pt-2 pb-2 rounded border-success">
+        <div class="row mx-2">
+            <div class="col mx-1 border border-start-0 border-top-0 shadow-sm py-1 rounded">
                 <?php if ($data['jenis'] == 1) { ?>
                     <table class="">
                         <tr>
@@ -104,7 +104,7 @@ if ($a['jenis'] == 1) {
 <div class="content mt-2 mb-0 pb-0">
     <div class="container-fluid">
         <div class="row pb-0 mb-0">
-            <div class="col-auto">
+            <div class="col mx-1 w-100">
                 <div id="info"></div>
             </div>
         </div>
@@ -112,8 +112,8 @@ if ($a['jenis'] == 1) {
 </div>
 <div class="content mb-2 mt-0 pt-0" style="padding-bottom: 70px;">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col pe-2" style="max-width: 200px;">
+        <div class="row mb-2 mx-1">
+            <div class="col mx-1 mb-2 border py-1 border-top-0 border-start-0 shadow-sm rounded pt-2">
                 <form action="<?= $this->BASE_URL ?>Transaksi/proses/<?= $a["jenis"] ?>/<?= $a["code"] ?>" method="post">
                     <div class="row mb-2">
                         <div class="col">
@@ -123,7 +123,7 @@ if ($a['jenis'] == 1) {
                     </div>
 
                     <?php if ($a['type'] == 'pln' && $data['jenis'] == 1) { ?>
-                        <div class="row mb-2">
+                        <div class="row mb-2 ps-1">
                             <div class="col-auto">
                                 <button type="button" id="cekPLN" class="btn cek btn-sm btn-success btn-block">
                                     Cek ID
@@ -136,7 +136,7 @@ if ($a['jenis'] == 1) {
                     <?php } ?>
 
                     <?php if ($data['jenis'] == 2) { ?>
-                        <div class="row mb-2">
+                        <div class="row mb-2 ps-1">
                             <div class="col-auto">
                                 <button type="button" id="cekPOST" class="btn cek btn-sm btn-success btn-block">
                                     Cek Tagihan
@@ -153,7 +153,7 @@ if ($a['jenis'] == 1) {
                             <input type="password" class="form-control form-control-sm border-top-0 border-end-0 border-start-0" name="pin" placeholder="PIN Transaksi" autocomplete="new-password" required>
                         </div>
                     </div>
-                    <div class="row mb-2">
+                    <div class="row mb-2 ps-1">
                         <div class="col">
                             <button type="submit" class="btn btn-sm btn-primary btn-block">
                                 <?= $data['jenis'] == 1 ? "Proses" : "Bayar" ?>
@@ -165,15 +165,19 @@ if ($a['jenis'] == 1) {
                     </div>
                 </form>
             </div>
-
-            <div class="col-auto ps-2 rounded border-start">
-                <label class="pb-1">Frequent Customers</label><br>
-                <?php foreach ($data['history'] as $h) { ?>
-                    <div style="cursor: pointer;" data-ci="<?= $h['customer_id'] ?>" class="bg-white me-1 mb-1 px-2 py-1 rounded border ci">
-                        <span style="cursor: pointer;"><?= $h['customer_id'] ?></span> <span class="text-success"><br><?= $h['tr_name'] ?></span>
-                    </div>
-                <?php } ?>
-            </div>
+        </div>
+        <div class="row mx-1">
+            <?php foreach ($data['history'] as $h) { ?>
+                <div style="cursor: pointer;" data-ci="<?= $h['customer_id'] ?>" class="col bg-white mx-1 mb-2 shadow-sm rounded border border-top-0 border-start-0 ci">
+                    <span style="cursor: pointer;">
+                        <?php if ($h['label'] <> "") { ?>
+                            <span class="text-primary"><?= $h['label'] ?></span><br>
+                        <?php } ?>
+                        <span class="text-success"><?= $h['customer_id'] ?></span><br>
+                        <span class="text-nowrap"><?= $h['tr_name'] ?></span>
+                    </span>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </div>
@@ -225,7 +229,11 @@ if ($a['jenis'] == 1) {
                 },
                 success: function(response) {
                     if (response == 1) {
-                        window.location.href = "<?= $this->BASE_URL ?>Home";
+                        if (confirm('Proses! Ingin transaksi lagi di halaman ini?')) {
+                            location.reload(true);
+                        } else {
+                            window.location.href = "<?= $this->BASE_URL ?>Home";
+                        }
                     } else if (response === "0") {
                         window.location.href = "<?= $this->BASE_URL ?>Login/logout";
                     } else {

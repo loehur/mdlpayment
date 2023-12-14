@@ -524,7 +524,7 @@ class Transaksi extends Controller
       };
 
       $array['history'] = [];
-      $array['history'] = $this->model('M_DB_1')->get_cols_where('prepaid', "customer_id, tr_name, count(customer_id) as count", "no_user = '" . $this->userData['no_user'] . "' AND UPPER(product_code) LIKE '%" . strtoupper($des) . "%' GROUP BY customer_id, tr_name ORDER BY count(customer_id) DESC LIMIT 5", 1);
+      $array['history'] = $this->model('M_DB_1')->get_cols_where('prepaid', "customer_id, tr_name, label, count(customer_id) as count", "no_user = '" . $this->userData['no_user'] . "' AND UPPER(product_code) LIKE '%" . strtoupper($des) . "%' GROUP BY customer_id, tr_name, label ORDER BY count(customer_id) DESC LIMIT 20", 1);
 
       $this->view($this->page . "/confirmation", $array);
    }
@@ -557,7 +557,7 @@ class Transaksi extends Controller
       }
 
       $array['history'] = [];
-      $array['history'] = $this->model('M_DB_1')->get_cols_where('postpaid', "customer_id, tr_name, count(customer_id) as count", "no_user = '" . $this->userData['no_user'] . "' AND UPPER(product_code) LIKE '%" . strtoupper($code) . "%' GROUP BY customer_id, tr_name ORDER BY count(customer_id) DESC LIMIT 5", 1);
+      $array['history'] = $this->model('M_DB_1')->get_cols_where('postpaid', "customer_id, tr_name, label, count(customer_id) as count", "no_user = '" . $this->userData['no_user'] . "' AND UPPER(product_code) LIKE '%" . strtoupper($code) . "%' GROUP BY customer_id, tr_name, label ORDER BY count(customer_id) DESC LIMIT 20", 1);
 
       $this->view($this->page . "/confirmation", $array);
    }

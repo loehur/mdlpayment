@@ -12,7 +12,7 @@
 $harga = $this->model("M_DB_1")->get_where_row("manual_set", "no_master = '" . $this->userData['no_master'] . "' AND id_manual_jenis = " . $data);
 ?>
 
-<div class="content mb-2 mt-0 pt-0" style="padding-bottom: 70px;">
+<div class="content mb-2 mt-0 pt-0 mx-2" style="padding-bottom: 70px;">
     <div class="container-fluid">
         <div class="row">
             <div class="col-auto">
@@ -20,7 +20,7 @@ $harga = $this->model("M_DB_1")->get_where_row("manual_set", "no_master = '" . $
             </div>
         </div>
         <div class="row">
-            <div class="col pe-2" style="max-width: 300px;">
+            <div class="col border border-top-0 border-start-0 shadow-sm rounded mx-2 py-2 px-2 mb-3" style="min-width: 300px;">
                 <form action="<?= $this->BASE_URL ?>Transaksi/proses_manual/<?= $data ?>" method="post">
                     <div class="row mb-2">
                         <div class="col">
@@ -102,15 +102,13 @@ $harga = $this->model("M_DB_1")->get_where_row("manual_set", "no_master = '" . $
                     </div>
                 </form>
             </div>
-
-            <div class="col-auto ps-2 rounded border-start">
-                <label class="pb-1">Frequent Accounts</label><br>
+            <div class="col px-2 rounded">
                 <?php
                 $cols = "target_id, target, target_name, target_number";
                 $where = "id_manual_jenis = " . $data . " GROUP BY target_id, target, target_name, target_number ORDER BY id_manual DESC LIMIT 12";
                 $freq = $this->model("M_DB_1")->get_cols_where("manual", $cols, $where, 1);
                 foreach ($freq as $f) { ?>
-                    <div style="cursor:pointer" class="freq border rounded px-1" data-id="<?= $f['target_id']  ?>" data-name="<?= $f['target_name'] ?>" data-number="<?= $f['target_number'] ?>"><?= "<span class='text-success'>" . $f['target'] . "</span> <b>" . strtoupper($f['target_name']) . "</b> " . $f['target_number'] ?></div>
+                    <div style="cursor:pointer" class="freq border border-top-0 py-1 border-start-0 shadow-sm rounded px-2" data-id="<?= $f['target_id']  ?>" data-name="<?= $f['target_name'] ?>" data-number="<?= $f['target_number'] ?>"><?= "<span class='text-success'>" . $f['target'] . "</span> <b class='text-nowrap'>" . strtoupper($f['target_name']) . "</b> " . $f['target_number'] ?></div>
                     <hr class="border-0 p-0 m-1">
                 <?php }
                 ?>

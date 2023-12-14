@@ -61,6 +61,22 @@
     </div>
 </div>
 
+<div class="modal" id="exampleModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <form action="<?= $this->BASE_URL ?>Home/label" method="POST">
+                <div class="modal-body">
+                    <label class="mb-1">Tandai Sebagai<br><small>Contoh: Token Rumah, Laundry, Pulsa Anak</small></label><br>
+                    <input name="label_id" type="hidden" required>
+                    <input name="label_mode" type="hidden" required>
+                    <input name="label_name" type="text" class="form-control form-control-sm text-center" required>
+                    <button type="submit" class="btn btn-sm btn-outline-success mt-2" data-bs-dismiss="modal">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script src="<?= $this->ASSETS_URL ?>js/jquery-3.6.0.min.js"></script>
 <script src="<?= $this->ASSETS_URL ?>js/popper.min.js"></script>
 <script src="<?= $this->ASSETS_URL ?>plugins/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
@@ -78,6 +94,34 @@
             cek_proses_post();
             cek_manual();
         }, 5000);
+    });
+
+    function setForm(label_id, label_mode) {
+        $("input[name=label_name]").val("");
+        $("input[name=label_name]").select();
+        $("input[name=label_id]").val(label_id);
+        $("input[name=label_mode]").val(label_mode);
+    }
+
+    $("form").on("submit", function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            type: $(this).attr("method"),
+            success: function(res) {
+                if (res.length == 0) {
+                    var mode = $("input[name=label_mode]").val();
+                    if (mode == 0) {
+                        load_pre();
+                    } else {
+                        load_post();
+                    }
+                } else {
+                    alert(res);
+                }
+            },
+        });
     });
 
     function load_pre() {

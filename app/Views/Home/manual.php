@@ -49,7 +49,7 @@ foreach ($data as $a) {
     $jumlah = $a['jumlah'];
     $biaya = $a['biaya'];
 ?>
-    <div class="col border pb-1 rounded m-1 px-1 <?= (date("Y-m-d") == substr($a['updateTime'], 0, 10)) ? "border-secondary" : "" ?>">
+    <div class="col border border-top-0 border-start-0 shadow-sm pb-1 rounded m-1 px-1 <?= (date("Y-m-d") == substr($a['updateTime'], 0, 10)) ? "border-secondary" : "" ?>">
         <table class="table table-borderless table-sm mb-0 pb-0">
             <tr>
                 <td nowrap>
@@ -61,7 +61,7 @@ foreach ($data as $a) {
                     <?= $a['no_user'] ?><br>
                     <small><?= $a['insertTime'] ?></small><br>
                     <small><?= $a['updateTime'] ?></small>
-                    <br><b><small><span class="text-<?= $class_status ?> border border-<?= $class_status ?> rounded px-2"><?= $status ?></span></small></b>
+                    <br><small><span class="text-<?= $class_status ?> border border-<?= $class_status ?> rounded px-2"><?= $status ?></span></small>
 
                 </td>
                 <td class="text-end">
