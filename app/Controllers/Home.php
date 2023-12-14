@@ -69,7 +69,7 @@ class Home extends Controller
             break;
       }
 
-      $where = "customer_id = '" . $label_id . "'";
+      $where = "customer_id = '" . $label_id . "' AND no_user = '" . $this->userData['no_user'] . "'";
       $set = "label = '" . $label_name . "'";
       $update = $this->model('M_DB_1')->update($table, $set, $where);
       if (!$update['errno'] == 0) {
