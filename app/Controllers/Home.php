@@ -54,26 +54,26 @@ class Home extends Controller
 
    function label()
    {
-      $table = "";
+      $table = "label";
       $label_id = $_POST['label_id'];
       $label_mode = $_POST['label_mode'];
       $label_name = $_POST['label_name'];
-      switch ($label_mode) {
-         case 0:
-            $table = "prepaid";
-            break;
-         case 1:
-            $table = "postpaid";
-            break;
-         default:
-            break;
-      }
 
-      $where = "customer_id = '" . $label_id . "' AND no_user = '" . $this->userData['no_user'] . "'";
-      $set = "label = '" . $label_name . "'";
-      $update = $this->model('M_DB_1')->update($table, $set, $where);
-      if (!$update['errno'] == 0) {
-         print_r($update);
+      $unic = $this->userData['no_master'] . "_" . $this->userData['no_user'] . "_" . $label_mode . "_" . $label_id;
+      $columns = 'customer_id, master_no, user_no, label_name, label_mode, unic';
+      $values = "'" . $label_id . "','" . $this->userData['no_master'] . "','" . $this->userData['no_user'] . "','" . $label_name . "'," . $label_mode . ",'" . $unic . "'";
+      $do = $this->model('M_DB_1')->insertCols($table, $columns, $values);
+      if ($do['errno'] == 1062) {
+         $where = "customer_id = '" . $label_id . "' AND user_no = '" . $this->userData['no_user'] . "' AND label_mode = " . $label_mode;
+         $set = "label_name = '" . $label_name . "'";
+         $update = $this->model('M_DB_1')->update($table, $set, $where);
+         if (!$update['errno'] == 0) {
+            print_r($update);
+         }
+      } else {
+         if ($do['errno'] <> 0) {
+            print_r($do);
+         }
       }
    }
 }

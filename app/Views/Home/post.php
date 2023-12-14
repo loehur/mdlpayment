@@ -1,6 +1,13 @@
 <?php
 $no = 0;
 $proses_post_count = 0;
+
+$whereLabel = "user_no = '" . $this->userData['no_user'] . "' AND master_no = '" . $this->userData['no_master'] . "'";
+$dtLabel = $this->model("M_DB_1")->get_where("label", $whereLabel);
+
+$whereLabel_M = "user_no <> '" . $this->userData['no_user'] . "' AND master_no = '" . $this->userData['no_master'] . "'";
+$dtLabel_M = $this->model("M_DB_1")->get_where("label", $whereLabel_M);
+
 foreach ($data['data_post'] as $a) {
 
     if ($a['no_user'] <> $this->userData['no_user'] && $this->userData['user_tipe'] <> 1) {
@@ -34,18 +41,30 @@ foreach ($data['data_post'] as $a) {
                 </td>
                 <td class="text-end">
 
-                    <?php if ($a['no_user'] == $this->userData['no_user']) { ?>
+                    <?php if ($a['no_user'] == $this->userData['no_user']) {
+                        $label = "";
+                        foreach ($dtLabel as $dl) {
+                            if ($dl['customer_id'] == $a['customer_id']) {
+                                $label = $dl['label_name'];
+                            }
+                        } ?>
                         <span class="text-primary">
-                            <?php if ($a['label'] == "") { ?>
+                            <?php if ($label == "") { ?>
                                 <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','1')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><i class="fa-regular fa-bookmark text-danger"></i> Tandai</small></span>
                             <?php } else { ?>
-                                <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','1')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><b class="text-primary"><i class="fa-solid fa-bookmark"></i> <?= $a['label'] ?></b></small></span>
+                                <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','1')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><b class="text-primary"><i class="fa-solid fa-bookmark"></i> <?= $label ?></b></small></span>
                             <?php } ?>
                         </span>
                         <br>
-                    <?php } else { ?>
-                        <?php if ($a['label'] <> "") { ?>
-                            <small><i class="fa-solid fa-bookmark"></i> <?= $a['label'] ?></small>
+                    <?php } else {
+                        $label = "";
+                        foreach ($dtLabel_M as $dlm) {
+                            if ($dlm['customer_id'] == $a['customer_id']) {
+                                $label = $dl['label_name'];
+                            }
+                        } ?>
+                        <?php if ($label <> "") { ?>
+                            <small><i class="fa-solid fa-bookmark"></i> <?= $label ?></small>
                             <br>
                         <?php } ?>
                     <?php } ?>

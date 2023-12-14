@@ -4,6 +4,9 @@ if ($a['jenis'] == 1) {
 } else {
     $des = $a['type'];
 }
+
+$whereLabel = "user_no = '" . $this->userData['no_user'] . "' AND master_no = '" . $this->userData['no_master'] . "'";
+$dtLabel = $this->model("M_DB_1")->get_where("label", $whereLabel);
 ?>
 
 <style>
@@ -170,8 +173,16 @@ if ($a['jenis'] == 1) {
             <?php foreach ($data['history'] as $h) { ?>
                 <div style="cursor: pointer;" data-ci="<?= $h['customer_id'] ?>" class="col bg-white mx-1 mb-2 shadow-sm rounded border border-top-0 border-start-0 ci">
                     <span style="cursor: pointer;">
-                        <?php if ($h['label'] <> "") { ?>
-                            <span class="text-primary"><?= $h['label'] ?></span><br>
+                        <?php
+                        $label = "";
+                        foreach ($dtLabel as $dl) {
+                            if ($dl['customer_id'] == $h['customer_id']) {
+                                $label = $dl['label_name'];
+                            }
+                        } ?>
+
+                        <?php if ($label <> "") { ?>
+                            <span class="text-primary"><?= $label ?></span><br>
                         <?php } ?>
                         <span class="text-success"><?= $h['customer_id'] ?></span><br>
                         <span class="text-nowrap"><?= $h['tr_name'] ?></span>
