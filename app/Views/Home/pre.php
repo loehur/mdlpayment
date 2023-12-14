@@ -36,14 +36,18 @@ foreach ($data['data_pre'] as $a) {
                     <small><?= $a['insertTime'] ?> [<?= $id ?>]<br><?= $a['no_user'] ?><br><?= substr($a['updateTime'], 2, -3) ?> [<?= $a['tr_id'] ?>]</small>
                 </td>
                 <td class="text-end">
-                    <span class="text-primary">
-                        <?php if ($a['label'] == "") { ?>
-                            <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','0')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><i class="fa-regular fa-bookmark"></i> Tandai</small></span>
-                        <?php } else { ?>
-                            <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','0')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><b class="text-primary"><i class="fa-solid fa-bookmark"></i> <?= $a['label'] ?></b></small></span>
-                        <?php } ?>
-                    </span>
-                    <br>
+
+                    <?php if ($a['no_user'] == $this->userData['no_user']) { ?>
+                        <span class="text-primary">
+                            <?php if ($a['label'] == "") { ?>
+                                <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','0')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><i class="fa-regular fa-bookmark"></i> Tandai</small></span>
+                            <?php } else { ?>
+                                <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','0')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><b class="text-primary"><i class="fa-solid fa-bookmark"></i> <?= $a['label'] ?></b></small></span>
+                            <?php } ?>
+                        </span>
+                        <br>
+                    <?php } ?>
+
                     <?= $a['customer_id'] ?>
                     <br>
                     Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price_master']) . ")</small>" : "" ?><br><small><b>[<?= $a['rc'] ?>] <?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small>
