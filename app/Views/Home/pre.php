@@ -40,7 +40,7 @@ foreach ($data['data_pre'] as $a) {
                     <?php if ($a['no_user'] == $this->userData['no_user']) { ?>
                         <span class="text-primary">
                             <?php if ($a['label'] == "") { ?>
-                                <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','0')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><i class="fa-regular fa-bookmark"></i> Tandai</small></span>
+                                <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','0')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><i class="fa-regular fa-bookmark text-danger"></i> Tandai</small></span>
                             <?php } else { ?>
                                 <span class="btn btn-sm border-0 p-0" onclick="setForm('<?= $a['customer_id'] ?>','0')" data-bs-toggle="modal" data-bs-target="#exampleModal"><small><b class="text-primary"><i class="fa-solid fa-bookmark"></i> <?= $a['label'] ?></b></small></span>
                             <?php } ?>

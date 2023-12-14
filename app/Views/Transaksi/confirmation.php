@@ -229,7 +229,7 @@ if ($a['jenis'] == 1) {
                 },
                 success: function(response) {
                     if (response == 1) {
-                        if (confirm('Proses! Ingin transaksi lagi di halaman ini?')) {
+                        if (confirm('Transaksi sedang diproses! Ingin transaksi lagi di halaman ini?')) {
                             location.reload(true);
                         } else {
                             window.location.href = "<?= $this->BASE_URL ?>Home";
