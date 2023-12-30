@@ -70,7 +70,8 @@ foreach ($data['data_post'] as $a) {
                     <?php } ?>
 
                     <?= $a['customer_id'] ?>
-                    <br>Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?><br><small><b>[<?= $a['rc'] ?>] <?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small>
+                    <br>Rp<?= number_format($a['price_sell']) ?> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a['price']) . ")</small>" : "" ?>
+                    <br><small class="text-nowrap"><b><?= $a['rc'] ?> - <?= empty($a['message']) ? "PROCESS" : $a['message'] ?></b></small>
                 </td>
             </tr>
             <tr>
