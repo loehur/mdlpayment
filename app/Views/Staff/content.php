@@ -82,7 +82,7 @@
                                     case "en":
                                         echo "<br>Status:";
                                         if ($value == $this->model('Validasi')->enc($pass_ . $pin_)) { ?>
-                                            <a class='text-danger border px-2 rounded text-decoration-none' href='<?= $this->BASE_URL . "Staff/updateCell_Staff/en/0/" . $user_id ?>'>Blok</a><span class='text-success'><b>Active</b></span>
+                                            <a class='text-danger border px-2 rounded text-decoration-none' href='<?= $this->BASE_URL . "Staff/updateCell_Staff/en/0/" . $user_id ?>'>Blok</a>
                                         <?php } else { ?>
                                             <span class='text-secondary text-bold'><b>Terblokir</b></span>
                                         <?php } ?>
