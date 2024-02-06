@@ -41,4 +41,26 @@ class Staff extends Controller
          print_r($update);
       }
    }
+
+   function updateSeller()
+   {
+      $no_user = $_POST['user'];
+      $value = $_POST['val'];
+
+      $where = "no_user = '" . $no_user . "'";
+
+      if ($value == 0) {
+         $val_ = 1;
+      } else {
+         $val_ = 0;
+      }
+
+      $set = "seller = " . $val_;
+      $update = $this->model('M_DB_1')->update("user", $set, $where);
+      if (isset($update['errno'])) {
+         if ($update['errno'] <> 0) {
+            echo $update['errno'];
+         }
+      }
+   }
 }

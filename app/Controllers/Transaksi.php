@@ -95,6 +95,8 @@ class Transaksi extends Controller
          }
       }
 
+
+
       //CEK SISA LIMIT PRIBADI
       $used = 0;
       $month = date("Y-m");
@@ -108,6 +110,12 @@ class Transaksi extends Controller
          $total_use = $used_pre;
 
          $sisa_limit = $limit - $total_use;
+      } else {
+         //CEK USER SELLER ATAU BUKAN
+         if ($this->userData['seller'] == 0) {
+            echo "ID Pelanggan tidak terdaftar! hubungi Admin";
+            exit();
+         }
       }
 
       if ($jenis == 1) {
