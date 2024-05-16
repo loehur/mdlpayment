@@ -7,6 +7,13 @@ class IAK extends Controller
       $this->data();
    }
 
+   function ip()
+   {
+      echo "<pre>";
+      print_r($_SERVER);
+      echo "</pre>";
+   }
+
    public function callBack()
    {
       $rawRequestInput = file_get_contents("php://input");
