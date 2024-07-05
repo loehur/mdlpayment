@@ -71,7 +71,7 @@ class Setor extends Controller
 
       if ($do['errno'] == 0) {
          $user = $this->userData['nama'] . " " . $this->userData['no_user'];
-         $message = "MDL Payment " . $user . ", payment.mdl.my.id/Setor_/cp/" . $id;
+         $message = "MDL Payment " . $user . ", " . Public_Variables::HOST . " /Setor_/cp/" . $id;
          $curl = curl_init();
          curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api.fonnte.com/send',
