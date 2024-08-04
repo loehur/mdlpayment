@@ -1,5 +1,85 @@
 <?php
-$SISTEMIT_COM_ENC = "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";
-$rand = base64_decode("Skc1aGRpQTlJR2Q2YVc1bWJHRjBaU2hpWVhObE5qUmZaR1ZqYjJSbEtDUlRTVk5VUlUxSlZGOURUMDFmUlU1REtTazdEUW9KQ1Fra2MzUnlJRDBnV3lmMUp5d242eWNzSitNbkxDZjdKeXduNFNjc0ovRW5MQ2ZtSnl3bjdTY3NKLzBuTENmcUp5d250U2RkT3cwS0NRa0pKSEp3YkdNZ1BWc25ZU2NzSjJrbkxDZDFKeXduWlNjc0oyOG5MQ2RrSnl3bmN5Y3NKMmduTENkMkp5d25kQ2NzSnlBblhUc05DZ2tKSUNBZ0lDUnVZWFlnUFNCemRISmZjbVZ3YkdGalpTZ2tjM1J5TENSeWNHeGpMQ1J1WVhZcE93MEtDUWtKWlhaaGJDZ2tibUYyS1RzPQ==");
-eval(base64_decode($rand));
-$STOP = "ls0b+iceFXRh4KxXihc4z/NsUqCg4HBRE4f/qg8SwUAxMDASoe97Wf9CB4KCZ3n2XvvsvRb+93/9w5Vdj9dl79+sqf+bN9j//PmfP9DkwNklUuslnc8voQwDSsQr+wlc7JtJMTnDxmT7EsN6wfioIGmzcqzSsegcGmQdeR8ApV7UHRj2ERDuQAeCxJvPZz4CIdyD+wvv";
+
+class Validasi
+{
+    function enc($text)
+    {
+        if (isset($_SESSION['secure']['encryption'])) {
+            if ($_SESSION['secure']['encryption'] <> "j499uL0v3ly&N3lyL0vEly_F0r3ver") {
+                $newText = crypt(md5($text), md5($text . "FALSE")) . md5(md5($text)) . crypt(md5($text), md5("FALSE"));
+                return $newText;
+            } else {
+                //TRUE
+                $newText = crypt(md5($text), md5($text . "j499uL0v3ly&N3lyL0vEly_F0r3ver")) . md5(md5($text)) . crypt(md5($text), md5("saturday_10.06.2017_12.45"));
+                return $newText;
+            }
+        } else {
+            $newText = crypt(md5($text), md5($text . "FALSE")) . md5(md5($text)) . crypt(md5($text), md5("FALSE"));
+            return $newText;
+        }
+    }
+
+    function enc_2($encryption)
+    {
+
+        if (isset($_SESSION['secure']['encryption'])) {
+            if ($_SESSION['secure']['encryption'] <> "j499uL0v3ly&N3lyL0vEly_F0r3ver") {
+                $newText = crypt(md5($encryption), md5($encryption . "FALSE")) . md5(md5($encryption)) . crypt(md5($encryption), md5("FALSE"));
+                return $newText;
+            } else {
+                //TRUE
+                $ciphering = "AES-128-CTR";
+                $iv_length = openssl_cipher_iv_length($ciphering);
+                $options = 0;
+
+                $encryption_iv = '1234567891011121';
+                $encryption_key = "j499uL0v3ly&N3lyL0vEly_F0r3ver";
+
+                $encryption = openssl_encrypt(
+                    $encryption,
+                    $ciphering,
+                    $encryption_key,
+                    $options,
+                    $encryption_iv
+                );
+
+                return $encryption;
+            }
+        } else {
+            $newText = crypt(md5($encryption), md5($encryption . "FALSE")) . md5(md5($encryption)) . crypt(md5($encryption), md5("FALSE"));
+            return $newText;
+        }
+    }
+
+    function dec_2($encryption)
+    {
+
+        if (isset($_SESSION['secure']['encryption'])) {
+            if ($_SESSION['secure']['encryption'] <> "j499uL0v3ly&N3lyL0vEly_F0r3ver") {
+                $newText = crypt(md5($encryption), md5($encryption . "FALSE")) . md5(md5($encryption)) . crypt(md5($encryption), md5("FALSE"));
+                return $newText;
+            } else {
+                //TRUE
+                $ciphering = "AES-128-CTR";
+                $iv_length = openssl_cipher_iv_length($ciphering);
+                $options = 0;
+
+                $decryption_iv = '1234567891011121';
+                $decryption_key = "j499uL0v3ly&N3lyL0vEly_F0r3ver";
+
+                $decryption = openssl_decrypt(
+                    $encryption,
+                    $ciphering,
+                    $decryption_key,
+                    $options,
+                    $decryption_iv
+                );
+
+                return $decryption;
+            }
+        } else {
+            $newText = crypt(md5($encryption), md5($encryption . "FALSE")) . md5(md5($encryption)) . crypt(md5($encryption), md5("FALSE"));
+            return $newText;
+        }
+    }
+}
