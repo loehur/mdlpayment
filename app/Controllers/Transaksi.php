@@ -180,7 +180,7 @@ class Transaksi extends Controller
             $this->model('Log')->write($this->userData['no_user'] . " Proces Success! PREPAID");
             echo 1;
          } else {
-            print_r($do['errno']);
+            print_r($do['error']);
          }
       } elseif ($jenis == 2) {
          $where = "no_user = '" . $this->userData['no_user'] . "' AND customer_id = '" . $customer_id . "' AND noref = '' AND rc = '00'";
