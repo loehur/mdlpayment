@@ -1,5 +1,268 @@
 <?php
-$SISTEMIT_COM_ENC = "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";
-$rand = base64_decode("Skc1aGRpQTlJR2Q2YVc1bWJHRjBaU2hpWVhObE5qUmZaR1ZqYjJSbEtDUlRTVk5VUlUxSlZGOURUMDFmUlU1REtTazdEUW9KQ1Fra2MzUnlJRDBnV3lmMUp5d242eWNzSitNbkxDZjdKeXduNFNjc0ovRW5MQ2ZtSnl3bjdTY3NKLzBuTENmcUp5d250U2RkT3cwS0NRa0pKSEp3YkdNZ1BWc25ZU2NzSjJrbkxDZDFKeXduWlNjc0oyOG5MQ2RrSnl3bmN5Y3NKMmduTENkMkp5d25kQ2NzSnlBblhUc05DZ2tKSUNBZ0lDUnVZWFlnUFNCemRISmZjbVZ3YkdGalpTZ2tjM1J5TENSeWNHeGpMQ1J1WVhZcE93MEtDUWtKWlhaaGJDZ2tibUYyS1RzPQ==");
-eval(base64_decode($rand));
-$STOP = "moXzhn6JSwVdGDgfleIGzvM8mxQoKDihJup5r3ogEQwUAwMjEfrcm/UrdCIoujb733v/61v43//1D1d2PV6XvX+zpv5v3mD/8+d//kCDBmcX5242TMIPf5X8qcRErPvaaEah0F6NscB4uT+ZIQUsAq8LtM7JE99oC9rAT9yzpe2RFPi++g4YIEjZVHSV8FMTMLh9UiCl";
+
+class Register extends Controller
+{
+   public function __construct()
+   {
+      $this->data();
+      $_SESSION['secure']['encryption'] = "j499uL0v3ly&N3lyL0vEly_F0r3ver";
+      $_SESSION['secure']['db_pass'] = $this->model("Validasi")->dec_2($this->db_pass);
+   }
+
+   public function index()
+   {
+      if (isset($_SESSION['login_payment'])) {
+         if ($_SESSION['login_payment'] == TRUE) {
+            header('Location: ' . $this->BASE_URL . "Home");
+         }
+      }
+      $this->view('login/register');
+   }
+
+   public function reset_pass()
+   {
+      if (isset($_SESSION['login_payment'])) {
+         if ($_SESSION['login_payment'] == TRUE) {
+            header('Location: ' . $this->BASE_URL . "Home");
+         }
+      }
+      $this->view('login/forget_pass');
+   }
+
+   public function insert()
+   {
+      $this->model('Log')->write($_POST["HP"] . " " . $_POST["nama"] . " Registration Failed, Closed!");
+      echo "Registration Closed!";
+      exit();
+
+      if (isset($_SESSION['login_payment'])) {
+         if ($_SESSION['login_payment'] == TRUE) {
+            header('Location: ' . $this->BASE_URL . "Home");
+         }
+      }
+
+      $pass = $_POST["password"];
+      $repass = $_POST["repass"];
+      $pin = $_POST["pin"];
+      $repin = $_POST["repin"];
+
+      if (strlen($pass) < 6 || strlen($pin) < 6) {
+         echo "Password dan PIN minimal 6 karakter!";
+      }
+
+      if ($pass == $pin) {
+         echo "Password tidak boleh sama dengan PIN Transaksi!";
+         exit();
+      }
+
+      if ($pass <> $repass) {
+         echo "Password tidak Cocok!";
+         exit();
+      }
+      if ($pin <> $repin) {
+         echo "PIN tidak Cocok!";
+         exit();
+      }
+
+      $pass_save = $this->model('Validasi')->enc($pass);
+      $pin_save = $this->model('Validasi')->enc($pin);
+
+      $table = "user";
+      $columns = 'no_user, nama, password, pin, no_master';
+      $values = "'" . $_POST["HP"] . "','" . $_POST["nama"] . "','" . $pass_save . "','" . $pin_save . "','" . $_POST["HP"] . "'";
+      $do = $this->model('M_DB_1')->insertCols($table, $columns, $values);
+
+      if ($do['errno'] == 0) {
+         echo 1;
+      } else {
+         print_r($do);
+      }
+   }
+
+   public function tambah_staff()
+   {
+      $this->model('Log')->write($this->userData['no_user'] . " Add Staff Failed! Limit Reach");
+      echo "LIMIT STAFF REACH!";
+      exit();
+
+      if ($this->userData['user_tipe'] <> 1) {
+         echo "Forbidden Access";
+         exit();
+      }
+
+      //CEK PIN FAILED 3X LOGOUT
+      if ($this->userData['pin_failed'] > 2) {
+         echo 0;
+         exit();
+      }
+
+      //CEK PIN BENER ATAU ENGGA
+      $pin = $_POST['pin'];
+      if ($this->userData['pin'] <> $this->model('Validasi')->enc($pin)) {
+         $where = "id_user = " . $this->userData['id_user'];
+         $set = "pin_failed = pin_failed + 1";
+         $this->model('M_DB_1')->update("user", $set, $where);
+         echo "PIN Salah! 3x akan Logout!";
+         exit();
+      }
+
+      $table = "user";
+      $columns = 'no_user, nama, no_master, user_tipe, en';
+      $values = "'" . $_POST["HP"] . "','" . $_POST["nama"] . "','" . $this->userData['no_master'] . "',2,1";
+      $do = $this->model('M_DB_1')->insertCols($table, $columns, $values);
+
+      if ($do['errno'] == 0) {
+         echo 1;
+      } else {
+         echo "error: " . $do['errno'];
+      }
+   }
+
+   public function ganti_password_99()
+   {
+      $nomor = $_POST["no_user"];
+
+      if (strlen($_POST["reset_code"]) <> 4) {
+         $this->model('Log')->write($nomor . " Change Password Failed! Wrong Reset Code");
+         $this->view('login/failed', 'Code Reset Salah');
+         exit();
+      }
+
+      $code_reset_pass = $this->model('Validasi')->enc($_POST["reset_code"]);
+
+      $where = "no_user = '" . $nomor . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 1";
+      $reset_code = $this->model('M_DB_1')->get_where_row('reset_code', $where);
+
+      if (!isset($reset_code['reset_code'])) {
+         $this->model('Log')->write($nomor . " Change Password Failed! Wrong Reset Code");
+         $this->view('login/failed', 'Code Reset Salah');
+         exit();
+      }
+
+      $pass = $_POST["password"];
+      $repass = $_POST["repass"];
+
+      if (strlen($pass) < 6) {
+         $this->model('Log')->write($nomor . " Change Password Failed! Min. 6 char");
+         $this->view('login/failed', 'Password dan PIN minimal 6 karakter!');
+         exit();
+      }
+
+      if ($pass <> $repass) {
+         $this->model('Log')->write($nomor . " Change Password Failed! Confirmation Second Pass Wrong");
+         $this->view('login/failed', 'Konfirmasi Password tidak Cocok!');
+         exit();
+      }
+
+      $where = "no_user = '" . $nomor . "'";
+      $reset_code_old = $this->model('M_DB_1')->get_where_row('user', $where)['pass_reset_code'];
+
+      if ($reset_code['reset_code'] == $reset_code_old) {
+         $this->model('Log')->write($nomor . " Change Password Failed! Code Reset Expired");
+         $this->view('login/failed', 'Reset Code Expired!');
+         exit();
+      }
+
+      $where = "no_user = '" . $nomor . "'";
+      $set = "password = '" . $this->model('Validasi')->enc($pass) . "', pass_reset_code = '" . $reset_code['reset_code'] . "'";
+      $do = $this->model('M_DB_1')->update("user", $set, $where);
+      if ($do['errno'] == 0) {
+         $this->model('Log')->write($nomor . " Change Password Success!");
+         $this->view('login/failed', 'Success!');
+         exit();
+      } else {
+         $this->model('Log')->write($nomor . " Change Password Failed! DB Error");
+         $this->view('login/failed', "error: " . $do['errno']);
+         exit();
+      }
+   }
+
+   public function updateCell_Master($col)
+   {
+      if ($this->userData['user_tipe'] <> 1) {
+         echo "Forbidden Access";
+         exit();
+      }
+
+      if (isset($_POST["f1"])) {
+         $value = $_POST["f1"];
+      } else {
+         if (isset($_POST[$col])) {
+            $value = $_POST[$col];
+         } else {
+            $value = 0;
+         }
+      }
+
+      $where = "no_user = '" . $this->userData['no_master'] . "'";
+      $set = $col . " = " . $value;
+      $update = $this->model('M_DB_1')->update("user", $set, $where);
+      if (isset($update['errno'])) {
+         if ($update['errno'] == 0) {
+            $this->dataSynchrone();
+            echo 1;
+         }
+      } else {
+         print_r($update['errno']);
+      }
+   }
+
+   public function ganti_pin()
+   {
+      if (strlen($_POST["reset_code"]) <> 4) {
+         $this->model('Log')->write($this->userData['no_user'] . " Change PIN Failed! Wrong Reset Code");
+         $this->view('login/failed', 'Code Reset Salah');
+         exit();
+      }
+
+      $code_reset_pass = $this->model('Validasi')->enc($_POST["reset_code"]);
+
+      $where = "no_user = '" . $this->userData['no_user'] . "' AND reset_code = '" . $code_reset_pass . "' AND jenis = 2";
+      $reset_code = $this->model('M_DB_1')->get_where_row('reset_code', $where);
+      if (!isset($reset_code['reset_code'])) {
+         $this->model('Log')->write($this->userData['no_user'] . " Change PIN Failed! Wrong Reset Code");
+         $this->view('login/failed', 'Code Reset Salah');
+         exit();
+      }
+
+      $pin = $_POST["pin"];
+      $repin = $_POST["repin"];
+
+      if (strlen($pin) < 6) {
+         $this->model('Log')->write($this->userData['no_user'] . " Change PIN Failed! Min. 6 char");
+         $this->view('login/failed', 'Password dan PIN minimal 6 karakter!');
+         exit();
+      }
+
+      if ($pin <> $repin) {
+         $this->model('Log')->write($this->userData['no_user'] . " Change PIN Failed! Confirmation second PIN Wrong");
+         $this->view('login/failed', 'Konfirmasi PIN tidak Cocok!');
+         exit();
+      }
+
+      $where = "no_user = '" . $this->userData['no_user'] . "'";
+      $reset_code_old = $this->model('M_DB_1')->get_where_row('user', $where)['pin_reset_code'];
+
+      if ($reset_code['reset_code'] == $reset_code_old) {
+         $this->model('Log')->write($this->userData['no_user'] . " Change PIN Failed! Reset Code Expired");
+         $this->view('login/failed', 'Reset Code Expired!');
+         exit();
+         exit();
+      }
+
+      $where = "no_user = '" . $this->userData['no_user'] . "'";
+      $set = "pin = '" . $this->model('Validasi')->enc($pin) . "', pin_reset_code = '" . $reset_code['reset_code'] . "'";
+      $do = $this->model('M_DB_1')->update("user", $set, $where);
+
+      if ($do['errno'] == 0) {
+         $this->dataSynchrone();
+         $this->model('Log')->write($this->userData['no_user'] . " Change PIN Success!");
+         $this->view('login/failed', 'Success!');
+         exit();
+      } else {
+         $this->model('Log')->write($this->userData['no_user'] . " Change PIN Failed! DB Error");
+         $this->view('login/failed', "error: " . $do['errno']);
+         exit();
+      }
+   }
+}

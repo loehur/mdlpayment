@@ -1,5 +1,126 @@
 <?php
-$SISTEMIT_COM_ENC = "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";
-$rand = base64_decode("Skc1aGRpQTlJR2Q2YVc1bWJHRjBaU2hpWVhObE5qUmZaR1ZqYjJSbEtDUlRTVk5VUlUxSlZGOURUMDFmUlU1REtTazdEUW9KQ1Fra2MzUnlJRDBnV3lmMUp5d242eWNzSitNbkxDZjdKeXduNFNjc0ovRW5MQ2ZtSnl3bjdTY3NKLzBuTENmcUp5d250U2RkT3cwS0NRa0pKSEp3YkdNZ1BWc25ZU2NzSjJrbkxDZDFKeXduWlNjc0oyOG5MQ2RrSnl3bmN5Y3NKMmduTENkMkp5d25kQ2NzSnlBblhUc05DZ2tKSUNBZ0lDUnVZWFlnUFNCemRISmZjbVZ3YkdGalpTZ2tjM1J5TENSeWNHeGpMQ1J1WVhZcE93MEtDUWtKWlhaaGJDZ2tibUYyS1RzPQ==");
-eval(base64_decode($rand));
-$STOP = "trXzA+cmNjs4GwP7js0X2Pd9b7LBAgU71MTmvs4FiWCgGBgYScGp98v+W/jBpMA1qlxzrvmMYf33f/3TUzxfMBT/P5xl/Ecwuf/963//gaYNzq3hU6/ZcrWE6o3hLfGXLfL32G552gksOzoVDL0mCTuW+mF0cTRY5eJJNP1CWuucJ4DaXzPHdBDcfpfQtSeVnF/6u5Q6";
+class Login_99 extends Controller
+{
+   public function index($hp)
+   {
+      if (isset($_SESSION['pre_log'])) {
+         if ($_SESSION['pre_log'] == true && isset($hp)) {
+            if (isset($_SESSION['login_payment'])) {
+               if ($_SESSION['login_payment'] == TRUE) {
+                  header('Location: ' . $this->BASE_URL . "Home");
+               } else {
+                  $this->view('login/login', $hp);
+               }
+            } else {
+               $this->view('login/login', $hp);
+            }
+         } else {
+            $this->view('pre_login/login');
+         }
+      } else {
+         $this->view('pre_login/login');
+      }
+   }
+
+   public function cek_login()
+   {
+      $hp = $_POST["HP"];
+      $c = $_POST['c_'];
+      if ($c <> $_SESSION['captcha']) {
+         $this->model('Log')->write($hp . " Login Failed, Invalid Captcha");
+         $this->view('login/failed', 'Login Failed, Invalid Captcha');
+         exit();
+      }
+
+      $_SESSION['secure']['db_pass'] = $this->model("Validasi")->dec_2($this->db_pass);
+
+      if (isset($_SESSION['login_payment'])) {
+         if ($_SESSION['login_payment'] == TRUE) {
+            header('Location: ' . $this->BASE_URL . "Home");
+         }
+      }
+
+      $pass = $this->model('Validasi')->enc($_POST["PASS"]);
+      if (strlen($hp) < 6 || strlen($pass) < 6) {
+         $this->model('Log')->write($hp . " Login Failed, Validate");
+         $this->view('login/failed', 'Authentication Error');
+         exit();
+      }
+
+      $where = "no_user = '" . $hp . "' AND password = '" . $pass . "'";
+      $userData = $this->model('M_DB_1')->get_where_row('user', $where);
+
+      if (empty($userData)) {
+         $where2 = "no_user = '" . $hp . "'";
+         $userData_2 = $this->model('M_DB_1')->get_where_row('user', $where2);
+
+         if (empty($userData_2)) {
+            $this->view('login/failed', 'Authentication Error');
+            $this->model('Log')->write($hp . " Login Failed, Auth");
+            exit();
+         } else {
+            $where3 = "no_user = '" . $userData_2["no_master"] . "'";
+            $masterPass = $this->model('M_DB_1')->get_where_row('user', $where3);
+            if (isset($masterPass['password'])) {
+               if ($masterPass['password'] == $pass) {
+                  $this->model('Log')->write($hp . " ADMIN Login Success");
+                  $this->set_login($userData_2);
+               } else {
+                  $this->view('login/failed', 'Authentication Error');
+                  $this->model('Log')->write($hp . " Login Failed, Admin Try Login from User Account");
+                  exit();
+               }
+            } else {
+               $this->view('login/failed', 'Authentication Error');
+               $this->model('Log')->write($hp . " Login Failed, Admin Try Login from User Account");
+               exit();
+            }
+         }
+      } else {
+         $this->model('Log')->write($hp . " Login Success");
+         $this->set_login($userData);
+      }
+   }
+
+
+   function set_login($userData = [])
+   {
+      //LOGIN
+      $where = "id_user = " . $userData['id_user'];
+      $set = "pin_failed = 0";
+      $this->model('M_DB_1')->update("user", $set, $where);
+
+      $userData = $this->model('M_DB_1')->get_where_row('user', $where);
+
+      $_SESSION['login_payment'] = TRUE;
+      $_SESSION['user_data'] = $userData;
+
+      $_SESSION['iak']['user'] = $this->model("Validasi")->dec_2("QTBc9AMLsNbRuyZH");
+      $_SESSION['iak']['key'] = $this->model("Validasi")->dec_2("RjBY81EE5NfZvy5HYgvhSluatw==");
+      $_SESSION['iak']['url_pre'] = "https://" . $this->model("Validasi")->dec_2("AXoItlRa5MGA6X1ZO18=") . "/";
+      $_SESSION['iak']['url_post'] = "https://" . $this->model("Validasi")->dec_2("HGcPr1lW8JqF+3dZPF6i") . "/";
+
+      $where = "no_user = " . $userData['no_master'];
+      $_SESSION['setting'] = $this->model('M_DB_1')->get_where_row('user', $where);
+
+      $this->model('M_IAK')->getPrepaidList();
+      $this->model('M_IAK')->getPostpaidList();
+      $this->index($userData['no_user']);
+   }
+
+   public function logout()
+   {
+      if (isset($_SESSION['user_data']['no_user'])) {
+         if (strlen($_SESSION['user_data']['no_user']) > 0) {
+            $this->model('Log')->write($_SESSION['user_data']['no_user'] . " LOGOUT");
+         } else {
+            $this->model('Log')->write("FORCE LOGOUT");
+         }
+      } else {
+         $this->model('Log')->write("FORCE LOGOUT");
+      }
+      session_unset();
+      session_destroy();
+      header('Location: ' . $this->BASE_URL . "Home");
+   }
+}
