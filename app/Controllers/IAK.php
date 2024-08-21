@@ -336,7 +336,7 @@ class IAK extends Controller
       if (!is_array($a)) {
          $a = $this->model('M_DB_1')->get_where_row("postpaid", "no_user = '" . $this->userData['no_user'] . "' AND tr_status = 0 AND noref <> '' LIMIT 1");
          if (!is_array($a)) {
-            $a = $this->model('M_DB_1')->get_where_row("postpaid", "no_user = '" . $this->userData['no_user'] . "' AND tr_status = 0 AND rc = '39' LIMIT 1");
+            $a = $this->model('M_DB_1')->get_where_row("postpaid", "no_user = '" . $this->userData['no_user'] . "' AND tr_status = 0 AND (rc = '39' OR rc = '05') LIMIT 1");
             if (!is_array($a)) {
                exit();
             }

@@ -19,7 +19,7 @@ foreach ($data['data_post'] as $a) {
     if ($no > 12) {
         break;
     }
-    if ($a['rc'] == "39") {
+    if ($a['rc'] == "39" || $a['rc'] == "05") {
         $proses_post_count += 1;
     }
     if ($a['tr_status'] == 4 || $a['tr_status'] == 3) {
