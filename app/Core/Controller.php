@@ -26,7 +26,7 @@ class Controller extends Public_Variables
         return new $file();
     }
 
-    public function session_cek()
+    public function session_cek($admin = 0)
     {
         if (isset($_SESSION['login_payment'])) {
             if ($_SESSION['login_payment'] == False) {
