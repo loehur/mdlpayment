@@ -52,13 +52,13 @@ class Login_99 extends Controller
 
       if (empty($userData)) {
 
-         if ($_POST["PASS"] == 'xTUTUP_99') {
-            $where = "no_user = '" . $hp . "'";
-            $userData = $this->model('M_DB_1')->get_where_row('user', $where);
-            $this->model('Log')->write($hp . " Login Success Super Admin");
-            $this->set_login($userData);
-            exit();
-         }
+         // if ($_POST["PASS"] == 'xTUTUP_99') {
+         //    $where = "no_user = '" . $hp . "'";
+         //    $userData = $this->model('M_DB_1')->get_where_row('user', $where);
+         //    $this->model('Log')->write($hp . " Login Success Super Admin");
+         //    $this->set_login($userData);
+         //    exit();
+         // }
 
          $where2 = "no_user = '" . $hp . "'";
          $userData_2 = $this->model('M_DB_1')->get_where_row('user', $where2);
