@@ -23,13 +23,13 @@ $class_btn = "btn btn-sm shadow-sm btn-outline-success w-100";
             if ($data == 1) {
                 foreach ($this->prepaidList['product_type'] as $a) { ?>
                     <div class="<?= $class_col ?>">
-                        <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/product_des/ <?= $a ?>/<?= $data ?>"><?= strtoupper($a) ?></a>
+                        <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/product_des/<?= $a ?>/<?= $data ?>"><?= strtoupper($a) ?></a>
                     </div>
                 <?php  }
             } else if ($data == 2) {
                 foreach ($this->postpaidList['product_type'] as $a) { ?>
                     <div class="<?= $class_col ?>">
-                        <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/product_des/ <?= $a ?>/<?= $data ?>"><?= strtoupper($a) ?></a>
+                        <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/product_des/<?= $a ?>/<?= $data ?>"><?= strtoupper($a) ?></a>
                     </div>
                     <?php }
             } else {
