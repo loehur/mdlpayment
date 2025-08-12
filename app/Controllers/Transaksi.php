@@ -510,13 +510,13 @@ class Transaksi extends Controller
       }
    }
 
-   public function confirmation($code, $nominal, $deskripsi, $type, $jenis, $harga)
+   public function confirmation($code, $nominal, $type, $jenis, $harga)
    {
       $this->index();
       $array = array();
       $array['data'] = array();
       $array['detail'] = "";
-      $des = urldecode($deskripsi);
+      $des = urldecode($_GET['deskripsi']);
 
       foreach ($this->prepaidList['list'] as $a) {
          if ($a['product_code'] == $code) {
