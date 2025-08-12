@@ -493,7 +493,7 @@ class Transaksi extends Controller
             $array['data'] = array();
             foreach ($this->prepaidList['list'] as $a) {
                if ($a['product_description'] == $des) {
-                  $array['data'][$a['product_code']] = array($a['product_nominal'], $a['product_details'], ceil(($a['product_price'] + $margin + $this->setting['margin_prepaid']) / 1000) * 1000, $a['product_price'] + $margin, $a);
+                  $array['data'][$a['product_code']] = array($a['product_nominal'], $a['product_details'], ceil(($a['product_price'] + $margin + $this->setting['margin_prepaid']) / 1000) * 1000, $a['product_price'] + $margin);
                }
             };
 
@@ -510,12 +510,14 @@ class Transaksi extends Controller
       }
    }
 
-   public function confirmation($code, $nominal, $des, $type, $jenis, $harga)
+   public function confirmation($code, $nomi, $des, $type, $jenis, $harga)
    {
       $this->index();
       $array = array();
       $array['data'] = array();
       $array['detail'] = "";
+
+      $nominal = urldecode($nomi);
 
       foreach ($this->prepaidList['list'] as $a) {
          if ($a['product_code'] == $code) {

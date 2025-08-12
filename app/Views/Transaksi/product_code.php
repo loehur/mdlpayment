@@ -13,13 +13,9 @@ $class_btn = "btn btn-sm shadow-sm btn-outline-success w-100";
     <div class="container-fluid">
         <div class="row mx-0">
             <?php
-            foreach ($data['data'] as $key => $a) {
-                echo "<pre>";
-                print_r($a[4]);
-                echo "</pre>";
-            ?>
+            foreach ($data['data'] as $key => $a) { ?>
                 <div class="<?= $class_col ?>">
-                    <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/confirmation/<?= $key ?>/<?= $a[0] ?>/<?= $data['type'] ?>/<?= $data['jenis'] ?>/<?= $a[2] ?>?deskripsi=<?= urlencode($data['des']) ?>">
+                    <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/confirmation/<?= $key ?>/<?= urlencode($a[0]) ?>/<?= $data['type'] ?>/<?= $data['jenis'] ?>/<?= $a[2] ?>?deskripsi=<?= urlencode($data['des']) ?>">
                         <?= $a[0] . ", " . $a[1] . "<br><b>Harga Rp" . number_format($a[2]) ?></b> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a[3]) . ")</small>" : "" ?>
                     </a>
                 </div>
