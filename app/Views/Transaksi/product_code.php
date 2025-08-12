@@ -15,7 +15,7 @@ $class_btn = "btn btn-sm shadow-sm btn-outline-success w-100";
             <?php
             foreach ($data['data'] as $key => $a) {
                 echo "<pre>";
-                print_r($a);
+                print_r($a[4]);
                 echo "</pre>";
             ?>
                 <div class="<?= $class_col ?>">
