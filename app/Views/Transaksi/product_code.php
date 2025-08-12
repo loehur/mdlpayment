@@ -15,7 +15,7 @@ $class_btn = "btn btn-sm shadow-sm btn-outline-success w-100";
             <?php
             foreach ($data['data'] as $key => $a) { ?>
                 <div class="<?= $class_col ?>">
-                    <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/confirmation/<?= $key ?>/<?= $a[0] ?>/<?= $data['des'] ?>/<?= $data['type'] ?>/<?= $data['jenis'] ?>/<?= $a[2] ?>">
+                    <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/confirmation/<?= $key ?>/<?= $a[0] ?>/<?= urlencode($data['des']) ?>/<?= $data['type'] ?>/<?= $data['jenis'] ?>/<?= $a[2] ?>">
                         <?= $a[0] . ", " . $a[1] . "<br><b>Harga Rp" . number_format($a[2]) ?></b> <?= ($this->setting['v_price'] == 1) ? "<small>(" . number_format($a[3]) . ")</small>" : "" ?>
                     </a>
                 </div>
