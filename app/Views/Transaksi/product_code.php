@@ -14,8 +14,9 @@ $class_btn = "btn btn-sm shadow-sm btn-outline-success w-100";
         <div class="row mx-0">
             <?php
             foreach ($data['data'] as $key => $a) {
-
+                echo "<pre>";
                 print_r($a);
+                echo "</pre>";
             ?>
                 <div class="<?= $class_col ?>">
                     <a class="<?= $class_btn ?>" href="<?= $this->BASE_URL ?>Transaksi/confirmation/<?= $key ?>/<?= $a[0] ?>/<?= $data['type'] ?>/<?= $data['jenis'] ?>/<?= $a[2] ?>?deskripsi=<?= urlencode($data['des']) ?>">
